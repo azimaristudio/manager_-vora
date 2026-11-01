@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Plus,
@@ -53,65 +53,104 @@ const EVENT_MODAL_OPTIONS = [
 
 const WEEKDAY_HEADERS = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
-// Grelha do mês de Outubro de 2026 (conforme Imagem 31)
-const OCTOBER_2026_GRID = [
-  [
-    { day: 28, isCurrentMonth: false },
-    { day: 29, isCurrentMonth: false },
-    { day: 30, isCurrentMonth: false },
-    { day: 1, isCurrentMonth: true },
-    { day: 2, isCurrentMonth: true },
-    { day: 3, isCurrentMonth: true },
-    { day: 4, isCurrentMonth: true },
-  ],
-  [
-    { day: 5, isCurrentMonth: true },
-    { day: 6, isCurrentMonth: true },
-    { day: 7, isCurrentMonth: true },
-    { day: 8, isCurrentMonth: true },
-    { day: 9, isCurrentMonth: true },
-    { day: 10, isCurrentMonth: true },
-    { day: 11, isCurrentMonth: true },
-  ],
-  [
-    { day: 12, isCurrentMonth: true },
-    { day: 13, isCurrentMonth: true },
-    { day: 14, isCurrentMonth: true },
-    { day: 15, isCurrentMonth: true },
-    { day: 16, isCurrentMonth: true },
-    { day: 17, isCurrentMonth: true },
-    { day: 18, isCurrentMonth: true },
-  ],
-  [
-    { day: 19, isCurrentMonth: true },
-    { day: 20, isCurrentMonth: true },
-    { day: 21, isCurrentMonth: true },
-    { day: 22, isCurrentMonth: true },
-    { day: 23, isCurrentMonth: true },
-    { day: 24, isCurrentMonth: true },
-    { day: 25, isCurrentMonth: true },
-  ],
-  [
-    { day: 26, isCurrentMonth: true },
-    { day: 27, isCurrentMonth: true },
-    { day: 28, isCurrentMonth: true },
-    { day: 29, isCurrentMonth: true },
-    { day: 30, isCurrentMonth: true, isHighlighted: true },
-    { day: 31, isCurrentMonth: true },
-    { day: 1, isCurrentMonth: false },
-  ],
-  [
-    { day: 2, isCurrentMonth: false },
-    { day: 3, isCurrentMonth: false },
-    { day: 4, isCurrentMonth: false },
-    { day: 5, isCurrentMonth: false },
-    { day: 6, isCurrentMonth: false },
-    { day: 7, isCurrentMonth: false },
-    { day: 8, isCurrentMonth: false },
-  ],
+const MONTH_NAMES_PT = [
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
+function formatDateKey(day, monthIndex, year) {
+  const dd = String(day).padStart(2, '0');
+  const mm = String(monthIndex + 1).padStart(2, '0');
+  return `${dd}/${mm}/${year}`;
+}
+
+/**
+ * Gera dinamicamente as 6 semanas (42 células) do calendário mensal (Seg a Dom)
+ * preenchendo os últimos dias do mês anterior e os primeiros dias do mês seguinte.
+ */
+function buildMonthGrid(currentDate) {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  // Dia da semana em que cai o dia 1º do mês convertendo de Dom=0..Sáb=6 para Seg=0..Dom=6
+  const firstDayOfMonth = new Date(year, month, 1);
+  const startOffset = (firstDayOfMonth.getDay() + 6) % 7;
+
+  const daysInCurrentMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+  const prevMonthDate = new Date(year, month - 1, 1);
+  const nextMonthDate = new Date(year, month + 1, 1);
+
+  const cells = [];
+
+  // 1. Últimos dias do mês anterior para preencher o início da primera semana
+  for (let i = startOffset - 1; i >= 0; i -= 1) {
+    const dayNum = daysInPrevMonth - i;
+    const m = prevMonthDate.getMonth();
+    const y = prevMonthDate.getFullYear();
+    cells.push({
+      day: dayNum,
+      month: m,
+      year: y,
+      dateKey: formatDateKey(dayNum, m, y),
+      isCurrentMonth: false,
+      isHighlighted: false,
+    });
+  }
+
+  // 2. Dias do mês atual
+  for (let dayNum = 1; dayNum <= daysInCurrentMonth; dayNum += 1) {
+    const dateKey = formatDateKey(dayNum, month, year);
+    cells.push({
+      day: dayNum,
+      month,
+      year,
+      dateKey,
+      isCurrentMonth: true,
+      // Realça o dia 30/10/2026 como referência padrão da captura 31_calendario.png
+      isHighlighted: dayNum === 30 && month === 9 && year === 2026,
+    });
+  }
+
+  // 3. Primeiros dias do mês seguinte até completar 42 células (6 linhas x 7 colunas)
+  const remainingCells = 42 - cells.length;
+  for (let dayNum = 1; dayNum <= remainingCells; dayNum += 1) {
+    const m = nextMonthDate.getMonth();
+    const y = nextMonthDate.getFullYear();
+    cells.push({
+      day: dayNum,
+      month: m,
+      year: y,
+      dateKey: formatDateKey(dayNum, m, y),
+      isCurrentMonth: false,
+      isHighlighted: false,
+    });
+  }
+
+  // Agrupa as 42 células em 6 semanas de 7 dias
+  const weeks = [];
+  for (let i = 0; i < cells.length; i += 7) {
+    weeks.push(cells.slice(i, i + 7));
+  }
+
+  return weeks;
+}
+
 export default function CalendarView() {
+  // 1. Estado local para controlar o mês/ano visualizado (inicializado em Outubro de 2026)
+  const [currentDate, setCurrentDate] = useState(() => new Date(2026, 9, 1));
+
   // Estados da Barra Lateral Esquerda
   const [talentSearch, setTalentSearch] = useState('');
   const [userFilter, setUserFilter] = useState('Você');
@@ -142,6 +181,44 @@ export default function CalendarView() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // 2. Funções de navegação entre meses (< Mês Anterior, > Próximo Mês, HOJE e Buscar Data)
+  const handlePrevMonth = () => {
+    setCurrentDate(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1)
+    );
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1)
+    );
+  };
+
+  const handleGoToReferenceMonth = () => {
+    setCurrentDate(new Date(2026, 9, 1));
+  };
+
+  const handleSearchDate = () => {
+    const parts = searchDateInput.trim().split('/');
+    if (parts.length === 3) {
+      const m = parseInt(parts[1], 10) - 1;
+      const y = parseInt(parts[2], 10);
+      if (!Number.isNaN(m) && !Number.isNaN(y) && m >= 0 && m <= 11 && y > 1900) {
+        setCurrentDate(new Date(y, m, 1));
+      }
+    }
+  };
+
+  // 3. Cálculo dinâmico da grelha com base em currentDate
+  const dynamicWeeksGrid = useMemo(
+    () => buildMonthGrid(currentDate),
+    [currentDate]
+  );
+
+  const formattedMonthYearLabel = `${
+    MONTH_NAMES_PT[currentDate.getMonth()]
+  } ${currentDate.getFullYear()}`;
+
   const handleSelectEventModal = (modalKey) => {
     setIsAddDropdownOpen(false);
     setIsCategoryPopupOpen(false);
@@ -149,13 +226,12 @@ export default function CalendarView() {
   };
 
   const handleSaveNewEvent = (eventPayload) => {
-    const dayStr = (eventPayload.date || '30/10/2026').split('/')[0];
-    const parsedDay = parseInt(dayStr, 10) || 30;
+    const rawDate = (eventPayload.date || '30/10/2026').trim();
     setEventsList((prev) => [
       ...prev,
       {
         id: `evt-${Date.now()}`,
-        day: parsedDay,
+        dateKey: rawDate,
         ...eventPayload,
       },
     ]);
@@ -338,20 +414,22 @@ export default function CalendarView() {
           <main className="flex-1 min-w-0 w-full">
             {/* Barra de Topo do Calendário */}
             <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-              {/* Navegação '<', '>', 'HOJE' e Mês/Ano */}
+              {/* Navegação '<', '>', 'HOJE' e Mês/Ano Dinâmico */}
               <div className="flex items-center gap-2">
                 <div className="inline-flex rounded-xs border border-slate-200 overflow-hidden bg-[#f2f2f2]">
                   <button
                     type="button"
+                    onClick={handlePrevMonth}
                     title="Mês anterior"
-                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 border-r border-slate-200 cursor-pointer"
+                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 border-r border-slate-200 transition-colors cursor-pointer"
                   >
                     <ChevronLeft className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
                   <button
                     type="button"
+                    onClick={handleNextMonth}
                     title="Próximo mês"
-                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 cursor-pointer"
+                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
                   >
                     <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
@@ -359,13 +437,15 @@ export default function CalendarView() {
 
                 <button
                   type="button"
-                  className="h-8 px-2.5 bg-[#f5f5f5] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-400 uppercase font-medium cursor-pointer"
+                  onClick={handleGoToReferenceMonth}
+                  title="Voltar para Outubro 2026"
+                  className="h-8 px-2.5 bg-[#f5f5f5] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-500 uppercase font-medium transition-colors cursor-pointer"
                 >
                   HOJE
                 </button>
 
                 <h1 className="text-[22px] text-slate-600 font-normal ml-2 tracking-tight">
-                  Outubro 2026
+                  {formattedMonthYearLabel}
                 </h1>
               </div>
 
@@ -407,11 +487,15 @@ export default function CalendarView() {
                     type="text"
                     value={searchDateInput}
                     onChange={(e) => setSearchDateInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleSearchDate();
+                    }}
                     placeholder="__/__/____"
                     className="w-24 h-full px-2 bg-white text-center text-xs text-slate-700 placeholder:text-slate-500 focus:outline-none"
                   />
                   <button
                     type="button"
+                    onClick={handleSearchDate}
                     title="Buscar data"
                     className="w-7 h-full bg-[#eaeaea] hover:bg-slate-300 border-l border-slate-200 flex items-center justify-center text-slate-700 cursor-pointer"
                   >
@@ -461,7 +545,7 @@ export default function CalendarView() {
               </div>
             </div>
 
-            {/* Grelha Mensal do Calendário (Seg a Dom) */}
+            {/* Grelha Mensal Dinâmica do Calendário (Seg a Dom) */}
             <div className="border border-slate-200 rounded-xs overflow-hidden bg-white">
               {/* Cabeçalho dos Dias da Semana */}
               <div className="grid grid-cols-7 border-b border-slate-200 bg-white">
@@ -475,18 +559,18 @@ export default function CalendarView() {
                 ))}
               </div>
 
-              {/* Semanas / Células Numeradas */}
+              {/* Semanas / Células Numeradas Dinâmicas */}
               <div className="divide-y divide-slate-200">
-                {OCTOBER_2026_GRID.map((week, weekIdx) => (
+                {dynamicWeeksGrid.map((week, weekIdx) => (
                   <div key={weekIdx} className="grid grid-cols-7">
-                    {week.map((cell, dayIdx) => {
-                      const dayEvents = cell.isCurrentMonth
-                        ? eventsList.filter((ev) => ev.day === cell.day)
-                        : [];
+                    {week.map((cell) => {
+                      const dayEvents = eventsList.filter(
+                        (ev) => ev.dateKey === cell.dateKey
+                      );
 
                       return (
                         <div
-                          key={dayIdx}
+                          key={cell.dateKey}
                           onClick={() => setIsCategoryPopupOpen(true)}
                           className={`min-h-[104px] p-1.5 border-r last:border-r-0 border-slate-200 flex flex-col justify-between transition-colors cursor-pointer ${
                             cell.isHighlighted
@@ -656,4 +740,3 @@ export default function CalendarView() {
     </div>
   );
 }
-
