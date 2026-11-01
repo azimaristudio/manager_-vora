@@ -15,7 +15,8 @@ import BackgroundJobs from './components/BackgroundJobs';
 import Contacts from './components/Contacts';
 import AddContact from './components/AddContact';
 import WebmailLayout from './components/webmail/WebmailLayout';
-import PackagesLayout from './components/webmail/PackagesLayout';
+import PackagesList from './components/packages/PackagesList';
+import CreatePackage from './components/packages/CreatePackage';
 import ProjectsList from './components/projects/ProjectsList';
 import ProjectDetails from './components/projects/ProjectDetails';
 import CalendarView from './components/calendar/CalendarView';
@@ -320,8 +321,11 @@ function AppRoutes() {
           }
         />
 
-        {/* Rota (/pacotes): Interface Independente de Pacotes (Imagem 23) */}
-        <Route path="/pacotes" element={<PackagesLayout />} />
+        {/* Rota (/pacotes): Listagem de Pacotes Criados e Enviados (Imagens 46 e 48) */}
+        <Route path="/pacotes" element={<PackagesList />} />
+
+        {/* Rota (/pacotes/novo): Criar / Editar Pacote (Imagem 47) */}
+        <Route path="/pacotes/novo" element={<CreatePackage />} />
 
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
@@ -433,12 +437,23 @@ function AppRoutes() {
           type="button"
           onClick={() => navigate('/pacotes')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/pacotes')
+            location.pathname === '/pacotes'
               ? 'bg-[#0077b5] text-white'
               : 'text-slate-300 hover:text-white'
           }`}
         >
           /pacotes
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/pacotes/novo')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/pacotes/novo'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /pacotes/novo
         </button>
         <button
           type="button"
