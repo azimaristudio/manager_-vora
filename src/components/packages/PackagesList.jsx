@@ -17,7 +17,7 @@ const TOP_MENU = [
   { label: 'CALENDÁRIO', path: '/calendario' },
   { label: 'PACOTES', path: '/pacotes' },
   { label: 'ESTATÍSTICAS', path: '/estatisticas' },
-  { label: 'CONTABILIDADE', path: '#' },
+  { label: 'CONTABILIDADE', path: '/contabilidade' },
 ];
 
 export default function PackagesList() {

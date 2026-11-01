@@ -21,6 +21,7 @@ import ProjectsList from './components/projects/ProjectsList';
 import ProjectDetails from './components/projects/ProjectDetails';
 import CalendarView from './components/calendar/CalendarView';
 import StatisticsLayout from './components/statistics/StatisticsLayout';
+import AccountingLayout from './components/accounting/AccountingLayout';
 
 const INITIAL_TALENTS = [
   {
@@ -343,6 +344,21 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/contabilidade): Módulo de Contabilidade (Imagens 54 a 62) */}
+        <Route
+          path="/contabilidade"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/contabilidade')}
+            >
+              <AccountingLayout />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -481,6 +497,17 @@ function AppRoutes() {
           }`}
         >
           /estatisticas
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/contabilidade')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname.startsWith('/contabilidade')
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /contabilidade
         </button>
         <button
           type="button"

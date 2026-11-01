@@ -32,7 +32,7 @@ const TOP_MENU = [
   { label: 'CALENDÁRIO', path: '/calendario' },
   { label: 'PACOTES', path: '/pacotes' },
   { label: 'ESTATÍSTICAS', path: '/estatisticas' },
-  { label: 'CONTABILIDADE', path: '#' },
+  { label: 'CONTABILIDADE', path: '/contabilidade' },
 ];
 
 const MEDIA_SELECTION_BLOCKS = [
