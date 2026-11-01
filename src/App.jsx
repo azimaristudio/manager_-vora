@@ -20,6 +20,7 @@ import CreatePackage from './components/packages/CreatePackage';
 import ProjectsList from './components/projects/ProjectsList';
 import ProjectDetails from './components/projects/ProjectDetails';
 import CalendarView from './components/calendar/CalendarView';
+import StatisticsLayout from './components/statistics/StatisticsLayout';
 
 const INITIAL_TALENTS = [
   {
@@ -327,6 +328,21 @@ function AppRoutes() {
         {/* Rota (/pacotes/novo): Criar / Editar Pacote (Imagem 47) */}
         <Route path="/pacotes/novo" element={<CreatePackage />} />
 
+        {/* Rota (/estatisticas): Módulo de Estatísticas (Imagens 49 a 53) */}
+        <Route
+          path="/estatisticas"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/estatisticas')}
+            >
+              <StatisticsLayout />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -454,6 +470,17 @@ function AppRoutes() {
           }`}
         >
           /pacotes/novo
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/estatisticas')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname.startsWith('/estatisticas')
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /estatisticas
         </button>
         <button
           type="button"

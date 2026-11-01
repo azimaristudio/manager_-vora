@@ -16,7 +16,7 @@ const TOP_MENU = [
   { label: 'PROJETOS', path: '/projetos' },
   { label: 'CALENDÁRIO', path: '/calendario' },
   { label: 'PACOTES', path: '/pacotes' },
-  { label: 'ESTATÍSTICAS', path: '#' },
+  { label: 'ESTATÍSTICAS', path: '/estatisticas' },
   { label: 'CONTABILIDADE', path: '#' },
 ];
 

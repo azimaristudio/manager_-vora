@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   { label: 'Projetos', path: '/projetos' },
   { label: 'Calendário', path: '/calendario' },
   { label: 'Pacotes', path: '/pacotes' },
-  { label: 'Estatísticas', path: '#' },
+  { label: 'Estatísticas', path: '/estatisticas' },
   { label: 'Contabilidade', path: '#' },
 ];
 
@@ -107,7 +107,9 @@ export default function Header({ onOpenCompoMake }) {
               (item.label === 'Calendário' &&
                 location.pathname.startsWith('/calendario')) ||
               (item.label === 'Pacotes' &&
-                location.pathname.startsWith('/pacotes'));
+                location.pathname.startsWith('/pacotes')) ||
+              (item.label === 'Estatísticas' &&
+                location.pathname.startsWith('/estatisticas'));
 
             return (
               <button
