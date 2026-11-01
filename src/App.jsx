@@ -18,6 +18,7 @@ import WebmailLayout from './components/webmail/WebmailLayout';
 import PackagesLayout from './components/webmail/PackagesLayout';
 import ProjectsList from './components/projects/ProjectsList';
 import ProjectDetails from './components/projects/ProjectDetails';
+import CalendarView from './components/calendar/CalendarView';
 
 const INITIAL_TALENTS = [
   {
@@ -304,6 +305,21 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/calendario): Módulo de Calendário e Criação de Eventos (Imagens 31 a 45) */}
+        <Route
+          path="/calendario"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/calendario')}
+            >
+              <CalendarView />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/pacotes): Interface Independente de Pacotes (Imagem 23) */}
         <Route path="/pacotes" element={<PackagesLayout />} />
 
@@ -401,6 +417,17 @@ function AppRoutes() {
           }`}
         >
           /projetos/1
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/calendario')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname.startsWith('/calendario')
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /calendario
         </button>
         <button
           type="button"
