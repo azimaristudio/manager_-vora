@@ -11,6 +11,8 @@ import AppLayout from './components/AppLayout';
 import AddTalent from './components/AddTalent';
 import CompoMakeEditor from './components/CompoMakeEditor';
 import BackgroundJobs from './components/BackgroundJobs';
+import Contacts from './components/Contacts';
+import AddContact from './components/AddContact';
 
 const INITIAL_TALENTS = [
   {
@@ -26,10 +28,28 @@ const INITIAL_TALENTS = [
   },
 ];
 
+const INITIAL_CONTACTS = {
+  clientes: [],
+  fornecedores: [
+    {
+      id: 'fornecedor-1',
+      name: 'asdasdsa',
+      entityType: 'company',
+      statusLabel: 'Ativo',
+      category: 'Agencia',
+      location: 'Recife, Brazil',
+      booker: '',
+      rating: 0,
+    },
+  ],
+  outros: [],
+};
+
 function AppRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
   const [talents, setTalents] = useState(INITIAL_TALENTS);
+  const [contactsData, setContactsData] = useState(INITIAL_CONTACTS);
 
   const handleTalentCreated = (payload) => {
     const stageName =
@@ -56,6 +76,40 @@ function AppRoutes() {
     };
 
     setTalents((prev) => [newCard, ...prev]);
+  };
+
+  const handleSaveContact = (groupKey, contactObj) => {
+    const targetGroup = groupKey || 'fornecedores';
+    setContactsData((prev) => {
+      const list = prev[targetGroup] || [];
+      const exists = list.some((c) => c.id === contactObj.id);
+      const nextList = exists
+        ? list.map((c) => (c.id === contactObj.id ? contactObj : c))
+        : [...list, contactObj];
+      return {
+        ...prev,
+        [targetGroup]: nextList,
+      };
+    });
+  };
+
+  const handleDeleteContact = (groupKey, contactId) => {
+    const targetGroup = groupKey || 'fornecedores';
+    setContactsData((prev) => ({
+      ...prev,
+      [targetGroup]: (prev[targetGroup] || []).filter(
+        (c) => c.id !== contactId
+      ),
+    }));
+  };
+
+  const handleUpdateContactBooker = (groupKey, contactId, newBooker) => {
+    setContactsData((prev) => ({
+      ...prev,
+      [groupKey]: (prev[groupKey] || []).map((c) =>
+        c.id === contactId ? { ...c, booker: newBooker } : c
+      ),
+    }));
   };
 
   return (
@@ -90,6 +144,42 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/contatos): Listagem de Contatos (Imagens 14, 15 e 16) */}
+        <Route
+          path="/contatos"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/contatos/novo')}
+            >
+              <Contacts
+                contactsData={contactsData}
+                onUpdateContactBooker={handleUpdateContactBooker}
+              />
+            </AppLayout>
+          }
+        />
+
+        {/* Rota (/contatos/novo): Adicionar / Editar Contato (Imagens 17 e 18) */}
+        <Route
+          path="/contatos/novo"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/contatos/novo')}
+            >
+              <AddContact
+                onSaveContact={handleSaveContact}
+                onDeleteContact={handleDeleteContact}
+              />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -105,7 +195,7 @@ function AppRoutes() {
           }
         />
 
-        {/* Rota (/background-jobs): Trabalhos em Segundo Plano (13_background_trabalhos.png) */}
+        {/* Rota (/background-jobs): Trabalhos em Segundo Plano */}
         <Route
           path="/background-jobs"
           element={
@@ -162,6 +252,28 @@ function AppRoutes() {
           }`}
         >
           /talentos/novo
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/contatos')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/contatos'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /contatos
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/contatos/novo')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/contatos/novo'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /contatos/novo
         </button>
         <button
           type="button"

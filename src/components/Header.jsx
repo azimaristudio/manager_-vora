@@ -15,7 +15,7 @@ import TasksDropdown from './TasksDropdown';
 
 const NAV_ITEMS = [
   { label: 'Talentos', path: '/' },
-  { label: 'Contatos', path: '#' },
+  { label: 'Contatos', path: '/contatos' },
   { label: 'Webmail', path: '#' },
   { label: 'Projetos', path: '#' },
   { label: 'Calendário', path: '#' },
@@ -94,22 +94,24 @@ export default function Header({ onOpenCompoMake }) {
         {/* Menu Superior de Navegação */}
         <nav className="hidden xl:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
-            const isTalentsActive =
-              item.label === 'Talentos' &&
-              (location.pathname === '/' ||
-                location.pathname.startsWith('/talentos'));
+            const isItemActive =
+              (item.label === 'Talentos' &&
+                (location.pathname === '/' ||
+                  location.pathname.startsWith('/talentos'))) ||
+              (item.label === 'Contatos' &&
+                location.pathname.startsWith('/contatos'));
 
             return (
               <button
                 key={item.label}
                 type="button"
                 onClick={() => {
-                  if (item.path === '/') {
-                    navigate('/');
+                  if (item.path && item.path !== '#') {
+                    navigate(item.path);
                   }
                 }}
                 className={`px-3 py-1.5 rounded-xs text-[13px] transition-colors cursor-pointer ${
-                  isTalentsActive
+                  isItemActive
                     ? 'bg-[#0077b5] text-white font-medium shadow-2xs'
                     : 'text-[#0077b5] hover:bg-sky-50 font-normal'
                 }`}
