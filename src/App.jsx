@@ -16,6 +16,8 @@ import Contacts from './components/Contacts';
 import AddContact from './components/AddContact';
 import WebmailLayout from './components/webmail/WebmailLayout';
 import PackagesLayout from './components/webmail/PackagesLayout';
+import ProjectsList from './components/projects/ProjectsList';
+import ProjectDetails from './components/projects/ProjectDetails';
 
 const INITIAL_TALENTS = [
   {
@@ -48,11 +50,47 @@ const INITIAL_CONTACTS = {
   outros: [],
 };
 
+const INITIAL_PROJECTS_MAP = {
+  1: {
+    id: '1',
+    projectName: 'foto',
+    status: 'ATIVO',
+    responsibleBooker: 'Mozart de Marias',
+    createdBy: 'Mozart de Marias',
+    createdAt: '2026-10-30 15:04:39',
+    department: '',
+    client: 'rubem',
+    producer: '',
+    workDatesLabel: '31/Out/2026 até 31/Out/2026',
+    description: '',
+    medias: '',
+    type: '',
+    products: '',
+    exclusivity: false,
+    usagePeriodRangeLabel: '30/Out/2026 - 31/Out/2026',
+    exclusivityTerritory: '',
+    activities: [
+      { key: 'casting', label: 'CASTING', count: 0, bg: 'bg-[#f8b400]' },
+      { key: 'callback', label: 'CALLBACK', count: 0, bg: 'bg-[#c5299b]' },
+      { key: 'opcao', label: 'OPÇÃO', count: 0, bg: 'bg-[#f06711]' },
+      { key: 'proupa', label: 'P. ROUPA', count: 0, bg: 'bg-[#3ab565]' },
+      { key: 'trabalho', label: 'TRABALHO', count: 0, bg: 'bg-[#2aa9d2]' },
+    ],
+    billingSummary: {
+      grossAmount: '0.00',
+      extraCommission: '0.00',
+      extraExpense: '0.00',
+      totalToCharge: '0.00',
+    },
+  },
+};
+
 function AppRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
   const [talents, setTalents] = useState(INITIAL_TALENTS);
   const [contactsData, setContactsData] = useState(INITIAL_CONTACTS);
+  const [projectsMap, setProjectsMap] = useState(INITIAL_PROJECTS_MAP);
 
   const handleTalentCreated = (payload) => {
     const stageName =
@@ -113,6 +151,33 @@ function AppRoutes() {
         c.id === contactId ? { ...c, booker: newBooker } : c
       ),
     }));
+  };
+
+  const handleSaveProject = (formData, existingId = null) => {
+    const targetId = existingId || '1';
+    setProjectsMap((prev) => {
+      const base = prev[targetId] || INITIAL_PROJECTS_MAP['1'];
+      const updatedProject = {
+        ...base,
+        id: targetId,
+        department: formData.department ?? base.department,
+        projectName: formData.projectName?.trim() || base.projectName || 'foto',
+        client: formData.client?.trim() || base.client || 'rubem',
+        producer: formData.producer ?? base.producer,
+        description: formData.description ?? base.description,
+        medias: formData.medias ?? base.medias,
+        type: formData.type ?? base.type,
+        products: formData.products ?? base.products,
+        exclusivity: Boolean(formData.exclusivity),
+        exclusivityTerritory:
+          formData.exclusivityTerritory ?? base.exclusivityTerritory,
+      };
+      return {
+        ...prev,
+        [targetId]: updatedProject,
+      };
+    });
+    return targetId;
   };
 
   return (
@@ -206,6 +271,39 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/projetos): Listagem de Projetos (Imagem 28 e Modal Imagem 29) */}
+        <Route
+          path="/projetos"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/projetos')}
+            >
+              <ProjectsList onProjectCreated={handleSaveProject} />
+            </AppLayout>
+          }
+        />
+
+        {/* Rota (/projetos/:id): Detalhes do Projeto (Imagem 30) */}
+        <Route
+          path="/projetos/:id"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/projetos')}
+            >
+              <ProjectDetails
+                projectsMap={projectsMap}
+                onSaveProject={handleSaveProject}
+              />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/pacotes): Interface Independente de Pacotes (Imagem 23) */}
         <Route path="/pacotes" element={<PackagesLayout />} />
 
@@ -284,6 +382,28 @@ function AppRoutes() {
         </button>
         <button
           type="button"
+          onClick={() => navigate('/projetos')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/projetos'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /projetos
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/projetos/1')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/projetos/1'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /projetos/1
+        </button>
+        <button
+          type="button"
           onClick={() => navigate('/pacotes')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/pacotes')
@@ -303,17 +423,6 @@ function AppRoutes() {
           }`}
         >
           /compomake
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/background-jobs')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/background-jobs'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          /background-jobs
         </button>
       </div>
     </div>
