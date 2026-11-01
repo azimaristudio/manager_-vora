@@ -3,6 +3,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate,
   useNavigate,
   useLocation,
 } from 'react-router-dom';
@@ -13,6 +14,8 @@ import CompoMakeEditor from './components/CompoMakeEditor';
 import BackgroundJobs from './components/BackgroundJobs';
 import Contacts from './components/Contacts';
 import AddContact from './components/AddContact';
+import WebmailLayout from './components/webmail/WebmailLayout';
+import PackagesLayout from './components/webmail/PackagesLayout';
 
 const INITIAL_TALENTS = [
   {
@@ -126,7 +129,7 @@ function AppRoutes() {
           }
         />
 
-        {/* Rota (/talentos/novo): Cadastro de Talentos (Agregar Talento) */}
+        {/* Rota (/talentos/novo): Cadastro de Talentos */}
         <Route
           path="/talentos/novo"
           element={
@@ -180,6 +183,32 @@ function AppRoutes() {
           }
         />
 
+        {/* Rotas (/webmail e /webmail/:section): Módulo de Webmail (Imagens 19 a 27) */}
+        <Route
+          path="/webmail"
+          element={<Navigate to="/webmail/inbox" replace />}
+        />
+        <Route
+          path="/webmail/packages"
+          element={<Navigate to="/pacotes" replace />}
+        />
+        <Route
+          path="/webmail/:section"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/webmail/new')}
+            >
+              <WebmailLayout />
+            </AppLayout>
+          }
+        />
+
+        {/* Rota (/pacotes): Interface Independente de Pacotes (Imagem 23) */}
+        <Route path="/pacotes" element={<PackagesLayout />} />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -222,17 +251,6 @@ function AppRoutes() {
         <span className="text-slate-400 font-medium mr-1">Rotas:</span>
         <button
           type="button"
-          onClick={() => navigate('/login')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/login'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          /login
-        </button>
-        <button
-          type="button"
           onClick={() => navigate('/')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/'
@@ -244,20 +262,9 @@ function AppRoutes() {
         </button>
         <button
           type="button"
-          onClick={() => navigate('/talentos/novo')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/talentos/novo'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          /talentos/novo
-        </button>
-        <button
-          type="button"
           onClick={() => navigate('/contatos')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/contatos'
+            location.pathname.startsWith('/contatos')
               ? 'bg-[#0077b5] text-white'
               : 'text-slate-300 hover:text-white'
           }`}
@@ -266,14 +273,25 @@ function AppRoutes() {
         </button>
         <button
           type="button"
-          onClick={() => navigate('/contatos/novo')}
+          onClick={() => navigate('/webmail/inbox')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/contatos/novo'
+            location.pathname.startsWith('/webmail')
               ? 'bg-[#0077b5] text-white'
               : 'text-slate-300 hover:text-white'
           }`}
         >
-          /contatos/novo
+          /webmail
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/pacotes')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname.startsWith('/pacotes')
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /pacotes
         </button>
         <button
           type="button"

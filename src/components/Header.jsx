@@ -16,10 +16,10 @@ import TasksDropdown from './TasksDropdown';
 const NAV_ITEMS = [
   { label: 'Talentos', path: '/' },
   { label: 'Contatos', path: '/contatos' },
-  { label: 'Webmail', path: '#' },
+  { label: 'Webmail', path: '/webmail/inbox' },
   { label: 'Projetos', path: '#' },
   { label: 'Calendário', path: '#' },
-  { label: 'Pacotes', path: '#' },
+  { label: 'Pacotes', path: '/pacotes' },
   { label: 'Estatísticas', path: '#' },
   { label: 'Contabilidade', path: '#' },
 ];
@@ -99,7 +99,11 @@ export default function Header({ onOpenCompoMake }) {
                 (location.pathname === '/' ||
                   location.pathname.startsWith('/talentos'))) ||
               (item.label === 'Contatos' &&
-                location.pathname.startsWith('/contatos'));
+                location.pathname.startsWith('/contatos')) ||
+              (item.label === 'Webmail' &&
+                location.pathname.startsWith('/webmail')) ||
+              (item.label === 'Pacotes' &&
+                location.pathname.startsWith('/pacotes'));
 
             return (
               <button
