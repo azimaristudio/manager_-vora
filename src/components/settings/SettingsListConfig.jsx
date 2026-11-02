@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 
 export default function SettingsListConfig({
+  title = '',
   initialItems = [],
   inputType = 'checkbox', // 'checkbox' | 'radio'
   defaultTagText = 'Padrão', // 'Padrão' | 'default'
@@ -98,18 +99,26 @@ export default function SettingsListConfig({
   };
 
   return (
-    <div className="max-w-2xl pt-2">
-      {/* Banner superior opcional com ícone azul de informação (i) */}
-      {showInfoBanner && (
-        <div className="pb-4 mb-4 border-b border-slate-200/90 pl-6 flex items-start gap-3">
-          <div className="w-7 h-7 rounded-full bg-[#5bc0de] text-white flex items-center justify-center shrink-0 font-serif font-bold text-base leading-none shadow-2xs">
-            i
-          </div>
-          <p className="text-xs text-slate-500 leading-relaxed pt-0.5">
-            {infoText}
-          </p>
+    <div className="pt-2">
+      {/* Título opcional da secção seguido de linha separadora fina (Imagens 88 e 89) */}
+      {title && (
+        <div className="pb-2.5 mb-5 border-b border-slate-200/90">
+          <h2 className="text-[19px] font-normal text-slate-600">{title}</h2>
         </div>
       )}
+
+      <div className="max-w-2xl">
+        {/* Banner superior opcional com ícone azul de informação (i) */}
+        {showInfoBanner && (
+          <div className="pb-4 mb-4 border-b border-slate-200/90 pl-6 flex items-start gap-3">
+            <div className="w-7 h-7 rounded-full bg-[#5bc0de] text-white flex items-center justify-center shrink-0 font-serif font-bold text-base leading-none shadow-2xs">
+              i
+            </div>
+            <p className="text-xs text-slate-500 leading-relaxed pt-0.5">
+              {infoText}
+            </p>
+          </div>
+        )}
 
       {/* Lista de Itens (Checkboxes ou Radio Buttons) */}
       {items.length > 0 && (
@@ -225,6 +234,7 @@ export default function SettingsListConfig({
           {saveButtonLabel}
         </button>
       </form>
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import TalentsSettings from './TalentsSettings';
+import ClientsSettings from './ClientsSettings';
 
 export const SETTINGS_MAIN_TABS = [
   { key: 'talentos', label: 'Talentos', Icon: User },
@@ -19,6 +20,7 @@ export const SETTINGS_MAIN_TABS = [
 
 const MAIN_TAB_COMPONENTS = {
   talentos: TalentsSettings,
+  clientes: ClientsSettings,
 };
 
 export default function SettingsLayout() {
@@ -84,4 +86,3 @@ export default function SettingsLayout() {
     </div>
   );
 }
-
