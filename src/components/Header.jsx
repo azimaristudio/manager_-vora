@@ -8,7 +8,6 @@ import {
   UserCircle2,
   ChevronDown,
   User,
-  LogOut,
 } from 'lucide-react';
 import ContractsDropdown from './ContractsDropdown';
 import TasksDropdown from './TasksDropdown';
@@ -247,7 +246,7 @@ export default function Header({ onOpenCompoMake }) {
         {/* Menu do Usuário / Perfil (Imagem 64) */}
         <div
           ref={userMenuContainerRef}
-          className="relative flex items-center gap-1 pl-1 border-l border-slate-200"
+          className="relative pl-1 border-l border-slate-200"
         >
           <button
             type="button"

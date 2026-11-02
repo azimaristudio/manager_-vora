@@ -13,9 +13,15 @@ export default function UserDropdown({ onClose }) {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-xs shadow-xl py-2.5 z-50 text-xs text-slate-600 select-none">
+    <div
+      className="absolute right-0 top-full mt-2.5 w-48 bg-white border border-slate-200 rounded-xs shadow-lg py-2.5 z-50 text-xs text-slate-600 select-none"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Seta superior apontando para o ícone de perfil */}
+      <div className="absolute -top-1.5 right-4 w-3 h-3 bg-white border-t border-l border-slate-200 rotate-45" />
+
       {/* Cabeçalho do Dropdown: Nome do utilizador e agência em negrito */}
-      <div className="px-3.5 pb-2">
+      <div className="relative px-3.5 pb-2">
         <p className="text-[12px] text-slate-600 leading-tight font-normal">
           Mozart de Marias
         </p>
