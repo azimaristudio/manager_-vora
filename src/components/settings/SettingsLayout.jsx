@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import TalentsSettings from './TalentsSettings';
 import ClientsSettings from './ClientsSettings';
+import WebmailSettings from './WebmailSettings';
 
 export const SETTINGS_MAIN_TABS = [
   { key: 'talentos', label: 'Talentos', Icon: User },
@@ -21,6 +22,7 @@ export const SETTINGS_MAIN_TABS = [
 const MAIN_TAB_COMPONENTS = {
   talentos: TalentsSettings,
   clientes: ClientsSettings,
+  webmail: WebmailSettings,
 };
 
 export default function SettingsLayout() {
