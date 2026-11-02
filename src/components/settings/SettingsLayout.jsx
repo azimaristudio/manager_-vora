@@ -10,6 +10,7 @@ import {
 import TalentsSettings from './TalentsSettings';
 import ClientsSettings from './ClientsSettings';
 import WebmailSettings from './WebmailSettings';
+import AccountingSettings from './AccountingSettings';
 
 export const SETTINGS_MAIN_TABS = [
   { key: 'talentos', label: 'Talentos', Icon: User },
@@ -23,6 +24,7 @@ const MAIN_TAB_COMPONENTS = {
   talentos: TalentsSettings,
   clientes: ClientsSettings,
   webmail: WebmailSettings,
+  contabilidade: AccountingSettings,
 };
 
 export default function SettingsLayout() {
