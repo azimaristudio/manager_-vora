@@ -22,6 +22,7 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import CalendarView from './components/calendar/CalendarView';
 import StatisticsLayout from './components/statistics/StatisticsLayout';
 import AccountingLayout from './components/accounting/AccountingLayout';
+import MyAccount from './components/MyAccount';
 
 const INITIAL_TALENTS = [
   {
@@ -359,6 +360,21 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/minha-conta): Minha Conta / Configurações de Perfil (Imagem 63) */}
+        <Route
+          path="/minha-conta"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/minha-conta')}
+            >
+              <MyAccount />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -508,6 +524,17 @@ function AppRoutes() {
           }`}
         >
           /contabilidade
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/minha-conta')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname === '/minha-conta'
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /minha-conta
         </button>
         <button
           type="button"

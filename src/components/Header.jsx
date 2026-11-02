@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import ContractsDropdown from './ContractsDropdown';
 import TasksDropdown from './TasksDropdown';
+import UserDropdown from './UserDropdown';
 
 const NAV_ITEMS = [
   { label: 'Talentos', path: '/' },
@@ -28,12 +29,14 @@ export default function Header({ onOpenCompoMake }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Estados para controlar a visibilidade dos dropdowns de Contratos e Tarefas
+  // Estados para controlar a visibilidade dos dropdowns de Contratos, Tarefas e Perfil
   const [isContractsOpen, setIsContractsOpen] = useState(false);
   const [isTasksOpen, setIsTasksOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const contractsContainerRef = useRef(null);
   const tasksContainerRef = useRef(null);
+  const userMenuContainerRef = useRef(null);
 
   // Fecha automaticamente os dropdowns ao clicar fora deles
   useEffect(() => {
@@ -50,6 +53,12 @@ export default function Header({ onOpenCompoMake }) {
       ) {
         setIsTasksOpen(false);
       }
+      if (
+        userMenuContainerRef.current &&
+        !userMenuContainerRef.current.contains(event.target)
+      ) {
+        setIsUserMenuOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -61,16 +70,25 @@ export default function Header({ onOpenCompoMake }) {
   const handleToggleContracts = () => {
     setIsContractsOpen((prev) => !prev);
     setIsTasksOpen(false);
+    setIsUserMenuOpen(false);
   };
 
   const handleToggleTasks = () => {
     setIsTasksOpen((prev) => !prev);
     setIsContractsOpen(false);
+    setIsUserMenuOpen(false);
+  };
+
+  const handleToggleUserMenu = () => {
+    setIsUserMenuOpen((prev) => !prev);
+    setIsContractsOpen(false);
+    setIsTasksOpen(false);
   };
 
   const handleOpenBackgroundJobs = () => {
     setIsContractsOpen(false);
     setIsTasksOpen(false);
+    setIsUserMenuOpen(false);
     navigate('/background-jobs');
   };
 
@@ -143,6 +161,7 @@ export default function Header({ onOpenCompoMake }) {
           onClick={() => {
             setIsContractsOpen(false);
             setIsTasksOpen(false);
+            setIsUserMenuOpen(false);
             if (onOpenCompoMake) onOpenCompoMake();
           }}
           title="Abrir CompoMake (Criar Composite)"
@@ -225,26 +244,26 @@ export default function Header({ onOpenCompoMake }) {
           <LifeBuoy className="w-5 h-5" />
         </button>
 
-        {/* Menu do Usuário / Login */}
-        <div className="flex items-center gap-1 pl-1 border-l border-slate-200">
+        {/* Menu do Usuário / Perfil (Imagem 64) */}
+        <div
+          ref={userMenuContainerRef}
+          className="relative flex items-center gap-1 pl-1 border-l border-slate-200"
+        >
           <button
             type="button"
-            onClick={() => navigate('/login')}
-            title="Ir para a tela de Login"
-            className="flex items-center gap-1 text-[#0077b5] hover:text-[#005a8c] p-1 rounded-xs transition-colors cursor-pointer"
+            onClick={handleToggleUserMenu}
+            title="Menu do Usuário"
+            className={`flex items-center gap-1 text-[#0077b5] hover:text-[#005a8c] p-1 rounded-xs transition-colors cursor-pointer ${
+              isUserMenuOpen ? 'bg-sky-100/80' : 'hover:bg-sky-50'
+            }`}
           >
             <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
             <ChevronDown className="w-3.5 h-3.5" />
           </button>
-          <button
-            type="button"
-            onClick={() => navigate('/login')}
-            title="Tela de Login"
-            className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-slate-500 hover:text-[#0077b5] px-2 py-1 rounded hover:bg-sky-50 transition-colors cursor-pointer"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-            <span>Login</span>
-          </button>
+
+          {isUserMenuOpen && (
+            <UserDropdown onClose={() => setIsUserMenuOpen(false)} />
+          )}
         </div>
       </div>
     </header>
