@@ -67,7 +67,7 @@ export default function UserDropdown({ onClose }) {
 
         <button
           type="button"
-          onClick={() => handleNavigate('#')}
+          onClick={() => handleNavigate('/configuracoes')}
           className="w-full px-3.5 py-1.5 text-left hover:bg-sky-50 flex items-center gap-2.5 text-xs text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
         >
           <Settings className="w-3.5 h-3.5 fill-slate-700 text-slate-700 shrink-0" />

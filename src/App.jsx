@@ -23,6 +23,7 @@ import CalendarView from './components/calendar/CalendarView';
 import StatisticsLayout from './components/statistics/StatisticsLayout';
 import AccountingLayout from './components/accounting/AccountingLayout';
 import MyAccount from './components/MyAccount';
+import SettingsLayout from './components/settings/SettingsLayout';
 
 const INITIAL_TALENTS = [
   {
@@ -375,6 +376,21 @@ function AppRoutes() {
           }
         />
 
+        {/* Rota (/configuracoes): Módulo de Configurações (Imagens 65 a 87) */}
+        <Route
+          path="/configuracoes"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/configuracoes')}
+            >
+              <SettingsLayout />
+            </AppLayout>
+          }
+        />
+
         {/* Rota (/compomake): Editor do CompoMake */}
         <Route
           path="/compomake"
@@ -535,6 +551,17 @@ function AppRoutes() {
           }`}
         >
           /minha-conta
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/configuracoes')}
+          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+            location.pathname.startsWith('/configuracoes')
+              ? 'bg-[#0077b5] text-white'
+              : 'text-slate-300 hover:text-white'
+          }`}
+        >
+          /configuracoes
         </button>
         <button
           type="button"
