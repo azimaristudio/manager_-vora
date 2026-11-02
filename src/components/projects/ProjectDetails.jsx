@@ -470,7 +470,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
         </div>
       </div>
 
-      {/* Rodapé Padrão ManagerFashion */}
+      {/* Rodapé Padrão Évora Models */}
       <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-slate-500">
         <div className="flex items-center justify-center gap-4">
           <span className="inline-flex items-center gap-1.5 text-slate-500">
@@ -496,7 +496,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
             PORTUGUÊS
           </button>
         </div>
-        <p className="text-slate-500 text-xs">© ManagerFashion.com</p>
+        <p className="text-slate-500 text-xs">© Évora Models</p>
       </footer>
 
       {/* Modal para Criar ou Editar Projeto */}

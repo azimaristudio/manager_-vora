@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import evoraLogo from '../assets/evora_logo.jpg';
 import {
   Move,
   Crop,
@@ -443,19 +444,13 @@ export default function CompoMakeEditor() {
             <div className="grid grid-cols-12 gap-3 items-stretch">
               {/* Lado Esquerdo do Esquema: Logo MF + Foto Principal + Nome do Talento */}
               <div className="col-span-5 flex flex-col items-center justify-between">
-                {/* Logo MF ManagerFashion */}
-                <div className="flex items-center gap-1 mb-1.5">
-                  <span className="bg-[#0077b5] text-white font-extrabold text-[10px] px-1 py-0.5 rounded-[1px] leading-none">
-                    MF
-                  </span>
-                  <div className="flex flex-col leading-none">
-                    <span className="text-[#0077b5] text-[11px] font-medium tracking-tight">
-                      Manager<span className="font-bold">Fashion</span>
-                    </span>
-                    <span className="text-[6px] text-slate-400">
-                      Solutions for Talents Agencies
-                    </span>
-                  </div>
+                {/* Logótipo Évora Models */}
+                <div className="flex items-center justify-center mb-1.5">
+                  <img
+                    src={evoraLogo}
+                    alt="Évora Models"
+                    className="h-9 w-auto object-contain"
+                  />
                 </div>
 
                 {/* Slot Principal */}

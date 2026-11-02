@@ -12,6 +12,7 @@ import {
 import ContractsDropdown from './ContractsDropdown';
 import TasksDropdown from './TasksDropdown';
 import UserDropdown from './UserDropdown';
+import evoraLogo from '../assets/evora_logo.jpg';
 
 const NAV_ITEMS = [
   { label: 'Talentos', path: '/' },
@@ -94,18 +95,17 @@ export default function Header({ onOpenCompoMake }) {
   return (
     <header className="w-full bg-white border-b border-slate-200 px-4 lg:px-8 h-16 flex items-center justify-between sticky top-0 z-30">
       <div className="flex items-center gap-6 lg:gap-10">
-        {/* Logotipo 'MF ManagerFashion' com Link para a rota inicial (/) */}
+        {/* Logótipo Évora Models com Link para a rota inicial (/) */}
         <Link
           to="/"
           title="Ir para o Início (Talentos)"
-          className="flex items-center gap-1.5 shrink-0 group"
+          className="flex items-center shrink-0 group"
         >
-          <span className="bg-[#0077b5] group-hover:bg-[#006399] text-white font-extrabold text-sm px-1.5 py-1 rounded-xs tracking-tighter leading-none transition-colors">
-            MF
-          </span>
-          <span className="text-[#0077b5] group-hover:text-[#006399] font-normal text-lg tracking-tight transition-colors">
-            Manager<span className="font-semibold">Fashion</span>
-          </span>
+          <img
+            src={evoraLogo}
+            alt="Évora Models"
+            className="h-11 w-auto object-contain transition-opacity group-hover:opacity-90"
+          />
         </Link>
 
         {/* Menu Superior de Navegação */}

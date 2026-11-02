@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import evoraLogo from '../../assets/evora_logo.jpg';
 import {
   LifeBuoy,
   UserCircle2,
@@ -35,29 +36,42 @@ export default function PackagesList() {
     <div className="min-h-screen bg-[#e6e7e9] text-slate-700 flex flex-col font-sans select-none">
       {/* Cabeçalho Superior (Fiel às Imagens 46 e 48) */}
       <header className="w-full bg-white border-b border-slate-200 px-6 lg:px-10 h-14 flex items-center justify-between sticky top-0 z-30">
-        <nav className="flex flex-wrap items-center gap-4 sm:gap-6">
-          {TOP_MENU.map((item) => {
-            const isCurrent = item.label === 'PACOTES';
-            return (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => {
-                  if (item.path !== '#') {
-                    navigate(item.path);
-                  }
-                }}
-                className={`text-[11px] tracking-wider uppercase transition-colors cursor-pointer ${
-                  isCurrent
-                    ? 'text-slate-900 font-bold'
-                    : 'text-slate-600 hover:text-[#0077b5] font-medium'
-                }`}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-6">
+          <Link
+            to="/"
+            title="Ir para o Início (Talentos)"
+            className="flex items-center shrink-0"
+          >
+            <img
+              src={evoraLogo}
+              alt="Évora Models"
+              className="h-10 w-auto object-contain"
+            />
+          </Link>
+          <nav className="flex flex-wrap items-center gap-4 sm:gap-6">
+            {TOP_MENU.map((item) => {
+              const isCurrent = item.label === 'PACOTES';
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    if (item.path !== '#') {
+                      navigate(item.path);
+                    }
+                  }}
+                  className={`text-[11px] tracking-wider uppercase transition-colors cursor-pointer ${
+                    isCurrent
+                      ? 'text-slate-900 font-bold'
+                      : 'text-slate-600 hover:text-[#0077b5] font-medium'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
 
         <div className="flex items-center gap-4 text-slate-600">
           <button
@@ -324,7 +338,7 @@ export default function PackagesList() {
 
       {/* Rodapé */}
       <footer className="py-3 text-center text-[10px] tracking-wider uppercase text-slate-500">
-        POWERED BY MANAGERFASHION ©
+        © Évora Models
       </footer>
     </div>
   );

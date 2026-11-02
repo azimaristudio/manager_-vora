@@ -85,7 +85,7 @@ export default function AppLayout({
 
   return (
     <div className="min-h-screen bg-white text-slate-700 flex flex-col font-sans">
-      {/* 1. CABEÇALHO SUPERIOR (Header.jsx com Link para "/" no logotipo MF ManagerFashion) */}
+      {/* 1. CABEÇALHO SUPERIOR (Header.jsx com Link para "/" no logótipo Évora Models) */}
       <Header onOpenCompoMake={() => setIsCompoMakeOpen(true)} />
 
       {/* 2. SUB-CABEÇALHO PADRÃO (Breadcrumbs "Início > Talentos" + Busca Global) */}

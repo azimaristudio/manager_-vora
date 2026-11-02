@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, Instagram, ArrowRight } from 'lucide-react';
+import evoraLogo from '../assets/evora_logo.jpg';
 
 export default function Login({ onLoginSuccess }) {
   const [lang, setLang] = useState('PT');
@@ -16,32 +17,32 @@ export default function Login({ onLoginSuccess }) {
 
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-gradient-to-br from-[#026aa7] via-[#1b8cc4] to-[#cce7f5] font-sans select-none">
-      {/* Área Esquerda: Branding "10 YEARS MF" modernizada */}
-      <div className="relative flex-1 flex flex-col items-center justify-center p-10 lg:p-16 overflow-hidden min-h-[260px] lg:min-h-screen">
+      {/* Área Esquerda: Branding Évora Models */}
+      <div className="relative flex-1 flex flex-col items-center justify-center p-10 lg:p-16 overflow-hidden min-h-[300px] lg:min-h-screen">
         {/* Efeitos de iluminação de fundo sutis */}
         <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute bottom-12 right-12 w-80 h-80 rounded-full bg-sky-300/20 blur-3xl" />
 
-        <div className="relative z-10 flex flex-col items-start">
-          <div className="flex items-baseline tracking-tighter leading-none">
-            <span
-              className="text-7xl sm:text-8xl lg:text-[108px] font-light text-transparent mr-1"
-              style={{
-                WebkitTextStroke: '2.5px rgba(255, 255, 255, 0.92)',
-              }}
-            >
-              10
-            </span>
-            <span className="text-7xl sm:text-8xl lg:text-[108px] font-extrabold text-white tracking-tight drop-shadow-sm">
-              MF
-            </span>
+        <div className="relative z-10 flex flex-col items-center text-center max-w-md">
+          {/* Logótipo Évora Models destacado e centralizado */}
+          <div className="bg-white rounded-xl p-3 shadow-xl mb-7">
+            <img
+              src={evoraLogo}
+              alt="Évora Models"
+              className="h-32 sm:h-40 w-auto object-contain rounded-lg"
+            />
           </div>
-          <span className="text-xl sm:text-2xl lg:text-[26px] font-medium tracking-[0.26em] text-white/80 -mt-2 ml-1.5">
-            YEARS
-          </span>
-          <p className="mt-6 text-xs sm:text-sm text-white/75 max-w-xs tracking-wide font-light">
-            Plataforma integrada de agenciamento artístico, casting e gestão financeira para agências de talentos.
+
+          {/* Textos institucionais abaixo do logótipo */}
+          <p className="text-base sm:text-lg font-semibold text-white tracking-wide drop-shadow-xs mb-3">
+            Where new talent finds opportunities.
           </p>
+
+          <div className="space-y-1.5 text-sm sm:text-[15px] text-white/95 font-medium tracking-wide leading-relaxed">
+            <p>🇧🇷 Brazil • 🌍 International</p>
+            <p>✨ Scouting &amp; Management</p>
+            <p>📩 contato@evoramodels.com</p>
+          </div>
         </div>
       </div>
 
@@ -143,10 +144,10 @@ export default function Login({ onLoginSuccess }) {
             className="flex flex-col items-center gap-1 hover:text-[#0077b5] transition-colors"
           >
             <Instagram className="w-4 h-4 stroke-[1.75]" />
-            <span className="text-[11px] tracking-wide">@manager.fashion.brazil</span>
+            <span className="text-[11px] tracking-wide">@evoramodels</span>
           </a>
-          <span className="text-[10px] tracking-widest uppercase text-slate-300 pt-1">
-            ©MANAGERFASHION
+          <span className="text-[10px] tracking-widest uppercase text-slate-400 pt-1">
+            © Évora Models
           </span>
         </div>
       </div>

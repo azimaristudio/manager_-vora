@@ -351,9 +351,9 @@ export default function PackagesLayout() {
         </div>
       </main>
 
-      {/* Rodapé "POWERED BY MANAGERFASHION ©" */}
+      {/* Rodapé "© Évora Models" */}
       <footer className="py-3 text-center text-[10px] tracking-wider uppercase text-slate-500">
-        POWERED BY MANAGERFASHION ©
+        © Évora Models
       </footer>
     </div>
   );

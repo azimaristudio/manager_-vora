@@ -6,6 +6,7 @@ import {
   Mail,
   DollarSign,
   Calendar,
+  Globe,
 } from 'lucide-react';
 import TalentsSettings from './TalentsSettings';
 import ClientsSettings from './ClientsSettings';
@@ -89,6 +90,35 @@ export default function SettingsLayout() {
           </div>
         )}
       </div>
+
+      {/* 4. Rodapé Padrão Évora Models */}
+      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-slate-500">
+        <div className="flex items-center justify-center gap-4">
+          <span className="inline-flex items-center gap-1.5 text-slate-500">
+            <Globe className="w-3.5 h-3.5" />
+            <span>Idiomas</span>
+          </span>
+          <button
+            type="button"
+            className="text-[#0077b5] underline font-normal text-[11px] uppercase cursor-pointer"
+          >
+            ENGLISH
+          </button>
+          <button
+            type="button"
+            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+          >
+            ESPAÑOL
+          </button>
+          <button
+            type="button"
+            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+          >
+            PORTUGUÊS
+          </button>
+        </div>
+        <p className="text-slate-500 text-xs">© Évora Models</p>
+      </footer>
     </div>
   );
 }
