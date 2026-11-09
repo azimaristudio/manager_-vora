@@ -38,7 +38,7 @@
 - Edição de Redes Sociais: Adicionar a função de excluir uma rede social vinculada após sua adição
 
 
--Integração: Sincronizar a entrada de dados com o Google Forms para acelerar e facilitar o fluxo de cadastros
+- Integração: Sincronizar a entrada de dados com o Google Forms para acelerar e facilitar o fluxo de cadastros
 
 --------------------------------------------------------------------------------------------------------
 
