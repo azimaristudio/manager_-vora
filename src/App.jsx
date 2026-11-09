@@ -94,6 +94,7 @@ const INITIAL_PROJECTS_MAP = {
 function AppRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [talents, setTalents] = useState(INITIAL_TALENTS);
   const [contactsData, setContactsData] = useState(INITIAL_CONTACTS);
   const [projectsMap, setProjectsMap] = useState(INITIAL_PROJECTS_MAP);
@@ -189,9 +190,24 @@ function AppRoutes() {
   return (
     <div className="relative min-h-screen">
       <Routes>
-        {/* Rota Inicial (/): Listagem Principal de Talentos */}
+        {/* Rota Inicial (/): Redireciona para /login se não autenticado; caso contrário exibe Talentos */}
         <Route
           path="/"
+          element={
+            isAuthenticated ? (
+              <AppLayout
+                customTalents={talents}
+                onOpenAddTalent={() => navigate('/talentos/novo')}
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Rota (/talentos): Listagem Principal de Talentos */}
+        <Route
+          path="/talentos"
           element={
             <AppLayout
               customTalents={talents}
@@ -424,24 +440,46 @@ function AppRoutes() {
         {/* Rota (/login): Tela de Autenticação */}
         <Route
           path="/login"
-          element={<Login onLoginSuccess={() => navigate('/')} />}
+          element={
+            <Login
+              onLoginSuccess={() => {
+                setIsAuthenticated(true);
+                navigate('/talentos');
+              }}
+            />
+          }
         />
       </Routes>
 
-      {/* Barra Flutuante de Protótipo para Inspecionar as Rotas */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-1.5 bg-slate-900/95 backdrop-blur-xs text-white px-3 py-1.5 rounded-full shadow-lg border border-white/15 text-xs">
-        <span className="text-slate-400 font-medium mr-1">Rotas:</span>
-        <button
-          type="button"
-          onClick={() => navigate('/')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          / (Talentos)
-        </button>
+      {/* Barra Flutuante de Protótipo para Inspecionar as Rotas (oculta na tela de Login) */}
+      {location.pathname !== '/login' && (
+        <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-1.5 bg-slate-900/95 backdrop-blur-xs text-white px-3 py-1.5 rounded-full shadow-lg border border-white/15 text-xs">
+          <span className="text-slate-400 font-medium mr-1">Rotas:</span>
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
+            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+              location.pathname === '/login'
+                ? 'bg-[#0077b5] text-white'
+                : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            /login
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setIsAuthenticated(true);
+              navigate('/talentos');
+            }}
+            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+              location.pathname === '/' || location.pathname === '/talentos'
+                ? 'bg-[#0077b5] text-white'
+                : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            /talentos
+          </button>
         <button
           type="button"
           onClick={() => navigate('/contatos')}
@@ -575,6 +613,7 @@ function AppRoutes() {
           /compomake
         </button>
       </div>
+      )}
     </div>
   );
 }
