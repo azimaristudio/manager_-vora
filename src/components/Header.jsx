@@ -93,7 +93,7 @@ export default function Header({ onOpenCompoMake }) {
   };
 
   return (
-    <header className="w-full bg-white border-b border-slate-200 px-4 lg:px-8 h-16 flex items-center justify-between sticky top-0 z-30">
+    <header className="w-full bg-[#161617] border-b border-white/10 px-4 lg:px-8 h-16 flex items-center justify-between sticky top-0 z-30">
       <div className="flex items-center gap-6 lg:gap-10">
         {/* Logótipo Évora Models com Link para a rota de Talentos (/talentos) */}
         <Link
@@ -141,8 +141,8 @@ export default function Header({ onOpenCompoMake }) {
                 }}
                 className={`px-3 py-1.5 rounded-xs text-[13px] transition-colors cursor-pointer ${
                   isItemActive
-                    ? 'bg-[#0077b5] text-white font-medium shadow-2xs'
-                    : 'text-[#0077b5] hover:bg-sky-50 font-normal'
+                    ? 'bg-[#880E1B] hover:bg-[#a31121] text-white font-medium shadow-2xs'
+                    : 'text-[#E8AC51] hover:bg-[#1c1c1e] font-normal'
                 }`}
               >
                 {item.label}
@@ -153,7 +153,7 @@ export default function Header({ onOpenCompoMake }) {
       </div>
 
       {/* Grupo Superior Direito: CompoMake + Contratos + Tarefas + Background Jobs + Suporte + Perfil */}
-      <div className="flex items-center gap-3 sm:gap-4 text-[#0077b5]">
+      <div className="flex items-center gap-3 sm:gap-4 text-[#E8AC51]">
         {/* 1º Ícone: CompoMake */}
         <button
           type="button"
@@ -164,17 +164,17 @@ export default function Header({ onOpenCompoMake }) {
             if (onOpenCompoMake) onOpenCompoMake();
           }}
           title="Abrir CompoMake (Criar Composite)"
-          className="p-1 hover:bg-sky-50 rounded-xs transition-all cursor-pointer group"
+          className="p-1 hover:bg-[#1c1c1e] rounded-xs transition-all cursor-pointer group"
         >
-          <div className="w-7 h-5 border-2 border-[#0077b5] bg-[#0077b5] rounded-[2px] p-0.5 flex items-center gap-0.5 group-hover:scale-105 transition-transform">
-            <div className="w-1/2 h-full bg-white flex items-end justify-center overflow-hidden">
-              <User className="w-3 h-3 text-[#0077b5] fill-[#0077b5] translate-y-0.5" />
+          <div className="w-7 h-5 border-2 border-[#880E1B] bg-[#880E1B] rounded-[2px] p-0.5 flex items-center gap-0.5 group-hover:scale-105 transition-transform">
+            <div className="w-1/2 h-full bg-[#161617] flex items-end justify-center overflow-hidden">
+              <User className="w-3 h-3 text-[#E8AC51] fill-[#E8AC51] translate-y-0.5" />
             </div>
             <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 gap-[1.5px]">
-              <div className="bg-white" />
-              <div className="bg-white" />
-              <div className="bg-white" />
-              <div className="bg-white" />
+              <div className="bg-[#E8AC51]" />
+              <div className="bg-[#E8AC51]" />
+              <div className="bg-[#E8AC51]" />
+              <div className="bg-[#E8AC51]" />
             </div>
           </div>
         </button>
@@ -186,11 +186,11 @@ export default function Header({ onOpenCompoMake }) {
             onClick={handleToggleContracts}
             title="Contratos"
             className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
-              isContractsOpen ? 'bg-sky-100/80' : 'hover:bg-sky-50'
+              isContractsOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
             }`}
           >
-            <Folder className="w-5 h-5 fill-[#0077b5] text-[#0077b5]" />
-            <span className="ml-0.5 px-1.5 py-0.2 bg-emerald-600 text-white text-[10px] font-bold rounded-xs leading-tight">
+            <Folder className="w-5 h-5 fill-[#E8AC51] text-[#E8AC51]" />
+            <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
               1
             </span>
           </button>
@@ -205,11 +205,11 @@ export default function Header({ onOpenCompoMake }) {
             onClick={handleToggleTasks}
             title="Tarefas"
             className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
-              isTasksOpen ? 'bg-sky-100/80' : 'hover:bg-sky-50'
+              isTasksOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
             }`}
           >
-            <Flag className="w-5 h-5 fill-[#0077b5] text-[#0077b5]" />
-            <span className="ml-0.5 px-1.5 py-0.2 bg-emerald-600 text-white text-[10px] font-bold rounded-xs leading-tight">
+            <Flag className="w-5 h-5 fill-[#E8AC51] text-[#E8AC51]" />
+            <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
               0
             </span>
           </button>
@@ -224,12 +224,12 @@ export default function Header({ onOpenCompoMake }) {
           title="Background Trabalhos"
           className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
             location.pathname === '/background-jobs'
-              ? 'bg-sky-100/80'
-              : 'hover:bg-sky-50'
+              ? 'bg-[#1c1c1e]'
+              : 'hover:bg-[#1c1c1e]'
           }`}
         >
-          <Hourglass className="w-5 h-5 text-[#0077b5]" />
-          <span className="ml-0.5 px-1.5 py-0.2 bg-emerald-600 text-white text-[10px] font-bold rounded-xs leading-tight">
+          <Hourglass className="w-5 h-5 text-[#E8AC51]" />
+          <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
             0
           </span>
         </button>
@@ -238,7 +238,7 @@ export default function Header({ onOpenCompoMake }) {
         <button
           type="button"
           title="Suporte e Tutoriais"
-          className="p-1.5 hover:bg-sky-50 rounded-xs transition-colors cursor-pointer"
+          className="p-1.5 hover:bg-[#1c1c1e] rounded-xs transition-colors cursor-pointer"
         >
           <LifeBuoy className="w-5 h-5" />
         </button>
@@ -246,14 +246,14 @@ export default function Header({ onOpenCompoMake }) {
         {/* Menu do Usuário / Perfil (Imagem 64) */}
         <div
           ref={userMenuContainerRef}
-          className="relative pl-1 border-l border-slate-200"
+          className="relative pl-1 border-l border-white/10"
         >
           <button
             type="button"
             onClick={handleToggleUserMenu}
             title="Menu do Usuário"
-            className={`flex items-center gap-1 text-[#0077b5] hover:text-[#005a8c] p-1 rounded-xs transition-colors cursor-pointer ${
-              isUserMenuOpen ? 'bg-sky-100/80' : 'hover:bg-sky-50'
+            className={`flex items-center gap-1 text-[#E8AC51] hover:text-[#a31121] p-1 rounded-xs transition-colors cursor-pointer ${
+              isUserMenuOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
             }`}
           >
             <UserCircle2 className="w-7 h-7 stroke-[1.5]" />

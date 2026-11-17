@@ -104,18 +104,18 @@ export default function CompoMakeModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/55 backdrop-blur-[1px] flex items-center justify-center p-4 select-none animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-[1px] flex items-center justify-center p-4 select-none animate-in fade-in duration-150"
       onClick={onClose}
     >
       {/* Caixa do Modal Flutuando Centralizada */}
       <div
-        className="bg-white rounded-sm shadow-2xl w-full max-w-[500px] border border-slate-200 overflow-visible relative"
+        className="bg-[#1c1c1e] rounded-sm shadow-2xl w-full max-w-[500px] border border-white/10 overflow-visible relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 1. CABEÇALHO DO MODAL */}
         <div className="relative px-6 pt-5 pb-3 flex items-center justify-center">
           <div className="flex items-baseline gap-2">
-            <h2 className="text-[22px] font-normal text-slate-700 tracking-tight">
+            <h2 className="text-[22px] font-normal text-white tracking-tight">
               CompoMake
             </h2>
             <a
@@ -124,7 +124,7 @@ export default function CompoMakeModal({
                 e.preventDefault();
                 console.log('📖 [CompoMake] Link de TUTORIAL acionado.');
               }}
-              className="text-[10px] font-semibold text-[#5bc0de] hover:text-[#0077b5] uppercase tracking-wider transition-colors"
+              className="text-[10px] font-semibold text-[#E8AC51] hover:underline uppercase tracking-wider transition-colors"
             >
               TUTORIAL
             </a>
@@ -134,7 +134,7 @@ export default function CompoMakeModal({
             type="button"
             onClick={onClose}
             aria-label="Fechar modal CompoMake"
-            className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1 rounded-xs transition-colors cursor-pointer"
+            className="absolute right-4 top-4 text-neutral-400 hover:text-white p-1 rounded-xs transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[2.2]" />
           </button>
@@ -143,20 +143,20 @@ export default function CompoMakeModal({
         {/* 2. CORPO DO MODAL (Layout em Duas Colunas fiel à imagem 09_comomake.png) */}
         <form onSubmit={handleCreate} className="px-6 py-4">
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-            {/* Coluna Esquerda: Grande Caixa Azul com Ícone de Perfil + Grid 2x2 */}
+            {/* Coluna Esquerda: Grande Caixa com Ícone de Perfil + Grid 2x2 */}
             <div className="sm:col-span-5 flex justify-center">
-              <div className="w-44 h-32 bg-[#0077b5] rounded-md p-3.5 flex items-center justify-between gap-2.5 shadow-sm">
-                {/* Bloco Branco Esquerdo: Silhueta de Perfil */}
-                <div className="w-1/2 h-full bg-white rounded-xs flex flex-col items-center justify-end overflow-hidden pt-2">
-                  <User className="w-14 h-14 text-[#0077b5] fill-[#0077b5] translate-y-1.5" />
+              <div className="w-44 h-32 bg-[#880E1B] rounded-md p-3.5 flex items-center justify-between gap-2.5 shadow-sm">
+                {/* Bloco Esquerdo: Silhueta de Perfil */}
+                <div className="w-1/2 h-full bg-[#161617] rounded-xs flex flex-col items-center justify-end overflow-hidden pt-2">
+                  <User className="w-14 h-14 text-[#E8AC51] fill-[#E8AC51] translate-y-1.5" />
                 </div>
 
                 {/* Bloco Direito: Grid 2x2 de Fotos do Composite */}
                 <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 gap-1.5">
-                  <div className="bg-white rounded-[2px]" />
-                  <div className="bg-white rounded-[2px]" />
-                  <div className="bg-white rounded-[2px]" />
-                  <div className="bg-white rounded-[2px]" />
+                  <div className="bg-[#E8AC51] rounded-[2px]" />
+                  <div className="bg-[#E8AC51] rounded-[2px]" />
+                  <div className="bg-[#E8AC51] rounded-[2px]" />
+                  <div className="bg-[#E8AC51] rounded-[2px]" />
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function CompoMakeModal({
             <div className="sm:col-span-7 space-y-3.5">
               {/* Campo 1: Selecione um talento (com filtro de busca visual) */}
               <div className="relative">
-                <label className="block text-[13px] font-normal text-slate-600 mb-1.5">
+                <label className="block text-[13px] font-normal text-neutral-400 mb-1.5">
                   Selecione um talento
                 </label>
                 <div className="relative">
@@ -179,14 +179,14 @@ export default function CompoMakeModal({
                       setShowSuggestions(true);
                     }}
                     placeholder="Pesquisar Talento..."
-                    className="w-full pl-3 pr-8 py-1.5 text-xs text-slate-700 placeholder:text-slate-400 bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none transition-colors"
+                    className="w-full pl-3 pr-8 py-1.5 text-xs text-white placeholder:text-neutral-400 bg-[#161617] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none transition-colors"
                   />
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Search className="w-3.5 h-3.5 text-neutral-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
 
                 {/* Dropdown de resultados filtrados do array mocado */}
                 {showSuggestions && (
-                  <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-white border border-slate-200 rounded-xs shadow-lg max-h-40 overflow-y-auto divide-y divide-slate-100">
+                  <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-[#161617] border border-white/10 rounded-xs shadow-lg max-h-40 overflow-y-auto divide-y divide-white/10">
                     {filteredTalents.length > 0 ? (
                       filteredTalents.map((talent) => {
                         const isSelected = selectedTalent?.id === talent.id;
@@ -195,24 +195,24 @@ export default function CompoMakeModal({
                             key={talent.id}
                             type="button"
                             onClick={() => handleSelectTalent(talent)}
-                            className="w-full px-3 py-2 text-left hover:bg-sky-50 flex items-center justify-between transition-colors cursor-pointer"
+                            className="w-full px-3 py-2 text-left hover:bg-[#1c1c1e] flex items-center justify-between transition-colors cursor-pointer"
                           >
                             <div>
-                              <p className="text-xs font-semibold text-slate-700 capitalize">
+                              <p className="text-xs font-semibold text-white capitalize">
                                 {talent.name}
                               </p>
-                              <p className="text-[10px] text-slate-400">
+                              <p className="text-[10px] text-neutral-400">
                                 {talent.category}
                               </p>
                             </div>
                             {isSelected && (
-                              <Check className="w-3.5 h-3.5 text-[#0077b5]" />
+                              <Check className="w-3.5 h-3.5 text-[#E8AC51]" />
                             )}
                           </button>
                         );
                       })
                     ) : (
-                      <div className="px-3 py-2 text-[11px] text-slate-400">
+                      <div className="px-3 py-2 text-[11px] text-neutral-400">
                         Nenhum talento encontrado para &ldquo;{searchQuery}&rdquo;
                       </div>
                     )}
@@ -222,13 +222,13 @@ export default function CompoMakeModal({
 
               {/* Campo 2: Selecionar um desenho */}
               <div>
-                <label className="block text-[13px] font-normal text-slate-600 mb-1.5">
+                <label className="block text-[13px] font-normal text-neutral-400 mb-1.5">
                   Selecionar um desenho
                 </label>
                 <select
                   value={selectedDesign}
                   onChange={(e) => setSelectedDesign(e.target.value)}
-                  className="w-full px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none cursor-pointer"
+                  className="w-full px-2.5 py-1.5 text-xs font-semibold text-white bg-[#161617] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none cursor-pointer"
                 >
                   {MOCK_COMPOMAKE_DESIGNS.map((designName) => (
                     <option key={designName} value={designName}>
@@ -240,19 +240,19 @@ export default function CompoMakeModal({
             </div>
           </div>
 
-          {/* 3. RODAPÉ DO MODAL: Botões FECHAR (cinza) e CRIAR (azul) */}
+          {/* 3. RODAPÉ DO MODAL: Botões FECHAR e CRIAR */}
           <div className="mt-6 pt-3 flex items-center justify-end gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-2 bg-[#e6e6e6] hover:bg-slate-300 text-slate-600 text-[11px] font-semibold uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+              className="px-3.5 py-2 bg-[#161617] hover:bg-neutral-800 border border-white/10 text-neutral-400 hover:text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
             >
               FECHAR
             </button>
 
             <button
               type="submit"
-              className="px-4 py-2 bg-[#5bc0de] hover:bg-[#31b0d5] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
+              className="px-4 py-2 bg-[#880E1B] hover:bg-[#a31121] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
             >
               CRIAR
             </button>
