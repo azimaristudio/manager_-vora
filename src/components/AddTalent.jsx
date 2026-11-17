@@ -473,7 +473,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
 
       {/* Container Principal com as Abas (Geral, Habilidades, Carreira, Informações Administrativas, Contas Bancárias) */}
       <form onSubmit={handleCreateTalent}>
-        <div className="bg-[#161617] border border-white/10 rounded-t-sm flex flex-wrap items-center">
+        <div className="bg-[#161617] border border-white/10 rounded-t-sm flex flex-nowrap md:flex-wrap items-center overflow-x-auto whitespace-nowrap">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -482,7 +482,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 sm:px-5 py-3.5 flex items-center gap-2 text-xs font-medium border-r border-white/10 transition-colors cursor-pointer ${
+                className={`px-4 sm:px-5 py-3.5 flex items-center gap-2 text-xs font-medium border-r border-white/10 transition-colors cursor-pointer shrink-0 ${
                   isActive
                     ? 'bg-[#1c1c1e] text-[#E8AC51] font-bold border-t-2 border-t-[#880E1B] -mb-px'
                     : 'text-neutral-400 hover:bg-[#1c1c1e] hover:text-white'
@@ -509,12 +509,12 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
         </div>
 
         {/* Conteúdo da Aba Selecionada */}
-        <div className="bg-[#161617] border-x border-b border-white/10 p-4 sm:p-6 rounded-b-sm">
+        <div className="bg-[#161617] border-x border-b border-white/10 p-4 md:p-6 rounded-b-sm">
           {/* ABA 1: GERAL (Layout de 3 colunas fiel à Imagem 03) */}
           {activeTab === 'geral' && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
               {/* Coluna Esquerda (4 cols): Upload de Foto de Perfil + Galeria Compacta */}
-              <div className="lg:col-span-4">
+              <div className="md:col-span-4">
                 <MediaUploadForm
                   compact={true}
                   mediaItems={mediaItems}
@@ -528,7 +528,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
               </div>
 
               {/* Coluna Central (4 cols): Info Básica, Idiomas, Endereço, Redes Sociais, Contatos */}
-              <div className="lg:col-span-4">
+              <div className="md:col-span-4">
                 <PersonalInfoForm
                   formData={formData}
                   onNestedChange={handleNestedChange}
@@ -536,7 +536,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
               </div>
 
               {/* Coluna Direita (4 cols): Medidas, Detalhes de Corpo e Restrições de Sessão */}
-              <div className="lg:col-span-4">
+              <div className="md:col-span-4">
                 <MeasurementsForm
                   formData={formData}
                   onNestedChange={handleNestedChange}

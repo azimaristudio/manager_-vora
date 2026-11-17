@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  LifeBuoy,
-  UserCircle2,
   ChevronDown,
   Plus,
   Search,
@@ -23,6 +21,7 @@ import {
   Check,
   X,
 } from 'lucide-react';
+import Header from '../Header';
 
 const TOP_MENU = [
   { label: 'TALENTOS', path: '/' },
@@ -109,76 +108,12 @@ export default function CreatePackage() {
 
   return (
     <div className="min-h-screen bg-[#161617] text-white flex flex-col font-sans select-none">
-      {/* Cabeçalho Superior (Fiel à Imagem 47) */}
-      <header className="w-full bg-[#161617] border-b border-white/10 px-6 lg:px-10 h-16 flex items-center justify-between sticky top-0 z-30">
-        <div className="flex items-center gap-6">
-          <Link
-            to="/"
-            title="Ir para o Início (Talentos)"
-            className="flex items-center shrink-0"
-          >
-            <img
-              src="/pose manager.png"
-              alt="Pose Manager"
-              className="h-16 w-auto object-contain"
-            />
-          </Link>
-          <nav className="flex flex-wrap items-center gap-4 sm:gap-6">
-            {TOP_MENU.map((item) => {
-              const isCurrent = item.label === 'PACOTES';
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => {
-                    if (item.path !== '#') {
-                      navigate(item.path);
-                    }
-                  }}
-                  className={`text-[11px] tracking-wider uppercase transition-colors cursor-pointer ${
-                    isCurrent
-                      ? 'text-white font-bold'
-                      : 'text-neutral-400 hover:text-[#E8AC51] font-medium'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
-          </nav>
-        </div>
+      {/* Cabeçalho Superior Responsivo */}
+      <Header />
 
-        <div className="flex items-center gap-4 text-neutral-400">
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 text-[11px] font-medium uppercase hover:text-white cursor-pointer"
-          >
-            <LifeBuoy className="w-3.5 h-3.5" />
-            <span>AJUDA</span>
-          </button>
-
-          <div className="pl-2.5 border-l border-white/10 flex items-center gap-2">
-            <img
-              src="/mini_posemanager.png"
-              alt="Pose Manager"
-              className="h-8 w-8 object-contain rounded-md border border-white/10 shrink-0"
-            />
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              title="Voltar ao Início"
-              className="flex items-center gap-1 text-[#E8AC51] cursor-pointer"
-            >
-              <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
-              <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Container Branco Principal (Imagem 47) */}
-      <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 pt-8 pb-6 flex flex-col">
-        <div className="flex-1 bg-[#1c1c1e] rounded-xs shadow-xs border border-white/10 px-6 sm:px-10 py-6 flex flex-col justify-between relative">
+      {/* Container Principal (Imagem 47) */}
+      <main className="flex-1 max-w-[1400px] w-full mx-auto p-4 md:px-6 md:pt-8 md:pb-6 flex flex-col">
+        <div className="flex-1 bg-[#1c1c1e] rounded-xs shadow-xs border border-white/10 p-4 sm:p-6 md:px-10 md:py-6 flex flex-col justify-between relative">
           <div>
             {/* Topo: Títulos Centrais 'PACOTES' e 'CRIAR/EDITAR' + Botão Vermelho 'CANCELAR' */}
             <div className="relative flex items-center justify-center pt-2 pb-4">

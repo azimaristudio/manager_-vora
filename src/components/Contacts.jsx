@@ -203,7 +203,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
       </div>
 
       {/* 4. Tabela de Dados de Contatos (Fiel às imagens 14, 15 e 16) */}
-      <div className="w-full border border-white/10 rounded-xs overflow-x-auto shadow-2xs">
+      <div className="w-full border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap shadow-2xs">
         <table className="w-full border-collapse text-left min-w-[820px]">
           <thead>
             <tr className="bg-[#880E1B] text-white text-[11px] font-medium">

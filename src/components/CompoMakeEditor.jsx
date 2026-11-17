@@ -199,9 +199,9 @@ export default function CompoMakeEditor() {
       </div>
 
       {/* 3. LAYOUT PRINCIPAL EM DUAS COLUNAS (Esquerda: Canvas | Direita: Esquema e Informações) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* COLUNA ESQUERDA (8 colunas): Toolbar + Canvas Quadriculado */}
-        <div className="lg:col-span-8 space-y-3">
+        <div className="md:col-span-8 space-y-3">
           {/* Toolbar de Ferramentas do Editor */}
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -368,7 +368,7 @@ export default function CompoMakeEditor() {
 
           {/* Grande Área Cinza Escuro com Padrão Quadriculado (Checkerboard) e Retângulo Central "ÉVORA MODELS" */}
           <div
-            className="w-full h-[540px] rounded-xs border border-white/10 relative overflow-hidden flex items-center justify-center"
+            className="w-full h-[380px] sm:h-[540px] rounded-xs border border-white/10 relative overflow-hidden flex items-center justify-center"
             style={{
               backgroundColor: '#585858',
               backgroundImage: `
@@ -437,7 +437,7 @@ export default function CompoMakeEditor() {
         </div>
 
         {/* COLUNA DIREITA (4 colunas): Esquema Pontilhado do Composite + Informações do Talento */}
-        <div className="lg:col-span-4 space-y-6">
+        <div className="md:col-span-4 space-y-6">
           {/* Bloco Superior Branco: Esboço/Esquema de Layout do Composite com Linhas Pontilhadas */}
           <div className="bg-[#1c1c1e] border border-white/10 p-3 shadow-2xs">
             <div className="grid grid-cols-12 gap-3 items-stretch">

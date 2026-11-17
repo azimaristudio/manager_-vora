@@ -4,7 +4,7 @@ import { List, Plus, ThumbsUp } from 'lucide-react';
 export default function TasksDropdown() {
   return (
     <div
-      className="absolute right-0 top-full mt-2.5 w-[340px] sm:w-[430px] bg-[#1c1c1e] border border-white/10 rounded-xs shadow-xl z-50 text-white select-none animate-in fade-in zoom-in-95 duration-100"
+      className="absolute -right-12 sm:right-0 top-full mt-2.5 w-[calc(100vw-1.5rem)] max-w-[340px] sm:max-w-none sm:w-[430px] bg-[#1c1c1e] border border-white/10 rounded-xs shadow-xl z-50 text-white select-none animate-in fade-in zoom-in-95 duration-100"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Seta superior apontando para o ícone da bandeira */}

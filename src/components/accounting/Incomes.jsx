@@ -121,7 +121,7 @@ export default function Incomes() {
 
       {/* Tabela de Entradas */}
       <div className="border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e]">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto whitespace-nowrap">
           <table className="w-full min-w-[1050px] border-collapse">
             <thead>
               <tr className="bg-[#880E1B] text-white text-[10px] font-normal">

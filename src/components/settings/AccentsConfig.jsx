@@ -257,8 +257,8 @@ export default function AccentsConfig() {
           </span>
         </div>
 
-        <div className="overflow-x-auto border border-white/10 rounded-xs">
-          <table className="w-full text-left border-collapse text-[11px]">
+        <div className="overflow-x-auto whitespace-nowrap border border-white/10 rounded-xs">
+          <table className="w-full min-w-[520px] text-left border-collapse text-[11px]">
             <thead>
               <tr className="bg-[#880E1B] text-white">
                 <th className="py-2 px-3 font-semibold">Nome do Sotaque</th>

@@ -300,9 +300,9 @@ export default function CalendarView() {
         </div>
 
         {/* Layout Principal de Duas Colunas: Barra Lateral Esquerda + Área do Calendário à Direita */}
-        <div className="flex flex-col lg:flex-row items-start gap-6">
+        <div className="flex flex-col md:flex-row items-start gap-6">
           {/* Barra Lateral Esquerda */}
-          <aside className="w-full lg:w-[205px] shrink-0 space-y-5">
+          <aside className="w-full md:w-[205px] shrink-0 space-y-5">
             {/* Secção Multi Horário */}
             <div className="space-y-2.5">
               <div className="flex items-center gap-2 text-[#E8AC51]">
@@ -545,72 +545,74 @@ export default function CalendarView() {
               </div>
             </div>
 
-            {/* Grelha Mensal Dinâmica do Calendário (Seg a Dom) */}
-            <div className="border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e]">
-              {/* Cabeçalho dos Dias da Semana */}
-              <div className="grid grid-cols-7 border-b border-white/10 bg-[#1c1c1e]">
-                {WEEKDAY_HEADERS.map((weekday) => (
-                  <div
-                    key={weekday}
-                    className="py-1 text-center text-xs font-bold text-white border-r last:border-r-0 border-white/10"
-                  >
-                    {weekday}
-                  </div>
-                ))}
-              </div>
+            {/* Grelha Mensal Dinâmica do Calendário (Seg a Dom) com scroll horizontal no mobile */}
+            <div className="border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap bg-[#1c1c1e]">
+              <div className="min-w-[640px]">
+                {/* Cabeçalho dos Dias da Semana */}
+                <div className="grid grid-cols-7 border-b border-white/10 bg-[#1c1c1e]">
+                  {WEEKDAY_HEADERS.map((weekday) => (
+                    <div
+                      key={weekday}
+                      className="py-1 text-center text-xs font-bold text-white border-r last:border-r-0 border-white/10"
+                    >
+                      {weekday}
+                    </div>
+                  ))}
+                </div>
 
-              {/* Semanas / Células Numeradas Dinâmicas */}
-              <div className="divide-y divide-white/10">
-                {dynamicWeeksGrid.map((week, weekIdx) => (
-                  <div key={weekIdx} className="grid grid-cols-7">
-                    {week.map((cell) => {
-                      const dayEvents = eventsList.filter(
-                        (ev) => ev.dateKey === cell.dateKey
-                      );
+                {/* Semanas / Células Numeradas Dinâmicas */}
+                <div className="divide-y divide-white/10">
+                  {dynamicWeeksGrid.map((week, weekIdx) => (
+                    <div key={weekIdx} className="grid grid-cols-7">
+                      {week.map((cell) => {
+                        const dayEvents = eventsList.filter(
+                          (ev) => ev.dateKey === cell.dateKey
+                        );
 
-                      return (
-                        <div
-                          key={cell.dateKey}
-                          onClick={() => setIsCategoryPopupOpen(true)}
-                          className={`min-h-[104px] p-1.5 border-r last:border-r-0 border-white/10 flex flex-col justify-between transition-colors cursor-pointer ${
-                            cell.isHighlighted
-                              ? 'bg-[#E8AC51]/15'
-                              : 'bg-[#1c1c1e] hover:bg-[#1c1c1e]'
-                          }`}
-                        >
-                          <div className="flex justify-end">
-                            <span
-                              className={`text-xs leading-none ${
-                                cell.isCurrentMonth
-                                  ? 'text-neutral-400 font-normal'
-                                  : 'text-neutral-400 font-normal'
-                              }`}
-                            >
-                              {cell.day}
-                            </span>
-                          </div>
-
-                          {/* Eventos mockados criados na célula */}
-                          {dayEvents.length > 0 && (
-                            <div
-                              className="mt-1 space-y-1"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {dayEvents.map((ev) => (
-                                <div
-                                  key={ev.id}
-                                  className={`${ev.color} text-white text-[10px] px-1.5 py-0.5 rounded-xs truncate font-medium`}
-                                >
-                                  {ev.title}
-                                </div>
-                              ))}
+                        return (
+                          <div
+                            key={cell.dateKey}
+                            onClick={() => setIsCategoryPopupOpen(true)}
+                            className={`min-h-[104px] p-1.5 border-r last:border-r-0 border-white/10 flex flex-col justify-between transition-colors cursor-pointer ${
+                              cell.isHighlighted
+                                ? 'bg-[#E8AC51]/15'
+                                : 'bg-[#1c1c1e] hover:bg-[#1c1c1e]'
+                            }`}
+                          >
+                            <div className="flex justify-end">
+                              <span
+                                className={`text-xs leading-none ${
+                                  cell.isCurrentMonth
+                                    ? 'text-neutral-400 font-normal'
+                                    : 'text-neutral-400 font-normal'
+                                }`}
+                              >
+                                {cell.day}
+                              </span>
                             </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
+
+                            {/* Eventos mockados criados na célula */}
+                            {dayEvents.length > 0 && (
+                              <div
+                                className="mt-1 space-y-1"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {dayEvents.map((ev) => (
+                                  <div
+                                    key={ev.id}
+                                    className={`${ev.color} text-white text-[10px] px-1.5 py-0.5 rounded-xs truncate font-medium`}
+                                  >
+                                    {ev.title}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </main>

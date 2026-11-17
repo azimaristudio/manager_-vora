@@ -67,8 +67,8 @@ export default function BackgroundJobs() {
       </div>
 
       {/* 5. Tabela com Cabeçalho e Empty State */}
-      <div className="w-full bg-[#1c1c1e] border border-white/10 rounded-md overflow-hidden shadow-2xs">
-        <table className="w-full border-collapse text-left">
+      <div className="w-full bg-[#1c1c1e] border border-white/10 rounded-md overflow-x-auto whitespace-nowrap shadow-2xs">
+        <table className="w-full min-w-[640px] border-collapse text-left">
           <thead>
             <tr className="border-b border-white/10 bg-[#1c1c1e] text-xs font-bold text-white">
               <th className="py-3 px-4 w-[32%]">Tarefa</th>

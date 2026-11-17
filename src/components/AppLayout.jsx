@@ -8,6 +8,7 @@ import {
   Square,
   CheckCircle2,
   X,
+  SlidersHorizontal,
 } from 'lucide-react';
 import Header from './Header';
 import FilterSidebar from './FilterSidebar';
@@ -49,6 +50,7 @@ export default function AppLayout({
   const [selectedTalents, setSelectedTalents] = useState([]);
   const [isCompoMakeOpen, setIsCompoMakeOpen] = useState(false);
   const [compoToast, setCompoToast] = useState(null);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   const talentsList = customTalents || INITIAL_MOCK_TALENTS;
 
@@ -85,23 +87,41 @@ export default function AppLayout({
 
   return (
     <div className="min-h-screen bg-[#161617] text-white flex flex-col font-sans">
-      {/* 1. CABEÇALHO SUPERIOR (Header.jsx com Link para "/" no logótipo Évora Models) */}
-      <Header onOpenCompoMake={() => setIsCompoMakeOpen(true)} />
+      {/* 1. CABEÇALHO SUPERIOR (Header.jsx com Link para "/" no logótipo Pose Manager) */}
+      <Header
+        onOpenCompoMake={() => setIsCompoMakeOpen(true)}
+        onToggleMobileFilters={
+          !hideSidebar ? () => setIsMobileFilterOpen((prev) => !prev) : undefined
+        }
+      />
 
       {/* 2. SUB-CABEÇALHO PADRÃO (Breadcrumbs "Início > Talentos" + Busca Global) */}
       {!hideSubHeader && (
         <div className="w-full border-b border-white/10 bg-[#161617]">
-          <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-2.5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#161617] border-x border-white/10">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-2.5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#161617] border-x border-white/10">
             {/* Breadcrumb com Link "Início" apontando para "/" */}
-            <div className="flex items-center gap-2 text-xs text-neutral-400">
-              <Link
-                to="/"
-                className="text-[#E8AC51] hover:underline cursor-pointer"
-              >
-                Início
-              </Link>
-              <span>&gt;</span>
-              <span className="text-neutral-400">Talentos</span>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-xs text-neutral-400">
+                <Link
+                  to="/"
+                  className="text-[#E8AC51] hover:underline cursor-pointer"
+                >
+                  Início
+                </Link>
+                <span>&gt;</span>
+                <span className="text-neutral-400">Talentos</span>
+              </div>
+
+              {!hideSidebar && (
+                <button
+                  type="button"
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  className="md:hidden inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] font-semibold text-[#E8AC51] cursor-pointer"
+                >
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  <span>FILTROS</span>
+                </button>
+              )}
             </div>
 
             {/* Barra de Busca "Buscar Talento" + Botão "+" (Agregar Talento) */}
@@ -123,7 +143,7 @@ export default function AppLayout({
                 type="button"
                 onClick={handleAddTalentClick}
                 title="Agregar Novo Talento"
-                className="px-2.5 py-1.5 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs shadow-2xs transition-colors flex items-center justify-center cursor-pointer"
+                className="px-2.5 py-1.5 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs shadow-2xs transition-colors flex items-center justify-center cursor-pointer shrink-0"
               >
                 <Plus className="w-4 h-4 stroke-[2.5]" />
               </button>
@@ -132,9 +152,40 @@ export default function AppLayout({
         </div>
       )}
 
+      {/* Drawer Mobile para a Sidebar de Filtros (visível apenas em telas < md) */}
+      {!hideSidebar && isMobileFilterOpen && (
+        <div
+          className="fixed inset-0 z-50 md:hidden bg-black/70 backdrop-blur-xs flex"
+          onClick={() => setIsMobileFilterOpen(false)}
+        >
+          <div
+            className="w-72 max-w-[85vw] bg-[#161617] border-r border-white/10 h-full p-4 overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#E8AC51]">
+                Filtros de Talentos
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsMobileFilterOpen(false)}
+                className="p-1 text-neutral-400 hover:text-white cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <FilterSidebar />
+          </div>
+        </div>
+      )}
+
       {/* 3. CORPO PRINCIPAL */}
-      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 lg:px-8 py-5 flex flex-col lg:flex-row items-start gap-5">
-        {!hideSidebar && <FilterSidebar />}
+      <main className="flex-1 max-w-[1440px] w-full mx-auto p-4 md:px-8 md:py-5 flex flex-col md:flex-row items-start gap-5">
+        {!hideSidebar && (
+          <div className="hidden md:block shrink-0">
+            <FilterSidebar />
+          </div>
+        )}
 
         <section className="flex-1 w-full min-w-0">
           {children ? (
@@ -337,8 +388,8 @@ export default function AppLayout({
                     })}
                   </div>
                 ) : (
-                  <div className="border border-white/10 rounded-xs overflow-hidden">
-                    <table className="w-full text-left border-collapse text-xs">
+                  <div className="border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap">
+                    <table className="w-full min-w-[540px] text-left border-collapse text-xs">
                       <thead>
                         <tr className="bg-[#1c1c1e] text-neutral-400 border-b border-white/10">
                           <th className="py-2.5 px-3">Talento</th>

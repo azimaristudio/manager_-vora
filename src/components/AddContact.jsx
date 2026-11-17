@@ -290,7 +290,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
         </div>
 
         {/* 3. Layout Principal de Três Colunas (Info básica | Info de contato | Staff) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start">
           {/* ==================== COLUNA 1: Info básica ==================== */}
           <div>
             <h3 className="text-xs font-bold text-white pb-2 mb-5 border-b border-white/10">

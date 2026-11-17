@@ -162,20 +162,20 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
         {/* Container Principal de Detalhes do Projeto (Imagem 30) */}
         <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden">
           {/* Bloco Superior de Informações */}
-          <div className="bg-[#161617] border-b border-white/10 px-6 py-5 relative">
+          <div className="bg-[#161617] border-b border-white/10 p-4 md:px-6 md:py-5 relative">
             {/* Link EDITAR no canto superior direito */}
             <button
               type="button"
               onClick={handleOpenEditModal}
-              className="absolute top-5 right-6 inline-flex items-center gap-1.5 text-[11px] text-[#E8AC51] hover:underline uppercase font-normal cursor-pointer"
+              className="absolute top-4 right-4 md:top-5 md:right-6 inline-flex items-center gap-1.5 text-[11px] text-[#E8AC51] hover:underline uppercase font-normal cursor-pointer"
             >
               <Pencil className="w-3.5 h-3.5 fill-[#E8AC51] text-[#E8AC51]" />
               <span>EDITAR</span>
             </button>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               {/* Esquerda: Título, Status e Metadados de Criação */}
-              <div className="lg:col-span-4 space-y-4">
+              <div className="md:col-span-4 space-y-4">
                 <div>
                   <h1 className="text-[25px] text-white font-normal leading-tight">
                     {projectState.projectName}{' '}
@@ -243,7 +243,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
               </div>
 
               {/* Direita: Lista de Atributos do Projeto */}
-              <div className="lg:col-span-8 pr-16 space-y-1.5 text-[11px]">
+              <div className="md:col-span-8 pr-0 md:pr-16 space-y-1.5 text-[11px]">
                 {/* Departamento */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
                   <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
@@ -366,7 +366,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
           </div>
 
           {/* Secções Inferiores (3 Colunas: Pacotes, Atividades, Orçamento + Faturamento Sumário) */}
-          <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-5 items-start bg-[#1c1c1e]">
+          <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-5 items-start bg-[#1c1c1e]">
             {/* Coluna 1: Card 'Pacotes' */}
             <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
               <div className="bg-[#161617] px-4 py-2.5 border-b border-white/10 flex items-center justify-between">

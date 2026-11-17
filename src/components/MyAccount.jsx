@@ -92,9 +92,9 @@ export default function MyAccount() {
 
         {/* Estrutura Principal (3 Colunas: Avatar, Dados Pessoais, Contactos) */}
         <form onSubmit={handleSave}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start px-2 sm:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start px-0 sm:px-4 md:px-8">
             {/* Coluna Esquerda (Avatar) */}
-            <div className="lg:col-span-3 flex flex-col items-center pt-1">
+            <div className="md:col-span-3 flex flex-col items-center pt-1">
               <div className="w-36 h-36 rounded-[28px] bg-[#880E1B] flex items-center justify-center overflow-hidden shadow-xs">
                 {avatarUrl ? (
                   <img
@@ -132,7 +132,7 @@ export default function MyAccount() {
             </div>
 
             {/* Coluna Central (Dados Pessoais) */}
-            <div className="lg:col-span-5 space-y-2.5 text-[11px]">
+            <div className="md:col-span-5 space-y-2.5 text-[11px]">
               {/* Plano */}
               <div className="grid grid-cols-12 items-center gap-3 min-h-[28px]">
                 <label className="col-span-4 text-right text-neutral-400">
@@ -324,7 +324,7 @@ export default function MyAccount() {
             </div>
 
             {/* Coluna Direita (Contactos: Telefone, Celular, Skype, Facebook, Twitter) */}
-            <div className="lg:col-span-4 space-y-2.5 text-[11px]">
+            <div className="md:col-span-4 space-y-2.5 text-[11px]">
               {/* Telefone */}
               <div className="grid grid-cols-12 items-center gap-3">
                 <label className="col-span-3 text-right text-neutral-400">

@@ -121,9 +121,9 @@ export default function StatisticsLayout() {
         {/* Conteúdo Dinâmico de acordo com a Aba Principal Selecionada */}
         {activeMainTab === 'ranking' && (
           <div className="pt-1 pb-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
               {/* Sub-menu Lateral à Esquerda: Talentos, Clientes e Departamentos */}
-              <aside className="lg:col-span-2 pt-3 space-y-1">
+              <aside className="md:col-span-2 pt-1 md:pt-3 flex md:block gap-1.5 md:space-y-1 overflow-x-auto">
                 {RANKING_SUB_MENUS.map((sub) => {
                   const isSubActive = activeRankingSubMenu === sub.key;
                   return (
@@ -131,7 +131,7 @@ export default function StatisticsLayout() {
                       key={sub.key}
                       type="button"
                       onClick={() => setActiveRankingSubMenu(sub.key)}
-                      className={`w-full text-left px-3 py-2 rounded-xs text-xs transition-colors cursor-pointer ${
+                      className={`w-auto md:w-full whitespace-nowrap text-left px-3 py-2 rounded-xs text-xs transition-colors cursor-pointer ${
                         isSubActive
                           ? 'bg-[#880E1B] text-white font-normal outline-1 outline-dotted outline-white/20 -outline-offset-2'
                           : 'text-[#E8AC51] hover:bg-[#1c1c1e] font-normal'
@@ -144,15 +144,15 @@ export default function StatisticsLayout() {
               </aside>
 
               {/* Área Central (Título Dinâmico + Formulário 'Opções') e Área Direita (Tabela de Resultados) */}
-              <div className="lg:col-span-10">
+              <div className="md:col-span-10">
                 {/* Título Dinâmico Acima */}
                 <h1 className="text-[22px] text-neutral-400 font-normal text-center mb-4">
                   {currentRankingConfig.pageTitle}
                 </h1>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                   {/* Coluna Central: Formulário 'Opções' */}
-                  <div className="lg:col-span-7">
+                  <div className="md:col-span-7">
                     <h2 className="text-[17px] text-neutral-400 font-normal text-center mb-3">
                       Opções
                     </h2>
@@ -484,8 +484,8 @@ export default function StatisticsLayout() {
                   </div>
 
                   {/* Área Direita: Tabela de Resultados */}
-                  <div className="lg:col-span-5">
-                    <div className="w-full">
+                  <div className="md:col-span-5">
+                    <div className="w-full overflow-x-auto whitespace-nowrap">
                       {/* Cabeçalho Azul Dinâmico */}
                       <div className="bg-[#880E1B] text-white px-3 py-2 flex items-center justify-between text-xs font-normal">
                         <span>{currentRankingConfig.tableColumnHeader}</span>

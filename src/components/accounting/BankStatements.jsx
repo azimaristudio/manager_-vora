@@ -132,8 +132,8 @@ export default function BankStatements() {
 
         {/* Tabela Vazia com Cabeçalhos Simples e Totais */}
         <div className="px-4 py-5">
-          <div className="pl-0 lg:pl-20">
-            <div className="grid grid-cols-9 border-b border-white/10 pb-2 text-[10px] text-neutral-400">
+          <div className="pl-0 lg:pl-20 overflow-x-auto whitespace-nowrap">
+            <div className="min-w-[720px] grid grid-cols-9 border-b border-white/10 pb-2 text-[10px] text-neutral-400">
               {STATEMENT_COLUMNS.map((col) => (
                 <span key={col}>{col}</span>
               ))}

@@ -94,7 +94,7 @@ export default function FilterSidebar() {
     );
 
   return (
-    <aside className="w-full lg:w-[235px] shrink-0 select-none">
+    <aside className="w-full md:w-[235px] shrink-0 select-none">
       <div className="bg-[#161617] border border-white/10 rounded-sm shadow-xs overflow-hidden">
         {/* Cabeçalho "FILTROS" com ações rápidas */}
         <div className="bg-[#880E1B] text-white px-3 py-2 flex items-center justify-between">
