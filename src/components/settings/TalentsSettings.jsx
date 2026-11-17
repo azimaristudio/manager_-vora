@@ -256,9 +256,9 @@ export default function TalentsSettings() {
   return (
     <div className="flex flex-col md:flex-row gap-8 lg:gap-12 pt-1 items-start">
       {/* Barra Lateral Esquerda (Fundo cinzento claro com item ativo branco) */}
-      <aside className="w-full md:w-52 shrink-0 bg-[#ebebeb]">
+      <aside className="w-full md:w-52 shrink-0 bg-[#1c1c1e]">
         {/* Espaçamento superior cinzento conforme Imagem 65 */}
-        <div className="h-8 bg-[#ebebeb]" />
+        <div className="h-8 bg-[#1c1c1e]" />
 
         <nav className="flex flex-col">
           {TALENT_SIDEBAR_SECTIONS.map((section) => {
@@ -271,8 +271,8 @@ export default function TalentsSettings() {
                 onClick={() => setActiveSection(section.key)}
                 className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-white text-[#0088cc] font-normal'
-                    : 'bg-[#ebebeb] hover:bg-[#e2e2e2] text-[#0088cc] font-normal'
+                    ? 'bg-[#1c1c1e] text-[#E8AC51] font-normal'
+                    : 'bg-[#1c1c1e] hover:bg-[#1c1c1e] text-[#E8AC51] font-normal'
                 }`}
               >
                 {section.label}
@@ -282,7 +282,7 @@ export default function TalentsSettings() {
         </nav>
 
         {/* Espaçamento inferior cinzento conforme Imagem 65 */}
-        <div className="h-6 bg-[#ebebeb]" />
+        <div className="h-6 bg-[#1c1c1e]" />
       </aside>
 
       {/* Área de Conteúdo Principal (Direita) */}

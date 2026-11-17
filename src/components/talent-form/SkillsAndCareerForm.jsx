@@ -37,13 +37,13 @@ export default function SkillsAndCareerForm({
 
   if (mode === 'career') {
     return (
-      <div className="bg-white border border-slate-200 rounded-md p-6 shadow-2xs">
-        <h3 className="text-sm font-bold text-slate-800 pb-2.5 mb-5 border-b border-slate-200">
+      <div className="bg-[#1c1c1e] border border-white/10 rounded-md p-6 shadow-2xs">
+        <h3 className="text-sm font-bold text-white pb-2.5 mb-5 border-b border-white/10">
           Carreira
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-12 items-start gap-4 max-w-3xl">
-          <label className="md:col-span-4 text-xs font-medium text-slate-600 pt-2">
+          <label className="md:col-span-4 text-xs font-medium text-neutral-400 pt-2">
             Outras Informações Sobre A Carreira
           </label>
           <div className="md:col-span-8 space-y-3">
@@ -54,12 +54,12 @@ export default function SkillsAndCareerForm({
                 onNestedChange('career', 'careerNotes', e.target.value)
               }
               placeholder="Descreva trabalhos anteriores, campanhas publicitárias, desfiles, participações em TV/Cinema, prêmios ou links de portfólio..."
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none"
+              className="w-full px-3.5 py-2.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div>
-                <label className="block text-[11px] font-medium text-slate-500 mb-1">
+                <label className="block text-[11px] font-medium text-neutral-400 mb-1">
                   Agência Mãe (Mother Agency)
                 </label>
                 <input
@@ -69,12 +69,12 @@ export default function SkillsAndCareerForm({
                     onNestedChange('career', 'motherAgency', e.target.value)
                   }
                   placeholder="Ex: Évora Models"
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none"
+                  className="w-full px-3 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-slate-500 mb-1">
+                <label className="block text-[11px] font-medium text-neutral-400 mb-1">
                   Ano de Início na Carreira
                 </label>
                 <input
@@ -84,7 +84,7 @@ export default function SkillsAndCareerForm({
                     onNestedChange('career', 'startYear', e.target.value)
                   }
                   placeholder="Ex: 2021"
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none"
+                  className="w-full px-3 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
                 />
               </div>
             </div>
@@ -95,8 +95,8 @@ export default function SkillsAndCareerForm({
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-md p-6 shadow-2xs">
-      <h3 className="text-sm font-bold text-slate-800 pb-2.5 mb-5 border-b border-slate-200">
+    <div className="bg-[#1c1c1e] border border-white/10 rounded-md p-6 shadow-2xs">
+      <h3 className="text-sm font-bold text-white pb-2.5 mb-5 border-b border-white/10">
         Habilidades
       </h3>
 
@@ -110,7 +110,7 @@ export default function SkillsAndCareerForm({
 
           return (
             <div key={group.key} className="space-y-3">
-              <label className="block text-xs font-bold text-slate-700">
+              <label className="block text-xs font-bold text-white">
                 {group.title}
               </label>
 
@@ -123,7 +123,7 @@ export default function SkillsAndCareerForm({
                       toggleSkill(group.key, e.target.value);
                     }
                   }}
-                  className="flex-1 px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs text-slate-600 focus:border-[#0077b5] outline-none"
+                  className="flex-1 px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs text-neutral-400 focus:border-[#880E1B] outline-none"
                 >
                   <option value="">
                     Selecione ({selectedList.length}/{options.length})
@@ -141,8 +141,8 @@ export default function SkillsAndCareerForm({
                   title="Selecionar tudo do grupo"
                   className={`p-1.5 border rounded-xs transition-colors cursor-pointer ${
                     allSelected
-                      ? 'bg-[#0077b5] text-white border-[#0077b5]'
-                      : 'bg-white text-[#0077b5] border-[#0077b5] hover:bg-sky-50'
+                      ? 'bg-[#880E1B] text-white border-[#880E1B]'
+                      : 'bg-[#1c1c1e] text-[#E8AC51] border-[#880E1B] hover:bg-[#1c1c1e]'
                   }`}
                 >
                   <CheckSquare className="w-3.5 h-3.5" />
@@ -150,19 +150,19 @@ export default function SkillsAndCareerForm({
               </div>
 
               {/* Lista de Checkboxes / Chips das Habilidades do Grupo */}
-              <div className="bg-slate-50 border border-slate-200/80 rounded-xs p-2.5 max-h-56 overflow-y-auto space-y-1.5">
+              <div className="bg-[#161617] border border-white/10 rounded-xs p-2.5 max-h-56 overflow-y-auto space-y-1.5">
                 {options.map((skill) => {
                   const isChecked = selectedList.includes(skill);
                   return (
                     <label
                       key={skill}
-                      className="flex items-center gap-2 text-xs text-slate-700 hover:text-[#0077b5] cursor-pointer"
+                      className="flex items-center gap-2 text-xs text-white hover:text-[#E8AC51] cursor-pointer"
                     >
                       <input
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => toggleSkill(group.key, skill)}
-                        className="w-3.5 h-3.5 accent-[#0077b5] rounded-xs cursor-pointer"
+                        className="w-3.5 h-3.5 accent-[#880E1B] rounded-xs cursor-pointer"
                       />
                       <span className="truncate">{skill}</span>
                     </label>
@@ -176,13 +176,13 @@ export default function SkillsAndCareerForm({
                   {selectedList.map((skill) => (
                     <span
                       key={skill}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#0077b5] text-white text-[10px] font-medium rounded-xs"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#880E1B] text-white text-[10px] font-medium rounded-xs"
                     >
                       <span>{skill}</span>
                       <button
                         type="button"
                         onClick={() => toggleSkill(group.key, skill)}
-                        className="hover:text-sky-200 cursor-pointer"
+                        className="hover:text-[#E8AC51] cursor-pointer"
                       >
                         <X className="w-2.5 h-2.5" />
                       </button>

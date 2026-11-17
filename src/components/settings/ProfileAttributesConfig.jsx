@@ -321,33 +321,33 @@ export default function ProfileAttributesConfig() {
     <div className="pt-1 pb-16 relative">
       {/* Cabeçalho */}
       <div className="mb-3">
-        <h2 className="text-xs font-bold text-slate-900">
+        <h2 className="text-xs font-bold text-white">
           Configuração de Atributos de Perfil de Talento
         </h2>
-        <p className="text-[11px] text-slate-500 mt-0.5">
+        <p className="text-[11px] text-neutral-400 mt-0.5">
           Configure quais atributos são visíveis e obrigatórios na plataforma e
           nas fichas informativas online
         </p>
       </div>
 
       {/* Legenda das Colunas */}
-      <div className="bg-white border border-slate-200 rounded-xs p-3 mb-3 text-[10px]">
-        <p className="font-bold text-slate-700 mb-2">Legenda das Colunas</p>
-        <div className="flex flex-wrap items-center gap-3 pb-2 border-b border-slate-100">
+      <div className="bg-[#1c1c1e] border border-white/10 rounded-xs p-3 mb-3 text-[10px]">
+        <p className="font-bold text-white mb-2">Legenda das Colunas</p>
+        <div className="flex flex-wrap items-center gap-3 pb-2 border-b border-white/10">
           <div className="flex items-center gap-1.5">
             <span className="px-1.5 py-0.5 bg-teal-50 text-teal-700 font-semibold rounded-xs border border-teal-200/60">
               Plataforma
             </span>
-            <span className="text-slate-500">
+            <span className="text-neutral-400">
               Controla a visibilidade em todo o sistema
             </span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 font-semibold rounded-xs border border-emerald-200/60">
+            <span className="px-1.5 py-0.5 bg-[#1c1c1e] text-[#161617] font-semibold rounded-xs border border-[#E8AC51]/30">
               Novo Talento
             </span>
-            <span className="text-slate-500">
+            <span className="text-neutral-400">
               Ficha informativa para registro de novo talento
             </span>
           </div>
@@ -356,23 +356,23 @@ export default function ProfileAttributesConfig() {
             <span className="px-1.5 py-0.5 bg-amber-50 text-amber-700 font-semibold rounded-xs border border-amber-200/60">
               Atualização de Perfil
             </span>
-            <span className="text-slate-500">
+            <span className="text-neutral-400">
               Ficha informativa para atualização de talento existente
             </span>
           </div>
         </div>
 
-        <div className="pt-2 flex flex-wrap items-center gap-4 text-slate-500">
+        <div className="pt-2 flex flex-wrap items-center gap-4 text-neutral-400">
           <span className="inline-flex items-center gap-1">
-            <Eye className="w-3 h-3 text-slate-400" />
+            <Eye className="w-3 h-3 text-neutral-400" />
             <span>Visível</span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <AlertTriangle className="w-3 h-3 text-slate-400" />
+            <AlertTriangle className="w-3 h-3 text-neutral-400" />
             <span>Obrigatório</span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <Lock className="w-3 h-3 text-slate-400" />
+            <Lock className="w-3 h-3 text-neutral-400" />
             <span>Campo bloqueado do sistema</span>
           </span>
         </div>
@@ -385,8 +385,8 @@ export default function ProfileAttributesConfig() {
           onClick={() => setActiveFilter('all')}
           className={`px-2.5 py-1 text-[10px] rounded-xs border transition-colors cursor-pointer ${
             activeFilter === 'all'
-              ? 'bg-[#0f82b3] text-white border-[#0f82b3] font-semibold'
-              : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+              ? 'bg-[#880E1B] text-white border-[#880E1B] font-semibold'
+              : 'bg-[#1c1c1e] text-neutral-400 border-white/10 hover:bg-[#1c1c1e]'
           }`}
         >
           Todas as Seções
@@ -401,8 +401,8 @@ export default function ProfileAttributesConfig() {
               onClick={() => setActiveFilter(sec.id)}
               className={`px-2.5 py-1 text-[10px] rounded-xs border transition-colors cursor-pointer ${
                 isActive
-                  ? 'bg-[#0f82b3] text-white border-[#0f82b3] font-semibold'
-                  : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  ? 'bg-[#880E1B] text-white border-[#880E1B] font-semibold'
+                  : 'bg-[#1c1c1e] text-neutral-400 border-white/10 hover:bg-[#1c1c1e]'
               }`}
             >
               {sec.title}
@@ -422,17 +422,17 @@ export default function ProfileAttributesConfig() {
           return (
             <div
               key={section.id}
-              className="bg-white border border-slate-200 rounded-xs shadow-2xs overflow-hidden"
+              className="bg-[#1c1c1e] border border-white/10 rounded-xs shadow-2xs overflow-hidden"
             >
               {/* Cabeçalho Azul Escuro do Painel */}
-              <div className="bg-[#0f82b3] text-white px-3.5 py-2 text-xs font-semibold">
+              <div className="bg-[#880E1B] text-white px-3.5 py-2 text-xs font-semibold">
                 {section.title}
               </div>
 
               {/* Barra de Pesquisa no Topo do Painel */}
-              <div className="p-2 border-b border-slate-200 bg-[#fafafa]">
+              <div className="p-2 border-b border-white/10 bg-[#161617]">
                 <div className="relative">
-                  <Search className="w-3 h-3 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+                  <Search className="w-3 h-3 text-neutral-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={searchBySection[section.id] || ''}
@@ -443,7 +443,7 @@ export default function ProfileAttributesConfig() {
                       }))
                     }
                     placeholder={`PESQUISAR ${section.title.toLowerCase()}...`}
-                    className="w-full h-6 pl-7 pr-2 bg-white border border-slate-200 rounded-xs text-[10px] text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0f82b3]"
+                    className="w-full h-6 pl-7 pr-2 bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
@@ -451,7 +451,7 @@ export default function ProfileAttributesConfig() {
               {/* Tabela de Atributos */}
               <div className="text-[10px]">
                 {/* Cabeçalho de Colunas */}
-                <div className="grid grid-cols-[18px_repeat(6,22px)_1fr] items-center bg-[#f7f8fa] border-b border-slate-200 py-1.5 px-1.5 text-[9px] font-bold">
+                <div className="grid grid-cols-[18px_repeat(6,22px)_1fr] items-center bg-[#161617] border-b border-white/10 py-1.5 px-1.5 text-[9px] font-bold">
                   <div />
                   <div className="col-span-2 text-center text-teal-700 leading-tight">
                     <div>Plataforma</div>
@@ -460,15 +460,15 @@ export default function ProfileAttributesConfig() {
                       <AlertTriangle className="w-2.5 h-2.5 text-teal-600" />
                     </div>
                   </div>
-                  <div className="col-span-2 text-center text-emerald-700 leading-tight">
+                  <div className="col-span-2 text-center text-[#161617] leading-tight">
                     <div>
                       Novo
                       <br />
                       Talento
                     </div>
                     <div className="flex items-center justify-around mt-1">
-                      <Eye className="w-2.5 h-2.5 text-emerald-600" />
-                      <AlertTriangle className="w-2.5 h-2.5 text-emerald-600" />
+                      <Eye className="w-2.5 h-2.5 text-[#E8AC51]" />
+                      <AlertTriangle className="w-2.5 h-2.5 text-[#E8AC51]" />
                     </div>
                   </div>
                   <div className="col-span-2 text-center text-amber-700 leading-tight">
@@ -482,13 +482,13 @@ export default function ProfileAttributesConfig() {
                       <AlertTriangle className="w-2.5 h-2.5 text-amber-600" />
                     </div>
                   </div>
-                  <div className="pl-2 text-slate-700 text-[10px]">
+                  <div className="pl-2 text-white text-[10px]">
                     Nome do campo
                   </div>
                 </div>
 
                 {/* Linha Selecionar tudo / Desmarcar tudo */}
-                <div className="grid grid-cols-[18px_repeat(6,22px)_1fr] items-center bg-[#f1f3f5] border-b border-slate-200 py-1.5 px-1.5">
+                <div className="grid grid-cols-[18px_repeat(6,22px)_1fr] items-center bg-[#1c1c1e] border-b border-white/10 py-1.5 px-1.5">
                   <div />
                   {[0, 1, 2, 3, 4, 5].map((colIdx) => {
                     const allChecked =
@@ -503,8 +503,8 @@ export default function ProfileAttributesConfig() {
                           }
                           className={`w-3 h-3 rounded-full border flex items-center justify-center transition-colors cursor-pointer ${
                             allChecked
-                              ? 'bg-[#0b5394] border-[#0b5394] text-white'
-                              : 'bg-white border-slate-400 hover:border-[#0b5394]'
+                              ? 'bg-[#880E1B] border-[#880E1B] text-white'
+                              : 'bg-[#1c1c1e] border-white/10 hover:border-[#880E1B]'
                           }`}
                         >
                           {allChecked && <Check className="w-2 h-2 stroke-[3]" />}
@@ -512,23 +512,23 @@ export default function ProfileAttributesConfig() {
                       </div>
                     );
                   })}
-                  <div className="pl-2 font-semibold text-slate-600">
+                  <div className="pl-2 font-semibold text-neutral-400">
                     Selecionar tudo / Desmarcar tudo
                   </div>
                 </div>
 
                 {/* Lista de Campos */}
-                <div className="divide-y divide-slate-100">
+                <div className="divide-y divide-white/10">
                   {filteredFields.map((field) => (
                     <div
                       key={field.id}
                       className={`grid grid-cols-[18px_repeat(6,22px)_1fr] items-center py-1 px-1.5 ${
                         field.isGroupHeader
-                          ? 'bg-slate-100/80'
-                          : 'hover:bg-slate-50/70'
+                          ? 'bg-[#161617]'
+                          : 'hover:bg-[#1c1c1e]'
                       }`}
                     >
-                      <div className="flex justify-center text-slate-300">
+                      <div className="flex justify-center text-neutral-400">
                         {!field.isSubItem && (
                           <GripVertical className="w-2.5 h-2.5" />
                         )}
@@ -543,8 +543,8 @@ export default function ProfileAttributesConfig() {
                             }
                             className={`w-3 h-3 rounded-full border flex items-center justify-center transition-colors cursor-pointer ${
                               isChecked
-                                ? 'bg-[#0b5394] border-[#0b5394] text-white'
-                                : 'bg-white border-slate-300 hover:border-[#0b5394]'
+                                ? 'bg-[#880E1B] border-[#880E1B] text-white'
+                                : 'bg-[#1c1c1e] border-white/10 hover:border-[#880E1B]'
                             }`}
                           >
                             {isChecked && (
@@ -555,18 +555,18 @@ export default function ProfileAttributesConfig() {
                       ))}
 
                       <div
-                        className={`pl-2 flex items-center gap-1 text-slate-500 truncate ${
-                          field.isSubItem ? 'pl-4 text-slate-400' : ''
+                        className={`pl-2 flex items-center gap-1 text-neutral-400 truncate ${
+                          field.isSubItem ? 'pl-4 text-neutral-400' : ''
                         }`}
                       >
                         {field.isSubItem && (
-                          <span className="text-slate-300 font-mono text-[9px]">
+                          <span className="text-neutral-400 font-mono text-[9px]">
                             |--
                           </span>
                         )}
                         <span className="truncate">{field.name}</span>
                         {field.locked && (
-                          <Lock className="w-2.5 h-2.5 text-slate-300 shrink-0" />
+                          <Lock className="w-2.5 h-2.5 text-neutral-400 shrink-0" />
                         )}
                       </div>
                     </div>
@@ -579,16 +579,16 @@ export default function ProfileAttributesConfig() {
       </div>
 
       {/* Rodapé Fixo com Botão 'Salvar alterações' */}
-      <div className="sticky bottom-0 mt-6 bg-white/95 backdrop-blur-xs border border-slate-200 rounded-xs px-4 py-2.5 shadow-md flex items-center justify-end gap-3 z-20">
+      <div className="sticky bottom-0 mt-6 bg-[#1c1c1e] backdrop-blur-xs border border-white/10 rounded-xs px-4 py-2.5 shadow-md flex items-center justify-end gap-3 z-20">
         {savedBanner && (
-          <span className="text-xs text-emerald-600 font-medium">
+          <span className="text-xs text-[#E8AC51] font-medium">
             Alterações salvas com sucesso!
           </span>
         )}
         <button
           type="button"
           onClick={handleSaveChanges}
-          className="px-4 py-1.5 bg-[#0f82b3] hover:bg-[#006399] text-white text-xs font-medium rounded-xs shadow-2xs transition-colors cursor-pointer"
+          className="px-4 py-1.5 bg-[#880E1B] hover:bg-[#a31121] text-white text-xs font-medium rounded-xs shadow-2xs transition-colors cursor-pointer"
         >
           Salvar alterações
         </button>
@@ -598,7 +598,7 @@ export default function ProfileAttributesConfig() {
       <button
         type="button"
         onClick={handleScrollToTop}
-        className="fixed bottom-14 right-4 z-40 px-3 py-1.5 bg-[#0f82b3] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-md transition-colors cursor-pointer"
+        className="fixed bottom-14 right-4 z-40 px-3 py-1.5 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-md transition-colors cursor-pointer"
       >
         IR PARA O TOPO
       </button>

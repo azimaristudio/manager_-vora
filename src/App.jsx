@@ -453,15 +453,15 @@ function AppRoutes() {
 
       {/* Barra Flutuante de Protótipo para Inspecionar as Rotas (oculta na tela de Login) */}
       {location.pathname !== '/login' && (
-        <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-1.5 bg-slate-900/95 backdrop-blur-xs text-white px-3 py-1.5 rounded-full shadow-lg border border-white/15 text-xs">
-          <span className="text-slate-400 font-medium mr-1">Rotas:</span>
+        <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-1.5 bg-[#1c1c1e]/95 backdrop-blur-xs text-white px-3 py-1.5 rounded-full shadow-lg border border-white/15 text-xs">
+          <span className="text-neutral-400 font-medium mr-1">Rotas:</span>
           <button
             type="button"
             onClick={() => navigate('/login')}
             className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
               location.pathname === '/login'
-                ? 'bg-[#0077b5] text-white'
-                : 'text-slate-300 hover:text-white'
+                ? 'bg-[#880E1B] text-white'
+                : 'text-neutral-400 hover:text-white'
             }`}
           >
             /login
@@ -474,8 +474,8 @@ function AppRoutes() {
             }}
             className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
               location.pathname === '/' || location.pathname === '/talentos'
-                ? 'bg-[#0077b5] text-white'
-                : 'text-slate-300 hover:text-white'
+                ? 'bg-[#880E1B] text-white'
+                : 'text-neutral-400 hover:text-white'
             }`}
           >
             /talentos
@@ -485,8 +485,8 @@ function AppRoutes() {
           onClick={() => navigate('/contatos')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/contatos')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /contatos
@@ -496,8 +496,8 @@ function AppRoutes() {
           onClick={() => navigate('/webmail/inbox')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/webmail')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /webmail
@@ -507,8 +507,8 @@ function AppRoutes() {
           onClick={() => navigate('/projetos')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/projetos'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /projetos
@@ -518,8 +518,8 @@ function AppRoutes() {
           onClick={() => navigate('/projetos/1')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/projetos/1'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /projetos/1
@@ -529,8 +529,8 @@ function AppRoutes() {
           onClick={() => navigate('/calendario')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/calendario')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /calendario
@@ -540,8 +540,8 @@ function AppRoutes() {
           onClick={() => navigate('/pacotes')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/pacotes'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /pacotes
@@ -551,8 +551,8 @@ function AppRoutes() {
           onClick={() => navigate('/pacotes/novo')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/pacotes/novo'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /pacotes/novo
@@ -562,8 +562,8 @@ function AppRoutes() {
           onClick={() => navigate('/estatisticas')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/estatisticas')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /estatisticas
@@ -573,8 +573,8 @@ function AppRoutes() {
           onClick={() => navigate('/contabilidade')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/contabilidade')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /contabilidade
@@ -584,8 +584,8 @@ function AppRoutes() {
           onClick={() => navigate('/minha-conta')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/minha-conta'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /minha-conta
@@ -595,8 +595,8 @@ function AppRoutes() {
           onClick={() => navigate('/configuracoes')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname.startsWith('/configuracoes')
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /configuracoes
@@ -606,8 +606,8 @@ function AppRoutes() {
           onClick={() => navigate('/compomake')}
           className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
             location.pathname === '/compomake'
-              ? 'bg-[#0077b5] text-white'
-              : 'text-slate-300 hover:text-white'
+              ? 'bg-[#880E1B] text-white'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           /compomake

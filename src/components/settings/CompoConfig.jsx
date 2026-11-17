@@ -75,13 +75,13 @@ export default function CompoConfig() {
   return (
     <div className="max-w-3xl pt-1">
       {/* Texto Explicativo no Topo */}
-      <div className="pb-4 mb-4 border-b border-slate-200/90 text-slate-500">
-        <p className="text-xs font-normal text-slate-600">
+      <div className="pb-4 mb-4 border-b border-white/10 text-neutral-400">
+        <p className="text-xs font-normal text-neutral-400">
           Selecionar the default measures for Compomaker
         </p>
-        <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+        <p className="text-[11px] text-neutral-400 mt-1 leading-relaxed">
           Adicionar the measures para the{' '}
-          <strong className="text-slate-700 font-semibold">selected</strong>{' '}
+          <strong className="text-white font-semibold">selected</strong>{' '}
           box, then drag and drop the measure para the position you want. Você
           can remove a selected measure Ou restore the default either.
         </p>
@@ -90,13 +90,13 @@ export default function CompoConfig() {
       {/* Painel de Measure Set */}
       <div className="space-y-3 mb-5">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-neutral-400">
             Adicionar novo measure set
           </span>
           <button
             type="button"
             onClick={handleAddNewMeasureSet}
-            className="w-6 h-5 bg-[#1e9d1e] hover:bg-[#178017] text-white rounded-xs flex items-center justify-center shadow-2xs cursor-pointer"
+            className="w-6 h-5 bg-[#E8AC51] hover:bg-[#d99b3f] text-white rounded-xs flex items-center justify-center shadow-2xs cursor-pointer"
             title="Adicionar novo measure set"
           >
             <Plus className="w-3.5 h-3.5 stroke-[3]" />
@@ -104,11 +104,11 @@ export default function CompoConfig() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          <span className="text-xs text-slate-500">Current measure set:</span>
+          <span className="text-xs text-neutral-400">Current measure set:</span>
           <select
             value={currentMeasureSet}
             onChange={(e) => setCurrentMeasureSet(e.target.value)}
-            className="w-40 h-7 px-2 bg-white border border-slate-200 rounded-xs text-xs text-slate-600 focus:outline-none focus:border-[#0077b5]"
+            className="w-40 h-7 px-2 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-neutral-400 focus:outline-none focus:border-[#880E1B]"
           >
             {measureSets.map((setKey) => (
               <option key={setKey} value={setKey}>
@@ -131,10 +131,10 @@ export default function CompoConfig() {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
         {/* Caixa Esquerda: Disponibilidade */}
         <div>
-          <h4 className="text-sm font-bold text-slate-700 mb-1.5">
+          <h4 className="text-sm font-bold text-white mb-1.5">
             Disponibilidade
           </h4>
-          <div className="h-52 bg-white border border-slate-200 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
+          <div className="h-52 bg-[#1c1c1e] border border-white/10 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
             {availableList.map((item) => {
               const isPicked = pickedAvailable === item;
               return (
@@ -150,8 +150,8 @@ export default function CompoConfig() {
                   }}
                   className={`w-full text-left px-1.5 py-0.5 rounded-xs text-[11px] font-bold transition-colors cursor-pointer ${
                     isPicked
-                      ? 'bg-sky-100 text-[#0077b5]'
-                      : 'text-slate-700 hover:bg-slate-100'
+                      ? 'bg-[#1c1c1e] text-[#E8AC51]'
+                      : 'text-white hover:bg-[#1c1c1e]'
                   }`}
                 >
                   {item}
@@ -166,7 +166,7 @@ export default function CompoConfig() {
           <button
             type="button"
             onClick={handleRestoreDefaults}
-            className="px-4 py-1.5 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
+            className="px-4 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
           >
             PADRÃO
           </button>
@@ -174,7 +174,7 @@ export default function CompoConfig() {
           <button
             type="button"
             onClick={handleRemoveFromSelected}
-            className="px-3.5 py-1.5 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
+            className="px-3.5 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
           >
             &larr; REMOVER
           </button>
@@ -182,7 +182,7 @@ export default function CompoConfig() {
           <button
             type="button"
             onClick={handleAddToSelected}
-            className="px-4 py-2 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-xl leading-tight text-center transition-colors cursor-pointer"
+            className="px-4 py-2 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-xl leading-tight text-center transition-colors cursor-pointer"
           >
             ADICIONAR NOVO
             <br />
@@ -192,10 +192,10 @@ export default function CompoConfig() {
 
         {/* Caixa Direita: Selecionado */}
         <div>
-          <h4 className="text-sm font-bold text-slate-700 mb-1.5">
+          <h4 className="text-sm font-bold text-white mb-1.5">
             Selecionado
           </h4>
-          <div className="h-52 bg-white border border-slate-200 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
+          <div className="h-52 bg-[#1c1c1e] border border-white/10 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
             {selectedList.map((item) => {
               const isPicked = pickedSelected === item;
               return (
@@ -211,8 +211,8 @@ export default function CompoConfig() {
                   }}
                   className={`w-full text-left px-1.5 py-0.5 rounded-xs text-[11px] transition-colors cursor-pointer ${
                     isPicked
-                      ? 'bg-sky-100 text-[#0077b5] font-semibold'
-                      : 'text-slate-600 hover:bg-slate-100'
+                      ? 'bg-[#1c1c1e] text-[#E8AC51] font-semibold'
+                      : 'text-neutral-400 hover:bg-[#1c1c1e]'
                   }`}
                 >
                   {item}
@@ -228,13 +228,13 @@ export default function CompoConfig() {
         <button
           type="button"
           onClick={handleSave}
-          className="px-4 py-2 bg-[#1e9d1e] hover:bg-[#178017] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
         >
           SALVAR
         </button>
 
         {savedFeedback && (
-          <span className="text-xs text-emerald-600 font-medium">
+          <span className="text-xs text-[#E8AC51] font-medium">
             Medidas do Compo salvas!
           </span>
         )}

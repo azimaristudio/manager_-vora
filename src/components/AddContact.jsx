@@ -185,39 +185,39 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
   return (
     <div className="w-full pb-20 select-none">
       {/* 1. Sub-Cabeçalho: Breadcrumb "Início > Contatos > Novo perfil" + Busca */}
-      <div className="w-full bg-[#f8f9fa] border border-slate-200/90 rounded-xs px-4 py-2.5 mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-4 py-2.5 mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-2 text-xs text-neutral-400">
           <Link
             to="/"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Início
           </Link>
           <span>&gt;</span>
           <Link
             to="/contatos"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Contatos
           </Link>
           <span>&gt;</span>
-          <span className="text-slate-500">Novo perfil</span>
+          <span className="text-neutral-400">Novo perfil</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-white border border-slate-200 rounded-xs overflow-hidden w-full sm:w-64">
-            <span className="px-2.5 py-1.5 bg-slate-100 border-r border-slate-200 text-slate-500">
+          <div className="flex items-center bg-[#1c1c1e] border border-white/10 rounded-xs overflow-hidden w-full sm:w-64">
+            <span className="px-2.5 py-1.5 bg-[#161617] border-r border-white/10 text-neutral-400">
               <Search className="w-3.5 h-3.5" />
             </span>
             <input
               type="text"
               placeholder="Buscar um contato"
-              className="w-full px-2.5 py-1 text-xs text-slate-700 placeholder:text-slate-400 outline-none"
+              className="w-full px-2.5 py-1 text-xs text-white placeholder:text-neutral-400 outline-none"
             />
           </div>
           <button
             type="button"
-            className="px-2.5 py-1.5 bg-[#0077b5] text-white rounded-xs flex items-center justify-center"
+            className="px-2.5 py-1.5 bg-[#880E1B] text-white rounded-xs flex items-center justify-center"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -226,51 +226,51 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
       <form onSubmit={handleSave}>
         {/* 2. Seletor de Tipo de Perfil: "Perfil do Cliente:" / "Perfil do Provedor:" + Empresa / Pessoa */}
-        <div className="border-y border-slate-200 py-4 mb-8 flex flex-wrap items-center justify-between gap-6">
+        <div className="border-y border-white/10 py-4 mb-8 flex flex-wrap items-center justify-between gap-6">
           <div className="flex flex-wrap items-center gap-8 sm:gap-14">
-            <h2 className="text-base font-normal text-slate-500">
+            <h2 className="text-base font-normal text-neutral-400">
               {profileTitle}
             </h2>
 
             {/* Radio: Empresa */}
-            <label className="inline-flex items-center gap-2 text-xs text-[#0077b5] cursor-pointer">
+            <label className="inline-flex items-center gap-2 text-xs text-[#E8AC51] cursor-pointer">
               <input
                 type="radio"
                 name="entityType"
                 value="company"
                 checked={entityType === 'company'}
                 onChange={() => setEntityType('company')}
-                className="accent-[#0077b5] cursor-pointer"
+                className="accent-[#880E1B] cursor-pointer"
               />
-              <Building2 className="w-4 h-4 text-[#0077b5]" />
+              <Building2 className="w-4 h-4 text-[#E8AC51]" />
               <span>Empresa</span>
             </label>
 
             {/* Radio: Pessoa */}
-            <label className="inline-flex items-center gap-2 text-xs text-[#0077b5] cursor-pointer">
+            <label className="inline-flex items-center gap-2 text-xs text-[#E8AC51] cursor-pointer">
               <input
                 type="radio"
                 name="entityType"
                 value="person"
                 checked={entityType === 'person'}
                 onChange={() => setEntityType('person')}
-                className="accent-[#0077b5] cursor-pointer"
+                className="accent-[#880E1B] cursor-pointer"
               />
-              <User className="w-4 h-4 text-[#0077b5]" />
+              <User className="w-4 h-4 text-[#E8AC51]" />
               <span>Pessoa</span>
             </label>
           </div>
 
           {/* Alternador rápido entre Cliente (Img 17) e Provedor/Fornecedor (Img 18) */}
           <div className="flex items-center gap-1.5 text-[11px]">
-            <span className="text-slate-400">Tipo de cadastro:</span>
+            <span className="text-neutral-400">Tipo de cadastro:</span>
             <button
               type="button"
               onClick={() => setContactGroup('clientes')}
               className={`px-2 py-0.5 rounded-xs cursor-pointer ${
                 contactGroup === 'clientes'
-                  ? 'bg-[#0077b5] text-white font-semibold'
-                  : 'bg-slate-100 text-slate-600'
+                  ? 'bg-[#880E1B] text-white font-semibold'
+                  : 'bg-[#161617] text-neutral-400'
               }`}
             >
               Cliente (Img 17)
@@ -280,8 +280,8 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
               onClick={() => setContactGroup('fornecedores')}
               className={`px-2 py-0.5 rounded-xs cursor-pointer ${
                 contactGroup === 'fornecedores'
-                  ? 'bg-[#0077b5] text-white font-semibold'
-                  : 'bg-slate-100 text-slate-600'
+                  ? 'bg-[#880E1B] text-white font-semibold'
+                  : 'bg-[#161617] text-neutral-400'
               }`}
             >
               Provedor / Fornecedor (Img 18)
@@ -293,14 +293,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           {/* ==================== COLUNA 1: Info básica ==================== */}
           <div>
-            <h3 className="text-xs font-bold text-slate-800 pb-2 mb-5 border-b border-slate-200">
+            <h3 className="text-xs font-bold text-white pb-2 mb-5 border-b border-white/10">
               Info básica
             </h3>
 
             <div className="space-y-3.5">
               {/* Status * */}
               <div className="grid grid-cols-12 items-start gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600 pt-0.5">
+                <label className="col-span-4 text-[11px] text-neutral-400 pt-0.5">
                   Status <span className="text-red-500">*</span>
                 </label>
                 <div className="col-span-8 space-y-2">
@@ -308,7 +308,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     {['Stand By', 'Inativo'].map((st) => (
                       <label
                         key={st}
-                        className="inline-flex items-center gap-1.5 text-[11px] text-[#0077b5] cursor-pointer"
+                        className="inline-flex items-center gap-1.5 text-[11px] text-[#E8AC51] cursor-pointer"
                       >
                         <input
                           type="radio"
@@ -316,21 +316,21 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           value={st}
                           checked={status === st}
                           onChange={(e) => setStatus(e.target.value)}
-                          className="accent-[#0077b5] cursor-pointer"
+                          className="accent-[#880E1B] cursor-pointer"
                         />
                         <span>{st}</span>
                       </label>
                     ))}
                   </div>
                   <div>
-                    <label className="inline-flex items-center gap-1.5 text-[11px] text-[#0077b5] cursor-pointer">
+                    <label className="inline-flex items-center gap-1.5 text-[11px] text-[#E8AC51] cursor-pointer">
                       <input
                         type="radio"
                         name="contactStatus"
                         value="Ativo"
                         checked={status === 'Ativo'}
                         onChange={(e) => setStatus(e.target.value)}
-                        className="accent-[#0077b5] cursor-pointer"
+                        className="accent-[#880E1B] cursor-pointer"
                       />
                       <span>Ativo</span>
                     </label>
@@ -340,7 +340,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Nome * */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Nome <span className="text-red-500">*</span>
                 </label>
                 <div className="col-span-8">
@@ -354,21 +354,21 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                         ? 'Nome da empresa'
                         : 'Nome completo'
                     }
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
 
               {/* Categoria */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Categoria
                 </label>
                 <div className="col-span-8">
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Selecione...</option>
                     <option value="Agencia">Agencia</option>
@@ -382,14 +382,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Booker */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Booker
                 </label>
                 <div className="col-span-8">
                   <select
                     value={booker}
                     onChange={(e) => setBooker(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Faça uma seleção</option>
                     <option value="Sophia Booker">Sophia Booker</option>
@@ -400,14 +400,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* País * */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   País <span className="text-red-500">*</span>
                 </label>
                 <div className="col-span-8">
                   <select
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="Brasil">Brasil</option>
                     <option value="Portugal">Portugal</option>
@@ -419,14 +419,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Cidade * */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Cidade <span className="text-red-500">*</span>
                 </label>
                 <div className="col-span-8">
                   <select
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Cidade</option>
                     <option value="Recife">Recife</option>
@@ -439,7 +439,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Classificação (Estrelas + NO RATED) */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Classificação
                 </label>
                 <div className="col-span-8 flex items-center gap-1.5">
@@ -457,13 +457,13 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           className={`w-3.5 h-3.5 ${
                             star <= rating
                               ? 'text-amber-400 fill-amber-400'
-                              : 'text-slate-300 hover:text-amber-300'
+                              : 'text-neutral-400 hover:text-amber-300'
                           }`}
                         />
                       </button>
                     ))}
                   </div>
-                  <span className="text-[9px] font-bold text-slate-400 leading-none uppercase">
+                  <span className="text-[9px] font-bold text-neutral-400 leading-none uppercase">
                     {rating === 0 ? (
                       <>
                         NO
@@ -479,14 +479,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Reputação */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Reputação
                 </label>
                 <div className="col-span-8">
                   <select
                     value={reputation}
                     onChange={(e) => setReputation(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Faça uma seleção</option>
                     <option value="Excelente">Excelente</option>
@@ -499,7 +499,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Notas sobre reputação */}
               <div className="grid grid-cols-12 items-start gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600 pt-1">
+                <label className="col-span-4 text-[11px] text-neutral-400 pt-1">
                   Notas sobre
                   <br />
                   reputação
@@ -509,21 +509,21 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     rows={3}
                     value={reputationNotes}
                     onChange={(e) => setReputationNotes(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
 
               {/* Interesse */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Interesse
                 </label>
                 <div className="col-span-8">
                   <select
                     value={interest}
                     onChange={(e) => setInterest(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="Todos">Todos</option>
                     <option value="Fashion">Fashion / Passarela</option>
@@ -534,14 +534,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Gênero */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Gênero
                 </label>
                 <div className="col-span-8">
                   <select
                     value={genderInterest}
                     onChange={(e) => setGenderInterest(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="Masculino/Feminino">
                       Masculino/Feminino
@@ -554,7 +554,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Notas */}
               <div className="grid grid-cols-12 items-start gap-2">
-                <label className="col-span-4 text-[11px] text-slate-600 pt-1">
+                <label className="col-span-4 text-[11px] text-neutral-400 pt-1">
                   Notas
                 </label>
                 <div className="col-span-8">
@@ -562,14 +562,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     rows={3}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
 
               {/* Logo (Botão Verde BROWSE) */}
               <div className="grid grid-cols-12 items-center gap-2 pt-1">
-                <label className="col-span-4 text-[11px] text-slate-600">
+                <label className="col-span-4 text-[11px] text-neutral-400">
                   Logo
                 </label>
                 <div className="col-span-8 flex items-center gap-3">
@@ -583,7 +583,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                   <button
                     type="button"
                     onClick={() => logoInputRef.current?.click()}
-                    className="px-3.5 py-2 bg-[#28a745] hover:bg-[#218838] text-white text-[11px] font-bold uppercase rounded-xs flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                    className="px-3.5 py-2 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[11px] font-bold uppercase rounded-xs flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                   >
                     <FolderOpen className="w-3.5 h-3.5 fill-white" />
                     <span>BROWSE</span>
@@ -593,7 +593,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     <img
                       src={logoPreviewUrl}
                       alt="Logo Preview"
-                      className="w-9 h-9 object-contain border border-slate-200 rounded-xs bg-white p-0.5"
+                      className="w-9 h-9 object-contain border border-white/10 rounded-xs bg-[#1c1c1e] p-0.5"
                     />
                   )}
                 </div>
@@ -603,14 +603,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
           {/* ==================== COLUNA 2: Info de contato ==================== */}
           <div>
-            <h3 className="text-xs font-bold text-slate-800 pb-2 mb-5 border-b border-slate-200">
+            <h3 className="text-xs font-bold text-white pb-2 mb-5 border-b border-white/10">
               Info de contato
             </h3>
 
             <div className="space-y-3.5">
               {/* Endereço */}
               <div className="grid grid-cols-12 items-start gap-2">
-                <label className="col-span-3 text-[11px] text-slate-600 pt-1">
+                <label className="col-span-3 text-[11px] text-neutral-400 pt-1">
                   Endereço
                 </label>
                 <div className="col-span-9">
@@ -618,7 +618,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     rows={3}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
@@ -630,7 +630,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     key={phone.id}
                     className="grid grid-cols-12 items-center gap-2"
                   >
-                    <label className="col-span-3 text-[11px] text-slate-600">
+                    <label className="col-span-3 text-[11px] text-neutral-400">
                       {idx === 0 ? 'Telefone' : ''}
                     </label>
                     <div className="col-span-4">
@@ -639,7 +639,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                         onChange={(e) =>
                           updatePhoneRow(phone.id, 'country', e.target.value)
                         }
-                        className="w-full px-2 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                        className="w-full px-2 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                       >
                         <option value="">País</option>
                         <option value="Brasil (+55)">Brasil (+55)</option>
@@ -655,7 +655,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           updatePhoneRow(phone.id, 'number', e.target.value)
                         }
                         placeholder="Número"
-                        className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                        className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                       />
                     </div>
                     <div className="col-span-1 flex justify-end">
@@ -664,7 +664,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           type="button"
                           onClick={addPhoneRow}
                           title="Adicionar Telefone"
-                          className="w-6 h-6 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs flex items-center justify-center cursor-pointer"
+                          className="w-6 h-6 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs flex items-center justify-center cursor-pointer"
                         >
                           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                         </button>
@@ -676,7 +676,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                               prev.filter((item) => item.id !== phone.id)
                             )
                           }
-                          className="text-slate-400 hover:text-red-500 cursor-pointer"
+                          className="text-neutral-400 hover:text-red-500 cursor-pointer"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -688,14 +688,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Fax */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-3 text-[11px] text-slate-600">
+                <label className="col-span-3 text-[11px] text-neutral-400">
                   Fax
                 </label>
                 <div className="col-span-4">
                   <select
                     value={faxCountry}
                     onChange={(e) => setFaxCountry(e.target.value)}
-                    className="w-full px-2 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2 py-1.5 text-xs font-bold text-white bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   >
                     <option value="">País</option>
                     <option value="Brasil (+55)">Brasil (+55)</option>
@@ -707,14 +707,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     value={faxNumber}
                     onChange={(e) => setFaxNumber(e.target.value)}
                     placeholder="Número"
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
 
               {/* Website */}
               <div className="grid grid-cols-12 items-center gap-2">
-                <label className="col-span-3 text-[11px] text-slate-600">
+                <label className="col-span-3 text-[11px] text-neutral-400">
                   Website
                 </label>
                 <div className="col-span-9">
@@ -723,18 +723,18 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                     placeholder="https://"
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                   />
                 </div>
               </div>
 
               {/* Social */}
               <div className="grid grid-cols-12 items-center gap-2 pt-1">
-                <label className="col-span-3 text-[11px] text-slate-600">
+                <label className="col-span-3 text-[11px] text-neutral-400">
                   Social
                 </label>
                 <div className="col-span-9 space-y-2">
-                  <div className="flex items-center gap-2 text-[#0077b5]">
+                  <div className="flex items-center gap-2 text-[#E8AC51]">
                     {[
                       { id: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
                       { id: 'facebook', icon: Facebook, label: 'Facebook' },
@@ -756,8 +756,8 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           title={net.label}
                           className={`p-1 rounded-xs transition-colors cursor-pointer ${
                             activeSocialInput === net.id
-                              ? 'bg-[#0077b5] text-white'
-                              : 'hover:bg-sky-50 text-[#0077b5]'
+                              ? 'bg-[#880E1B] text-white'
+                              : 'hover:bg-[#1c1c1e] text-[#E8AC51]'
                           }`}
                         >
                           <Icon className="w-4 h-4" />
@@ -777,7 +777,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                         }))
                       }
                       placeholder={`Link / usuário para ${activeSocialInput}...`}
-                      className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none focus:border-[#0077b5]"
+                      className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none focus:border-[#880E1B]"
                     />
                   )}
                 </div>
@@ -785,11 +785,11 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Bloco Expansível 1: Info de faturamento */}
               <div className="pt-4">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
                   <button
                     type="button"
                     onClick={() => setIsBillingOpen((prev) => !prev)}
-                    className="flex items-center gap-1.5 text-xs font-bold text-slate-800 cursor-pointer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-white cursor-pointer"
                   >
                     {isBillingOpen ? (
                       <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -802,7 +802,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                   <button
                     type="button"
                     onClick={handleAddBilling}
-                    className="px-2.5 py-1 bg-[#28a745] hover:bg-[#218838] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
+                    className="px-2.5 py-1 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <Plus className="w-3 h-3 stroke-[2.5]" />
                     <span>ADICIONAR NOVO</span>
@@ -812,14 +812,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                 {isBillingOpen && (
                   <div className="pt-3 space-y-2.5">
                     {billingItems.length === 0 ? (
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-neutral-400">
                         Clique em &ldquo;+ ADICIONAR NOVO&rdquo; para inserir dados fiscais.
                       </p>
                     ) : (
                       billingItems.map((item) => (
                         <div
                           key={item.id}
-                          className="p-3 bg-slate-50 border border-slate-200 rounded-xs space-y-2 relative"
+                          className="p-3 bg-[#161617] border border-white/10 rounded-xs space-y-2 relative"
                         >
                           <button
                             type="button"
@@ -828,7 +828,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                 prev.filter((b) => b.id !== item.id)
                               )
                             }
-                            className="absolute top-2 right-2 text-slate-400 hover:text-red-500 cursor-pointer"
+                            className="absolute top-2 right-2 text-neutral-400 hover:text-red-500 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -845,7 +845,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                 )
                               )
                             }
-                            className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                            className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                           />
                           <input
                             type="text"
@@ -860,7 +860,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                 )
                               )
                             }
-                            className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                            className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                           />
                         </div>
                       ))
@@ -871,11 +871,11 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
               {/* Bloco Expansível 2: Conta Bancária */}
               <div className="pt-3">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
                   <button
                     type="button"
                     onClick={() => setIsBankOpen((prev) => !prev)}
-                    className="flex items-center gap-1.5 text-xs font-bold text-slate-800 cursor-pointer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-white cursor-pointer"
                   >
                     {isBankOpen ? (
                       <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -888,7 +888,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                   <button
                     type="button"
                     onClick={handleAddBank}
-                    className="px-2.5 py-1 bg-[#28a745] hover:bg-[#218838] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
+                    className="px-2.5 py-1 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <Plus className="w-3 h-3 stroke-[2.5]" />
                     <span>ADICIONAR NOVO</span>
@@ -898,14 +898,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                 {isBankOpen && (
                   <div className="pt-3 space-y-2.5">
                     {bankItems.length === 0 ? (
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-neutral-400">
                         Clique em &ldquo;+ ADICIONAR NOVO&rdquo; para inserir conta bancária.
                       </p>
                     ) : (
                       bankItems.map((item) => (
                         <div
                           key={item.id}
-                          className="p-3 bg-slate-50 border border-slate-200 rounded-xs space-y-2 relative"
+                          className="p-3 bg-[#161617] border border-white/10 rounded-xs space-y-2 relative"
                         >
                           <button
                             type="button"
@@ -914,7 +914,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                 prev.filter((b) => b.id !== item.id)
                               )
                             }
-                            className="absolute top-2 right-2 text-slate-400 hover:text-red-500 cursor-pointer"
+                            className="absolute top-2 right-2 text-neutral-400 hover:text-red-500 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -931,7 +931,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                 )
                               )
                             }
-                            className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                            className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                           />
                           <div className="grid grid-cols-2 gap-2">
                             <input
@@ -947,7 +947,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                   )
                                 )
                               }
-                              className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                              className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                             />
                             <input
                               type="text"
@@ -962,7 +962,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                                   )
                                 )
                               }
-                              className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                              className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                             />
                           </div>
                         </div>
@@ -976,12 +976,12 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
 
           {/* ==================== COLUNA 3: Staff ==================== */}
           <div>
-            <div className="flex items-center justify-between pb-2 mb-5 border-b border-slate-200">
-              <h3 className="text-xs font-bold text-slate-800">Staff</h3>
+            <div className="flex items-center justify-between pb-2 mb-5 border-b border-white/10">
+              <h3 className="text-xs font-bold text-white">Staff</h3>
               <button
                 type="button"
                 onClick={handleAddStaffMember}
-                className="px-2.5 py-1 bg-[#28a745] hover:bg-[#218838] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
+                className="px-2.5 py-1 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-bold uppercase rounded-xs flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <Plus className="w-3 h-3 stroke-[2.5]" />
                 <span>ADICIONAR MEMBRO</span>
@@ -993,7 +993,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                 {staffMembers.map((member) => (
                   <div
                     key={member.id}
-                    className="p-3 bg-slate-50 border border-slate-200 rounded-xs space-y-2 relative"
+                    className="p-3 bg-[#161617] border border-white/10 rounded-xs space-y-2 relative"
                   >
                     <button
                       type="button"
@@ -1002,7 +1002,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           prev.filter((m) => m.id !== member.id)
                         )
                       }
-                      className="absolute top-2 right-2 text-slate-400 hover:text-red-500 cursor-pointer"
+                      className="absolute top-2 right-2 text-neutral-400 hover:text-red-500 cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -1019,7 +1019,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                           )
                         )
                       }
-                      className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                      className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                     />
                     <div className="grid grid-cols-2 gap-2">
                       <input
@@ -1035,7 +1035,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                             )
                           )
                         }
-                        className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                        className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                       />
                       <input
                         type="email"
@@ -1050,7 +1050,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
                             )
                           )
                         }
-                        className="w-full px-2.5 py-1 text-xs bg-white border border-slate-300 rounded-xs outline-none"
+                        className="w-full px-2.5 py-1 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs outline-none"
                       />
                     </div>
                   </div>
@@ -1061,7 +1061,7 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
         </div>
 
         {/* 4. Rodapé de Ações: EXCLUIR (vermelho à esquerda) | CANCELAR + SALVAR (à direita) */}
-        <div className="mt-12 pt-4 border-t border-slate-200 flex items-center justify-between gap-4">
+        <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
           <button
             type="button"
             onClick={handleDelete}
@@ -1074,14 +1074,14 @@ export default function AddContact({ onSaveContact, onDeleteContact }) {
             <button
               type="button"
               onClick={() => navigate('/contatos')}
-              className="text-xs font-medium text-[#0077b5] hover:underline uppercase tracking-wider cursor-pointer"
+              className="text-xs font-medium text-[#E8AC51] hover:underline uppercase tracking-wider cursor-pointer"
             >
               CANCELAR
             </button>
 
             <button
               type="submit"
-              className="px-4 py-2 bg-[#0077b5] hover:bg-[#006399] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
+              className="px-4 py-2 bg-[#880E1B] hover:bg-[#a31121] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
             >
               SALVAR
             </button>

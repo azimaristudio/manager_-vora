@@ -90,7 +90,7 @@ export default function CategoriesConfig() {
                 type="checkbox"
                 checked={isChecked}
                 onChange={() => handleToggleSelect(category.id)}
-                className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5] focus:ring-[#0077b5] cursor-pointer"
+                className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51] focus:ring-[#880E1B] cursor-pointer"
               />
 
               {isEditing ? (
@@ -104,12 +104,12 @@ export default function CategoriesConfig() {
                       if (e.key === 'Escape') setEditingId(null);
                     }}
                     autoFocus
-                    className="h-6 px-2 border border-[#0077b5] rounded-xs text-xs text-slate-700 focus:outline-none"
+                    className="h-6 px-2 border border-[#880E1B] rounded-xs text-xs text-white focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => handleConfirmEdit(category.id)}
-                    className="px-2 py-0.5 bg-[#0077b5] text-white text-[10px] rounded-xs cursor-pointer"
+                    className="px-2 py-0.5 bg-[#880E1B] text-white text-[10px] rounded-xs cursor-pointer"
                   >
                     OK
                   </button>
@@ -117,11 +117,11 @@ export default function CategoriesConfig() {
               ) : (
                 <label
                   onClick={() => handleToggleSelect(category.id)}
-                  className="text-slate-600 cursor-pointer select-none"
+                  className="text-neutral-400 cursor-pointer select-none"
                 >
                   <span>{category.name}</span>
                   {category.isDefault && (
-                    <span className="italic text-slate-400 ml-1">Padrão</span>
+                    <span className="italic text-neutral-400 ml-1">Padrão</span>
                   )}
                 </label>
               )}
@@ -131,36 +131,36 @@ export default function CategoriesConfig() {
       </div>
 
       {/* Barra de Ações */}
-      <div className="border-t border-b border-slate-200/90 py-3 my-3.5 pl-8 flex flex-wrap items-center gap-5">
-        <div className="flex items-center gap-1 text-slate-600 text-xs">
-          <CornerDownRight className="w-3.5 h-3.5 text-slate-500 stroke-[1.8]" />
+      <div className="border-t border-b border-white/10 py-3 my-3.5 pl-8 flex flex-wrap items-center gap-5">
+        <div className="flex items-center gap-1 text-neutral-400 text-xs">
+          <CornerDownRight className="w-3.5 h-3.5 text-neutral-400 stroke-[1.8]" />
           <span>Seleção</span>
         </div>
 
         <button
           type="button"
           onClick={handleStartEdit}
-          className="inline-flex items-center gap-1 text-[10px] text-[#0088cc] hover:underline uppercase tracking-wide cursor-pointer"
+          className="inline-flex items-center gap-1 text-[10px] text-[#E8AC51] hover:underline uppercase tracking-wide cursor-pointer"
         >
-          <Pencil className="w-3 h-3 fill-[#0088cc] text-[#0088cc]" />
+          <Pencil className="w-3 h-3 fill-[#E8AC51] text-[#E8AC51]" />
           <span>EDITAR</span>
         </button>
 
         <button
           type="button"
           onClick={handleToggleDefault}
-          className="inline-flex items-center gap-1 text-[10px] text-[#0088cc] hover:underline uppercase tracking-wide cursor-pointer"
+          className="inline-flex items-center gap-1 text-[10px] text-[#E8AC51] hover:underline uppercase tracking-wide cursor-pointer"
         >
-          <CheckSquare className="w-3 h-3 fill-[#0088cc] text-white" />
+          <CheckSquare className="w-3 h-3 fill-[#E8AC51] text-white" />
           <span>PADRÃO</span>
         </button>
 
         <button
           type="button"
           onClick={handleDeleteSelected}
-          className="inline-flex items-center gap-1 text-[10px] text-[#0088cc] hover:underline uppercase tracking-wide cursor-pointer"
+          className="inline-flex items-center gap-1 text-[10px] text-[#E8AC51] hover:underline uppercase tracking-wide cursor-pointer"
         >
-          <Trash2 className="w-3 h-3 text-[#0088cc]" />
+          <Trash2 className="w-3 h-3 text-[#E8AC51]" />
           <span>EXCLUIR</span>
         </button>
       </div>
@@ -175,12 +175,12 @@ export default function CategoriesConfig() {
           value={newCategoryName}
           onChange={(e) => setNewCategoryName(e.target.value)}
           placeholder="Inserir uma nova categoria"
-          className="w-56 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0077b5]"
+          className="w-56 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
         />
 
         <button
           type="submit"
-          className="px-3.5 h-8 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+          className="px-3.5 h-8 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
         >
           SALVAR CATEGORIA
         </button>

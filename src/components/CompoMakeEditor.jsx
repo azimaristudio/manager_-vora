@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import evoraLogo from '../assets/evora_logo.jpg';
 import {
   Move,
   Crop,
@@ -131,18 +130,18 @@ export default function CompoMakeEditor() {
     <div className="w-full pb-16 select-none">
       {/* Toast Flutuante */}
       {toast && (
-        <div className="fixed top-20 right-6 z-50 max-w-md bg-slate-900 text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-emerald-400 flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="fixed top-20 right-6 z-50 max-w-md bg-[#1c1c1e] text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-[#E8AC51] flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
+          <CheckCircle2 className="w-5 h-5 text-[#E8AC51] shrink-0 mt-0.5" />
           <div className="flex-1 text-xs">
             <p className="font-bold">{toast.title}</p>
-            <p className="text-slate-300 mt-0.5 leading-relaxed">
+            <p className="text-neutral-400 mt-0.5 leading-relaxed">
               {toast.subtitle}
             </p>
           </div>
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-slate-400 hover:text-white cursor-pointer"
+            className="text-neutral-400 hover:text-white cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -150,24 +149,24 @@ export default function CompoMakeEditor() {
       )}
 
       {/* 1. BARRA DE BREADCRUMB ("Início > CompoMake") */}
-      <div className="w-full bg-[#f8f9fa] border border-slate-200/80 rounded-xs px-4 py-2.5 mb-5 flex items-center gap-2 text-xs text-slate-400">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-4 py-2.5 mb-5 flex items-center gap-2 text-xs text-neutral-400">
         <Link
           to="/"
-          className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+          className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
         >
           Início
         </Link>
         <span>&gt;</span>
-        <span className="text-slate-500">CompoMake</span>
+        <span className="text-neutral-400">CompoMake</span>
       </div>
 
       {/* 2. CABEÇALHO DO EDITOR ("CompoMake / sophia évora" + Botões à direita) */}
-      <div className="w-full bg-[#f4f5f7] border border-slate-200/90 rounded-xs px-5 py-3.5 mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-5 py-3.5 mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-baseline gap-1.5">
-          <h1 className="text-xl font-bold text-slate-800 tracking-tight">
+          <h1 className="text-xl font-bold text-white tracking-tight">
             CompoMake /
           </h1>
-          <span className="text-base font-bold text-[#0077b5]">
+          <span className="text-base font-bold text-[#E8AC51]">
             {talentName}
           </span>
         </div>
@@ -176,7 +175,7 @@ export default function CompoMakeEditor() {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-500 border border-slate-200 text-xs font-medium uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+            className="px-4 py-2.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-neutral-400 border border-white/10 text-xs font-medium uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
           >
             CANCELAR
           </button>
@@ -192,7 +191,7 @@ export default function CompoMakeEditor() {
           <button
             type="button"
             onClick={handleSaveComposite}
-            className="px-4 py-2.5 bg-[#0077b5] hover:bg-[#006399] active:scale-[0.99] text-white text-xs font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
+            className="px-4 py-2.5 bg-[#880E1B] hover:bg-[#a31121] active:scale-[0.99] text-white text-xs font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
           >
             SALVAR COMPOSITE
           </button>
@@ -207,15 +206,15 @@ export default function CompoMakeEditor() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-1.5">
               {/* Grupo 1: Mover e Cortar */}
-              <div className="inline-flex rounded-xs border border-slate-200 bg-[#f1f3f5] overflow-hidden">
+              <div className="inline-flex rounded-xs border border-white/10 bg-[#1c1c1e] overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setActiveTool('move')}
                   title="Mover Imagem"
                   className={`p-2 transition-colors cursor-pointer ${
                     activeTool === 'move'
-                      ? 'bg-slate-300/80 text-slate-900'
-                      : 'text-slate-700 hover:bg-slate-200'
+                      ? 'bg-[#1c1c1e] text-white'
+                      : 'text-white hover:bg-[#1c1c1e]'
                   }`}
                 >
                   <Move className="w-3.5 h-3.5" />
@@ -224,10 +223,10 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setActiveTool('crop')}
                   title="Recortar Enquadramento"
-                  className={`p-2 border-l border-slate-200 transition-colors cursor-pointer ${
+                  className={`p-2 border-l border-white/10 transition-colors cursor-pointer ${
                     activeTool === 'crop'
-                      ? 'bg-slate-300/80 text-slate-900'
-                      : 'text-slate-700 hover:bg-slate-200'
+                      ? 'bg-[#1c1c1e] text-white'
+                      : 'text-white hover:bg-[#1c1c1e]'
                   }`}
                 >
                   <Crop className="w-3.5 h-3.5" />
@@ -235,12 +234,12 @@ export default function CompoMakeEditor() {
               </div>
 
               {/* Grupo 2: Zoom In / Zoom Out */}
-              <div className="inline-flex rounded-xs border border-slate-200 bg-[#f1f3f5] overflow-hidden">
+              <div className="inline-flex rounded-xs border border-white/10 bg-[#1c1c1e] overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setZoom((z) => Math.min(z + 0.1, 2.2))}
                   title="Aumentar Zoom"
-                  className="p-2 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                 </button>
@@ -248,19 +247,19 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setZoom((z) => Math.max(z - 0.1, 0.5))}
                   title="Diminuir Zoom"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Grupo 3: Setas de Deslocamento */}
-              <div className="inline-flex rounded-xs border border-slate-200 bg-[#f1f3f5] overflow-hidden">
+              <div className="inline-flex rounded-xs border border-white/10 bg-[#1c1c1e] overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setOffset((o) => ({ ...o, x: o.x - 10 }))}
                   title="Mover para Esquerda"
-                  className="p-2 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                 </button>
@@ -268,7 +267,7 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setOffset((o) => ({ ...o, x: o.x + 10 }))}
                   title="Mover para Direita"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -276,7 +275,7 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setOffset((o) => ({ ...o, y: o.y - 10 }))}
                   title="Mover para Cima"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ArrowUp className="w-3.5 h-3.5" />
                 </button>
@@ -284,19 +283,19 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setOffset((o) => ({ ...o, y: o.y + 10 }))}
                   title="Mover para Baixo"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <ArrowDown className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Grupo 4: Girar Esquerda / Direita */}
-              <div className="inline-flex rounded-xs border border-slate-200 bg-[#f1f3f5] overflow-hidden">
+              <div className="inline-flex rounded-xs border border-white/10 bg-[#1c1c1e] overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setRotation((r) => r - 90)}
                   title="Girar -90°"
-                  className="p-2 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
@@ -304,19 +303,19 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setRotation((r) => r + 90)}
                   title="Girar +90°"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <RotateCw className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Grupo 5: Espelhar Horizontal / Vertical */}
-              <div className="inline-flex rounded-xs border border-slate-200 bg-[#f1f3f5] overflow-hidden">
+              <div className="inline-flex rounded-xs border border-white/10 bg-[#1c1c1e] overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setFlip((f) => ({ ...f, x: f.x * -1 }))}
                   title="Espelhar Horizontalmente"
-                  className="p-2 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <MoveHorizontal className="w-3.5 h-3.5" />
                 </button>
@@ -324,7 +323,7 @@ export default function CompoMakeEditor() {
                   type="button"
                   onClick={() => setFlip((f) => ({ ...f, y: f.y * -1 }))}
                   title="Espelhar Verticalmente"
-                  className="p-2 border-l border-slate-200 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="p-2 border-l border-white/10 text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                 >
                   <MoveVertical className="w-3.5 h-3.5" />
                 </button>
@@ -335,7 +334,7 @@ export default function CompoMakeEditor() {
                 type="button"
                 onClick={handleResetTransform}
                 title="Restaurar Transformação"
-                className="p-2 rounded-xs border border-slate-200 bg-[#f1f3f5] text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                className="p-2 rounded-xs border border-white/10 bg-[#1c1c1e] text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
               </button>
@@ -353,14 +352,14 @@ export default function CompoMakeEditor() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3.5 py-2 bg-[#5bc0de] hover:bg-[#31b0d5] text-white text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+                className="px-3.5 py-2 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
               >
                 IMPORTAR
               </button>
               <button
                 type="button"
                 onClick={handleDoneSlot}
-                className="px-3.5 py-2 bg-[#28a745] hover:bg-[#218838] text-white text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+                className="px-3.5 py-2 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
               >
                 FEITO!
               </button>
@@ -369,7 +368,7 @@ export default function CompoMakeEditor() {
 
           {/* Grande Área Cinza Escuro com Padrão Quadriculado (Checkerboard) e Retângulo Central "ÉVORA MODELS" */}
           <div
-            className="w-full h-[540px] rounded-xs border border-slate-300 relative overflow-hidden flex items-center justify-center"
+            className="w-full h-[540px] rounded-xs border border-white/10 relative overflow-hidden flex items-center justify-center"
             style={{
               backgroundColor: '#585858',
               backgroundImage: `
@@ -384,7 +383,7 @@ export default function CompoMakeEditor() {
           >
             {/* Retângulo Central Branco simulando a imagem sendo editada ("ÉVORA MODELS") */}
             <div
-              className="relative w-64 h-80 bg-white shadow-2xl flex flex-col items-center justify-center transition-transform duration-150"
+              className="relative w-64 h-80 bg-[#1c1c1e] shadow-2xl flex flex-col items-center justify-center transition-transform duration-150"
               style={{
                 transform: `translate(${offset.x}px, ${offset.y}px) scale(${
                   zoom * flip.x
@@ -399,39 +398,39 @@ export default function CompoMakeEditor() {
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center p-6 text-center">
-                  <span className="text-3xl font-serif tracking-[0.22em] text-slate-900 font-semibold leading-none">
+                  <span className="text-3xl font-serif tracking-[0.22em] text-white font-semibold leading-none">
                     ÉVORA
                   </span>
-                  <span className="text-[11px] tracking-[0.42em] text-slate-500 mt-2 uppercase font-medium">
+                  <span className="text-[11px] tracking-[0.42em] text-neutral-400 mt-2 uppercase font-medium">
                     MODELS
                   </span>
                 </div>
               )}
 
               {/* Moldura Azul de Crop com Grade 3x3 (Regra dos Terços) e Alças */}
-              <div className="absolute inset-3 border-[1.5px] border-[#0088ff] pointer-events-none">
+              <div className="absolute inset-3 border-[1.5px] border-[#880E1B] pointer-events-none">
                 {/* Linhas tracejadas de terços */}
                 <div className="absolute inset-0 grid grid-cols-3 grid-rows-3">
-                  <div className="border-r border-b border-dashed border-slate-400/50" />
-                  <div className="border-r border-b border-dashed border-slate-400/50" />
-                  <div className="border-b border-dashed border-slate-400/50" />
-                  <div className="border-r border-b border-dashed border-slate-400/50" />
-                  <div className="border-r border-b border-dashed border-slate-400/50" />
-                  <div className="border-b border-dashed border-slate-400/50" />
-                  <div className="border-r border-dashed border-slate-400/50" />
-                  <div className="border-r border-dashed border-slate-400/50" />
+                  <div className="border-r border-b border-dashed border-white/10" />
+                  <div className="border-r border-b border-dashed border-white/10" />
+                  <div className="border-b border-dashed border-white/10" />
+                  <div className="border-r border-b border-dashed border-white/10" />
+                  <div className="border-r border-b border-dashed border-white/10" />
+                  <div className="border-b border-dashed border-white/10" />
+                  <div className="border-r border-dashed border-white/10" />
+                  <div className="border-r border-dashed border-white/10" />
                   <div />
                 </div>
 
                 {/* Alças quadradas azuis nos cantos e meios */}
-                <span className="w-2 h-2 bg-[#0088ff] absolute -top-1 -left-1" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute -top-1 left-1/2 -translate-x-1/2" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute -top-1 -right-1" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute top-1/2 -translate-y-1/2 -left-1" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute top-1/2 -translate-y-1/2 -right-1" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute -bottom-1 -left-1" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute -bottom-1 left-1/2 -translate-x-1/2" />
-                <span className="w-2 h-2 bg-[#0088ff] absolute -bottom-1 -right-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -top-1 -left-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -top-1 left-1/2 -translate-x-1/2" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -top-1 -right-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute top-1/2 -translate-y-1/2 -left-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute top-1/2 -translate-y-1/2 -right-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -bottom-1 -left-1" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -bottom-1 left-1/2 -translate-x-1/2" />
+                <span className="w-2 h-2 bg-[#880E1B] absolute -bottom-1 -right-1" />
               </div>
             </div>
           </div>
@@ -440,16 +439,16 @@ export default function CompoMakeEditor() {
         {/* COLUNA DIREITA (4 colunas): Esquema Pontilhado do Composite + Informações do Talento */}
         <div className="lg:col-span-4 space-y-6">
           {/* Bloco Superior Branco: Esboço/Esquema de Layout do Composite com Linhas Pontilhadas */}
-          <div className="bg-white border border-slate-400 p-3 shadow-2xs">
+          <div className="bg-[#1c1c1e] border border-white/10 p-3 shadow-2xs">
             <div className="grid grid-cols-12 gap-3 items-stretch">
               {/* Lado Esquerdo do Esquema: Logo MF + Foto Principal + Nome do Talento */}
               <div className="col-span-5 flex flex-col items-center justify-between">
-                {/* Logótipo Évora Models */}
+                {/* Logótipo Pose Manager */}
                 <div className="flex items-center justify-center mb-1.5">
                   <img
-                    src={evoraLogo}
-                    alt="Évora Models"
-                    className="h-9 w-auto object-contain"
+                    src="/pose manager.png"
+                    alt="Pose Manager"
+                    className="h-8 w-auto object-contain"
                   />
                 </div>
 
@@ -458,8 +457,8 @@ export default function CompoMakeEditor() {
                   onClick={() => setActiveSlot(0)}
                   className={`w-full aspect-[3/4] border flex flex-col items-center justify-center overflow-hidden cursor-pointer transition-all ${
                     activeSlot === 0
-                      ? 'border-[#0077b5] ring-2 ring-[#0077b5]/20 bg-white'
-                      : 'border-slate-300 bg-slate-50'
+                      ? 'border-[#880E1B] ring-2 ring-[#880E1B]/30 bg-[#1c1c1e]'
+                      : 'border-white/10 bg-[#161617]'
                   }`}
                 >
                   {importedImageUrl ? (
@@ -470,17 +469,17 @@ export default function CompoMakeEditor() {
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center p-2 text-center">
-                      <span className="text-sm font-serif tracking-widest text-slate-900 font-semibold leading-none">
+                      <span className="text-sm font-serif tracking-widest text-white font-semibold leading-none">
                         ÉVORA
                       </span>
-                      <span className="text-[6px] tracking-[0.3em] text-slate-500 mt-1 uppercase">
+                      <span className="text-[6px] tracking-[0.3em] text-neutral-400 mt-1 uppercase">
                         MODELS
                       </span>
                     </div>
                   )}
                 </div>
 
-                <span className="text-[10px] text-slate-600 mt-1.5 font-medium">
+                <span className="text-[10px] text-neutral-400 mt-1.5 font-medium">
                   {talentName}
                 </span>
               </div>
@@ -495,8 +494,8 @@ export default function CompoMakeEditor() {
                       title={`Selecionar Slot #${slotIdx}`}
                       className={`border border-dashed rounded-[1px] flex items-center justify-center text-[10px] cursor-pointer transition-colors ${
                         activeSlot === slotIdx
-                          ? 'border-[#0077b5] bg-sky-50/50 text-[#0077b5] font-semibold'
-                          : 'border-slate-400 hover:border-[#0077b5] text-transparent hover:text-slate-400'
+                          ? 'border-[#880E1B] bg-[#1c1c1e] text-[#E8AC51] font-semibold'
+                          : 'border-white/10 hover:border-[#880E1B] text-transparent hover:text-neutral-300'
                       }`}
                     >
                       Slot {slotIdx}
@@ -505,7 +504,7 @@ export default function CompoMakeEditor() {
                 </div>
 
                 {/* Caixa Pontilhada Inferior: "Informações do talento" */}
-                <div className="border border-dashed border-slate-400 py-1 px-2 text-center text-[10px] text-slate-600">
+                <div className="border border-dashed border-white/10 py-1 px-2 text-center text-[10px] text-neutral-400">
                   Informações do talento
                 </div>
               </div>
@@ -515,13 +514,13 @@ export default function CompoMakeEditor() {
           {/* Seção: "Informações do talento" + Dropdown "default" */}
           <div>
             <div className="flex items-center justify-between gap-3 mb-4">
-              <h2 className="text-sm font-bold text-slate-800">
+              <h2 className="text-sm font-bold text-white">
                 Informações do talento
               </h2>
               <select
                 value={infoPreset}
                 onChange={(e) => setInfoPreset(e.target.value)}
-                className="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-300 rounded-xs focus:border-[#0077b5] outline-none cursor-pointer"
+                className="px-3 py-1.5 text-xs font-medium text-white bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none cursor-pointer"
               >
                 <option value="default">default</option>
                 <option value="Kids">Kids</option>
@@ -533,21 +532,21 @@ export default function CompoMakeEditor() {
             {/* Quadro Dividido em Duas Colunas: SELECIONADO e DISPONIBILIDADE */}
             <div className="grid grid-cols-2 gap-3 items-start">
               {/* Coluna 1: SELECIONADO */}
-              <fieldset className="border border-slate-200 rounded-xs p-2.5 bg-white">
-                <legend className="px-1.5 text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+              <fieldset className="border border-white/10 rounded-xs p-2.5 bg-[#1c1c1e]">
+                <legend className="px-1.5 text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
                   SELECIONADO
                 </legend>
-                <div className="divide-y divide-dotted divide-slate-200">
+                <div className="divide-y divide-dotted divide-white/10">
                   {selectedAttrs.map((attr) => (
                     <button
                       key={attr.id}
                       type="button"
                       onClick={() => moveToAvailable(attr)}
                       title="Clique para mover para DISPONIBILIDADE"
-                      className="w-full py-2 px-1 text-center text-[11px] text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
+                      className="w-full py-2 px-1 text-center text-[11px] text-neutral-400 hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                     >
                       <span>{attr.label}: </span>
-                      <strong className="font-bold text-slate-800">
+                      <strong className="font-bold text-white">
                         {attr.value}
                       </strong>
                     </button>
@@ -556,21 +555,21 @@ export default function CompoMakeEditor() {
               </fieldset>
 
               {/* Coluna 2: DISPONIBILIDADE */}
-              <fieldset className="border border-slate-200 rounded-xs p-2.5 bg-[#f4f5f7]">
-                <legend className="px-1.5 text-[10px] font-semibold tracking-wider text-slate-400 uppercase bg-white">
+              <fieldset className="border border-white/10 rounded-xs p-2.5 bg-[#161617]">
+                <legend className="px-1.5 text-[10px] font-semibold tracking-wider text-neutral-400 uppercase bg-[#1c1c1e]">
                   DISPONIBILIDADE
                 </legend>
-                <div className="divide-y divide-dotted divide-slate-300">
+                <div className="divide-y divide-dotted divide-white/10">
                   {availableAttrs.map((attr) => (
                     <button
                       key={attr.id}
                       type="button"
                       onClick={() => moveToSelected(attr)}
                       title="Clique para mover para SELECIONADO"
-                      className="w-full py-2 px-1 text-center text-[11px] text-slate-600 hover:bg-white/70 transition-colors cursor-pointer"
+                      className="w-full py-2 px-1 text-center text-[11px] text-neutral-400 hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                     >
                       <span>{attr.label}: </span>
-                      <strong className="font-bold text-slate-800">
+                      <strong className="font-bold text-white">
                         {attr.value}
                       </strong>
                     </button>
@@ -589,27 +588,27 @@ export default function CompoMakeEditor() {
           onClick={() => setIsPreviewModalOpen(false)}
         >
           <div
-            className="bg-white rounded-sm shadow-2xl max-w-2xl w-full p-6 border border-slate-200"
+            className="bg-[#1c1c1e] rounded-sm shadow-2xl max-w-2xl w-full p-6 border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-800">
-                <Eye className="w-4 h-4 text-[#0077b5]" />
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
+              <div className="flex items-center gap-2 text-sm font-bold text-white">
+                <Eye className="w-4 h-4 text-[#E8AC51]" />
                 <span>Pré-visualização do Composite — {talentName}</span>
               </div>
               <button
                 type="button"
                 onClick={() => setIsPreviewModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="text-neutral-400 hover:text-white cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="border border-slate-300 p-6 bg-white">
+            <div className="border border-white/10 p-6 bg-[#1c1c1e]">
               <div className="grid grid-cols-12 gap-6 items-center">
                 <div className="col-span-5 flex flex-col items-center">
-                  <div className="w-full aspect-[3/4] border border-slate-200 flex flex-col items-center justify-center bg-slate-50 overflow-hidden">
+                  <div className="w-full aspect-[3/4] border border-white/10 flex flex-col items-center justify-center bg-[#161617] overflow-hidden">
                     {importedImageUrl ? (
                       <img
                         src={importedImageUrl}
@@ -618,16 +617,16 @@ export default function CompoMakeEditor() {
                       />
                     ) : (
                       <div className="text-center">
-                        <p className="text-2xl font-serif tracking-widest font-semibold text-slate-900">
+                        <p className="text-2xl font-serif tracking-widest font-semibold text-white">
                           ÉVORA
                         </p>
-                        <p className="text-[8px] tracking-[0.35em] text-slate-500 uppercase mt-1">
+                        <p className="text-[8px] tracking-[0.35em] text-neutral-400 uppercase mt-1">
                           MODELS
                         </p>
                       </div>
                     )}
                   </div>
-                  <p className="mt-3 text-sm font-bold uppercase tracking-widest text-slate-800">
+                  <p className="mt-3 text-sm font-bold uppercase tracking-widest text-white">
                     {talentName}
                   </p>
                 </div>
@@ -637,16 +636,16 @@ export default function CompoMakeEditor() {
                     {[1, 2, 3, 4].map((n) => (
                       <div
                         key={n}
-                        className="aspect-[3/4] bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] text-slate-400"
+                        className="aspect-[3/4] bg-[#161617] border border-white/10 flex items-center justify-center text-[10px] text-neutral-400"
                       >
                         Foto {n}
                       </div>
                     ))}
                   </div>
-                  <div className="pt-2 border-t border-slate-200 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-slate-600">
+                  <div className="pt-2 border-t border-white/10 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-neutral-400">
                     {selectedAttrs.map((a) => (
                       <span key={a.id}>
-                        {a.label}: <strong className="text-slate-900">{a.value}</strong>
+                        {a.label}: <strong className="text-white">{a.value}</strong>
                       </span>
                     ))}
                   </div>
@@ -658,7 +657,7 @@ export default function CompoMakeEditor() {
               <button
                 type="button"
                 onClick={() => setIsPreviewModalOpen(false)}
-                className="px-4 py-2 bg-[#0077b5] text-white text-xs font-semibold uppercase rounded-xs cursor-pointer"
+                className="px-4 py-2 bg-[#880E1B] text-white text-xs font-semibold uppercase rounded-xs cursor-pointer"
               >
                 Fechar Pré-visualização
               </button>

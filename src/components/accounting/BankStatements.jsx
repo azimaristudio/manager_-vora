@@ -29,13 +29,13 @@ export default function BankStatements() {
   return (
     <div className="pt-2">
       {/* Container Principal de Extratos Bancários (Imagem 61) */}
-      <div className="border border-slate-200 rounded-xs overflow-hidden bg-white">
+      <div className="border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e]">
         {/* Painel de Filtro Cinzento */}
-        <div className="bg-[#f4f4f4] border-b border-slate-200 p-4">
+        <div className="bg-[#161617] border-b border-white/10 p-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-4">
             {/* Título 'Filtro' à esquerda */}
             <div className="lg:col-span-1 pt-5">
-              <span className="text-sm text-slate-700 font-normal">Filtro</span>
+              <span className="text-sm text-white font-normal">Filtro</span>
             </div>
 
             {/* Campos Conta, De, Até, Moeda e Botões */}
@@ -43,58 +43,58 @@ export default function BankStatements() {
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 {/* Conta */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-slate-400">Conta</label>
+                  <label className="text-[10px] text-neutral-400">Conta</label>
                   <div className="relative">
                     <select
                       value={account}
                       onChange={(e) => setAccount(e.target.value)}
-                      className="w-full h-8 px-2.5 pr-6 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 pr-6 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                     >
                       <option value="DEFAULT ACCOUNT -">
                         DEFAULT ACCOUNT -
                       </option>
                       <option value="Todas as contas">Todas as contas</option>
                     </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* De */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-slate-400">De</label>
+                  <label className="text-[10px] text-neutral-400">De</label>
                   <input
                     type="text"
                     value={dateFrom}
                     onChange={(e) => setDateFrom(e.target.value)}
-                    className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                   />
                 </div>
 
                 {/* Até */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-slate-400">Até</label>
+                  <label className="text-[10px] text-neutral-400">Até</label>
                   <input
                     type="text"
                     value={dateTo}
                     onChange={(e) => setDateTo(e.target.value)}
-                    className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                   />
                 </div>
 
                 {/* Moeda */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-slate-400">Moeda</label>
+                  <label className="text-[10px] text-neutral-400">Moeda</label>
                   <div className="relative">
                     <select
                       value={currency}
                       onChange={(e) => setCurrency(e.target.value)}
-                      className="w-full h-8 px-2.5 pr-6 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 pr-6 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                     >
                       <option value="Todos">Todos</option>
                       <option value="BRL">BRL</option>
                       <option value="USD">USD</option>
                     </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export default function BankStatements() {
 
                 <button
                   type="button"
-                  className="h-8 px-3 bg-[#5fa2dd] hover:bg-[#4b8fc9] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="h-8 px-3 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Download className="w-3 h-3 stroke-[2.5]" />
                   <span>EXPORTAÇÃO EXCEL</span>
@@ -120,7 +120,7 @@ export default function BankStatements() {
 
                 <button
                   type="button"
-                  className="h-8 px-3 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="h-8 px-3 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Search className="w-3 h-3 stroke-[2.5]" />
                   <span>PESQUISA</span>
@@ -133,7 +133,7 @@ export default function BankStatements() {
         {/* Tabela Vazia com Cabeçalhos Simples e Totais */}
         <div className="px-4 py-5">
           <div className="pl-0 lg:pl-20">
-            <div className="grid grid-cols-9 border-b border-slate-200 pb-2 text-[10px] text-slate-500">
+            <div className="grid grid-cols-9 border-b border-white/10 pb-2 text-[10px] text-neutral-400">
               {STATEMENT_COLUMNS.map((col) => (
                 <span key={col}>{col}</span>
               ))}
@@ -142,11 +142,11 @@ export default function BankStatements() {
 
           {/* Nota à esquerda + Totais Saldo do Período e Balanço Geral */}
           <div className="pt-4 grid grid-cols-1 sm:grid-cols-12 items-start gap-4 text-[10px]">
-            <div className="sm:col-span-6 text-slate-400">
+            <div className="sm:col-span-6 text-neutral-400">
               * registros gerados desde a ficha de Talento
             </div>
 
-            <div className="sm:col-span-3 text-right space-y-3 font-bold text-slate-800">
+            <div className="sm:col-span-3 text-right space-y-3 font-bold text-white">
               <p>Saldo do Período</p>
               <p>Balanço Geral</p>
             </div>
@@ -155,7 +155,7 @@ export default function BankStatements() {
 
           {/* Secção Arquivos Anexados */}
           <div className="pt-12 pb-2">
-            <h3 className="text-xs font-bold text-slate-800 border-b border-slate-500 pb-1.5">
+            <h3 className="text-xs font-bold text-white border-b border-white/10 pb-1.5">
               Arquivos Anexados
             </h3>
           </div>

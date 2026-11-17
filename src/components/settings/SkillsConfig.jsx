@@ -90,20 +90,20 @@ export default function SkillsConfig() {
       {/* Barra Superior de Inserção (Alinhada à direita conforme Imagem 81) */}
       <form
         onSubmit={handleAddSkill}
-        className="flex flex-wrap items-center justify-end gap-1.5 pb-4 mb-5 border-b border-slate-200/90"
+        className="flex flex-wrap items-center justify-end gap-1.5 pb-4 mb-5 border-b border-white/10"
       >
         <input
           type="text"
           value={newSkillText}
           onChange={(e) => setNewSkillText(e.target.value)}
           placeholder="Declare aqui uma habilidade"
-          className="w-44 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0077b5]"
+          className="w-44 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
         />
 
         <select
           value={selectedGroup}
           onChange={(e) => setSelectedGroup(e.target.value)}
-          className="w-32 h-8 px-2 bg-white border border-slate-200 rounded-xs text-xs text-slate-600 focus:outline-none focus:border-[#0077b5]"
+          className="w-32 h-8 px-2 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-neutral-400 focus:outline-none focus:border-[#880E1B]"
         >
           {GROUP_KEYS.map((group) => (
             <option key={group} value={group}>
@@ -114,7 +114,7 @@ export default function SkillsConfig() {
 
         <button
           type="submit"
-          className="px-3.5 h-8 bg-[#1e9d1e] hover:bg-[#178017] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+          className="px-3.5 h-8 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
         >
           ADICIONAR
         </button>
@@ -128,10 +128,10 @@ export default function SkillsConfig() {
           return (
             <div
               key={groupTitle}
-              className="bg-white border border-slate-200 rounded-xs shadow-xs overflow-hidden"
+              className="bg-[#1c1c1e] border border-white/10 rounded-xs shadow-xs overflow-hidden"
             >
               {/* Cabeçalho Azul Claro */}
-              <div className="bg-[#5ec2e8] text-white px-3.5 py-2 text-xs font-medium">
+              <div className="bg-[#E8AC51] text-white px-3.5 py-2 text-xs font-medium">
                 {groupTitle}
               </div>
 
@@ -145,13 +145,13 @@ export default function SkillsConfig() {
                     return (
                       <label
                         key={skill}
-                        className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none"
+                        className="flex items-center gap-2 text-xs text-neutral-400 cursor-pointer select-none"
                       >
                         <input
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => handleToggleCheck(groupTitle, skill)}
-                          className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5] focus:ring-[#0077b5] cursor-pointer"
+                          className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51] focus:ring-[#880E1B] cursor-pointer"
                         />
                         <span>{skill}</span>
                       </label>
@@ -160,7 +160,7 @@ export default function SkillsConfig() {
                 </div>
 
                 {/* Barra horizontal decorativa na base do card igual à Imagem 81 */}
-                <div className="mt-3 mx-1 h-1 bg-slate-300/90 rounded-full" />
+                <div className="mt-3 mx-1 h-1 bg-[#1c1c1e] rounded-full" />
               </div>
             </div>
           );

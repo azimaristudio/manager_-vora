@@ -24,19 +24,19 @@ export default function TransferModal({ isOpen, onClose }) {
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-[500px] rounded-xs shadow-2xl border border-slate-200 overflow-hidden my-auto"
+        className="bg-[#1c1c1e] w-full max-w-[500px] rounded-xs shadow-2xl border border-white/10 overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho (Imagem 57) */}
-        <div className="relative flex items-center justify-center px-6 py-4 border-b border-slate-100">
-          <h2 className="text-[15px] text-slate-700 font-normal">
+        <div className="relative flex items-center justify-center px-6 py-4 border-b border-white/10">
+          <h2 className="text-[15px] text-white font-normal">
             Transferência entre contas
           </h2>
           <button
             type="button"
             onClick={onClose}
             title="Fechar"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -44,10 +44,10 @@ export default function TransferModal({ isOpen, onClose }) {
 
         {/* Corpo do Modal */}
         <form onSubmit={handleSubmit}>
-          <div className="px-6 py-6 space-y-3 text-[11px] text-slate-600">
+          <div className="px-6 py-6 space-y-3 text-[11px] text-neutral-400">
             {/* Conta Origem + Input de Valor abaixo */}
             <div className="grid grid-cols-12 items-start gap-3">
-              <label className="col-span-4 text-right text-slate-700 pt-1.5">
+              <label className="col-span-4 text-right text-white pt-1.5">
                 Conta Origem
               </label>
               <div className="col-span-8 space-y-2">
@@ -55,26 +55,26 @@ export default function TransferModal({ isOpen, onClose }) {
                   <select
                     value={sourceAccount}
                     onChange={(e) => setSourceAccount(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Selecionar an Conta</option>
                     <option value="DEFAULT ACCOUNT -">DEFAULT ACCOUNT -</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
 
                 <input
                   type="text"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-36 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-right text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                  className="w-36 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-right text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Conta Destino */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Conta Destino
               </label>
               <div className="col-span-8">
@@ -82,19 +82,19 @@ export default function TransferModal({ isOpen, onClose }) {
                   <select
                     value={targetAccount}
                     onChange={(e) => setTargetAccount(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Selecionar an Conta</option>
                     <option value="DEFAULT ACCOUNT -">DEFAULT ACCOUNT -</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Categoria */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Categoria
               </label>
               <div className="col-span-8">
@@ -102,19 +102,19 @@ export default function TransferModal({ isOpen, onClose }) {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Selecionar a Categoria</option>
                     <option value="Transferência">Transferência</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Sub categoria */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Sub categoria
               </label>
               <div className="col-span-8">
@@ -122,19 +122,19 @@ export default function TransferModal({ isOpen, onClose }) {
                   <select
                     value={subCategory}
                     onChange={(e) => setSubCategory(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="">Selecionar a Sub categoria</option>
                     <option value="Padrão">Padrão</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Data */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Data
               </label>
               <div className="col-span-8">
@@ -142,14 +142,14 @@ export default function TransferModal({ isOpen, onClose }) {
                   type="text"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-36 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                  className="w-36 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Descrição */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Descrição
               </label>
               <div className="col-span-8">
@@ -157,14 +157,14 @@ export default function TransferModal({ isOpen, onClose }) {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-56 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                  className="w-56 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-white focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Notas */}
             <div className="grid grid-cols-12 items-start gap-3">
-              <label className="col-span-4 text-right text-slate-700 pt-1.5">
+              <label className="col-span-4 text-right text-white pt-1.5">
                 Notas
               </label>
               <div className="col-span-8">
@@ -172,24 +172,24 @@ export default function TransferModal({ isOpen, onClose }) {
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-56 p-2 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                  className="w-56 p-2 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-white focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
           </div>
 
           {/* Rodapé: FECHAR e SALVAR MUDANÇAS */}
-          <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-white">
+          <div className="px-6 py-4 border-t border-white/10 flex items-center justify-end gap-2 bg-[#1c1c1e]">
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-2 bg-[#f2f2f2] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-500 uppercase font-medium cursor-pointer"
+              className="px-3.5 py-2 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-neutral-400 uppercase font-medium cursor-pointer"
             >
               FECHAR
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+              className="px-4 py-2 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
             >
               SALVAR MUDANÇAS
             </button>

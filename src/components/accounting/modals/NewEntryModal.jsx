@@ -37,19 +37,19 @@ export default function NewEntryModal({
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-[500px] rounded-xs shadow-2xl border border-slate-200 overflow-hidden my-auto"
+        className="bg-[#1c1c1e] w-full max-w-[500px] rounded-xs shadow-2xl border border-white/10 overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho (Imagem 55) */}
-        <div className="relative flex items-center justify-center px-6 py-4 border-b border-slate-100">
-          <h2 className="text-[15px] text-slate-700 font-normal">
+        <div className="relative flex items-center justify-center px-6 py-4 border-b border-white/10">
+          <h2 className="text-[15px] text-white font-normal">
             {modalTitle}
           </h2>
           <button
             type="button"
             onClick={onClose}
             title="Fechar"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -57,10 +57,10 @@ export default function NewEntryModal({
 
         {/* Corpo do Modal */}
         <form onSubmit={handleSubmit}>
-          <div className="px-6 py-6 space-y-3.5 text-[11px] text-slate-600">
+          <div className="px-6 py-6 space-y-3.5 text-[11px] text-neutral-400">
             {/* Categoria */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Categoria
               </label>
               <div className="col-span-8">
@@ -68,20 +68,20 @@ export default function NewEntryModal({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="Padrão Categoria">Padrão Categoria</option>
                     <option value="Cachê">Cachê</option>
                     <option value="Comissão">Comissão</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Sub categoria */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Sub categoria
               </label>
               <div className="col-span-8">
@@ -89,20 +89,20 @@ export default function NewEntryModal({
                   <select
                     value={subCategory}
                     onChange={(e) => setSubCategory(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-7 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-7 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="Padrão Sub categoria">
                       Padrão Sub categoria
                     </option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Data de Referencia */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Data de Referencia
               </label>
               <div className="col-span-8">
@@ -110,14 +110,14 @@ export default function NewEntryModal({
                   type="text"
                   value={referenceDate}
                   onChange={(e) => setReferenceDate(e.target.value)}
-                  className="w-36 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                  className="w-36 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Data de Vencimento */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Data de Vencimento
               </label>
               <div className="col-span-8">
@@ -125,14 +125,14 @@ export default function NewEntryModal({
                   type="text"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-36 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                  className="w-36 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-white focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Repetir */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Repetir
               </label>
               <div className="col-span-8">
@@ -140,20 +140,20 @@ export default function NewEntryModal({
                   <select
                     value={repeat}
                     onChange={(e) => setRepeat(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-6 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-400 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-6 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-neutral-400 appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="Nunca">Nunca</option>
                     <option value="Mensalmente">Mensalmente</option>
                     <option value="Anualmente">Anualmente</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Cliente */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Cliente
               </label>
               <div className="col-span-8 flex items-center gap-2">
@@ -162,20 +162,20 @@ export default function NewEntryModal({
                   value={client}
                   onChange={(e) => setClient(e.target.value)}
                   placeholder="Pesquisa..."
-                  className="flex-1 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                  className="flex-1 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                 />
                 <button
                   type="button"
-                  className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                  className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                 >
-                  <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                  <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                 </button>
               </div>
             </div>
 
             {/* Descrição */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Descrição
               </label>
               <div className="col-span-8">
@@ -183,14 +183,14 @@ export default function NewEntryModal({
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-56 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-[11px] text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                  className="w-56 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[11px] text-white focus:outline-none focus:border-[#880E1B]"
                 />
               </div>
             </div>
 
             {/* Valor */}
             <div className="grid grid-cols-12 items-center gap-3">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Valor
               </label>
               <div className="col-span-8 flex items-center gap-2">
@@ -198,25 +198,25 @@ export default function NewEntryModal({
                   type="text"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-28 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-right text-[11px] text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                  className="w-28 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-right text-[11px] text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                 />
                 <div className="relative w-28">
                   <select
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    className="w-full h-8 px-2 pr-5 bg-white border border-slate-200 rounded-xs text-[10px] text-slate-400 truncate appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2 pr-5 bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-neutral-400 truncate appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="BRL - Brazil Real">BRL - Brazil Real</option>
                     <option value="USD - US Dollar">USD - US Dollar</option>
                   </select>
-                  <ChevronDown className="w-3 h-3 text-slate-400 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3 h-3 text-neutral-400 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Anexar files */}
             <div className="grid grid-cols-12 items-center gap-3 pt-1">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Anexar files
               </label>
               <div className="col-span-8 flex items-center gap-2">
@@ -232,13 +232,13 @@ export default function NewEntryModal({
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-1.5 text-[10px] text-[#0077b5] hover:underline uppercase cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-[10px] text-[#E8AC51] hover:underline uppercase cursor-pointer"
                 >
-                  <Folder className="w-3.5 h-3.5 fill-[#0077b5] text-[#0077b5]" />
+                  <Folder className="w-3.5 h-3.5 fill-[#E8AC51] text-[#E8AC51]" />
                   <span>ADICIONAR</span>
                 </button>
                 {attachedFile && (
-                  <span className="text-[10px] text-slate-500 truncate max-w-[140px]">
+                  <span className="text-[10px] text-neutral-400 truncate max-w-[140px]">
                     {attachedFile}
                   </span>
                 )}
@@ -247,7 +247,7 @@ export default function NewEntryModal({
 
             {/* Status de Pagamento: dropdown vermelho 'NÃO PAGO' e botão azul 'ADICIONAR PAGAMENTO' */}
             <div className="grid grid-cols-12 items-center gap-3 pt-2">
-              <label className="col-span-4 text-right text-slate-700">
+              <label className="col-span-4 text-right text-white">
                 Status de Pagamento
               </label>
               <div className="col-span-8 flex items-center justify-between gap-2">
@@ -258,7 +258,7 @@ export default function NewEntryModal({
                     className={`h-8 pl-2.5 pr-6 rounded-xs text-white text-[10px] font-semibold uppercase appearance-none cursor-pointer focus:outline-none ${
                       paymentStatus === 'NÃO PAGO'
                         ? 'bg-[#ff3b30]'
-                        : 'bg-emerald-600'
+                        : 'bg-[#E8AC51]'
                     }`}
                   >
                     <option value="NÃO PAGO">NÃO PAGO</option>
@@ -272,7 +272,7 @@ export default function NewEntryModal({
                   onClick={() => {
                     if (onOpenDirectPayment) onOpenDirectPayment();
                   }}
-                  className="h-8 px-3 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+                  className="h-8 px-3 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
                 >
                   ADICIONAR PAGAMENTO
                 </button>
@@ -281,17 +281,17 @@ export default function NewEntryModal({
           </div>
 
           {/* Rodapé: FECHAR e SALVAR MUDANÇAS */}
-          <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-white">
+          <div className="px-6 py-4 border-t border-white/10 flex items-center justify-end gap-2 bg-[#1c1c1e]">
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-2 bg-[#f2f2f2] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-500 uppercase font-medium cursor-pointer"
+              className="px-3.5 py-2 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-neutral-400 uppercase font-medium cursor-pointer"
             >
               FECHAR
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+              className="px-4 py-2 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
             >
               SALVAR MUDANÇAS
             </button>

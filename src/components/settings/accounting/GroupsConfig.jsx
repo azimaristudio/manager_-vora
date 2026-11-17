@@ -32,14 +32,14 @@ export default function GroupsConfig() {
   return (
     <div className="pt-2">
       {/* Abas Pequenas no Topo: Entradas | Saídas */}
-      <div className="border-b border-slate-200 flex items-end mb-6">
+      <div className="border-b border-white/10 flex items-end mb-6">
         <button
           type="button"
           onClick={() => setActiveTab('entradas')}
           className={`px-3.5 py-2 text-xs transition-colors cursor-pointer ${
             activeTab === 'entradas'
-              ? 'bg-white border-t border-l border-r border-slate-200 rounded-t-xs -mb-px text-slate-600'
-              : 'text-slate-500 hover:text-slate-700'
+              ? 'bg-[#1c1c1e] border-t border-l border-r border-white/10 rounded-t-xs -mb-px text-neutral-400'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           Entradas
@@ -50,8 +50,8 @@ export default function GroupsConfig() {
           onClick={() => setActiveTab('saidas')}
           className={`px-3.5 py-2 text-xs transition-colors cursor-pointer ${
             activeTab === 'saidas'
-              ? 'bg-white border-t border-l border-r border-slate-200 rounded-t-xs -mb-px text-slate-600'
-              : 'text-slate-500 hover:text-slate-700'
+              ? 'bg-[#1c1c1e] border-t border-l border-r border-white/10 rounded-t-xs -mb-px text-neutral-400'
+              : 'text-neutral-400 hover:text-white'
           }`}
         >
           Saídas
@@ -62,8 +62,8 @@ export default function GroupsConfig() {
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 items-start">
         {/* Caixa Esquerda: Categorias sem grupo */}
         <div>
-          <p className="text-xs text-slate-500 mb-2">Categorias sem grupo</p>
-          <div className="min-h-[380px] bg-white border border-slate-200 rounded-xs p-2.5 space-y-1.5">
+          <p className="text-xs text-neutral-400 mb-2">Categorias sem grupo</p>
+          <div className="min-h-[380px] bg-[#1c1c1e] border border-white/10 rounded-xs p-2.5 space-y-1.5">
             {ungroupedItems.map((item, idx) => (
               <div
                 key={`${item}-${idx}`}
@@ -83,22 +83,22 @@ export default function GroupsConfig() {
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
               placeholder="Nome do grupo"
-              className="flex-1 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0f82b3]"
+              className="flex-1 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
             />
             <button
               type="submit"
-              className="w-8 h-8 bg-[#0f82b3] hover:bg-[#006399] text-white rounded-xs flex items-center justify-center shadow-2xs transition-colors cursor-pointer shrink-0"
+              className="w-8 h-8 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs flex items-center justify-center shadow-2xs transition-colors cursor-pointer shrink-0"
               title="Adicionar grupo"
             >
               <Plus className="w-3.5 h-3.5 stroke-[3]" />
             </button>
           </form>
 
-          <div className="min-h-[380px] bg-white border border-slate-200 rounded-xs p-3 space-y-2">
+          <div className="min-h-[380px] bg-[#1c1c1e] border border-white/10 rounded-xs p-3 space-y-2">
             {createdGroups.map((g, idx) => (
               <div
                 key={`${g}-${idx}`}
-                className="p-2 bg-slate-50 border border-slate-200 rounded-xs text-xs font-medium text-slate-700"
+                className="p-2 bg-[#161617] border border-white/10 rounded-xs text-xs font-medium text-white"
               >
                 {g}
               </div>

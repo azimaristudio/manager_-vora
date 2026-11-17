@@ -20,9 +20,9 @@ export default function WebmailSettings() {
   return (
     <div className="flex flex-col md:flex-row gap-4 lg:gap-6 pt-1 items-start">
       {/* Barra Lateral Esquerda (Duas opções: Emails de Saída e Emails de Entrada - Imagens 90 e 91) */}
-      <aside className="w-full md:w-52 shrink-0 bg-[#ebebeb]">
+      <aside className="w-full md:w-52 shrink-0 bg-[#1c1c1e]">
         {/* Espaçamento superior cinzento */}
-        <div className="h-8 bg-[#ebebeb]" />
+        <div className="h-8 bg-[#1c1c1e]" />
 
         <nav className="flex flex-col">
           {WEBMAIL_SIDEBAR_SECTIONS.map((section) => {
@@ -35,8 +35,8 @@ export default function WebmailSettings() {
                 onClick={() => setActiveSection(section.key)}
                 className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-white text-[#0088cc] font-normal'
-                    : 'bg-[#ebebeb] hover:bg-[#e2e2e2] text-[#0088cc] font-normal'
+                    ? 'bg-[#1c1c1e] text-[#E8AC51] font-normal'
+                    : 'bg-[#1c1c1e] hover:bg-[#1c1c1e] text-[#E8AC51] font-normal'
                 }`}
               >
                 {section.label}
@@ -46,7 +46,7 @@ export default function WebmailSettings() {
         </nav>
 
         {/* Espaçamento inferior cinzento fiel às Imagens 90 e 91 */}
-        <div className="h-32 bg-[#ebebeb]" />
+        <div className="h-32 bg-[#1c1c1e]" />
       </aside>
 
       {/* Área de Conteúdo Principal (Direita) */}

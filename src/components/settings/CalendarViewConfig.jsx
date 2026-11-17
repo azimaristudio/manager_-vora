@@ -20,14 +20,14 @@ export default function CalendarViewConfig() {
     <div className="pt-8">
       <form onSubmit={handleSave}>
         {/* Cabeçalho: Vista carregada padrão do calendário + linha horizontal separadora */}
-        <div className="pb-3 border-b border-slate-200/90">
-          <h2 className="text-xs font-normal text-slate-500">
+        <div className="pb-3 border-b border-white/10">
+          <h2 className="text-xs font-normal text-neutral-400">
             Vista carregada padrão do calendário
           </h2>
         </div>
 
         {/* Opções: Grupo de radio buttons alinhados horizontalmente */}
-        <div className="py-4 border-b border-slate-200/90 flex flex-wrap items-center gap-4 text-xs text-slate-700">
+        <div className="py-4 border-b border-white/10 flex flex-wrap items-center gap-4 text-xs text-white">
           {VIEW_OPTIONS.map((opt) => (
             <label
               key={opt.key}
@@ -39,7 +39,7 @@ export default function CalendarViewConfig() {
                 value={opt.key}
                 checked={defaultView === opt.key}
                 onChange={() => setDefaultView(opt.key)}
-                className="w-3.5 h-3.5 text-[#0077b5] accent-[#0077b5] cursor-pointer"
+                className="w-3.5 h-3.5 text-[#E8AC51] accent-[#880E1B] cursor-pointer"
               />
               <span>{opt.label}</span>
             </label>
@@ -50,13 +50,13 @@ export default function CalendarViewConfig() {
         <div className="pt-4 flex items-center gap-3">
           <button
             type="submit"
-            className="px-3.5 py-2 bg-[#1e9d1e] hover:bg-[#178017] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+            className="px-3.5 py-2 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
           >
             SALVAR
           </button>
 
           {savedFeedback && (
-            <span className="text-xs text-emerald-600 font-medium">
+            <span className="text-xs text-[#E8AC51] font-medium">
               Visualização padrão salva!
             </span>
           )}

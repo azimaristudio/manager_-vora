@@ -16,23 +16,23 @@ export default function BackgroundJobs() {
   return (
     <div className="w-full max-w-[1040px] mx-auto pb-20 select-none">
       {/* 1. Topo: Breadcrumb "Início > Background Trabalhos" */}
-      <div className="w-full bg-[#f8f9fa] border border-slate-200/90 rounded-sm px-4 py-2.5 mb-7 flex items-center gap-2 text-xs text-slate-400">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-sm px-4 py-2.5 mb-7 flex items-center gap-2 text-xs text-neutral-400">
         <Link
           to="/"
-          className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+          className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
         >
           Início
         </Link>
         <span>&gt;</span>
-        <span className="text-slate-400">Background Trabalhos</span>
+        <span className="text-neutral-400">Background Trabalhos</span>
       </div>
 
       {/* 2. Título e Descrição */}
       <div className="mb-5">
-        <h1 className="text-[15px] font-bold text-slate-800 tracking-tight">
+        <h1 className="text-[15px] font-bold text-white tracking-tight">
           Trabalhos em segundo plano
         </h1>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-neutral-400 mt-1">
           Acompanhe e baixe suas exportações.
         </p>
       </div>
@@ -41,16 +41,16 @@ export default function BackgroundJobs() {
       <div className="flex items-center justify-between gap-4 mb-2">
         <button
           type="button"
-          className="px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-md shadow-2xs flex items-center gap-2 text-xs font-bold text-slate-800 transition-colors cursor-pointer"
+          className="px-4 py-2.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 rounded-md shadow-2xs flex items-center gap-2 text-xs font-bold text-white transition-colors cursor-pointer"
         >
-          <FileDown className="w-4 h-4 text-slate-800 stroke-[2.2]" />
+          <FileDown className="w-4 h-4 text-white stroke-[2.2]" />
           <span>Downloads</span>
         </button>
 
         <button
           type="button"
           onClick={handleRefresh}
-          className="px-3.5 py-2 bg-[#0077b5] hover:bg-[#006399] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-sm shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
+          className="px-3.5 py-2 bg-[#880E1B] hover:bg-[#a31121] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-sm shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
         >
           <RefreshCw
             className={`w-3.5 h-3.5 stroke-[2.5] ${
@@ -63,14 +63,14 @@ export default function BackgroundJobs() {
 
       {/* 4. Contador "0 Tarefas" alinhado à direita acima da tabela */}
       <div className="flex justify-end mb-1.5">
-        <span className="text-[11px] text-slate-400">0 Tarefas</span>
+        <span className="text-[11px] text-neutral-400">0 Tarefas</span>
       </div>
 
       {/* 5. Tabela com Cabeçalho e Empty State */}
-      <div className="w-full bg-white border border-slate-200 rounded-md overflow-hidden shadow-2xs">
+      <div className="w-full bg-[#1c1c1e] border border-white/10 rounded-md overflow-hidden shadow-2xs">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="border-b border-slate-200 bg-white text-xs font-bold text-slate-800">
+            <tr className="border-b border-white/10 bg-[#1c1c1e] text-xs font-bold text-white">
               <th className="py-3 px-4 w-[32%]">Tarefa</th>
               <th className="py-3 px-4 w-[15%]">Usuário</th>
               <th className="py-3 px-4 w-[16%]">Data / hora</th>
@@ -82,17 +82,17 @@ export default function BackgroundJobs() {
 
           <tbody>
             <tr>
-              <td colSpan={6} className="bg-[#fbfcfd] py-14 px-6 text-center">
+              <td colSpan={6} className="bg-[#161617] py-14 px-6 text-center">
                 <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
                   {/* Ícone de documento/download em caixa arredondada cinza */}
-                  <div className="w-9 h-9 rounded-md bg-slate-200/75 text-slate-700 flex items-center justify-center mb-3">
+                  <div className="w-9 h-9 rounded-md bg-[#1c1c1e] text-white flex items-center justify-center mb-3">
                     <FileDown className="w-4 h-4 stroke-[2.2]" />
                   </div>
 
-                  <p className="text-xs font-bold text-slate-700">
+                  <p className="text-xs font-bold text-white">
                     Nenhum trabalho em segundo plano ainda
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-1">
+                  <p className="text-[11px] text-neutral-400 mt-1">
                     Quando você iniciar uma exportação, ela aparecerá aqui.
                   </p>
                 </div>

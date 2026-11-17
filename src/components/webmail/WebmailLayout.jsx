@@ -136,16 +136,16 @@ export default function WebmailLayout() {
     <div className="w-full max-w-[1140px] mx-auto pb-20 select-none">
       {/* Toast Visual */}
       {toast && (
-        <div className="fixed top-20 right-6 z-50 max-w-md bg-slate-900 text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-emerald-400 flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="fixed top-20 right-6 z-50 max-w-md bg-[#1c1c1e] text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-[#E8AC51] flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
+          <CheckCircle2 className="w-5 h-5 text-[#E8AC51] shrink-0 mt-0.5" />
           <div className="flex-1 text-xs">
             <p className="font-bold">{toast.title}</p>
-            <p className="text-slate-300 mt-0.5">{toast.subtitle}</p>
+            <p className="text-neutral-400 mt-0.5">{toast.subtitle}</p>
           </div>
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-slate-400 hover:text-white cursor-pointer"
+            className="text-neutral-400 hover:text-white cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -156,30 +156,30 @@ export default function WebmailLayout() {
       {currentSection.id === 'bounced' && <BouncedEmailsTopBar />}
 
       {/* 1. Barra Superior (Toolbar): Breadcrumb Dinâmico + Search Email + ADVANCED + Refresh + "+" */}
-      <div className="w-full bg-[#f4f5f7] border border-slate-200/90 rounded-xs px-4 py-2 mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-4 py-2 mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         {/* Breadcrumb Dinâmico */}
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+        <div className="flex items-center gap-2 text-xs text-neutral-400">
           <Link
             to="/"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Home
           </Link>
           <span>&gt;</span>
           <Link
             to="/webmail/inbox"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Webmail
           </Link>
           <span>&gt;</span>
-          <span className="text-slate-400">{currentSection.breadcrumb}</span>
+          <span className="text-neutral-400">{currentSection.breadcrumb}</span>
         </div>
 
         {/* Barra de Pesquisa + ADVANCED + Botão Azul Refresh + Botão Azul "+" */}
         <div className="flex items-center gap-1.5">
-          <div className="flex items-center bg-white border border-slate-200 rounded-xs overflow-hidden focus-within:border-[#0077b5]">
-            <span className="px-2.5 py-1.5 bg-[#eaecef] border-r border-slate-200 text-slate-600">
+          <div className="flex items-center bg-[#1c1c1e] border border-white/10 rounded-xs overflow-hidden focus-within:border-[#880E1B]">
+            <span className="px-2.5 py-1.5 bg-[#1c1c1e] border-r border-white/10 text-neutral-400">
               <Search className="w-3.5 h-3.5" />
             </span>
             <input
@@ -187,11 +187,11 @@ export default function WebmailLayout() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search email"
-              className="w-36 sm:w-44 px-2.5 py-1 text-xs text-slate-700 placeholder:text-slate-400 outline-none"
+              className="w-36 sm:w-44 px-2.5 py-1 text-xs text-white placeholder:text-neutral-400 outline-none"
             />
             <button
               type="button"
-              className="px-2.5 py-1.5 bg-[#eaecef] hover:bg-slate-200 border-l border-slate-200 text-[10px] font-medium text-slate-500 uppercase flex items-center gap-1 transition-colors cursor-pointer"
+              className="px-2.5 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border-l border-white/10 text-[10px] font-medium text-neutral-400 uppercase flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>ADVANCED</span>
               <ChevronDown className="w-2.5 h-2.5" />
@@ -203,7 +203,7 @@ export default function WebmailLayout() {
             type="button"
             onClick={() => setIsSyncModalOpen(true)}
             title="Synchronize Inbox"
-            className="p-2 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs shadow-2xs transition-colors cursor-pointer"
+            className="p-2 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs shadow-2xs transition-colors cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
@@ -213,7 +213,7 @@ export default function WebmailLayout() {
             type="button"
             onClick={() => navigate('/webmail/new')}
             title="New mail"
-            className="p-2 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs shadow-2xs transition-colors cursor-pointer"
+            className="p-2 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs shadow-2xs transition-colors cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
@@ -233,8 +233,8 @@ export default function WebmailLayout() {
                 onClick={() => navigate(item.path)}
                 className={`w-full px-3.5 py-2.5 rounded-xs text-xs flex items-center gap-2 text-left transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-[#0077b5] text-white font-medium shadow-2xs'
-                    : 'text-[#0077b5] hover:bg-sky-50 font-normal'
+                    ? 'bg-[#880E1B] text-white font-medium shadow-2xs'
+                    : 'text-[#E8AC51] hover:bg-[#1c1c1e] font-normal'
                 }`}
               >
                 <span>{item.label}</span>
@@ -242,8 +242,8 @@ export default function WebmailLayout() {
                   <span
                     className={`w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center ${
                       isActive
-                        ? 'bg-white text-[#0077b5]'
-                        : 'bg-[#0077b5] text-white'
+                        ? 'bg-[#1c1c1e] text-[#E8AC51]'
+                        : 'bg-[#880E1B] text-white'
                     }`}
                   >
                     {foldersData.inbox.length || item.badge}

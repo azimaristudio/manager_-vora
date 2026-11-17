@@ -37,10 +37,10 @@ export default function EmailList({
     <div className="space-y-4 select-none">
       {/* Banner Azul Claro "Synchro" (Exibido em Inbox e Unread - Imagens 20 e 21) */}
       {showSyncAlert && (
-        <div className="relative bg-[#67c2ef] border border-[#3db0e8] text-white rounded-xs px-5 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+        <div className="relative bg-[#E8AC51] border border-[#880E1B] text-white rounded-xs px-5 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
           {/* Lado Esquerdo: Ícone de Sincronização + "Synchro" */}
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-full bg-white text-[#67c2ef] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#1c1c1e] text-[#E8AC51] flex items-center justify-center shrink-0">
               <RefreshCw className="w-4 h-4 stroke-[2.5]" />
             </div>
             <span className="text-xl font-light tracking-wide">Synchro</span>
@@ -53,7 +53,7 @@ export default function EmailList({
               <button
                 type="button"
                 onClick={onOpenSyncModal}
-                className="underline font-medium hover:text-sky-100 cursor-pointer"
+                className="underline font-medium hover:text-[#E8AC51] cursor-pointer"
               >
                 synchronizing your inbox
               </button>
@@ -77,15 +77,15 @@ export default function EmailList({
       )}
 
       {/* Container da Tabela de Emails */}
-      <div className="border border-slate-200 rounded-xs bg-white overflow-hidden shadow-2xs">
+      <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
         {/* Barra de Ferramentas da Lista: Checkbox Geral, Lixo, Lido, Não Lido e Paginação */}
-        <div className="bg-[#f4f5f7] border-b border-slate-200 px-3.5 py-2.5 flex items-center justify-between gap-2">
+        <div className="bg-[#161617] border-b border-white/10 px-3.5 py-2.5 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
               checked={allSelected}
               onChange={toggleSelectAll}
-              className="w-3.5 h-3.5 rounded-xs accent-[#0077b5] cursor-pointer mr-1"
+              className="w-3.5 h-3.5 rounded-xs accent-[#880E1B] cursor-pointer mr-1"
             />
 
             <button
@@ -97,7 +97,7 @@ export default function EmailList({
                 }
               }}
               title="Move to Deleted"
-              className="p-1.5 bg-[#eaecef] hover:bg-slate-300/70 border border-slate-200/90 text-slate-500 rounded-xs transition-colors cursor-pointer"
+              className="p-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 text-neutral-400 rounded-xs transition-colors cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -105,7 +105,7 @@ export default function EmailList({
             <button
               type="button"
               title="Mark as read"
-              className="p-1.5 bg-[#eaecef] hover:bg-slate-300/70 border border-slate-200/90 text-slate-500 rounded-xs transition-colors cursor-pointer"
+              className="p-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 text-neutral-400 rounded-xs transition-colors cursor-pointer"
             >
               <Eye className="w-3.5 h-3.5" />
             </button>
@@ -113,20 +113,20 @@ export default function EmailList({
             <button
               type="button"
               title="Mark as unread"
-              className="p-1.5 bg-[#eaecef] hover:bg-slate-300/70 border border-slate-200/90 text-slate-500 rounded-xs transition-colors cursor-pointer"
+              className="p-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 text-neutral-400 rounded-xs transition-colors cursor-pointer"
             >
               <EyeOff className="w-3.5 h-3.5" />
             </button>
           </div>
 
           {/* Paginação: "0-0 of 0" + Setas */}
-          <div className="flex items-center gap-2 text-[11px] text-slate-600">
+          <div className="flex items-center gap-2 text-[11px] text-neutral-400">
             <span>
-              <strong className="font-bold text-slate-800">
+              <strong className="font-bold text-white">
                 {emails.length > 0 ? 1 : 0}-{emails.length}
               </strong>{' '}
               of{' '}
-              <strong className="font-bold text-slate-800">
+              <strong className="font-bold text-white">
                 {emails.length}
               </strong>
             </span>
@@ -134,13 +134,13 @@ export default function EmailList({
             <div className="inline-flex items-center gap-1">
               <button
                 type="button"
-                className="p-1.5 bg-[#eaecef] hover:bg-slate-300/70 border border-slate-200/90 text-slate-500 rounded-xs transition-colors cursor-pointer"
+                className="p-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 text-neutral-400 rounded-xs transition-colors cursor-pointer"
               >
                 <ChevronLeft className="w-3 h-3" />
               </button>
               <button
                 type="button"
-                className="p-1.5 bg-[#eaecef] hover:bg-slate-300/70 border border-slate-200/90 text-slate-500 rounded-xs transition-colors cursor-pointer"
+                className="p-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 text-neutral-400 rounded-xs transition-colors cursor-pointer"
               >
                 <ChevronRight className="w-3 h-3" />
               </button>
@@ -150,15 +150,15 @@ export default function EmailList({
 
         {/* Corpo da Tabela (Empty State "This inbox is empty" ou Lista de Emails) */}
         {emails.length === 0 ? (
-          <div className="py-6 px-4 text-center text-xs text-slate-500 bg-white">
+          <div className="py-6 px-4 text-center text-xs text-neutral-400 bg-[#1c1c1e]">
             This inbox is empty
           </div>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-white/10">
             {emails.map((mail) => (
               <div
                 key={mail.id}
-                className="px-4 py-3 flex items-center justify-between gap-4 hover:bg-slate-50 text-xs text-slate-700"
+                className="px-4 py-3 flex items-center justify-between gap-4 hover:bg-[#1c1c1e] text-xs text-white"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <input
@@ -171,16 +171,16 @@ export default function EmailList({
                           : [...prev, mail.id]
                       )
                     }
-                    className="w-3.5 h-3.5 accent-[#0077b5] cursor-pointer"
+                    className="w-3.5 h-3.5 accent-[#880E1B] cursor-pointer"
                   />
-                  <span className="font-semibold text-[#0077b5] truncate w-44">
+                  <span className="font-semibold text-[#E8AC51] truncate w-44">
                     {mail.to || '(Sem destinatário)'}
                   </span>
-                  <span className="text-slate-600 truncate">
+                  <span className="text-neutral-400 truncate">
                     {mail.subject || '(No Subject)'}
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-400 shrink-0">
+                <span className="text-[11px] text-neutral-400 shrink-0">
                   {mail.date}
                 </span>
               </div>

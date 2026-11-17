@@ -12,7 +12,6 @@ import {
 import ContractsDropdown from './ContractsDropdown';
 import TasksDropdown from './TasksDropdown';
 import UserDropdown from './UserDropdown';
-import evoraLogo from '../assets/evora_logo.jpg';
 
 const NAV_ITEMS = [
   { label: 'Talentos', path: '/talentos' },
@@ -95,16 +94,16 @@ export default function Header({ onOpenCompoMake }) {
   return (
     <header className="w-full bg-[#161617] border-b border-white/10 px-4 lg:px-8 h-16 flex items-center justify-between sticky top-0 z-30">
       <div className="flex items-center gap-6 lg:gap-10">
-        {/* Logótipo Évora Models com Link para a rota de Talentos (/talentos) */}
+        {/* Logótipo Pose Manager com Link para a rota de Talentos (/talentos) */}
         <Link
           to="/talentos"
           title="Ir para o Início (Talentos)"
           className="flex items-center shrink-0 group"
         >
           <img
-            src={evoraLogo}
-            alt="Évora Models"
-            className="h-11 w-auto object-contain transition-opacity group-hover:opacity-90"
+            src="/pose manager.png"
+            alt="Pose Manager"
+            className="h-8 w-auto object-contain transition-opacity group-hover:opacity-90"
           />
         </Link>
 

@@ -44,19 +44,19 @@ export default function PackagesLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-[#e6e7e9] text-slate-700 flex flex-col font-sans select-none">
+    <div className="min-h-screen bg-[#161617] text-white flex flex-col font-sans select-none">
       {/* Toast Flutuante */}
       {toast && (
-        <div className="fixed top-20 right-6 z-50 max-w-md bg-slate-900 text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-[#3eb5e6] flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
-          <CheckCircle2 className="w-5 h-5 text-[#3eb5e6] shrink-0 mt-0.5" />
+        <div className="fixed top-20 right-6 z-50 max-w-md bg-[#1c1c1e] text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-[#880E1B] flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-150">
+          <CheckCircle2 className="w-5 h-5 text-[#E8AC51] shrink-0 mt-0.5" />
           <div className="flex-1 text-xs">
             <p className="font-bold">{toast.title}</p>
-            <p className="text-slate-300 mt-0.5">{toast.subtitle}</p>
+            <p className="text-neutral-400 mt-0.5">{toast.subtitle}</p>
           </div>
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-slate-400 hover:text-white cursor-pointer"
+            className="text-neutral-400 hover:text-white cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -64,7 +64,7 @@ export default function PackagesLayout() {
       )}
 
       {/* 1. Cabeçalho Superior Específico do Módulo de Pacotes (Fiel à Imagem 23) */}
-      <header className="w-full bg-white border-b border-slate-200 px-6 lg:px-10 h-14 flex items-center justify-between sticky top-0 z-30">
+      <header className="w-full bg-[#161617] border-b border-white/10 px-6 lg:px-10 h-14 flex items-center justify-between sticky top-0 z-30">
         <nav className="flex flex-wrap items-center gap-4 sm:gap-6">
           {TOP_MENU.map((item) => {
             const isCurrent = item.label === 'PACOTES';
@@ -79,8 +79,8 @@ export default function PackagesLayout() {
                 }}
                 className={`text-[11px] tracking-wider uppercase transition-colors cursor-pointer ${
                   isCurrent
-                    ? 'text-slate-900 font-bold'
-                    : 'text-slate-600 hover:text-[#0077b5] font-medium'
+                    ? 'text-white font-bold'
+                    : 'text-neutral-400 hover:text-[#E8AC51] font-medium'
                 }`}
               >
                 {item.label}
@@ -89,10 +89,10 @@ export default function PackagesLayout() {
           })}
         </nav>
 
-        <div className="flex items-center gap-4 text-slate-600">
+        <div className="flex items-center gap-4 text-neutral-400">
           <button
             type="button"
-            className="inline-flex items-center gap-1 text-[11px] font-medium uppercase hover:text-slate-900 cursor-pointer"
+            className="inline-flex items-center gap-1 text-[11px] font-medium uppercase hover:text-white cursor-pointer"
           >
             <LifeBuoy className="w-3.5 h-3.5" />
             <span>AJUDA</span>
@@ -102,7 +102,7 @@ export default function PackagesLayout() {
             type="button"
             onClick={() => navigate('/')}
             title="Voltar ao Início"
-            className="flex items-center gap-1 text-[#0077b5] cursor-pointer"
+            className="flex items-center gap-1 text-[#E8AC51] cursor-pointer"
           >
             <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
             <ChevronDown className="w-3.5 h-3.5" />
@@ -112,17 +112,17 @@ export default function PackagesLayout() {
 
       {/* 2. Container Branco Central (Fiel à Imagem 23) */}
       <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 pt-8 pb-6 flex flex-col">
-        <div className="flex-1 bg-white rounded-xs shadow-xs border border-slate-200/80 px-6 sm:px-10 py-8 flex flex-col justify-between">
+        <div className="flex-1 bg-[#1c1c1e] rounded-xs shadow-xs border border-white/10 px-6 sm:px-10 py-8 flex flex-col justify-between">
           <div>
             {/* Abas: PACOTES CRIADOS | PACOTES ENVIADOS */}
-            <div className="border-b border-slate-200 flex items-center gap-6 mb-4">
+            <div className="border-b border-white/10 flex items-center gap-6 mb-4">
               <button
                 type="button"
                 onClick={() => setActiveTab('criados')}
                 className={`pb-2.5 text-xs tracking-wide uppercase transition-colors cursor-pointer ${
                   activeTab === 'criados'
-                    ? 'text-slate-800 font-bold border-b-2 border-slate-800 -mb-px'
-                    : 'text-slate-500 hover:text-slate-800 font-medium'
+                    ? 'text-white font-bold border-b-2 border-white/10 -mb-px'
+                    : 'text-neutral-400 hover:text-white font-medium'
                 }`}
               >
                 PACOTES CRIADOS
@@ -133,8 +133,8 @@ export default function PackagesLayout() {
                 onClick={() => setActiveTab('enviados')}
                 className={`pb-2.5 text-xs tracking-wide uppercase transition-colors cursor-pointer ${
                   activeTab === 'enviados'
-                    ? 'text-slate-800 font-bold border-b-2 border-slate-800 -mb-px'
-                    : 'text-slate-500 hover:text-slate-800 font-medium'
+                    ? 'text-white font-bold border-b-2 border-white/10 -mb-px'
+                    : 'text-neutral-400 hover:text-white font-medium'
                 }`}
               >
                 PACOTES ENVIADOS
@@ -150,14 +150,14 @@ export default function PackagesLayout() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="PESQUISAR  PACOTE"
-                  className="w-56 px-3 py-1.5 bg-[#e6e7e9] text-xs text-slate-700 placeholder:text-slate-400 rounded-xs outline-none focus:ring-1 focus:ring-[#3eb5e6]"
+                  className="w-56 px-3 py-1.5 bg-[#161617] text-xs text-white placeholder:text-neutral-400 rounded-xs outline-none focus:ring-1 focus:ring-[#880E1B]"
                 />
 
                 {/* Dropdown Usuário */}
                 <select
                   value={selectedUser}
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="px-3 py-1.5 bg-[#4a4f55] text-white text-xs rounded-xs outline-none cursor-pointer"
+                  className="px-3 py-1.5 bg-[#1c1c1e] text-white text-xs rounded-xs outline-none cursor-pointer"
                 >
                   <option value="">Usuário</option>
                   <option value="evora">Évora Models</option>
@@ -168,7 +168,7 @@ export default function PackagesLayout() {
                 <select
                   value={selectedDateMode}
                   onChange={(e) => setSelectedDateMode(e.target.value)}
-                  className="w-36 px-3 py-1.5 bg-[#4a4f55] text-white text-xs rounded-xs outline-none cursor-pointer"
+                  className="w-36 px-3 py-1.5 bg-[#1c1c1e] text-white text-xs rounded-xs outline-none cursor-pointer"
                 >
                   <option value="Datas">Datas</option>
                   <option value="Criado em">Data de Criação</option>
@@ -179,7 +179,7 @@ export default function PackagesLayout() {
                 <button
                   type="button"
                   title="Ordenar por data"
-                  className="p-1.5 text-slate-600 hover:text-slate-900 cursor-pointer"
+                  className="p-1.5 text-neutral-400 hover:text-white cursor-pointer"
                 >
                   <ArrowDownWideNarrow className="w-4 h-4" />
                 </button>
@@ -188,7 +188,7 @@ export default function PackagesLayout() {
                 <select
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
-                  className="px-2.5 py-1.5 bg-[#4a4f55] text-white text-xs rounded-xs outline-none cursor-pointer"
+                  className="px-2.5 py-1.5 bg-[#1c1c1e] text-white text-xs rounded-xs outline-none cursor-pointer"
                 >
                   <option value="">Ano</option>
                   <option value="2026">2026</option>
@@ -199,7 +199,7 @@ export default function PackagesLayout() {
                 <select
                   value={selectedMonth}
                   onChange={(e) => setSelectedMonth(e.target.value)}
-                  className="px-2.5 py-1.5 bg-[#4a4f55] text-white text-xs rounded-xs outline-none cursor-pointer"
+                  className="px-2.5 py-1.5 bg-[#1c1c1e] text-white text-xs rounded-xs outline-none cursor-pointer"
                 >
                   <option value="">Mês</option>
                   <option value="01">Janeiro</option>
@@ -214,44 +214,44 @@ export default function PackagesLayout() {
               <button
                 type="button"
                 onClick={handleCreatePackage}
-                className="px-4 py-1.5 bg-[#3eb5e6] hover:bg-[#2da3d4] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
+                className="px-4 py-1.5 bg-[#E8AC51] hover:bg-[#d99b3f] active:scale-[0.99] text-white text-[11px] font-semibold uppercase tracking-wider rounded-xs shadow-2xs transition-all cursor-pointer"
               >
                 CRIAR PACOTE
               </button>
             </div>
 
             {/* Sub-barra: TOTAL DE PACOTES: 0 | Paginação 30 ▾ 1 - 1 < | > */}
-            <div className="py-2.5 border-b border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+            <div className="py-2.5 border-b border-white/10 flex items-center justify-between text-[11px] text-neutral-400">
               <div>
                 <span>TOTAL DE PACOTES: </span>
-                <strong className="font-bold text-slate-900">0</strong>
+                <strong className="font-bold text-white">0</strong>
               </div>
 
               <div className="flex items-center gap-3">
                 <select
                   value={pageSize}
                   onChange={(e) => setPageSize(e.target.value)}
-                  className="px-2 py-1 bg-[#e6e7e9] text-slate-700 text-[11px] rounded-xs outline-none cursor-pointer"
+                  className="px-2 py-1 bg-[#161617] text-white text-[11px] rounded-xs outline-none cursor-pointer"
                 >
                   <option value="30">30</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
                 </select>
 
-                <div className="flex items-center gap-1.5 text-slate-500">
+                <div className="flex items-center gap-1.5 text-neutral-400">
                   <span>
-                    <strong className="text-slate-800">1</strong> - 1
+                    <strong className="text-white">1</strong> - 1
                   </span>
                   <button
                     type="button"
-                    className="p-0.5 hover:text-slate-800 cursor-pointer"
+                    className="p-0.5 hover:text-white cursor-pointer"
                   >
                     <ChevronLeft className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-slate-300">|</span>
+                  <span className="text-neutral-400">|</span>
                   <button
                     type="button"
-                    className="p-0.5 hover:text-slate-800 cursor-pointer"
+                    className="p-0.5 hover:text-white cursor-pointer"
                   >
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
@@ -261,7 +261,7 @@ export default function PackagesLayout() {
 
             {/* Corpo Central: Empty State ("Nenhum resultado encontrado" + Ilustração de Caixa Aberta) */}
             <div className="py-12 flex flex-col items-center justify-center text-center">
-              <p className="text-xs font-bold text-slate-700 mb-6">
+              <p className="text-xs font-bold text-white mb-6">
                 Nenhum resultado encontrado
               </p>
 
@@ -343,8 +343,8 @@ export default function PackagesLayout() {
 
           {/* Linha Divisória Inferior + Barra "/" Centralizada */}
           <div className="pt-4">
-            <div className="border-t border-slate-300" />
-            <div className="pt-2 text-center text-xs text-slate-600 font-medium">
+            <div className="border-t border-white/10" />
+            <div className="pt-2 text-center text-xs text-neutral-400 font-medium">
               /
             </div>
           </div>
@@ -352,7 +352,7 @@ export default function PackagesLayout() {
       </main>
 
       {/* Rodapé "© Évora Models" */}
-      <footer className="py-3 text-center text-[10px] tracking-wider uppercase text-slate-500">
+      <footer className="py-3 text-center text-[10px] tracking-wider uppercase text-neutral-400">
         © Évora Models
       </footer>
     </div>

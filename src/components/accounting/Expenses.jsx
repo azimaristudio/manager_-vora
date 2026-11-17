@@ -34,7 +34,7 @@ const STATUS_LEGEND = [
     color: 'bg-[#f57c00]',
     hasExclamation: true,
   },
-  { label: 'Pago', color: 'bg-[#43a047]', hasExclamation: false },
+  { label: 'Pago', color: 'bg-[#E8AC51]', hasExclamation: false },
   { label: 'Cancelado', color: 'bg-[#8e8e8e]', hasExclamation: false },
 ];
 
@@ -44,9 +44,9 @@ export default function Expenses() {
   return (
     <div className="pt-2">
       {/* Barra de Ferramentas de Saídas (Imagem 59) */}
-      <div className="bg-[#f4f4f4] border border-slate-200 rounded-xs px-3 py-2 flex flex-wrap items-center justify-between gap-3 mb-2">
+      <div className="bg-[#161617] border border-white/10 rounded-xs px-3 py-2 flex flex-wrap items-center justify-between gap-3 mb-2">
         {/* Esquerda: Legenda de Status com Círculos Coloridos */}
-        <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
+        <div className="flex flex-wrap items-center gap-3 text-[11px] text-neutral-400">
           {STATUS_LEGEND.map((st) => (
             <div key={st.label} className="flex items-center gap-1.5">
               <span
@@ -64,7 +64,7 @@ export default function Expenses() {
           <button
             type="button"
             title="Atualizar"
-            className="p-1.5 text-[#28a745] hover:text-emerald-700 cursor-pointer"
+            className="p-1.5 text-[#E8AC51] hover:text-[#d99b3f] cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
@@ -73,14 +73,14 @@ export default function Expenses() {
             type="button"
             onClick={() => setActiveModal('columns')}
             title="Configurar Colunas"
-            className="p-1.5 text-slate-800 hover:text-black cursor-pointer"
+            className="p-1.5 text-white hover:text-white cursor-pointer"
           >
-            <Settings className="w-3.5 h-3.5 fill-slate-800" />
+            <Settings className="w-3.5 h-3.5 fill-[#E8AC51]" />
           </button>
 
           <button
             type="button"
-            className="h-8 px-2.5 bg-[#5fa2dd] hover:bg-[#4b8fc9] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="h-8 px-2.5 bg-[#E8AC51] hover:bg-[#d99b3f] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <Download className="w-3 h-3 stroke-[2.5]" />
             <span>EXPORTAÇÃO EXCEL</span>
@@ -99,7 +99,7 @@ export default function Expenses() {
           <button
             type="button"
             onClick={() => setActiveModal('new')}
-            className="h-8 px-3 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+            className="h-8 px-3 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
           >
             NOVA SAÍDA
           </button>
@@ -107,7 +107,7 @@ export default function Expenses() {
           <button
             type="button"
             onClick={() => setActiveModal('direct')}
-            className="h-8 px-3 bg-[#006299] hover:bg-[#004f7c] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+            className="h-8 px-3 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
           >
             LANÇAMENTO DIRETO
           </button>
@@ -115,11 +115,11 @@ export default function Expenses() {
       </div>
 
       {/* Tabela de Saídas */}
-      <div className="border border-slate-200 rounded-xs overflow-hidden bg-white">
+      <div className="border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e]">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1050px] border-collapse">
             <thead>
-              <tr className="bg-[#0077b5] text-white text-[10px] font-normal">
+              <tr className="bg-[#880E1B] text-white text-[10px] font-normal">
                 <th className="py-2 px-1.5 text-center align-bottom w-11">
                   <div className="flex flex-col items-center gap-1">
                     <span>Status</span>
@@ -233,7 +233,7 @@ export default function Expenses() {
               <tr>
                 <td
                   colSpan={18}
-                  className="bg-[#f5f5f5] border-b border-slate-200 py-3.5 text-center text-[11px] text-slate-600"
+                  className="bg-[#161617] border-b border-white/10 py-3.5 text-center text-[11px] text-neutral-400"
                 >
                   Nenhum resultado encontrado
                 </td>
@@ -242,7 +242,7 @@ export default function Expenses() {
           </table>
         </div>
 
-        <div className="min-h-[380px] bg-white" />
+        <div className="min-h-[380px] bg-[#1c1c1e]" />
       </div>
 
       {/* Modais sobrepostos */}

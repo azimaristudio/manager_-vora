@@ -47,19 +47,19 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-[650px] rounded-xs shadow-2xl border border-slate-200 overflow-hidden my-auto"
+        className="bg-[#1c1c1e] w-full max-w-[650px] rounded-xs shadow-2xl border border-white/10 overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho (Imagem 58) */}
-        <div className="relative flex items-center justify-center px-6 py-4 border-b border-slate-100">
-          <h2 className="text-[14px] text-slate-800 font-bold">
+        <div className="relative flex items-center justify-center px-6 py-4 border-b border-white/10">
+          <h2 className="text-[14px] text-white font-bold">
             {titleLabel || 'Colunas de Entradas'}
           </h2>
           <button
             type="button"
             onClick={onClose}
             title="Fechar"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -67,7 +67,7 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
 
         {/* Corpo: Grelha de 3 Colunas com Checkboxes */}
         <form onSubmit={handleSubmit}>
-          <div className="px-8 py-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-slate-700">
+          <div className="px-8 py-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-white">
             {/* Coluna 1 */}
             <div className="space-y-2.5">
               {[
@@ -86,7 +86,7 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
                     type="checkbox"
                     checked={cols[item.key]}
                     onChange={() => toggleCol(item.key)}
-                    className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5]"
+                    className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51]"
                   />
                   <span>{item.label}</span>
                 </label>
@@ -111,7 +111,7 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
                     type="checkbox"
                     checked={cols[item.key]}
                     onChange={() => toggleCol(item.key)}
-                    className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5]"
+                    className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51]"
                   />
                   <span>{item.label}</span>
                 </label>
@@ -135,7 +135,7 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
                     type="checkbox"
                     checked={cols[item.key]}
                     onChange={() => toggleCol(item.key)}
-                    className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5]"
+                    className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51]"
                   />
                   <span>{item.label}</span>
                 </label>
@@ -144,17 +144,17 @@ export default function ColumnsConfigModal({ isOpen, onClose, titleLabel }) {
           </div>
 
           {/* Rodapé: FECHAR e SALVAR */}
-          <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-white">
+          <div className="px-6 py-4 border-t border-white/10 flex items-center justify-end gap-2 bg-[#1c1c1e]">
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-2 bg-[#f2f2f2] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-500 uppercase font-medium cursor-pointer"
+              className="px-3.5 py-2 bg-[#1c1c1e] hover:bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-neutral-400 uppercase font-medium cursor-pointer"
             >
               FECHAR
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+              className="px-4 py-2 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
             >
               SALVAR
             </button>

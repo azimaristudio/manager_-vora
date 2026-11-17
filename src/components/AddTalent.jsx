@@ -404,18 +404,18 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
     <div className="w-full pb-16">
       {/* Toast / Alerta Visual Flutuante */}
       {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 max-w-md bg-slate-900 text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-emerald-400 flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-200">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="fixed top-20 right-6 z-50 max-w-md bg-[#1c1c1e] text-white px-4 py-3.5 rounded-md shadow-2xl border-l-4 border-[#E8AC51] flex items-start gap-3 animate-in fade-in slide-in-from-top-3 duration-200">
+          <CheckCircle2 className="w-5 h-5 text-[#E8AC51] shrink-0 mt-0.5" />
           <div className="flex-1 text-xs">
             <p className="font-bold text-white">{toastMessage.title}</p>
-            <p className="text-slate-300 mt-0.5 leading-relaxed">
+            <p className="text-neutral-400 mt-0.5 leading-relaxed">
               {toastMessage.subtitle}
             </p>
           </div>
           <button
             type="button"
             onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white cursor-pointer"
+            className="text-neutral-400 hover:text-white cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -429,22 +429,22 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
             <button
               type="button"
               onClick={onBackToList}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 rounded-xs text-xs font-medium transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-neutral-400 border border-white/10 rounded-xs text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Voltar para listagem</span>
             </button>
           )}
-          <span className="text-xs text-slate-400">
-            <Link to="/" className="text-[#0077b5] hover:underline">
+          <span className="text-xs text-neutral-400">
+            <Link to="/" className="text-[#E8AC51] hover:underline">
               Início
             </Link>{' '}
             &gt;{' '}
-            <Link to="/" className="text-[#0077b5] hover:underline">
+            <Link to="/" className="text-[#E8AC51] hover:underline">
               Talentos
             </Link>{' '}
             &gt;{' '}
-            <strong className="text-slate-600 font-semibold">
+            <strong className="text-neutral-400 font-semibold">
               {formData.personal.stageName || 'Novo perfil'}
             </strong>
           </span>
@@ -464,7 +464,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
         <button
           type="button"
           onClick={handleFillDemoData}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-[#0077b5] border border-sky-200 rounded-xs text-xs font-semibold transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-[#E8AC51] border border-white/10 rounded-xs text-xs font-semibold transition-colors cursor-pointer"
         >
           <Sparkles className="w-3.5 h-3.5" />
           <span>Preencher Dados de Teste</span>
@@ -473,7 +473,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
 
       {/* Container Principal com as Abas (Geral, Habilidades, Carreira, Informações Administrativas, Contas Bancárias) */}
       <form onSubmit={handleCreateTalent}>
-        <div className="bg-[#f4f5f7] border border-slate-200 rounded-t-sm flex flex-wrap items-center">
+        <div className="bg-[#161617] border border-white/10 rounded-t-sm flex flex-wrap items-center">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -482,24 +482,24 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 sm:px-5 py-3.5 flex items-center gap-2 text-xs font-medium border-r border-slate-200 transition-colors cursor-pointer ${
+                className={`px-4 sm:px-5 py-3.5 flex items-center gap-2 text-xs font-medium border-r border-white/10 transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-white text-[#0077b5] font-bold border-t-2 border-t-[#0077b5] -mb-px'
-                    : 'text-slate-600 hover:bg-slate-200/60 hover:text-slate-900'
+                    ? 'bg-[#1c1c1e] text-[#E8AC51] font-bold border-t-2 border-t-[#880E1B] -mb-px'
+                    : 'text-neutral-400 hover:bg-[#1c1c1e] hover:text-white'
                 }`}
               >
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center ${
                     isActive
-                      ? 'bg-[#0077b5] text-white'
-                      : 'bg-slate-800 text-white'
+                      ? 'bg-[#880E1B] text-white'
+                      : 'bg-[#1c1c1e] text-white'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </span>
                 <span>{tab.label}</span>
                 {tab.id === 'midia' && mediaItems.length > 0 && (
-                  <span className="ml-1 px-1.5 py-0.2 bg-[#0077b5] text-white rounded-full text-[10px]">
+                  <span className="ml-1 px-1.5 py-0.2 bg-[#880E1B] text-white rounded-full text-[10px]">
                     {mediaItems.length}
                   </span>
                 )}
@@ -509,7 +509,7 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
         </div>
 
         {/* Conteúdo da Aba Selecionada */}
-        <div className="bg-slate-50/50 border-x border-b border-slate-200 p-4 sm:p-6 rounded-b-sm">
+        <div className="bg-[#161617] border-x border-b border-white/10 p-4 sm:p-6 rounded-b-sm">
           {/* ABA 1: GERAL (Layout de 3 colunas fiel à Imagem 03) */}
           {activeTab === 'geral' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -603,14 +603,14 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
             onClick={() => {
               if (onBackToList) onBackToList();
             }}
-            className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-300 text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+            className="px-4 py-2 bg-[#161617] hover:bg-[#1c1c1e] text-neutral-400 border border-white/10 text-xs font-semibold uppercase rounded-xs transition-colors cursor-pointer"
           >
             CANCELAR
           </button>
 
           <button
             type="submit"
-            className="px-5 py-2 bg-[#0077b5] hover:bg-[#006399] active:scale-[0.99] text-white text-xs font-bold uppercase rounded-xs shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-5 py-2 bg-[#880E1B] hover:bg-[#a31121] active:scale-[0.99] text-white text-xs font-bold uppercase rounded-xs shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
           >
             <Save className="w-3.5 h-3.5" />
             <span>SALVAR</span>
@@ -620,23 +620,23 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
 
       {/* Inspetor Visual do Payload consolidado pelo `handleCreateTalent` */}
       {lastSavedPayload && showPayloadInspector && (
-        <div className="mt-8 bg-slate-900 text-slate-100 rounded-md p-5 border border-slate-700 shadow-lg">
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
+        <div className="mt-8 bg-[#1c1c1e] text-neutral-100 rounded-md p-5 border border-white/10 shadow-lg">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+              <Code2 className="w-4 h-4 text-[#E8AC51]" />
+              <span className="text-xs font-bold text-[#E8AC51] uppercase tracking-wider">
                 Resultado do handleCreateTalent — Dados Consolidados (Também no console.log)
               </span>
             </div>
             <button
               type="button"
               onClick={() => setShowPayloadInspector(false)}
-              className="text-xs text-slate-400 hover:text-white cursor-pointer"
+              className="text-xs text-neutral-400 hover:text-white cursor-pointer"
             >
               Ocultar JSON
             </button>
           </div>
-          <pre className="text-[11px] font-mono text-sky-200 overflow-x-auto max-h-80 leading-relaxed">
+          <pre className="text-[11px] font-mono text-[#E8AC51] overflow-x-auto max-h-80 leading-relaxed">
             {JSON.stringify(lastSavedPayload, null, 2)}
           </pre>
         </div>

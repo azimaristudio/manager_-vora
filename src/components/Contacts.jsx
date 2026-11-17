@@ -54,18 +54,18 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
   return (
     <div className="w-full pb-20 select-none">
       {/* 1. Sub-Cabeçalho: Breadcrumb "Início > Contatos" + Busca + Botão "+" */}
-      <div className="w-full bg-[#f8f9fa] border border-slate-200/90 rounded-xs px-4 py-2.5 mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-4 py-2.5 mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-2 text-xs text-neutral-400">
           <Link
             to="/"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Início
           </Link>
           <span>&gt;</span>
           <Link
             to="/contatos"
-            className="text-[#0077b5] hover:underline font-normal cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal cursor-pointer"
           >
             Contatos
           </Link>
@@ -73,8 +73,8 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
 
         {/* Barra de Busca "Buscar um contato" + Botão Azul "+" */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-white border border-slate-200 rounded-xs overflow-hidden focus-within:border-[#0077b5] transition-colors w-full sm:w-64">
-            <span className="px-2.5 py-1.5 bg-slate-100 border-r border-slate-200 text-slate-500">
+          <div className="flex items-center bg-[#1c1c1e] border border-white/10 rounded-xs overflow-hidden focus-within:border-[#880E1B] transition-colors w-full sm:w-64">
+            <span className="px-2.5 py-1.5 bg-[#161617] border-r border-white/10 text-neutral-400">
               <Search className="w-3.5 h-3.5" />
             </span>
             <input
@@ -82,7 +82,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar um contato"
-              className="w-full px-2.5 py-1 text-xs text-slate-700 placeholder:text-slate-400 outline-none"
+              className="w-full px-2.5 py-1 text-xs text-white placeholder:text-neutral-400 outline-none"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
             type="button"
             onClick={handleGoToNewContact}
             title="Adicionar Novo Contato"
-            className="px-2.5 py-1.5 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs shadow-2xs transition-colors flex items-center justify-center cursor-pointer"
+            className="px-2.5 py-1.5 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs shadow-2xs transition-colors flex items-center justify-center cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -98,7 +98,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
       </div>
 
       {/* 2. Navegação por Abas: Clientes | Fornecedores | Outros Contatos */}
-      <div className="flex flex-wrap items-end border-b border-slate-200">
+      <div className="flex flex-wrap items-end border-b border-white/10">
         {TABS.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -112,11 +112,11 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               }}
               className={`px-4 py-3 flex items-center gap-2.5 text-xs border-t border-x rounded-t-xs transition-colors cursor-pointer mr-1 ${
                 isActive
-                  ? 'bg-white border-slate-200 text-slate-700 font-semibold -mb-px pb-[13px]'
-                  : 'bg-[#f8f9fa] border-slate-200/80 text-slate-500 hover:bg-slate-100'
+                  ? 'bg-[#1c1c1e] border-white/10 text-white font-semibold -mb-px pb-[13px]'
+                  : 'bg-[#161617] border-white/10 text-neutral-400 hover:bg-[#1c1c1e]'
               }`}
             >
-              <span className="w-6 h-6 rounded-full bg-[#2f353b] text-white flex items-center justify-center shrink-0">
+              <span className="w-6 h-6 rounded-full bg-[#1c1c1e] text-white flex items-center justify-center shrink-0">
                 <Icon className="w-3.5 h-3.5" />
               </span>
               <span>{tab.label}</span>
@@ -127,14 +127,14 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
 
       {/* 3. Barra Alfabética (TODOS + A..Z) + Botão Reset + Paginação */}
       <div className="py-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center border border-slate-200 rounded-xs overflow-hidden bg-[#f5f6f8]">
+        <div className="flex flex-wrap items-center border border-white/10 rounded-xs overflow-hidden bg-[#161617]">
           <button
             type="button"
             onClick={() => setActiveLetter('TODOS')}
             className={`px-3.5 py-1.5 text-[11px] font-semibold uppercase transition-colors cursor-pointer ${
               activeLetter === 'TODOS'
-                ? 'bg-[#0077b5] text-white'
-                : 'text-slate-600 hover:bg-slate-200'
+                ? 'bg-[#880E1B] text-white'
+                : 'text-neutral-400 hover:bg-[#1c1c1e]'
             }`}
           >
             TODOS
@@ -146,10 +146,10 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                 key={letter}
                 type="button"
                 onClick={() => setActiveLetter(letter)}
-                className={`w-6 py-1.5 text-[10px] border-l border-slate-200/80 transition-colors cursor-pointer ${
+                className={`w-6 py-1.5 text-[10px] border-l border-white/10 transition-colors cursor-pointer ${
                   isCurrent
-                    ? 'bg-[#0077b5] text-white font-bold'
-                    : 'text-slate-500 hover:bg-slate-200/70'
+                    ? 'bg-[#880E1B] text-white font-bold'
+                    : 'text-neutral-400 hover:bg-[#1c1c1e]'
                 }`}
               >
                 {letter}
@@ -167,33 +167,33 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               setSearchQuery('');
             }}
             title="Limpar filtro alfabético"
-            className="p-1.5 bg-[#5bc0de] hover:bg-[#31b0d5] text-white rounded-xs transition-colors cursor-pointer"
+            className="p-1.5 bg-[#E8AC51] hover:bg-[#d99b3f] text-white rounded-xs transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
 
-          <div className="flex items-center gap-2 text-xs text-slate-600">
+          <div className="flex items-center gap-2 text-xs text-neutral-400">
             <span>
-              <strong className="font-bold text-slate-800">1</strong> -{' '}
-              <strong className="font-bold text-slate-800">
+              <strong className="font-bold text-white">1</strong> -{' '}
+              <strong className="font-bold text-white">
                 {filteredList.length}
               </strong>{' '}
               de{' '}
-              <strong className="font-bold text-slate-800">
+              <strong className="font-bold text-white">
                 {filteredList.length}
               </strong>
             </span>
 
-            <div className="inline-flex border border-slate-200 rounded-xs overflow-hidden bg-slate-100">
+            <div className="inline-flex border border-white/10 rounded-xs overflow-hidden bg-[#161617]">
               <button
                 type="button"
-                className="p-1.5 text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer"
+                className="p-1.5 text-neutral-400 hover:bg-[#1c1c1e] transition-colors cursor-pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
               </button>
               <button
                 type="button"
-                className="p-1.5 border-l border-slate-200 text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer"
+                className="p-1.5 border-l border-white/10 text-neutral-400 hover:bg-[#1c1c1e] transition-colors cursor-pointer"
               >
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
@@ -203,10 +203,10 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
       </div>
 
       {/* 4. Tabela de Dados de Contatos (Fiel às imagens 14, 15 e 16) */}
-      <div className="w-full border border-slate-200 rounded-xs overflow-x-auto shadow-2xs">
+      <div className="w-full border border-white/10 rounded-xs overflow-x-auto shadow-2xs">
         <table className="w-full border-collapse text-left min-w-[820px]">
           <thead>
-            <tr className="bg-[#0082c3] text-white text-[11px] font-medium">
+            <tr className="bg-[#880E1B] text-white text-[11px] font-medium">
               <th className="py-2.5 px-3 w-[6%]">
                 <div className="inline-flex items-center gap-1">
                   <span>#</span>
@@ -227,7 +227,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                   <Search className="w-3 h-3 opacity-85" />
                 </div>
               </th>
-              <th className="py-2.5 px-3 w-[9%] bg-[#32373c] text-center">
+              <th className="py-2.5 px-3 w-[9%] bg-[#1c1c1e] text-center">
                 <div className="inline-flex items-center justify-center gap-1">
                   <span>Ativo</span>
                   <Search className="w-3 h-3 opacity-85" />
@@ -275,10 +275,10 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               filteredList.map((contact, idx) => (
                 <tr
                   key={contact.id}
-                  className="bg-[#f8f9fa] hover:bg-slate-100/80 border-b border-slate-200/80 text-xs text-slate-600 transition-colors"
+                  className="bg-[#161617] hover:bg-[#1c1c1e] border-b border-white/10 text-xs text-neutral-400 transition-colors"
                 >
                   {/* # */}
-                  <td className="py-2.5 px-3 text-slate-500">{idx + 1}</td>
+                  <td className="py-2.5 px-3 text-neutral-400">{idx + 1}</td>
 
                   {/* Nome */}
                   <td className="py-2.5 px-3">
@@ -292,7 +292,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                           },
                         })
                       }
-                      className="font-bold text-[#0077b5] hover:underline cursor-pointer text-left"
+                      className="font-bold text-[#E8AC51] hover:underline cursor-pointer text-left"
                     >
                       {contact.name}
                     </button>
@@ -300,7 +300,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
 
                   {/* Tipo (Ícone de Empresa ou Pessoa) */}
                   <td className="py-2.5 px-3 text-center">
-                    <div className="inline-flex items-center justify-center text-slate-400">
+                    <div className="inline-flex items-center justify-center text-neutral-400">
                       {contact.entityType === 'person' ? (
                         <User className="w-3.5 h-3.5" />
                       ) : (
@@ -310,19 +310,19 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                   </td>
 
                   {/* Ativo */}
-                  <td className="py-2.5 px-3 text-center text-slate-600">
+                  <td className="py-2.5 px-3 text-center text-neutral-400">
                     {contact.statusLabel || 'Ativo'}
                   </td>
 
                   {/* Categoria (Tag Azul) */}
                   <td className="py-2.5 px-3">
-                    <span className="inline-block px-2 py-0.5 bg-[#0077b5] text-white text-[10px] font-semibold rounded-xs">
+                    <span className="inline-block px-2 py-0.5 bg-[#880E1B] text-white text-[10px] font-semibold rounded-xs">
                       {contact.category || 'Agencia'}
                     </span>
                   </td>
 
                   {/* Localização */}
-                  <td className="py-2.5 px-3 text-slate-500">
+                  <td className="py-2.5 px-3 text-neutral-400">
                     {contact.location || 'Recife, Brazil'}
                   </td>
 
@@ -339,7 +339,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                             [contact.id]: e.target.value,
                           }))
                         }
-                        className="px-2 py-1 text-[11px] bg-white border border-slate-300 rounded-xs text-slate-600 outline-none focus:border-[#0077b5] max-w-[105px]"
+                        className="px-2 py-1 text-[11px] bg-[#1c1c1e] border border-white/10 rounded-xs text-neutral-400 outline-none focus:border-[#880E1B] max-w-[105px]"
                       >
                         <option value="">Faça uma seleção</option>
                         <option value="Sophia Booker">Sophia Booker</option>
@@ -356,7 +356,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                             );
                           }
                         }}
-                        className="px-2 py-1 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-bold uppercase rounded-xs cursor-pointer"
+                        className="px-2 py-1 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-bold uppercase rounded-xs cursor-pointer"
                       >
                         OK
                       </button>
@@ -366,14 +366,14 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                   {/* Classificação (Estrelas + Ícone de Lápis) */}
                   <td className="py-2.5 px-3">
                     <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-0.5 text-slate-300">
+                      <div className="flex items-center gap-0.5 text-neutral-400">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <Star
                             key={star}
                             className={`w-3 h-3 ${
                               star <= (contact.rating || 0)
                                 ? 'text-amber-400 fill-amber-400'
-                                : 'text-slate-300'
+                                : 'text-neutral-400'
                             }`}
                           />
                         ))}
@@ -389,7 +389,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
                           })
                         }
                         title="Editar Contato"
-                        className="text-[#0077b5] hover:text-[#005a8c] cursor-pointer"
+                        className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer"
                       >
                         <Pencil className="w-3.5 h-3.5 fill-current" />
                       </button>
@@ -402,7 +402,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               <tr>
                 <td
                   colSpan={8}
-                  className="bg-[#f5f6f8] py-10 px-4 text-center text-xs text-slate-500"
+                  className="bg-[#161617] py-10 px-4 text-center text-xs text-neutral-400"
                 >
                   Nenhum resultado para esta consulta
                 </td>

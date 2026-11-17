@@ -238,19 +238,19 @@ export default function CalendarView() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-white flex flex-col justify-between py-4 px-4 sm:px-8">
+    <div className="min-h-[calc(100vh-4rem)] bg-[#161617] flex flex-col justify-between py-4 px-4 sm:px-8">
       <div className="max-w-[1160px] w-full mx-auto">
         {/* Sub-cabeçalho Superior: Breadcrumb 'Início > Calendário' e Botão '+' */}
-        <div className="bg-[#f5f5f5] border border-slate-200/80 rounded-xs px-4 py-2.5 flex items-center justify-between gap-3 mb-5">
+        <div className="bg-[#161617] border border-white/10 rounded-xs px-4 py-2.5 flex items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-1.5 text-xs">
             <Link
               to="/"
-              className="text-[#0077b5] hover:underline font-normal"
+              className="text-[#E8AC51] hover:underline font-normal"
             >
               Início
             </Link>
-            <span className="text-slate-400">&gt;</span>
-            <span className="text-slate-500 font-normal">Calendário</span>
+            <span className="text-neutral-400">&gt;</span>
+            <span className="text-neutral-400 font-normal">Calendário</span>
           </div>
 
           {/* Botão '+' com Menu Dropdown de Seleção do Tipo de Evento */}
@@ -259,14 +259,14 @@ export default function CalendarView() {
               type="button"
               onClick={() => setIsAddDropdownOpen((prev) => !prev)}
               title="Adicionar Evento"
-              className="w-8 h-8 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs flex items-center justify-center transition-colors cursor-pointer"
+              className="w-8 h-8 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs flex items-center justify-center transition-colors cursor-pointer"
             >
               <Plus className="w-4 h-4 stroke-[2.8]" />
             </button>
 
             {isAddDropdownOpen && (
-              <div className="absolute right-0 mt-1.5 w-52 bg-white border border-slate-200 rounded-xs shadow-xl z-40 py-1.5">
-                <div className="px-3 py-1.5 border-b border-slate-100 text-[11px] font-semibold text-slate-700">
+              <div className="absolute right-0 mt-1.5 w-52 bg-[#1c1c1e] border border-white/10 rounded-xs shadow-xl z-40 py-1.5">
+                <div className="px-3 py-1.5 border-b border-white/10 text-[11px] font-semibold text-white">
                   Selecione o tipo de evento
                 </div>
                 {EVENT_MODAL_OPTIONS.map((opt) => (
@@ -274,7 +274,7 @@ export default function CalendarView() {
                     key={opt.key}
                     type="button"
                     onClick={() => handleSelectEventModal(opt.key)}
-                    className="w-full px-3 py-1.5 text-left text-xs text-slate-700 hover:bg-sky-50 flex items-center gap-2.5 transition-colors cursor-pointer"
+                    className="w-full px-3 py-1.5 text-left text-xs text-white hover:bg-[#1c1c1e] flex items-center gap-2.5 transition-colors cursor-pointer"
                   >
                     <span
                       className={`w-2.5 h-2.5 rounded-xs shrink-0 ${opt.color}`}
@@ -282,14 +282,14 @@ export default function CalendarView() {
                     <span>{opt.label}</span>
                   </button>
                 ))}
-                <div className="border-t border-slate-100 mt-1 pt-1">
+                <div className="border-t border-white/10 mt-1 pt-1">
                   <button
                     type="button"
                     onClick={() => {
                       setIsAddDropdownOpen(false);
                       setIsCategoryPopupOpen(true);
                     }}
-                    className="w-full px-3 py-1.5 text-left text-[11px] text-[#0077b5] hover:bg-sky-50 font-medium cursor-pointer"
+                    className="w-full px-3 py-1.5 text-left text-[11px] text-[#E8AC51] hover:bg-[#1c1c1e] font-medium cursor-pointer"
                   >
                     Abrir seletor de categoria...
                   </button>
@@ -305,7 +305,7 @@ export default function CalendarView() {
           <aside className="w-full lg:w-[205px] shrink-0 space-y-5">
             {/* Secção Multi Horário */}
             <div className="space-y-2.5">
-              <div className="flex items-center gap-2 text-[#0077b5]">
+              <div className="flex items-center gap-2 text-[#E8AC51]">
                 <LayoutList className="w-4 h-4 stroke-[2.2]" />
                 <h2 className="text-[15px] font-normal">Multi Horário</h2>
               </div>
@@ -315,55 +315,55 @@ export default function CalendarView() {
                 value={talentSearch}
                 onChange={(e) => setTalentSearch(e.target.value)}
                 placeholder="Pesquisar Talento..."
-                className="w-full h-8 px-2.5 border border-slate-200 rounded-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0077b5]"
+                className="w-full h-8 px-2.5 border border-white/10 rounded-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
               />
 
               <button
                 type="button"
-                className="h-8 px-3.5 bg-[#0077b5] hover:bg-[#006399] text-white text-[11px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
+                className="h-8 px-3.5 bg-[#880E1B] hover:bg-[#a31121] text-white text-[11px] font-semibold uppercase rounded-xs transition-colors cursor-pointer"
               >
                 PESQUISAR
               </button>
             </div>
 
-            <hr className="border-slate-200" />
+            <hr className="border-white/10" />
 
             {/* Secção Filtros */}
             <div className="space-y-3.5">
-              <div className="flex items-center gap-2 text-[#0077b5]">
-                <Filter className="w-3.5 h-3.5 fill-[#0077b5]" />
+              <div className="flex items-center gap-2 text-[#E8AC51]">
+                <Filter className="w-3.5 h-3.5 fill-[#E8AC51]" />
                 <h2 className="text-[15px] font-normal">Filtros</h2>
               </div>
 
               {/* POR USUÁRIO */}
               <div className="space-y-1">
-                <label className="block text-[9px] text-slate-500 uppercase tracking-wide">
+                <label className="block text-[9px] text-neutral-400 uppercase tracking-wide">
                   POR USUÁRIO
                 </label>
                 <div className="relative">
                   <select
                     value={userFilter}
                     onChange={(e) => setUserFilter(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-6 border border-slate-200 rounded-xs bg-[#f2f2f2] text-xs font-semibold text-slate-700 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-6 border border-white/10 rounded-xs bg-[#1c1c1e] text-xs font-semibold text-white appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="Você">Você</option>
                     <option value="Todos">Todos</option>
                     <option value="Mozart de Marias">Mozart de Marias</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
 
               {/* POR ATIVIDADE */}
               <div className="space-y-1">
-                <label className="block text-[9px] text-slate-500 uppercase tracking-wide">
+                <label className="block text-[9px] text-neutral-400 uppercase tracking-wide">
                   POR ATIVIDADE
                 </label>
                 <div className="relative">
                   <select
                     value={activityFilter}
                     onChange={(e) => setActivityFilter(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-6 border border-slate-200 rounded-xs bg-[#f2f2f2] text-xs font-semibold text-slate-700 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-6 border border-white/10 rounded-xs bg-[#1c1c1e] text-xs font-semibold text-white appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="11 de 15 selecionados">
                       11 de 15 selecionados
@@ -372,20 +372,20 @@ export default function CalendarView() {
                       Todas as atividades
                     </option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
 
               {/* Por Divisão */}
               <div className="space-y-1">
-                <label className="block text-[10px] text-slate-500">
+                <label className="block text-[10px] text-neutral-400">
                   Por Divisão
                 </label>
                 <div className="relative">
                   <select
                     value={divisionFilter}
                     onChange={(e) => setDivisionFilter(e.target.value)}
-                    className="w-full h-8 px-2.5 pr-6 border border-slate-200 rounded-xs bg-[#f2f2f2] text-xs font-semibold text-slate-700 appearance-none focus:outline-none focus:border-[#0077b5]"
+                    className="w-full h-8 px-2.5 pr-6 border border-white/10 rounded-xs bg-[#1c1c1e] text-xs font-semibold text-white appearance-none focus:outline-none focus:border-[#880E1B]"
                   >
                     <option value="Todos selecionados">
                       Todos selecionados
@@ -393,7 +393,7 @@ export default function CalendarView() {
                     <option value="Fashion">Fashion</option>
                     <option value="Comercial">Comercial</option>
                   </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
 
@@ -401,7 +401,7 @@ export default function CalendarView() {
               <div className="pt-1">
                 <button
                   type="button"
-                  className="h-8 px-3 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="h-8 px-3 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase rounded-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <CalendarIcon className="w-3.5 h-3.5" />
                   <span>EXPORTAR CALENDÁRIO</span>
@@ -416,12 +416,12 @@ export default function CalendarView() {
             <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
               {/* Navegação '<', '>', 'HOJE' e Mês/Ano Dinâmico */}
               <div className="flex items-center gap-2">
-                <div className="inline-flex rounded-xs border border-slate-200 overflow-hidden bg-[#f2f2f2]">
+                <div className="inline-flex rounded-xs border border-white/10 overflow-hidden bg-[#1c1c1e]">
                   <button
                     type="button"
                     onClick={handlePrevMonth}
                     title="Mês anterior"
-                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 border-r border-slate-200 transition-colors cursor-pointer"
+                    className="w-7 h-8 flex items-center justify-center text-white hover:bg-[#1c1c1e] border-r border-white/10 transition-colors cursor-pointer"
                   >
                     <ChevronLeft className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
@@ -429,7 +429,7 @@ export default function CalendarView() {
                     type="button"
                     onClick={handleNextMonth}
                     title="Próximo mês"
-                    className="w-7 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                    className="w-7 h-8 flex items-center justify-center text-white hover:bg-[#1c1c1e] transition-colors cursor-pointer"
                   >
                     <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
@@ -439,19 +439,19 @@ export default function CalendarView() {
                   type="button"
                   onClick={handleGoToReferenceMonth}
                   title="Voltar para Outubro 2026"
-                  className="h-8 px-2.5 bg-[#f5f5f5] hover:bg-slate-200 border border-slate-200 rounded-xs text-[10px] text-slate-500 uppercase font-medium transition-colors cursor-pointer"
+                  className="h-8 px-2.5 bg-[#161617] hover:bg-[#1c1c1e] border border-white/10 rounded-xs text-[10px] text-neutral-400 uppercase font-medium transition-colors cursor-pointer"
                 >
                   HOJE
                 </button>
 
-                <h1 className="text-[22px] text-slate-600 font-normal ml-2 tracking-tight">
+                <h1 className="text-[22px] text-neutral-400 font-normal ml-2 tracking-tight">
                   {formattedMonthYearLabel}
                 </h1>
               </div>
 
               {/* Botões de Vista ('MÊS', 'SEMANA', 'DIA') e 'BUSCAR DATA' */}
               <div className="flex flex-wrap items-center gap-2">
-                <div className="inline-flex rounded-xs border border-slate-200 overflow-hidden bg-[#f2f2f2]">
+                <div className="inline-flex rounded-xs border border-white/10 overflow-hidden bg-[#1c1c1e]">
                   {[
                     'LISTA MÊS',
                     'LISTA SEMANA',
@@ -466,10 +466,10 @@ export default function CalendarView() {
                         key={mode}
                         type="button"
                         onClick={() => setActiveViewMode(mode)}
-                        className={`h-8 px-2.5 text-[10px] font-medium uppercase border-r last:border-r-0 border-slate-200 transition-colors cursor-pointer ${
+                        className={`h-8 px-2.5 text-[10px] font-medium uppercase border-r last:border-r-0 border-white/10 transition-colors cursor-pointer ${
                           isActive
-                            ? 'bg-[#0077b5] text-white font-semibold'
-                            : 'text-slate-600 hover:bg-slate-200/70'
+                            ? 'bg-[#880E1B] text-white font-semibold'
+                            : 'text-neutral-400 hover:bg-[#1c1c1e]'
                         }`}
                       >
                         {mode}
@@ -479,8 +479,8 @@ export default function CalendarView() {
                 </div>
 
                 {/* Input BUSCAR DATA */}
-                <div className="inline-flex items-center border border-slate-200 rounded-xs overflow-hidden bg-[#f2f2f2] h-8">
-                  <span className="px-2.5 text-[10px] font-semibold text-slate-600 uppercase border-r border-slate-200 h-full flex items-center">
+                <div className="inline-flex items-center border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e] h-8">
+                  <span className="px-2.5 text-[10px] font-semibold text-neutral-400 uppercase border-r border-white/10 h-full flex items-center">
                     BUSCAR DATA
                   </span>
                   <input
@@ -491,13 +491,13 @@ export default function CalendarView() {
                       if (e.key === 'Enter') handleSearchDate();
                     }}
                     placeholder="__/__/____"
-                    className="w-24 h-full px-2 bg-white text-center text-xs text-slate-700 placeholder:text-slate-500 focus:outline-none"
+                    className="w-24 h-full px-2 bg-[#1c1c1e] text-center text-xs text-white placeholder:text-neutral-400 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={handleSearchDate}
                     title="Buscar data"
-                    className="w-7 h-full bg-[#eaeaea] hover:bg-slate-300 border-l border-slate-200 flex items-center justify-center text-slate-700 cursor-pointer"
+                    className="w-7 h-full bg-[#1c1c1e] hover:bg-[#1c1c1e] border-l border-white/10 flex items-center justify-center text-white cursor-pointer"
                   >
                     <Search className="w-3 h-3 stroke-[2.5]" />
                   </button>
@@ -546,13 +546,13 @@ export default function CalendarView() {
             </div>
 
             {/* Grelha Mensal Dinâmica do Calendário (Seg a Dom) */}
-            <div className="border border-slate-200 rounded-xs overflow-hidden bg-white">
+            <div className="border border-white/10 rounded-xs overflow-hidden bg-[#1c1c1e]">
               {/* Cabeçalho dos Dias da Semana */}
-              <div className="grid grid-cols-7 border-b border-slate-200 bg-white">
+              <div className="grid grid-cols-7 border-b border-white/10 bg-[#1c1c1e]">
                 {WEEKDAY_HEADERS.map((weekday) => (
                   <div
                     key={weekday}
-                    className="py-1 text-center text-xs font-bold text-slate-700 border-r last:border-r-0 border-slate-200"
+                    className="py-1 text-center text-xs font-bold text-white border-r last:border-r-0 border-white/10"
                   >
                     {weekday}
                   </div>
@@ -560,7 +560,7 @@ export default function CalendarView() {
               </div>
 
               {/* Semanas / Células Numeradas Dinâmicas */}
-              <div className="divide-y divide-slate-200">
+              <div className="divide-y divide-white/10">
                 {dynamicWeeksGrid.map((week, weekIdx) => (
                   <div key={weekIdx} className="grid grid-cols-7">
                     {week.map((cell) => {
@@ -572,18 +572,18 @@ export default function CalendarView() {
                         <div
                           key={cell.dateKey}
                           onClick={() => setIsCategoryPopupOpen(true)}
-                          className={`min-h-[104px] p-1.5 border-r last:border-r-0 border-slate-200 flex flex-col justify-between transition-colors cursor-pointer ${
+                          className={`min-h-[104px] p-1.5 border-r last:border-r-0 border-white/10 flex flex-col justify-between transition-colors cursor-pointer ${
                             cell.isHighlighted
-                              ? 'bg-[#fcf8e3]'
-                              : 'bg-white hover:bg-slate-50/70'
+                              ? 'bg-[#E8AC51]/15'
+                              : 'bg-[#1c1c1e] hover:bg-[#1c1c1e]'
                           }`}
                         >
                           <div className="flex justify-end">
                             <span
                               className={`text-xs leading-none ${
                                 cell.isCurrentMonth
-                                  ? 'text-slate-600 font-normal'
-                                  : 'text-slate-300 font-normal'
+                                  ? 'text-neutral-400 font-normal'
+                                  : 'text-neutral-400 font-normal'
                               }`}
                             >
                               {cell.day}
@@ -618,32 +618,32 @@ export default function CalendarView() {
       </div>
 
       {/* Rodapé Padrão Évora Models */}
-      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-slate-500">
+      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-neutral-400">
         <div className="flex items-center justify-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-slate-500">
+          <span className="inline-flex items-center gap-1.5 text-neutral-400">
             <Globe className="w-3.5 h-3.5" />
             <span>Idiomas</span>
           </span>
           <button
             type="button"
-            className="text-[#0077b5] underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ENGLISH
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ESPAÑOL
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             PORTUGUÊS
           </button>
         </div>
-        <p className="text-slate-500 text-xs">© Évora Models</p>
+        <p className="text-neutral-400 text-xs">© Évora Models</p>
       </footer>
 
       {/* Modal de Seleção de Categoria ("O que você gostaria fazer?" - Imagem 32) */}
@@ -653,17 +653,17 @@ export default function CalendarView() {
           onClick={() => setIsCategoryPopupOpen(false)}
         >
           <div
-            className="bg-white w-full max-w-[380px] rounded-xs shadow-2xl border border-slate-200 overflow-hidden"
+            className="bg-[#1c1c1e] w-full max-w-[380px] rounded-xs shadow-2xl border border-white/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-100">
-              <h3 className="text-[15px] font-bold text-slate-800">
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10">
+              <h3 className="text-[15px] font-bold text-white">
                 O que você gostaria fazer?
               </h3>
               <button
                 type="button"
                 onClick={() => setIsCategoryPopupOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                className="text-neutral-400 hover:text-white p-1 cursor-pointer"
               >
                 <X className="w-4 h-4 stroke-[2.5]" />
               </button>
@@ -677,7 +677,7 @@ export default function CalendarView() {
                       handleSelectEventModal(e.target.value);
                     }
                   }}
-                  className="w-full h-9 px-3 pr-8 border border-[#0077b5] rounded-xs bg-white text-xs font-bold text-slate-700 appearance-none focus:outline-none cursor-pointer"
+                  className="w-full h-9 px-3 pr-8 border border-[#880E1B] rounded-xs bg-[#1c1c1e] text-xs font-bold text-white appearance-none focus:outline-none cursor-pointer"
                 >
                   <option value="" disabled>
                     Selecione a categoria
@@ -688,7 +688,7 @@ export default function CalendarView() {
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
             </div>
           </div>

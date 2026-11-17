@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { ChevronDown, Trash2 } from 'lucide-react';
 
 const TAG_COLORS = [
-  '#0077b5',
-  '#2aa9d2',
+  '#880E1B',
+  '#E8AC51',
   '#3ab565',
   '#f8b400',
   '#f06711',
@@ -15,7 +15,7 @@ const TAG_COLORS = [
 
 export default function TagsConfig() {
   const [tagName, setTagName] = useState('');
-  const [selectedColor, setSelectedColor] = useState('#0077b5');
+  const [selectedColor, setSelectedColor] = useState('#880E1B');
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [tags, setTags] = useState([]);
 
@@ -44,22 +44,22 @@ export default function TagsConfig() {
       {/* Formulário Superior: Nome da etiqueta + Cor + Botão SALVAR */}
       <form
         onSubmit={handleSaveTag}
-        className="flex flex-wrap items-end gap-2.5 pb-4 border-b border-slate-200/90"
+        className="flex flex-wrap items-end gap-2.5 pb-4 border-b border-white/10"
       >
         <div>
-          <label className="block text-[11px] font-semibold text-slate-600 mb-1.5">
+          <label className="block text-[11px] font-semibold text-neutral-400 mb-1.5">
             Nome da etiqueta
           </label>
           <input
             type="text"
             value={tagName}
             onChange={(e) => setTagName(e.target.value)}
-            className="w-60 h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+            className="w-60 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-white focus:outline-none focus:border-[#880E1B]"
           />
         </div>
 
         <div className="relative">
-          <label className="block text-[11px] font-semibold text-slate-600 mb-1.5">
+          <label className="block text-[11px] font-semibold text-neutral-400 mb-1.5">
             Cor
           </label>
           <button
@@ -73,7 +73,7 @@ export default function TagsConfig() {
           </button>
 
           {isColorPickerOpen && (
-            <div className="absolute left-0 top-full mt-1.5 p-2 bg-white border border-slate-200 rounded-xs shadow-lg z-30 flex items-center gap-1.5">
+            <div className="absolute left-0 top-full mt-1.5 p-2 bg-[#1c1c1e] border border-white/10 rounded-xs shadow-lg z-30 flex items-center gap-1.5">
               {TAG_COLORS.map((color) => (
                 <button
                   key={color}
@@ -83,7 +83,7 @@ export default function TagsConfig() {
                     setIsColorPickerOpen(false);
                   }}
                   style={{ backgroundColor: color }}
-                  className="w-5 h-5 rounded-xs border border-black/10 hover:scale-110 transition-transform cursor-pointer"
+                  className="w-5 h-5 rounded-xs border border-white/10 hover:scale-110 transition-transform cursor-pointer"
                 />
               ))}
             </div>
@@ -92,7 +92,7 @@ export default function TagsConfig() {
 
         <button
           type="submit"
-          className="px-3 h-8 bg-[#5ba4cf] hover:bg-[#0077b5] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs transition-colors cursor-pointer"
+          className="px-3 h-8 bg-[#E8AC51] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs transition-colors cursor-pointer"
         >
           SALVAR
         </button>
@@ -101,10 +101,10 @@ export default function TagsConfig() {
       {/* Lista de Etiquetas ou Empty State Centralizado (Imagem 66) */}
       {tags.length === 0 ? (
         <div className="py-16 px-4 text-center max-w-lg mx-auto">
-          <p className="text-sm text-slate-500 font-normal">
+          <p className="text-sm text-neutral-400 font-normal">
             Sua conta não tem etiquetas de talento ainda.
           </p>
-          <p className="text-xs text-slate-400 leading-relaxed mt-1">
+          <p className="text-xs text-neutral-400 leading-relaxed mt-1">
             As etiquetas de talento permitem organização eficiente, recuperação
             rápida, colaboração aprimorada, maior eficiência e análise
             criteriosa

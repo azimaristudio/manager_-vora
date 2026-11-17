@@ -41,19 +41,19 @@ export default function SettingsLayout() {
   return (
     <div className="max-w-[1060px] mx-auto px-4 sm:px-6 pt-3 pb-10">
       {/* 1. Breadcrumb: Início > Configurações */}
-      <div className="w-full bg-[#f5f5f5] border border-slate-200/80 rounded-xs px-4 py-2 mb-6 text-xs flex items-center gap-2">
+      <div className="w-full bg-[#161617] border border-white/10 rounded-xs px-4 py-2 mb-6 text-xs flex items-center gap-2">
         <Link
           to="/"
-          className="text-[#0088cc] hover:underline font-normal"
+          className="text-[#E8AC51] hover:underline font-normal"
         >
           Início
         </Link>
-        <span className="text-slate-300">&gt;</span>
-        <span className="text-slate-400">Configurações</span>
+        <span className="text-neutral-400">&gt;</span>
+        <span className="text-neutral-400">Configurações</span>
       </div>
 
       {/* 2. Abas Principais (Menu Superior) */}
-      <div className="border-b border-slate-200 flex flex-wrap items-end">
+      <div className="border-b border-white/10 flex flex-wrap items-end">
         {SETTINGS_MAIN_TABS.map((tab, index) => {
           const isActive = activeMainTab === tab.key;
           const IconComponent = tab.Icon;
@@ -65,13 +65,13 @@ export default function SettingsLayout() {
               onClick={() => setActiveMainTab(tab.key)}
               className={`px-4 py-2.5 flex items-center gap-2 text-xs transition-colors cursor-pointer ${
                 isActive
-                  ? 'bg-white border-t border-l border-r border-slate-200 rounded-t-xs -mb-px text-slate-600 font-normal z-10'
-                  : `bg-[#f7f7f7] hover:bg-white border-t border-r ${
+                  ? 'bg-[#1c1c1e] border-t border-l border-r border-white/10 rounded-t-xs -mb-px text-neutral-400 font-normal z-10'
+                  : `bg-[#161617] hover:bg-[#1c1c1e] border-t border-r ${
                       index === 0 ? 'border-l' : ''
-                    } border-slate-200 text-slate-600 font-normal`
+                    } border-white/10 text-neutral-400 font-normal`
               }`}
             >
-              <span className="w-5 h-5 rounded-full bg-[#333333] text-white flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#1c1c1e] text-white flex items-center justify-center shrink-0">
                 <IconComponent className="w-3 h-3 stroke-[2.2]" />
               </span>
               <span>{tab.label}</span>
@@ -85,39 +85,39 @@ export default function SettingsLayout() {
         {ActiveTabContent ? (
           <ActiveTabContent />
         ) : (
-          <div className="py-10 px-6 text-xs text-slate-500">
-            Aba <strong className="text-slate-700">{currentTabObj?.label}</strong> pronta para implementação.
+          <div className="py-10 px-6 text-xs text-neutral-400">
+            Aba <strong className="text-white">{currentTabObj?.label}</strong> pronta para implementação.
           </div>
         )}
       </div>
 
       {/* 4. Rodapé Padrão Évora Models */}
-      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-slate-500">
+      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-neutral-400">
         <div className="flex items-center justify-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-slate-500">
+          <span className="inline-flex items-center gap-1.5 text-neutral-400">
             <Globe className="w-3.5 h-3.5" />
             <span>Idiomas</span>
           </span>
           <button
             type="button"
-            className="text-[#0077b5] underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ENGLISH
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ESPAÑOL
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             PORTUGUÊS
           </button>
         </div>
-        <p className="text-slate-500 text-xs">© Évora Models</p>
+        <p className="text-neutral-400 text-xs">© Évora Models</p>
       </footer>
     </div>
   );

@@ -109,19 +109,19 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-[960px] rounded-xs shadow-2xl border border-slate-200 overflow-hidden my-auto"
+        className="bg-[#1c1c1e] w-full max-w-[960px] rounded-xs shadow-2xl border border-white/10 overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cabeçalho */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-          <h2 className="text-[17px] text-slate-800 font-bold tracking-tight">
-            Opção <span className="font-normal text-slate-500">/ Novo</span>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+          <h2 className="text-[17px] text-white font-bold tracking-tight">
+            Opção <span className="font-normal text-neutral-400">/ Novo</span>
           </h2>
           <button
             type="button"
             onClick={onClose}
             title="Fechar"
-            className="text-slate-400 hover:text-slate-600 p-1 transition-colors cursor-pointer"
+            className="text-neutral-400 hover:text-white p-1 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[2.5]" />
           </button>
@@ -129,20 +129,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
         {/* Corpo do Modal (Imagem 41) */}
         <form onSubmit={handleSubmit}>
-          <div className="px-6 py-5 max-h-[78vh] overflow-y-auto text-[11px] text-slate-600 space-y-4">
+          <div className="px-6 py-5 max-h-[78vh] overflow-y-auto text-[11px] text-neutral-400 space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Coluna Esquerda */}
               <div className="lg:col-span-6 space-y-3">
                 {/* Departamento */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Departamento
                   </label>
                   <div className="col-span-9 relative">
                     <select
                       value={department}
                       onChange={(e) => setDepartment(e.target.value)}
-                      className="w-full h-8 px-2.5 pr-7 border border-slate-200 rounded-xs bg-white text-slate-700 font-semibold text-xs appearance-none focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 pr-7 border border-white/10 rounded-xs bg-[#1c1c1e] text-white font-semibold text-xs appearance-none focus:outline-none focus:border-[#880E1B]"
                     >
                       <option value="Todos departamentos">
                         Todos departamentos
@@ -151,13 +151,13 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       <option value="Fashion">Fashion</option>
                       <option value="Editorial">Editorial</option>
                     </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Tipo de opção */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Tipo de opção
                   </label>
                   <div className="col-span-9">
@@ -165,20 +165,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       <select
                         value={optionType}
                         onChange={(e) => setOptionType(e.target.value)}
-                        className="w-full h-8 px-2.5 pr-6 border border-slate-200 rounded-xs bg-white text-slate-700 font-semibold text-xs appearance-none focus:outline-none focus:border-[#0077b5]"
+                        className="w-full h-8 px-2.5 pr-6 border border-white/10 rounded-xs bg-[#1c1c1e] text-white font-semibold text-xs appearance-none focus:outline-none focus:border-[#880E1B]"
                       >
                         <option value="1ª Opção">1ª Opção</option>
                         <option value="2ª Opção">2ª Opção</option>
                         <option value="3ª Opção">3ª Opção</option>
                       </select>
-                      <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
                   </div>
                 </div>
 
                 {/* Casting */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Casting
                   </label>
                   <div className="col-span-9">
@@ -187,14 +187,14 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={casting}
                       onChange={(e) => setCasting(e.target.value)}
                       placeholder="Buscar castings existentes"
-                      className="w-full h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                   </div>
                 </div>
 
                 {/* Projeto * */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Projeto <span className="text-red-500">*</span>
                   </label>
                   <div className="col-span-9">
@@ -203,14 +203,14 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={project}
                       onChange={(e) => setProject(e.target.value)}
                       placeholder="Pesquisar um projeto ou declarar um novo"
-                      className="w-full h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                   </div>
                 </div>
 
                 {/* Cliente * */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Cliente <span className="text-red-500">*</span>
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -218,20 +218,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       type="text"
                       value={client}
                       onChange={(e) => setClient(e.target.value)}
-                      className="flex-1 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="flex-1 h-8 px-2.5 border border-white/10 rounded-xs text-white text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                     <button
                       type="button"
-                      className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                      className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                     >
-                      <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                      <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                     </button>
                   </div>
                 </div>
 
                 {/* Produtor */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Produtor
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -239,20 +239,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       type="text"
                       value={producer}
                       onChange={(e) => setProducer(e.target.value)}
-                      className="flex-1 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="flex-1 h-8 px-2.5 border border-white/10 rounded-xs text-white text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                     <button
                       type="button"
-                      className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                      className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                     >
-                      <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                      <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                     </button>
                   </div>
                 </div>
 
                 {/* Descrição */}
                 <div className="grid grid-cols-12 items-start gap-3">
-                  <label className="col-span-3 text-right text-slate-600 pt-1.5">
+                  <label className="col-span-3 text-right text-neutral-400 pt-1.5">
                     Descrição
                   </label>
                   <div className="col-span-9">
@@ -267,7 +267,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Mídias */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Mídias
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -276,20 +276,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={medias}
                       onChange={(e) => setMedias(e.target.value)}
                       placeholder="Selecione ou digite uma nova opção"
-                      className="flex-1 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="flex-1 h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                     <button
                       type="button"
-                      className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                      className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                     >
-                      <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                      <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                     </button>
                   </div>
                 </div>
 
                 {/* Tipo */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Tipo
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -298,20 +298,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={type}
                       onChange={(e) => setType(e.target.value)}
                       placeholder="Selecione ou digite uma nova opção"
-                      className="flex-1 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="flex-1 h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                     <button
                       type="button"
-                      className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                      className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                     >
-                      <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                      <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                     </button>
                   </div>
                 </div>
 
                 {/* Produto */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Produto
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -320,20 +320,20 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={product}
                       onChange={(e) => setProduct(e.target.value)}
                       placeholder="Selecione ou digite uma nova opção"
-                      className="flex-1 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="flex-1 h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                     <button
                       type="button"
-                      className="text-[#0077b5] hover:text-[#005f92] cursor-pointer shrink-0"
+                      className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer shrink-0"
                     >
-                      <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                      <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                     </button>
                   </div>
                 </div>
 
                 {/* Exclusividade */}
                 <div className="grid grid-cols-12 items-center gap-3 pt-1">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Exclusividade
                   </label>
                   <div className="col-span-9 flex items-center gap-4">
@@ -341,11 +341,11 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       type="checkbox"
                       checked={exclusivity}
                       onChange={(e) => setExclusivity(e.target.checked)}
-                      className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5] cursor-pointer"
+                      className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51] cursor-pointer"
                     />
                     <button
                       type="button"
-                      className="text-[10px] text-[#0077b5] hover:underline uppercase cursor-pointer"
+                      className="text-[10px] text-[#E8AC51] hover:underline uppercase cursor-pointer"
                     >
                       ADICIONAR NOTA
                     </button>
@@ -354,12 +354,12 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Período de uso */}
                 <div className="grid grid-cols-12 items-start gap-3 pt-1">
-                  <label className="col-span-3 text-right text-slate-600 pt-1">
+                  <label className="col-span-3 text-right text-neutral-400 pt-1">
                     Período de uso
                   </label>
                   <div className="col-span-9 space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-slate-400 text-[10px]">
+                      <span className="text-neutral-400 text-[10px]">
                         Período
                       </span>
                       <input
@@ -367,25 +367,25 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                         min="0"
                         value={periodCount}
                         onChange={(e) => setPeriodCount(e.target.value)}
-                        className="w-12 h-7 px-1.5 border border-slate-200 rounded-xs text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                        className="w-12 h-7 px-1.5 border border-white/10 rounded-xs text-xs text-white focus:outline-none focus:border-[#880E1B]"
                       />
                       <div className="relative w-24">
                         <select
                           value={periodUnit}
                           onChange={(e) => setPeriodUnit(e.target.value)}
-                          className="w-full h-7 px-2 pr-6 border border-slate-200 rounded-xs bg-white text-slate-700 font-semibold text-[11px] appearance-none focus:outline-none focus:border-[#0077b5]"
+                          className="w-full h-7 px-2 pr-6 border border-white/10 rounded-xs bg-[#1c1c1e] text-white font-semibold text-[11px] appearance-none focus:outline-none focus:border-[#880E1B]"
                         >
                           <option value="dia(s)">dia(s)</option>
                           <option value="semana(s)">semana(s)</option>
                           <option value="mês(es)">mês(es)</option>
                         </select>
-                        <ChevronDown className="w-3 h-3 text-slate-400 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <ChevronDown className="w-3 h-3 text-neutral-400 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3">
                       <div>
-                        <span className="block text-[10px] text-slate-400 mb-0.5">
+                        <span className="block text-[10px] text-neutral-400 mb-0.5">
                           Começo
                         </span>
                         <input
@@ -393,17 +393,17 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                           value={startDate}
                           onChange={(e) => setStartDate(e.target.value)}
                           placeholder="__/__/____"
-                          className="w-20 h-7 px-1.5 border border-slate-200 rounded-xs text-center text-slate-700 placeholder:text-slate-500 text-[11px] focus:outline-none focus:border-[#0077b5]"
+                          className="w-20 h-7 px-1.5 border border-white/10 rounded-xs text-center text-white placeholder:text-neutral-400 text-[11px] focus:outline-none focus:border-[#880E1B]"
                         />
                       </div>
                       <div className="flex items-center gap-1.5 pt-3.5">
-                        <span className="text-[10px] text-slate-400">Fim</span>
+                        <span className="text-[10px] text-neutral-400">Fim</span>
                         <input
                           type="text"
                           value={endDate}
                           onChange={(e) => setEndDate(e.target.value)}
                           placeholder="__/__/____"
-                          className="w-20 h-7 px-1.5 border border-slate-200 rounded-xs text-center text-slate-700 placeholder:text-slate-500 text-[11px] focus:outline-none focus:border-[#0077b5]"
+                          className="w-20 h-7 px-1.5 border border-white/10 rounded-xs text-center text-white placeholder:text-neutral-400 text-[11px] focus:outline-none focus:border-[#880E1B]"
                         />
                       </div>
                     </div>
@@ -412,7 +412,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Território de exclusividade */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600 leading-tight">
+                  <label className="col-span-3 text-right text-neutral-400 leading-tight">
                     Território de
                     <br />
                     exclusividade
@@ -423,7 +423,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       value={territory}
                       onChange={(e) => setTerritory(e.target.value)}
                       placeholder="Selecione ou digite uma nova opção"
-                      className="w-full h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                      className="w-full h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                     />
                   </div>
                 </div>
@@ -433,7 +433,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
               <div className="lg:col-span-6 space-y-3">
                 {/* Orçamento * */}
                 <div className="grid grid-cols-12 items-center gap-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Orçamento <span className="text-red-500">*</span>
                   </label>
                   <div className="col-span-9 flex flex-wrap items-center gap-1.5">
@@ -441,35 +441,35 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                       type="text"
                       value={budgetAmount}
                       onChange={(e) => setBudgetAmount(e.target.value)}
-                      className="w-28 h-8 px-2 border border-slate-200 rounded-xs text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                      className="w-28 h-8 px-2 border border-white/10 rounded-xs text-xs text-white focus:outline-none focus:border-[#880E1B]"
                     />
                     <div className="relative w-24">
                       <select
                         value={budgetCurrency}
                         onChange={(e) => setBudgetCurrency(e.target.value)}
-                        className="w-full h-8 px-1.5 pr-5 border border-slate-200 rounded-xs bg-white text-slate-700 font-semibold text-[11px] truncate appearance-none focus:outline-none focus:border-[#0077b5]"
+                        className="w-full h-8 px-1.5 pr-5 border border-white/10 rounded-xs bg-[#1c1c1e] text-white font-semibold text-[11px] truncate appearance-none focus:outline-none focus:border-[#880E1B]"
                       >
                         <option value="BRL - Brazil R$">BRL - Brazil</option>
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                       </select>
-                      <ChevronDown className="w-3 h-3 text-slate-400 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <ChevronDown className="w-3 h-3 text-neutral-400 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
-                    <span className="text-slate-400">+</span>
+                    <span className="text-neutral-400">+</span>
                     <input
                       type="text"
                       value={budgetExtraPercent}
                       onChange={(e) => setBudgetExtraPercent(e.target.value)}
-                      className="w-10 h-8 px-1.5 border border-slate-200 rounded-xs text-center font-semibold text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                      className="w-10 h-8 px-1.5 border border-white/10 rounded-xs text-center font-semibold text-xs text-white focus:outline-none focus:border-[#880E1B]"
                     />
-                    <span className="text-slate-500">%</span>
-                    <Info className="w-3.5 h-3.5 fill-[#0077b5] text-white" />
+                    <span className="text-neutral-400">%</span>
+                    <Info className="w-3.5 h-3.5 fill-[#E8AC51] text-white" />
                   </div>
                 </div>
 
                 {/* Data(s) do trabalho */}
                 <div className="grid grid-cols-12 items-start gap-3">
-                  <label className="col-span-3 text-right text-slate-600 pt-1.5">
+                  <label className="col-span-3 text-right text-neutral-400 pt-1.5">
                     Data(s) do trabalho
                   </label>
                   <div className="col-span-9 space-y-2">
@@ -478,16 +478,16 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                         key={idx}
                         className="flex flex-wrap items-center gap-1.5"
                       >
-                        <Calendar className="w-4 h-4 text-[#0077b5] shrink-0" />
+                        <Calendar className="w-4 h-4 text-[#E8AC51] shrink-0" />
                         <input
                           type="text"
                           value={row.date}
                           onChange={(e) =>
                             handleDateChange(idx, 'date', e.target.value)
                           }
-                          className="w-24 h-8 px-2 border border-slate-200 rounded-xs text-center font-semibold text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                          className="w-24 h-8 px-2 border border-white/10 rounded-xs text-center font-semibold text-xs text-white focus:outline-none focus:border-[#880E1B]"
                         />
-                        <Clock className="w-4 h-4 text-[#0077b5] ml-2 shrink-0" />
+                        <Clock className="w-4 h-4 text-[#E8AC51] ml-2 shrink-0" />
                         <input
                           type="text"
                           value={row.startTime}
@@ -495,9 +495,9 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                             handleDateChange(idx, 'startTime', e.target.value)
                           }
                           placeholder="__:__"
-                          className="w-12 h-8 px-1 border border-slate-200 rounded-xs text-center font-semibold text-xs text-slate-700 focus:outline-none focus:border-[#0077b5]"
+                          className="w-12 h-8 px-1 border border-white/10 rounded-xs text-center font-semibold text-xs text-white focus:outline-none focus:border-[#880E1B]"
                         />
-                        <span className="text-slate-400">-</span>
+                        <span className="text-neutral-400">-</span>
                         <input
                           type="text"
                           value={row.endTime}
@@ -505,21 +505,21 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                             handleDateChange(idx, 'endTime', e.target.value)
                           }
                           placeholder="__:__"
-                          className="w-12 h-8 px-1 border border-slate-200 rounded-xs text-center text-xs text-slate-700 placeholder:text-slate-500 focus:outline-none focus:border-[#0077b5]"
+                          className="w-12 h-8 px-1 border border-white/10 rounded-xs text-center text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
                         />
                         <button
                           type="button"
                           onClick={handleAddDateRow}
-                          className="text-[#0077b5] hover:text-[#005f92] cursor-pointer"
+                          className="text-[#E8AC51] hover:text-[#E8AC51] cursor-pointer"
                         >
-                          <PlusCircle className="w-4 h-4 fill-[#0077b5] text-white" />
+                          <PlusCircle className="w-4 h-4 fill-[#E8AC51] text-white" />
                         </button>
                       </div>
                     ))}
                     <button
                       type="button"
                       onClick={handleAddDateRow}
-                      className="inline-flex items-center gap-1 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold px-2.5 py-1 rounded-xs cursor-pointer"
+                      className="inline-flex items-center gap-1 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold px-2.5 py-1 rounded-xs cursor-pointer"
                     >
                       <Plus className="w-3 h-3 stroke-[3]" />
                       <span>DATA</span>
@@ -529,7 +529,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Notas */}
                 <div className="grid grid-cols-12 items-start gap-3">
-                  <label className="col-span-3 text-right text-slate-600 pt-1.5">
+                  <label className="col-span-3 text-right text-neutral-400 pt-1.5">
                     Notas
                   </label>
                   <div className="col-span-9">
@@ -544,7 +544,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Notas Internas */}
                 <div className="grid grid-cols-12 items-start gap-3 pt-2">
-                  <label className="col-span-3 text-right text-slate-600 pt-1.5">
+                  <label className="col-span-3 text-right text-neutral-400 pt-1.5">
                     Notas Internas
                   </label>
                   <div className="col-span-9">
@@ -559,7 +559,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
                 {/* Arquivos Anexados */}
                 <div className="grid grid-cols-12 items-center gap-3 pt-3">
-                  <label className="col-span-3 text-right text-slate-600">
+                  <label className="col-span-3 text-right text-neutral-400">
                     Arquivos Anexados
                   </label>
                   <div className="col-span-9 flex items-center gap-2">
@@ -575,13 +575,13 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="inline-flex items-center gap-1.5 text-[10px] text-[#0077b5] hover:underline uppercase cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-[10px] text-[#E8AC51] hover:underline uppercase cursor-pointer"
                     >
-                      <Folder className="w-3.5 h-3.5 fill-[#0077b5] text-[#0077b5]" />
+                      <Folder className="w-3.5 h-3.5 fill-[#E8AC51] text-[#E8AC51]" />
                       <span>PESQUISAR</span>
                     </button>
                     {attachedFileName && (
-                      <span className="text-[10px] text-slate-500 truncate max-w-[160px]">
+                      <span className="text-[10px] text-neutral-400 truncate max-w-[160px]">
                         {attachedFileName}
                       </span>
                     )}
@@ -592,7 +592,7 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
 
             {/* Linha Inferior: Talento * */}
             <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-3 pt-1">
-              <label className="lg:col-span-1 lg:text-right text-slate-600 pt-2">
+              <label className="lg:col-span-1 lg:text-right text-neutral-400 pt-2">
                 Talento <span className="text-red-500">*</span>
               </label>
               <div className="lg:col-span-11 space-y-2 pl-0 lg:pl-7">
@@ -602,32 +602,32 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
                     value={talent}
                     onChange={(e) => setTalent(e.target.value)}
                     placeholder="Pesquisar Talento..."
-                    className="w-full sm:w-80 h-8 px-2.5 border border-slate-200 rounded-xs text-slate-700 placeholder:text-slate-400 text-xs focus:outline-none focus:border-[#0077b5]"
+                    className="w-full sm:w-80 h-8 px-2.5 border border-white/10 rounded-xs text-white placeholder:text-neutral-400 text-xs focus:outline-none focus:border-[#880E1B]"
                   />
 
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1.5 text-[10px] text-[#0077b5] hover:underline uppercase cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-[10px] text-[#E8AC51] hover:underline uppercase cursor-pointer"
                   >
-                    <Package className="w-3.5 h-3.5 text-[#0077b5]" />
+                    <Package className="w-3.5 h-3.5 text-[#E8AC51]" />
                     <span>ADICIONAR A PARTIR DE PACOTES</span>
                   </button>
 
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1 bg-[#0077b5] hover:bg-[#006399] text-white text-[10px] font-semibold px-2.5 py-1.5 rounded-xs uppercase cursor-pointer"
+                    className="inline-flex items-center gap-1 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold px-2.5 py-1.5 rounded-xs uppercase cursor-pointer"
                   >
                     <Filter className="w-3 h-3 fill-white" />
                     <span>FILTRO</span>
                   </button>
                 </div>
 
-                <label className="inline-flex items-center gap-1.5 cursor-pointer text-[11px] text-slate-600">
+                <label className="inline-flex items-center gap-1.5 cursor-pointer text-[11px] text-neutral-400">
                   <input
                     type="checkbox"
                     checked={checkSchedule}
                     onChange={(e) => setCheckSchedule(e.target.checked)}
-                    className="w-3.5 h-3.5 rounded-xs border-slate-300 text-[#0077b5]"
+                    className="w-3.5 h-3.5 rounded-xs border-white/10 text-[#E8AC51]"
                   />
                   <span>Conferir Agenda dos Participantes</span>
                 </label>
@@ -636,17 +636,17 @@ export default function AddOpcaoModal({ isOpen, onClose, onSave }) {
           </div>
 
           {/* Rodapé */}
-          <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-4 bg-white">
+          <div className="px-6 py-4 border-t border-white/10 flex items-center justify-end gap-4 bg-[#1c1c1e]">
             <button
               type="button"
               onClick={onClose}
-              className="text-[11px] text-[#0077b5] hover:underline uppercase font-medium px-2 py-1.5 cursor-pointer"
+              className="text-[11px] text-[#E8AC51] hover:underline uppercase font-medium px-2 py-1.5 cursor-pointer"
             >
               CANCELAR
             </button>
             <button
               type="submit"
-              className="bg-[#0077b5] hover:bg-[#006399] text-white text-[11px] font-semibold uppercase px-4 py-2 rounded-xs transition-colors cursor-pointer"
+              className="bg-[#880E1B] hover:bg-[#a31121] text-white text-[11px] font-semibold uppercase px-4 py-2 rounded-xs transition-colors cursor-pointer"
             >
               SALVAR
             </button>

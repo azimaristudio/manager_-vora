@@ -67,10 +67,10 @@ export default function CurrencyConfig() {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
         {/* Coluna Esquerda: Minhas Moedas */}
         <div>
-          <h3 className="text-sm font-bold text-slate-700 mb-1.5">
+          <h3 className="text-sm font-bold text-white mb-1.5">
             Minhas Moedas
           </h3>
-          <div className="h-52 bg-white border border-slate-200 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
+          <div className="h-52 bg-[#1c1c1e] border border-white/10 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
             {myCurrencies.map((curr) => {
               const isSelected = selectedMyCode === curr.code;
               return (
@@ -80,8 +80,8 @@ export default function CurrencyConfig() {
                   onClick={() => setSelectedMyCode(curr.code)}
                   className={`w-full text-left px-1.5 py-0.5 rounded-xs text-[11px] font-bold transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-sky-100 text-[#0077b5]'
-                      : 'text-slate-700 hover:bg-slate-100'
+                      ? 'bg-[#1c1c1e] text-[#E8AC51]'
+                      : 'text-white hover:bg-[#1c1c1e]'
                   }`}
                 >
                   {curr.label}
@@ -97,7 +97,7 @@ export default function CurrencyConfig() {
           <button
             type="button"
             onClick={handleSetDefault}
-            className="px-4 py-1.5 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
+            className="px-4 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
           >
             PADRÃO
           </button>
@@ -105,7 +105,7 @@ export default function CurrencyConfig() {
           <button
             type="button"
             onClick={handleAddCurrency}
-            className="px-3.5 py-1.5 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
+            className="px-3.5 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
           >
             &larr; ADICIONAR
           </button>
@@ -113,7 +113,7 @@ export default function CurrencyConfig() {
           <button
             type="button"
             onClick={handleRemoveCurrency}
-            className="px-4 py-1.5 bg-[#e6e6e6] hover:bg-slate-300 text-slate-700 text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
+            className="px-4 py-1.5 bg-[#1c1c1e] hover:bg-[#1c1c1e] text-white text-[10px] font-semibold uppercase rounded-full transition-colors cursor-pointer"
           >
             REMOVER &rarr;
           </button>
@@ -121,10 +121,10 @@ export default function CurrencyConfig() {
 
         {/* Coluna Direita: Moedas do Mundo */}
         <div>
-          <h3 className="text-sm font-bold text-slate-700 mb-1.5">
+          <h3 className="text-sm font-bold text-white mb-1.5">
             Moedas do Mundo
           </h3>
-          <div className="h-52 bg-white border border-slate-200 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
+          <div className="h-52 bg-[#1c1c1e] border border-white/10 rounded-xs p-2.5 overflow-y-auto space-y-1.5">
             {worldCurrencies.map((curr) => {
               const isSelected = selectedWorldCode === curr.code;
               return (
@@ -134,8 +134,8 @@ export default function CurrencyConfig() {
                   onClick={() => setSelectedWorldCode(curr.code)}
                   className={`w-full text-left px-1.5 py-0.5 rounded-xs text-[11px] font-bold transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-sky-100 text-[#0077b5]'
-                      : 'text-slate-700 hover:bg-slate-100'
+                      ? 'bg-[#1c1c1e] text-[#E8AC51]'
+                      : 'text-white hover:bg-[#1c1c1e]'
                   }`}
                 >
                   {curr.label}

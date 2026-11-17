@@ -110,33 +110,33 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-white flex flex-col justify-between py-4 px-4 sm:px-8">
+    <div className="min-h-[calc(100vh-4rem)] bg-[#161617] flex flex-col justify-between py-4 px-4 sm:px-8">
       <div className="max-w-[1160px] w-full mx-auto">
         {/* Topo: Breadcrumb dinâmico 'Início > Projetos > foto' e barra de pesquisa */}
-        <div className="bg-[#f5f5f5] border border-slate-200/80 rounded-xs px-4 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+        <div className="bg-[#161617] border border-white/10 rounded-xs px-4 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-1.5 text-xs">
             <Link
               to="/"
-              className="text-[#0077b5] hover:underline font-normal"
+              className="text-[#E8AC51] hover:underline font-normal"
             >
               Início
             </Link>
-            <span className="text-slate-400">&gt;</span>
+            <span className="text-neutral-400">&gt;</span>
             <Link
               to="/projetos"
-              className="text-[#0077b5] hover:underline font-normal"
+              className="text-[#E8AC51] hover:underline font-normal"
             >
               Projetos
             </Link>
-            <span className="text-slate-400">&gt;</span>
-            <span className="text-slate-500 font-normal">
+            <span className="text-neutral-400">&gt;</span>
+            <span className="text-neutral-400 font-normal">
               {projectState.projectName}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center bg-white border border-slate-200 rounded-xs overflow-hidden">
-              <span className="px-2.5 py-1.5 bg-[#eaeaea] border-r border-slate-200 text-slate-600 flex items-center justify-center">
+            <div className="flex items-center bg-[#1c1c1e] border border-white/10 rounded-xs overflow-hidden">
+              <span className="px-2.5 py-1.5 bg-[#1c1c1e] border-r border-white/10 text-neutral-400 flex items-center justify-center">
                 <Search className="w-3.5 h-3.5 stroke-[2.2]" />
               </span>
               <input
@@ -144,7 +144,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
                 value={topSearch}
                 onChange={(e) => setTopSearch(e.target.value)}
                 placeholder="Pesquisar projeto"
-                className="w-48 sm:w-60 px-2.5 py-1 text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none"
+                className="w-48 sm:w-60 px-2.5 py-1 text-xs text-white placeholder:text-neutral-400 focus:outline-none"
               />
             </div>
 
@@ -152,7 +152,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
               type="button"
               onClick={handleOpenCreateModal}
               title="Criar novo projeto"
-              className="w-7 h-7 bg-[#0077b5] hover:bg-[#006399] text-white rounded-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
+              className="w-7 h-7 bg-[#880E1B] hover:bg-[#a31121] text-white rounded-xs flex items-center justify-center transition-colors cursor-pointer shrink-0"
             >
               <Plus className="w-4 h-4 stroke-[2.8]" />
             </button>
@@ -160,16 +160,16 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
         </div>
 
         {/* Container Principal de Detalhes do Projeto (Imagem 30) */}
-        <div className="border border-slate-200 rounded-xs bg-white overflow-hidden">
+        <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden">
           {/* Bloco Superior de Informações */}
-          <div className="bg-[#f4f4f4] border-b border-slate-200 px-6 py-5 relative">
+          <div className="bg-[#161617] border-b border-white/10 px-6 py-5 relative">
             {/* Link EDITAR no canto superior direito */}
             <button
               type="button"
               onClick={handleOpenEditModal}
-              className="absolute top-5 right-6 inline-flex items-center gap-1.5 text-[11px] text-[#0077b5] hover:underline uppercase font-normal cursor-pointer"
+              className="absolute top-5 right-6 inline-flex items-center gap-1.5 text-[11px] text-[#E8AC51] hover:underline uppercase font-normal cursor-pointer"
             >
-              <Pencil className="w-3.5 h-3.5 fill-[#0077b5] text-[#0077b5]" />
+              <Pencil className="w-3.5 h-3.5 fill-[#E8AC51] text-[#E8AC51]" />
               <span>EDITAR</span>
             </button>
 
@@ -177,20 +177,20 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
               {/* Esquerda: Título, Status e Metadados de Criação */}
               <div className="lg:col-span-4 space-y-4">
                 <div>
-                  <h1 className="text-[25px] text-slate-700 font-normal leading-tight">
+                  <h1 className="text-[25px] text-white font-normal leading-tight">
                     {projectState.projectName}{' '}
-                    <span className="text-[17px] text-slate-500 font-normal">
+                    <span className="text-[17px] text-neutral-400 font-normal">
                       #{projectState.id}
                     </span>
                   </h1>
 
                   <div className="mt-2.5 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="text-slate-400 text-[11px]">Status:</span>
+                    <span className="text-neutral-400 text-[11px]">Status:</span>
                     <span
                       className={`px-2.5 py-1 rounded-xs text-white text-[11px] font-bold uppercase leading-none ${
                         projectState.status === 'ATIVO'
-                          ? 'bg-[#0077b5]'
-                          : 'bg-slate-500'
+                          ? 'bg-[#880E1B]'
+                          : 'bg-[#1c1c1e]'
                       }`}
                     >
                       {projectState.status}
@@ -199,9 +199,9 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
                     <button
                       type="button"
                       onClick={handleToggleProjectStatus}
-                      className="inline-flex items-center gap-1 text-[11px] text-[#0077b5] hover:underline uppercase ml-1 cursor-pointer"
+                      className="inline-flex items-center gap-1 text-[11px] text-[#E8AC51] hover:underline uppercase ml-1 cursor-pointer"
                     >
-                      <ToggleLeft className="w-4 h-4 text-[#0077b5]" />
+                      <ToggleLeft className="w-4 h-4 text-[#E8AC51]" />
                       <span>
                         {projectState.status === 'ATIVO'
                           ? 'CANCELAR ESTE PROJETO'
@@ -214,28 +214,28 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
                 {/* Metadados de Booker e Criação */}
                 <div className="space-y-1.5 pt-1 text-[11px]">
                   <div className="grid grid-cols-12 gap-3 items-center">
-                    <span className="col-span-5 text-right text-slate-400">
+                    <span className="col-span-5 text-right text-neutral-400">
                       Booker Responsável
                     </span>
-                    <span className="col-span-7 text-slate-800 italic">
+                    <span className="col-span-7 text-white italic">
                       {projectState.responsibleBooker}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-12 gap-3 items-center">
-                    <span className="col-span-5 text-right text-slate-400">
+                    <span className="col-span-5 text-right text-neutral-400">
                       Criação por
                     </span>
-                    <span className="col-span-7 text-slate-800 italic">
+                    <span className="col-span-7 text-white italic">
                       {projectState.createdBy}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-12 gap-3 items-center">
-                    <span className="col-span-5 text-right text-slate-400">
+                    <span className="col-span-5 text-right text-neutral-400">
                       Criado em
                     </span>
-                    <span className="col-span-7 text-slate-800 italic">
+                    <span className="col-span-7 text-white italic">
                       {projectState.createdAt}
                     </span>
                   </div>
@@ -246,24 +246,24 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
               <div className="lg:col-span-8 pr-16 space-y-1.5 text-[11px]">
                 {/* Departamento */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Departamento
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.department}
                   </span>
                 </div>
 
                 {/* Cliente */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Cliente
                   </span>
                   <span className="col-span-8 sm:col-span-9">
                     <button
                       type="button"
                       onClick={() => navigate('/contatos')}
-                      className="text-[#0077b5] hover:underline font-bold text-xs cursor-pointer"
+                      className="text-[#E8AC51] hover:underline font-bold text-xs cursor-pointer"
                     >
                       {projectState.client}
                     </button>
@@ -272,92 +272,92 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
 
                 {/* Produtor */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Produtor
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.producer}
                   </span>
                 </div>
 
                 {/* Data(s) do trabalho */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Data(s) do trabalho
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.workDatesLabel}
                   </span>
                 </div>
 
                 {/* Descrição */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Descrição
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.description}
                   </span>
                 </div>
 
                 {/* Mídias */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Mídias
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.medias}
                   </span>
                 </div>
 
                 {/* Tipo */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Tipo
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.type}
                   </span>
                 </div>
 
                 {/* Produto */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Produto
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.products}
                   </span>
                 </div>
 
                 {/* Exclusividade */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[18px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Exclusividade
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs uppercase">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs uppercase">
                     {projectState.exclusivity ? 'SIM' : 'NÃO'}
                   </span>
                 </div>
 
                 {/* Período de uso */}
                 <div className="grid grid-cols-12 gap-4 items-start min-h-[34px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400">
                     Período de uso
                   </span>
-                  <div className="col-span-8 sm:col-span-9 text-slate-700 text-xs pt-4">
+                  <div className="col-span-8 sm:col-span-9 text-white text-xs pt-4">
                     {projectState.usagePeriodRangeLabel}
                   </div>
                 </div>
 
                 {/* Território de exclusividade */}
                 <div className="grid grid-cols-12 gap-4 items-baseline min-h-[24px]">
-                  <span className="col-span-4 sm:col-span-3 text-right text-slate-400 leading-tight">
+                  <span className="col-span-4 sm:col-span-3 text-right text-neutral-400 leading-tight">
                     Território de
                     <br />
                     exclusividade
                   </span>
-                  <span className="col-span-8 sm:col-span-9 text-slate-700 text-xs">
+                  <span className="col-span-8 sm:col-span-9 text-white text-xs">
                     {projectState.exclusivityTerritory}
                   </span>
                 </div>
@@ -366,29 +366,29 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
           </div>
 
           {/* Secções Inferiores (3 Colunas: Pacotes, Atividades, Orçamento + Faturamento Sumário) */}
-          <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-5 items-start bg-white">
+          <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-5 items-start bg-[#1c1c1e]">
             {/* Coluna 1: Card 'Pacotes' */}
-            <div className="border border-slate-200 rounded-xs bg-white overflow-hidden shadow-2xs">
-              <div className="bg-[#f5f5f5] px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
-                <h3 className="text-[13px] font-bold text-slate-800">
+            <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
+              <div className="bg-[#161617] px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+                <h3 className="text-[13px] font-bold text-white">
                   Pacotes
                 </h3>
                 <button
                   type="button"
                   onClick={() => navigate('/pacotes')}
-                  className="inline-flex items-center gap-1 text-[11px] text-[#0077b5] hover:underline uppercase font-normal cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[11px] text-[#E8AC51] hover:underline uppercase font-normal cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5 stroke-[2.8]" />
                   <span>ADICIONAR</span>
                 </button>
               </div>
-              <div className="min-h-[42px] bg-white" />
+              <div className="min-h-[42px] bg-[#1c1c1e]" />
             </div>
 
             {/* Coluna 2: Card 'Atividades' */}
-            <div className="border border-slate-200 rounded-xs bg-white overflow-hidden shadow-2xs">
-              <div className="bg-[#f5f5f5] px-4 py-2.5 border-b border-slate-200">
-                <h3 className="text-[13px] font-bold text-slate-800">
+            <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
+              <div className="bg-[#161617] px-4 py-2.5 border-b border-white/10">
+                <h3 className="text-[13px] font-bold text-white">
                   Atividades
                 </h3>
               </div>
@@ -412,7 +412,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
 
                 {/* Mensagem 'No activities found' */}
                 <div className="py-8 text-center">
-                  <p className="text-[13px] text-slate-400 font-normal">
+                  <p className="text-[13px] text-neutral-400 font-normal">
                     No activities found
                   </p>
                 </div>
@@ -422,30 +422,30 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
             {/* Coluna 3: Card 'Orçamento' e Card 'Faturamento Sumário' */}
             <div className="space-y-4">
               {/* Card 'Orçamento' */}
-              <div className="border border-slate-200 rounded-xs bg-white overflow-hidden shadow-2xs">
-                <div className="bg-[#f5f5f5] px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
-                  <h3 className="text-[13px] font-bold text-slate-800">
+              <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
+                <div className="bg-[#161617] px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+                  <h3 className="text-[13px] font-bold text-white">
                     Orçamento
                   </h3>
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1 text-[11px] text-[#0077b5] hover:underline uppercase font-normal cursor-pointer"
+                    className="inline-flex items-center gap-1 text-[11px] text-[#E8AC51] hover:underline uppercase font-normal cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5 stroke-[2.8]" />
                     <span>ADD</span>
                   </button>
                 </div>
-                <div className="min-h-[36px] bg-white" />
+                <div className="min-h-[36px] bg-[#1c1c1e]" />
               </div>
 
               {/* Card 'Faturamento Sumário' */}
-              <div className="border border-slate-200 rounded-xs bg-white overflow-hidden shadow-2xs">
-                <div className="bg-[#f5f5f5] px-4 py-2.5 border-b border-slate-200">
-                  <h3 className="text-[13px] font-bold text-slate-800">
+              <div className="border border-white/10 rounded-xs bg-[#1c1c1e] overflow-hidden shadow-2xs">
+                <div className="bg-[#161617] px-4 py-2.5 border-b border-white/10">
+                  <h3 className="text-[13px] font-bold text-white">
                     Faturamento Sumário
                   </h3>
                 </div>
-                <div className="p-4 space-y-1.5 text-[12px] text-slate-500">
+                <div className="p-4 space-y-1.5 text-[12px] text-neutral-400">
                   <div className="flex items-center justify-between">
                     <span>Montante Bruto</span>
                     <span>{projectState.billingSummary.grossAmount}</span>
@@ -459,7 +459,7 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
                     <span>{projectState.billingSummary.extraExpense}</span>
                   </div>
 
-                  <div className="border-t border-slate-800 pt-2 flex items-center justify-between font-bold text-slate-800 text-[12px]">
+                  <div className="border-t border-white/10 pt-2 flex items-center justify-between font-bold text-white text-[12px]">
                     <span>Valor a ser cobrado</span>
                     <span>{projectState.billingSummary.totalToCharge}</span>
                   </div>
@@ -471,32 +471,32 @@ export default function ProjectDetails({ projectsMap, onSaveProject }) {
       </div>
 
       {/* Rodapé Padrão Évora Models */}
-      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-slate-500">
+      <footer className="mt-10 pb-6 text-center space-y-2 text-xs text-neutral-400">
         <div className="flex items-center justify-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-slate-500">
+          <span className="inline-flex items-center gap-1.5 text-neutral-400">
             <Globe className="w-3.5 h-3.5" />
             <span>Idiomas</span>
           </span>
           <button
             type="button"
-            className="text-[#0077b5] underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ENGLISH
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             ESPAÑOL
           </button>
           <button
             type="button"
-            className="text-[#0077b5] hover:underline font-normal text-[11px] uppercase cursor-pointer"
+            className="text-[#E8AC51] hover:underline font-normal text-[11px] uppercase cursor-pointer"
           >
             PORTUGUÊS
           </button>
         </div>
-        <p className="text-slate-500 text-xs">© Évora Models</p>
+        <p className="text-neutral-400 text-xs">© Évora Models</p>
       </footer>
 
       {/* Modal para Criar ou Editar Projeto */}

@@ -58,13 +58,13 @@ export default function TaxConfig() {
   return (
     <div className="pt-2">
       {/* Título Imposto */}
-      <div className="pb-2.5 mb-6 border-b border-slate-200/90">
-        <h2 className="text-[19px] font-normal text-slate-600">Imposto</h2>
+      <div className="pb-2.5 mb-6 border-b border-white/10">
+        <h2 className="text-[19px] font-normal text-neutral-400">Imposto</h2>
       </div>
 
       <div className="max-w-lg pl-14">
         {/* Lista de Radio Buttons */}
-        <div className="space-y-3 pb-4 border-b border-slate-200/90 text-xs text-slate-500">
+        <div className="space-y-3 pb-4 border-b border-white/10 text-xs text-neutral-400">
           {taxes.map((item) => (
             <label
               key={item.id}
@@ -75,7 +75,7 @@ export default function TaxConfig() {
                 name="taxOption"
                 checked={selectedId === item.id}
                 onChange={() => handleSelectOption(item)}
-                className="w-3.5 h-3.5 text-[#0f82b3] accent-[#0f82b3] cursor-pointer"
+                className="w-3.5 h-3.5 text-[#E8AC51] accent-[#880E1B] cursor-pointer"
               />
               <span>{item.label}</span>
             </label>
@@ -89,7 +89,7 @@ export default function TaxConfig() {
             value={taxName}
             onChange={(e) => setTaxName(e.target.value)}
             placeholder="Nome do imposto"
-            className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0f82b3]"
+            className="w-full h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
           />
 
           <div className="flex items-center">
@@ -98,12 +98,12 @@ export default function TaxConfig() {
               value={taxValue}
               onChange={(e) => setTaxValue(e.target.value)}
               placeholder="Valor do imposto"
-              className="flex-1 min-w-0 h-8 px-2.5 bg-white border border-slate-200 rounded-l-xs text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#0f82b3]"
+              className="flex-1 min-w-0 h-8 px-2.5 bg-[#1c1c1e] border border-white/10 rounded-l-xs text-xs text-white placeholder:text-neutral-400 focus:outline-none focus:border-[#880E1B]"
             />
             <select
               value={taxUnit}
               onChange={(e) => setTaxUnit(e.target.value)}
-              className="w-12 h-8 px-1 bg-white border-t border-r border-b border-slate-200 rounded-r-xs text-xs font-semibold text-slate-700 focus:outline-none"
+              className="w-12 h-8 px-1 bg-[#1c1c1e] border-t border-r border-b border-white/10 rounded-r-xs text-xs font-semibold text-white focus:outline-none"
             >
               <option value="%">%</option>
               <option value="$">$</option>
@@ -113,7 +113,7 @@ export default function TaxConfig() {
           <div className="flex justify-end pt-0.5">
             <button
               type="submit"
-              className="px-3.5 h-8 bg-[#0f82b3] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+              className="px-3.5 h-8 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
             >
               SALVAR
             </button>

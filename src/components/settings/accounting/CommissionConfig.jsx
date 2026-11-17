@@ -15,8 +15,8 @@ export default function CommissionConfig() {
   return (
     <div className="pt-2">
       {/* Título Comissão da agência */}
-      <div className="pb-2.5 mb-8 border-b border-slate-200/90">
-        <h2 className="text-[19px] font-normal text-slate-600">
+      <div className="pb-2.5 mb-8 border-b border-white/10">
+        <h2 className="text-[19px] font-normal text-neutral-400">
           Comissão da agência
         </h2>
       </div>
@@ -29,7 +29,7 @@ export default function CommissionConfig() {
         <select
           value={commission}
           onChange={(e) => setCommission(e.target.value)}
-          className="w-36 h-8 px-2 bg-white border border-slate-200 rounded-xs text-xs font-semibold text-slate-700 focus:outline-none focus:border-[#0f82b3]"
+          className="w-36 h-8 px-2 bg-[#1c1c1e] border border-white/10 rounded-xs text-xs font-semibold text-white focus:outline-none focus:border-[#880E1B]"
         >
           {COMMISSION_VALUES.map((val) => (
             <option key={val} value={val}>
@@ -38,17 +38,17 @@ export default function CommissionConfig() {
           ))}
         </select>
 
-        <span className="text-xs text-slate-500">%</span>
+        <span className="text-xs text-neutral-400">%</span>
 
         <button
           type="submit"
-          className="px-3.5 h-8 bg-[#0f82b3] hover:bg-[#006399] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
+          className="px-3.5 h-8 bg-[#880E1B] hover:bg-[#a31121] text-white text-[10px] font-semibold uppercase tracking-wide rounded-xs shadow-2xs transition-colors cursor-pointer"
         >
           SALVAR
         </button>
 
         {savedFeedback && (
-          <span className="text-xs text-emerald-600 font-medium">
+          <span className="text-xs text-[#E8AC51] font-medium">
             Comissão salva!
           </span>
         )}
