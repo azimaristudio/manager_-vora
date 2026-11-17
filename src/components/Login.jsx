@@ -1,157 +1,82 @@
-import React, { useState } from 'react';
-import { User, Mail, Lock, Eye, EyeOff, Instagram, ArrowRight } from 'lucide-react';
-import evoraLogo from '../assets/evora_logo.jpg';
+import { useState } from 'react'
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 
-export default function Login({ onLoginSuccess }) {
-  const [lang, setLang] = useState('PT');
-  const [email, setEmail] = useState('contato@evoramodels.com.br');
-  const [password, setPassword] = useState('••••••••••••');
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (onLoginSuccess) {
-      onLoginSuccess();
-    }
-  };
-
+export default function Login() {
+  const [show, setShow] = useState(false)
+  const [remember, setRemember] = useState(false)
+  const field =
+    'flex items-center gap-3 h-14 px-4 rounded-2xl bg-[#1c1c1c] border border-neutral-600 focus-within:border-[#d9ae5f]/60 transition-colors'
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-gradient-to-br from-[#026aa7] via-[#1b8cc4] to-[#cce7f5] font-sans select-none">
-      {/* Área Esquerda: Branding Évora Models */}
-      <div className="relative flex-1 flex flex-col items-center justify-center p-10 lg:p-16 overflow-hidden min-h-[300px] lg:min-h-screen">
-        {/* Efeitos de iluminação de fundo sutis */}
-        <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-12 right-12 w-80 h-80 rounded-full bg-sky-300/20 blur-3xl" />
-
-        <div className="relative z-10 flex flex-col items-center text-center max-w-md">
-          {/* Logótipo Évora Models destacado e centralizado */}
-          <div className="bg-white rounded-xl p-3 shadow-xl mb-7">
-            <img
-              src={evoraLogo}
-              alt="Évora Models"
-              className="h-32 sm:h-40 w-auto object-contain rounded-lg"
-            />
-          </div>
-
-          {/* Textos institucionais abaixo do logótipo */}
-          <p className="text-base sm:text-lg font-semibold text-white tracking-wide drop-shadow-xs mb-3">
-            Where new talent finds opportunities.
-          </p>
-
-          <div className="space-y-1.5 text-sm sm:text-[15px] text-white/95 font-medium tracking-wide leading-relaxed">
-            <p>🇧🇷 Brazil • 🌍 International</p>
-            <p>✨ Scouting &amp; Management</p>
-            <p>📩 contato@evoramodels.com</p>
-          </div>
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-[#121212] text-white">
+      <div className="relative hidden md:block overflow-hidden bg-[radial-gradient(ellipse_at_50%_35%,#5a4825_0%,#1d1711_55%,#121212_100%)]">
+        <div className="absolute top-10 left-9 pl-5 border-l border-[#d9ae5f]/50">
+          <div className="serif text-4xl tracking-[0.25em]">POSE</div>
+          <div className="serif text-sm tracking-[0.4em] text-[#d9ae5f]/80 mt-1">MANAGER</div>
         </div>
+        <img src="/model.png" alt="Modelo" className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[88%] max-w-none object-contain" />
+        <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-r from-transparent to-[#121212]" />
       </div>
 
-      {/* Painel Direito: Card Vertical Clean de Autenticação */}
-      <div className="w-full lg:w-[430px] xl:w-[460px] lg:mr-20 bg-white/95 backdrop-blur-md shadow-2xl flex flex-col justify-between px-8 sm:px-12 py-8 min-h-[calc(100vh-260px)] lg:min-h-screen border-l border-white/40">
-        {/* Seletor de Idiomas (EN / ES / PT) */}
-        <div className="flex justify-center items-center gap-1.5 text-xs tracking-widest font-semibold text-slate-400">
-          {['EN', 'ES', 'PT'].map((item, index) => (
-            <React.Fragment key={item}>
-              <button
-                type="button"
-                onClick={() => setLang(item)}
-                className={`cursor-pointer transition-colors px-1 py-0.5 rounded ${
-                  lang === item
-                    ? 'text-[#0077b5] font-bold'
-                    : 'text-slate-400 hover:text-slate-600'
-                }`}
-              >
-                {item}
-              </button>
-              {index < 2 && <span className="text-slate-300">/</span>}
-            </React.Fragment>
-          ))}
-        </div>
-
-        {/* Bloco Central: Avatar + Formulário */}
-        <div className="my-auto py-8 flex flex-col items-center w-full">
-          {/* Ícone de Avatar circular inspirado no original */}
-          <div className="relative mb-10 group">
-            <div className="w-28 h-28 rounded-full p-1.5 border-2 border-[#0077b5] shadow-md bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-              <div className="w-full h-full rounded-full bg-gradient-to-b from-[#0487cc] to-[#006da8] flex items-end justify-center overflow-hidden">
-                <User className="w-20 h-20 text-white fill-white translate-y-2.5" />
-              </div>
+      <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-[radial-gradient(ellipse_at_90%_90%,#2a2013_0%,#121212_55%)]">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full max-w-[492px] rounded-3xl border border-[#d9ae5f]/50 bg-black/60 backdrop-blur-xl p-12 shadow-[0_0_80px_rgba(217,174,95,0.08)]"
+        >
+          <div className="text-center mb-10">
+            <div className="serif text-6xl text-[#d9ae5f] font-medium tracking-wide">ÉVORA</div>
+            <div className="flex items-center justify-center gap-4 mt-1">
+              <span className="h-px w-12 bg-[#d9ae5f]/70" />
+              <span className="text-[11px] tracking-[0.4em] text-[#d9ae5f]">MODELS</span>
+              <span className="h-px w-12 bg-[#d9ae5f]/70" />
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="w-full space-y-4">
-            {/* Campo de E-mail */}
-            <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="ENDEREÇO EMAIL"
-                aria-label="Endereço de Email"
-                required
-                className="w-full pl-10 pr-4 py-3.5 bg-slate-100/90 hover:bg-slate-200/60 focus:bg-white text-slate-700 placeholder:text-slate-400 text-xs font-medium tracking-wider text-center rounded-md border border-transparent focus:border-[#0077b5] focus:ring-3 focus:ring-[#0077b5]/15 outline-none transition-all"
-              />
-            </div>
-
-            {/* Campo de Senha */}
-            <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="SENHA"
-                aria-label="Senha"
-                required
-                className="w-full pl-10 pr-10 py-3.5 bg-slate-100/90 hover:bg-slate-200/60 focus:bg-white text-slate-700 placeholder:text-slate-400 text-xs font-medium tracking-wider text-center rounded-md border border-transparent focus:border-[#0077b5] focus:ring-3 focus:ring-[#0077b5]/15 outline-none transition-all"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
-                title={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-              >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          <div className="space-y-4">
+            <label className={field}>
+              <Mail size={16} className="text-[#d9ae5f]" />
+              <input type="email" placeholder="Endereço de e-mail" className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm" />
+            </label>
+            <label className={field}>
+              <Lock size={16} className="text-[#d9ae5f]" />
+              <input type={show ? 'text' : 'password'} placeholder="Digite sua senha" className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm" />
+              <button type="button" onClick={() => setShow(!show)} aria-label="Mostrar senha" className="text-[#d9ae5f]">
+                {show ? <Eye size={16} /> : <EyeOff size={16} />}
               </button>
+            </label>
+          </div>
+
+          <div className="flex items-center justify-between mt-5 text-sm">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="size-5 appearance-none rounded-md border border-white/30 bg-transparent checked:bg-[#d9ae5f] checked:border-[#d9ae5f]" />
+              Lembrar de mim
+            </label>
+            <a href="#" className="text-[#e0b35f] underline underline-offset-4">Esqueceu sua senha?</a>
+          </div>
+
+          <button className="mt-8 w-full h-16 rounded-2xl font-bold tracking-[0.3em] text-white bg-[#880E1B] hover:bg-[#a31121] hover:ring-2 hover:ring-[#d9ae5f] transition-all duration-300 ease-in-out">
+            ENTRAR
+          </button>
+        </form>
+        <footer className="mt-10 w-full max-w-[492px] text-xs">
+          <div className="flex flex-col md:flex-row md:justify-between gap-8">
+            <div className="space-y-1.5">
+              <h3 className="serif text-sm tracking-[0.25em] text-[#d9ae5f]/70 mb-2">POSE MANAGER</h3>
+              <p><a href="mailto:usepose@posemanager.com" className="text-neutral-300 hover:text-[#d9ae5f] transition-colors">usepose@posemanager.com</a></p>
+              <p><a href="tel:+5581981011403" className="text-neutral-300 hover:text-[#d9ae5f] transition-colors">(81) 98101-1403</a></p>
             </div>
-
-            {/* Botão Entrar */}
-            <div className="pt-3 flex flex-col items-center space-y-4">
-              <button
-                type="submit"
-                className="w-56 py-3 px-6 bg-[#0077b5] hover:bg-[#006399] active:scale-[0.99] text-white text-xs font-semibold tracking-widest uppercase rounded shadow-md hover:shadow-lg shadow-[#0077b5]/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>ENTRAR</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-
-              <button
-                type="button"
-                className="text-[11px] font-medium tracking-wider uppercase text-slate-400 hover:text-[#0077b5] transition-colors cursor-pointer"
-              >
-                ESQUECI MINHA SENHA
-              </button>
+            <div className="space-y-1.5 md:text-right">
+              <h3 className="serif text-sm tracking-[0.25em] text-[#d9ae5f]/70 mb-2">AZIMARI GROUP</h3>
+              <p><a href="https://azimarigroup.com" target="_blank" rel="noreferrer" className="text-neutral-300 hover:text-[#d9ae5f] transition-colors">azimarigroup.com</a></p>
+              <p><a href="mailto:azimaristudio@azimarigroup.com" className="text-neutral-300 hover:text-[#d9ae5f] transition-colors">azimaristudio@azimarigroup.com</a></p>
+              <p><a href="tel:+5581981011403" className="text-neutral-300 hover:text-[#d9ae5f] transition-colors">(81) 98101-1403</a></p>
             </div>
-          </form>
-        </div>
-
-        {/* Rodapé: Instagram + Copyright */}
-        <div className="flex flex-col items-center space-y-1.5 text-slate-400 pt-4 border-t border-slate-100">
-          <a
-            href="#instagram"
-            onClick={(e) => e.preventDefault()}
-            className="flex flex-col items-center gap-1 hover:text-[#0077b5] transition-colors"
-          >
-            <Instagram className="w-4 h-4 stroke-[1.75]" />
-            <span className="text-[11px] tracking-wide">@evoramodels</span>
-          </a>
-          <span className="text-[10px] tracking-widest uppercase text-slate-400 pt-1">
-            © Évora Models
-          </span>
-        </div>
+          </div>
+          <div className="mt-8 pt-6 border-t border-white/5 text-center">
+            <p className="text-white/80">© 2026 Pose Manager. Todos os direitos reservados.</p>
+            <p className="mt-2 text-[10px] tracking-[0.3em] text-white/35">POWERED BY AZIMARI GROUP</p>
+          </div>
+        </footer>
       </div>
     </div>
-  );
+  )
 }
-
