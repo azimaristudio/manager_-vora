@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Plus,
   Trash2,
@@ -10,6 +10,8 @@ import {
   Youtube,
   Facebook,
   MessageCircle,
+  ChevronDown,
+  Search,
 } from 'lucide-react';
 import {
   OFFICE_OPTIONS,
@@ -25,7 +27,114 @@ import {
   LANGUAGE_OPTIONS,
   LANGUAGE_LEVEL_OPTIONS,
   CONTACT_RELATION_OPTIONS,
+  PHONE_COUNTRIES,
+  getCountryByDdi,
+  formatPhoneForCountry,
 } from '../../data/talentFormOptions';
+
+function CountryCodeSelector({ value = '+55', onChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const containerRef = useRef(null);
+
+  const selectedCountry = getCountryByDdi(value);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const filteredCountries = PHONE_COUNTRIES.filter((c) => {
+    const q = search.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      c.name.toLowerCase().includes(q) ||
+      c.code.toLowerCase().includes(q) ||
+      c.ddi.includes(q)
+    );
+  });
+
+  return (
+    <div ref={containerRef} className="relative col-span-3 sm:col-span-3">
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+          setSearch('');
+        }}
+        title={`${selectedCountry.name} (${selectedCountry.ddi})`}
+        className="w-full px-2 py-1.5 text-xs bg-[#161617] hover:bg-[#1c1c1e] border border-white/10 focus:border-[#880E1B] rounded-xs flex items-center justify-between gap-1 font-medium text-white cursor-pointer transition-colors"
+      >
+        <span className="truncate">
+          {selectedCountry.flag} {selectedCountry.ddi}
+        </span>
+        <ChevronDown className="w-3 h-3 text-[#E8AC51] shrink-0" />
+      </button>
+
+      {isOpen && (
+        <div className="absolute left-0 top-full mt-1 w-60 bg-[#1c1c1e] border border-white/10 rounded-xs shadow-2xl z-50 overflow-hidden">
+          <div className="p-2 border-b border-white/10 bg-[#161617] flex items-center gap-1.5">
+            <Search className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar país ou DDI (+55)..."
+              autoFocus
+              className="w-full bg-transparent text-xs text-white placeholder:text-neutral-400 outline-none"
+            />
+          </div>
+          <div className="max-h-48 overflow-y-auto divide-y divide-white/5">
+            {filteredCountries.length > 0 ? (
+              filteredCountries.map((country) => {
+                const isSelected = country.ddi === selectedCountry.ddi;
+                return (
+                  <button
+                    key={country.code}
+                    type="button"
+                    onClick={() => {
+                      onChange(country.ddi);
+                      setIsOpen(false);
+                    }}
+                    className={`w-full px-3 py-2 text-left text-xs flex items-center justify-between gap-2 transition-colors cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#880E1B] text-white font-semibold'
+                        : 'text-white hover:bg-[#161617]'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2 truncate">
+                      <span>{country.flag}</span>
+                      <span className="truncate">{country.name}</span>
+                    </span>
+                    <span
+                      className={`text-[11px] shrink-0 ${
+                        isSelected ? 'text-[#E8AC51] font-bold' : 'text-[#E8AC51]'
+                      }`}
+                    >
+                      {country.ddi}
+                    </span>
+                  </button>
+                );
+              })
+            ) : (
+              <div className="px-3 py-2.5 text-[11px] text-neutral-400 text-center">
+                Nenhum país encontrado
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function PersonalInfoForm({ formData, onChange, onNestedChange }) {
   const { personal } = formData;
@@ -99,9 +208,23 @@ export default function PersonalInfoForm({ formData, onChange, onNestedChange })
   const updatePhone = (id, key, value) => {
     handleField(
       'phones',
-      personal.phones.map((item) =>
-        item.id === id ? { ...item, [key]: value } : item
-      )
+      personal.phones.map((item) => {
+        if (item.id !== id) return item;
+        if (key === 'ddi') {
+          return {
+            ...item,
+            ddi: value,
+            number: formatPhoneForCountry(item.number, value),
+          };
+        }
+        if (key === 'number') {
+          return {
+            ...item,
+            number: formatPhoneForCountry(value, item.ddi || '+55'),
+          };
+        }
+        return { ...item, [key]: value };
+      })
     );
   };
 
@@ -115,16 +238,30 @@ export default function PersonalInfoForm({ formData, onChange, onNestedChange })
   const addEmergencyContact = () => {
     handleField('relatedContacts', [
       ...personal.relatedContacts,
-      { id: Date.now(), relation: 'mother', name: '', phone: '' },
+      { id: Date.now(), relation: 'mother', name: '', ddi: '+55', phone: '' },
     ]);
   };
 
   const updateEmergencyContact = (id, key, value) => {
     handleField(
       'relatedContacts',
-      personal.relatedContacts.map((item) =>
-        item.id === id ? { ...item, [key]: value } : item
-      )
+      personal.relatedContacts.map((item) => {
+        if (item.id !== id) return item;
+        if (key === 'ddi') {
+          return {
+            ...item,
+            ddi: value,
+            phone: formatPhoneForCountry(item.phone, value),
+          };
+        }
+        if (key === 'phone') {
+          return {
+            ...item,
+            phone: formatPhoneForCountry(value, item.ddi || '+55'),
+          };
+        }
+        return { ...item, [key]: value };
+      })
     );
   };
 
@@ -722,54 +859,62 @@ export default function PersonalInfoForm({ formData, onChange, onNestedChange })
             </button>
           </div>
           <div className="space-y-2">
-            {personal.phones.map((item) => (
-              <div
-                key={item.id}
-                className="grid grid-cols-12 items-center gap-1.5"
-              >
-                <select
-                  value={item.type}
-                  onChange={(e) =>
-                    updatePhone(item.id, 'type', e.target.value)
-                  }
-                  className="col-span-3 px-2 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
+            {personal.phones.map((item) => {
+              const currentCountry = getCountryByDdi(item.ddi || '+55');
+              return (
+                <div
+                  key={item.id}
+                  className="grid grid-cols-12 items-center gap-1.5"
                 >
-                  <option value="Celular">Celular</option>
-                  <option value="Fixo">Fixo</option>
-                  <option value="WhatsApp">WhatsApp</option>
-                </select>
-                <span className="col-span-2 px-2 py-1.5 text-xs bg-[#161617] border border-white/10 rounded-xs text-center font-medium">
-                  🇧🇷 {item.ddi}
-                </span>
-                <input
-                  type="tel"
-                  value={item.number}
-                  onChange={(e) =>
-                    updatePhone(item.id, 'number', e.target.value)
-                  }
-                  placeholder="(11) 99999-9999"
-                  className="col-span-4 px-2.5 py-1.5 text-xs border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
-                />
-                <input
-                  type="text"
-                  value={item.notes}
-                  onChange={(e) =>
-                    updatePhone(item.id, 'notes', e.target.value)
-                  }
-                  placeholder="Notas"
-                  className="col-span-2 px-2 py-1.5 text-xs border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
-                />
-                {personal.phones.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removePhone(item.id)}
-                    className="col-span-1 text-neutral-400 hover:text-red-500 flex justify-center cursor-pointer"
+                  <select
+                    value={item.type}
+                    onChange={(e) =>
+                      updatePhone(item.id, 'type', e.target.value)
+                    }
+                    className="col-span-2 px-1.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-            ))}
+                    <option value="Celular">Celular</option>
+                    <option value="Fixo">Fixo</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                  </select>
+                  <CountryCodeSelector
+                    value={item.ddi || '+55'}
+                    onChange={(nextDdi) =>
+                      updatePhone(item.id, 'ddi', nextDdi)
+                    }
+                  />
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    value={item.number}
+                    maxLength={currentCountry.placeholder.length}
+                    onChange={(e) =>
+                      updatePhone(item.id, 'number', e.target.value)
+                    }
+                    placeholder={currentCountry.placeholder}
+                    className="col-span-4 px-2.5 py-1.5 text-xs bg-[#161617] text-white border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
+                  />
+                  <input
+                    type="text"
+                    value={item.notes}
+                    onChange={(e) =>
+                      updatePhone(item.id, 'notes', e.target.value)
+                    }
+                    placeholder="Notas"
+                    className="col-span-2 px-2 py-1.5 text-xs bg-[#161617] text-white border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
+                  />
+                  {personal.phones.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removePhone(item.id)}
+                      className="col-span-1 text-neutral-400 hover:text-red-500 flex justify-center cursor-pointer"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -927,10 +1072,20 @@ export default function PersonalInfoForm({ formData, onChange, onNestedChange })
                 <label className="sm:col-span-3 text-xs text-neutral-400">
                   Telefone
                 </label>
-                <div className="sm:col-span-9">
+                <div className="sm:col-span-9 grid grid-cols-12 items-center gap-1.5">
+                  <CountryCodeSelector
+                    value={contact.ddi || '+55'}
+                    onChange={(nextDdi) =>
+                      updateEmergencyContact(contact.id, 'ddi', nextDdi)
+                    }
+                  />
                   <input
                     type="tel"
+                    inputMode="numeric"
                     value={contact.phone}
+                    maxLength={
+                      getCountryByDdi(contact.ddi || '+55').placeholder.length
+                    }
                     onChange={(e) =>
                       updateEmergencyContact(
                         contact.id,
@@ -938,8 +1093,10 @@ export default function PersonalInfoForm({ formData, onChange, onNestedChange })
                         e.target.value
                       )
                     }
-                    placeholder="Telefone"
-                    className="w-full px-2.5 py-1.5 text-xs bg-[#1c1c1e] border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
+                    placeholder={
+                      getCountryByDdi(contact.ddi || '+55').placeholder
+                    }
+                    className="col-span-9 px-2.5 py-1.5 text-xs bg-[#1c1c1e] text-white border border-white/10 rounded-xs focus:border-[#880E1B] outline-none"
                   />
                 </div>
               </div>

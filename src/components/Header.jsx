@@ -103,7 +103,7 @@ export default function Header({ onOpenCompoMake }) {
           <img
             src="/pose manager.png"
             alt="Pose Manager"
-            className="h-8 w-auto object-contain transition-opacity group-hover:opacity-90"
+            className="h-16 w-auto object-contain transition-opacity group-hover:opacity-90"
           />
         </Link>
 

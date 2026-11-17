@@ -448,7 +448,7 @@ export default function CompoMakeEditor() {
                   <img
                     src="/pose manager.png"
                     alt="Pose Manager"
-                    className="h-8 w-auto object-contain"
+                    className="h-12 w-auto object-contain"
                   />
                 </div>
 

@@ -110,7 +110,7 @@ export default function CreatePackage() {
   return (
     <div className="min-h-screen bg-[#161617] text-white flex flex-col font-sans select-none">
       {/* Cabeçalho Superior (Fiel à Imagem 47) */}
-      <header className="w-full bg-[#161617] border-b border-white/10 px-6 lg:px-10 h-14 flex items-center justify-between sticky top-0 z-30">
+      <header className="w-full bg-[#161617] border-b border-white/10 px-6 lg:px-10 h-16 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-6">
           <Link
             to="/"
@@ -120,7 +120,7 @@ export default function CreatePackage() {
             <img
               src="/pose manager.png"
               alt="Pose Manager"
-              className="h-8 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
           </Link>
           <nav className="flex flex-wrap items-center gap-4 sm:gap-6">

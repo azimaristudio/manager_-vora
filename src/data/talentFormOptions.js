@@ -276,3 +276,230 @@ export const BANK_ACCOUNT_TYPE_OPTIONS = [
   { value: 'payment', label: 'Conta de Pagamento / PIX' },
 ];
 
+export const PHONE_COUNTRIES = [
+  {
+    code: 'BR',
+    name: 'Brasil',
+    ddi: '+55',
+    flag: '🇧🇷',
+    maxDigits: 11,
+    placeholder: '(11) 99999-9999',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return `(${d}`;
+      if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+      if (d.length <= 10)
+        return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6, 10)}`;
+      return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7, 11)}`;
+    },
+  },
+  {
+    code: 'US',
+    name: 'Estados Unidos / Canadá',
+    ddi: '+1',
+    flag: '🇺🇸',
+    maxDigits: 10,
+    placeholder: '(201) 555-0123',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 3) return `(${d}`;
+      if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+      return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6, 10)}`;
+    },
+  },
+  {
+    code: 'PT',
+    name: 'Portugal',
+    ddi: '+351',
+    flag: '🇵🇹',
+    maxDigits: 9,
+    placeholder: '912 345 678',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 3) return d;
+      if (d.length <= 6) return `${d.slice(0, 3)} ${d.slice(3)}`;
+      return `${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 9)}`;
+    },
+  },
+  {
+    code: 'AR',
+    name: 'Argentina',
+    ddi: '+54',
+    flag: '🇦🇷',
+    maxDigits: 10,
+    placeholder: '11 2345-6789',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return d;
+      if (d.length <= 6) return `${d.slice(0, 2)} ${d.slice(2)}`;
+      return `${d.slice(0, 2)} ${d.slice(2, 6)}-${d.slice(6, 10)}`;
+    },
+  },
+  {
+    code: 'GB',
+    name: 'Reino Unido',
+    ddi: '+44',
+    flag: '🇬🇧',
+    maxDigits: 10,
+    placeholder: '7400 123456',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 4) return d;
+      return `${d.slice(0, 4)} ${d.slice(4, 10)}`;
+    },
+  },
+  {
+    code: 'FR',
+    name: 'França',
+    ddi: '+33',
+    flag: '🇫🇷',
+    maxDigits: 9,
+    placeholder: '6 12 34 56 78',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 1) return d;
+      const rest = d.slice(1, 9).match(/.{1,2}/g) || [];
+      return [d.slice(0, 1), ...rest].join(' ');
+    },
+  },
+  {
+    code: 'ES',
+    name: 'Espanha',
+    ddi: '+34',
+    flag: '🇪🇸',
+    maxDigits: 9,
+    placeholder: '612 34 56 78',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 3) return d;
+      const rest = d.slice(3, 9).match(/.{1,2}/g) || [];
+      return [d.slice(0, 3), ...rest].join(' ');
+    },
+  },
+  {
+    code: 'IT',
+    name: 'Itália',
+    ddi: '+39',
+    flag: '🇮🇹',
+    maxDigits: 10,
+    placeholder: '312 345 6789',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 3) return d;
+      if (d.length <= 6) return `${d.slice(0, 3)} ${d.slice(3)}`;
+      return `${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 10)}`;
+    },
+  },
+  {
+    code: 'DE',
+    name: 'Alemanha',
+    ddi: '+49',
+    flag: '🇩🇪',
+    maxDigits: 11,
+    placeholder: '1512 3456789',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 4) return d;
+      return `${d.slice(0, 4)} ${d.slice(4, 11)}`;
+    },
+  },
+  {
+    code: 'MX',
+    name: 'México',
+    ddi: '+52',
+    flag: '🇲🇽',
+    maxDigits: 10,
+    placeholder: '55 1234 5678',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return d;
+      if (d.length <= 6) return `${d.slice(0, 2)} ${d.slice(2)}`;
+      return `${d.slice(0, 2)} ${d.slice(2, 6)} ${d.slice(6, 10)}`;
+    },
+  },
+  {
+    code: 'UY',
+    name: 'Uruguai',
+    ddi: '+598',
+    flag: '🇺🇾',
+    maxDigits: 8,
+    placeholder: '94 123 456',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return d;
+      if (d.length <= 5) return `${d.slice(0, 2)} ${d.slice(2)}`;
+      return `${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5, 8)}`;
+    },
+  },
+  {
+    code: 'CL',
+    name: 'Chile',
+    ddi: '+56',
+    flag: '🇨🇱',
+    maxDigits: 9,
+    placeholder: '9 1234 5678',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 1) return d;
+      if (d.length <= 5) return `${d.slice(0, 1)} ${d.slice(1)}`;
+      return `${d.slice(0, 1)} ${d.slice(1, 5)} ${d.slice(5, 9)}`;
+    },
+  },
+  {
+    code: 'CO',
+    name: 'Colômbia',
+    ddi: '+57',
+    flag: '🇨🇴',
+    maxDigits: 10,
+    placeholder: '300 123 4567',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 3) return d;
+      if (d.length <= 6) return `${d.slice(0, 3)} ${d.slice(3)}`;
+      return `${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 10)}`;
+    },
+  },
+  {
+    code: 'CH',
+    name: 'Suíça',
+    ddi: '+41',
+    flag: '🇨🇭',
+    maxDigits: 9,
+    placeholder: '78 123 45 67',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return d;
+      if (d.length <= 5) return `${d.slice(0, 2)} ${d.slice(2)}`;
+      if (d.length <= 7) return `${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5)}`;
+      return `${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5, 7)} ${d.slice(7, 9)}`;
+    },
+  },
+  {
+    code: 'JP',
+    name: 'Japão',
+    ddi: '+81',
+    flag: '🇯🇵',
+    maxDigits: 10,
+    placeholder: '90-1234-5678',
+    format: (d) => {
+      if (!d) return '';
+      if (d.length <= 2) return d;
+      if (d.length <= 6) return `${d.slice(0, 2)}-${d.slice(2)}`;
+      return `${d.slice(0, 2)}-${d.slice(2, 6)}-${d.slice(6, 10)}`;
+    },
+  },
+];
+
+export function getCountryByDdi(ddi = '+55') {
+  return (
+    PHONE_COUNTRIES.find((c) => c.ddi === ddi) || PHONE_COUNTRIES[0]
+  );
+}
+
+export function formatPhoneForCountry(rawInput = '', ddi = '+55') {
+  const country = getCountryByDdi(ddi);
+  const digits = String(rawInput).replace(/\D/g, '').slice(0, country.maxDigits);
+  return country.format(digits);
+}
+
+
