@@ -242,11 +242,16 @@ export default function Header({ onOpenCompoMake }) {
           <LifeBuoy className="w-5 h-5" />
         </button>
 
-        {/* Menu do Usuário / Perfil (Imagem 64) */}
+        {/* Menu do Usuário / Perfil (Imagem 64) + Monograma Pose Manager */}
         <div
           ref={userMenuContainerRef}
-          className="relative pl-1 border-l border-white/10"
+          className="relative pl-2.5 border-l border-white/10 flex items-center gap-2"
         >
+          <img
+            src="/mini_posemanager.png"
+            alt="Pose Manager"
+            className="h-8 w-8 object-contain rounded-md border border-white/10 shrink-0"
+          />
           <button
             type="button"
             onClick={handleToggleUserMenu}

@@ -157,15 +157,22 @@ export default function CreatePackage() {
             <span>AJUDA</span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            title="Voltar ao Início"
-            className="flex items-center gap-1 text-[#E8AC51] cursor-pointer"
-          >
-            <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
-            <ChevronDown className="w-3.5 h-3.5" />
-          </button>
+          <div className="pl-2.5 border-l border-white/10 flex items-center gap-2">
+            <img
+              src="/mini_posemanager.png"
+              alt="Pose Manager"
+              className="h-8 w-8 object-contain rounded-md border border-white/10 shrink-0"
+            />
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              title="Voltar ao Início"
+              className="flex items-center gap-1 text-[#E8AC51] cursor-pointer"
+            >
+              <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
+              <ChevronDown className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </header>
 
