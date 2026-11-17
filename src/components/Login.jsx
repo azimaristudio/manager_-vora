@@ -85,6 +85,8 @@ export default function Login({ onLoginSuccess }) {
             <a href="#" className="text-[#e0b35f] underline underline-offset-4">Esqueceu sua senha?</a>
           </div>
 
+          {error && <p className="text-red-500 text-sm text-center mt-4 mb-4">{error}</p>}
+
           <button className="mt-8 w-full h-16 rounded-2xl font-bold tracking-[0.3em] text-white bg-[#880E1B] hover:bg-[#a31121] hover:ring-2 hover:ring-[#d9ae5f] transition-all duration-300 ease-in-out">
             ENTRAR
           </button>
