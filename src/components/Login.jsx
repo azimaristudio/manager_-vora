@@ -1,9 +1,29 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { auth } from '../firebaseConfig'
 
-export default function Login() {
+export default function Login({ onLoginSuccess }) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const [show, setShow] = useState(false)
   const [remember, setRemember] = useState(false)
+  const navigate = useNavigate()
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setError('')
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      onLoginSuccess?.()
+      navigate('/talentos')
+    } catch (err) {
+      setError('E-mail ou senha incorretos. Tente novamente.')
+    }
+  }
+
   const field =
     'flex items-center gap-3 h-14 px-4 rounded-2xl bg-[#1c1c1c] border border-neutral-600 focus-within:border-[#d9ae5f]/60 transition-colors'
   return (
@@ -19,7 +39,7 @@ export default function Login() {
 
       <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-[radial-gradient(ellipse_at_90%_90%,#2a2013_0%,#121212_55%)]">
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleLogin}
           className="w-full max-w-[492px] rounded-3xl border border-[#d9ae5f]/50 bg-black/60 backdrop-blur-xl p-12 shadow-[0_0_80px_rgba(217,174,95,0.08)]"
         >
           <div className="text-center mb-10">
@@ -34,11 +54,23 @@ export default function Login() {
           <div className="space-y-4">
             <label className={field}>
               <Mail size={16} className="text-[#d9ae5f]" />
-              <input type="email" placeholder="Endereço de e-mail" className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm" />
+              <input
+                type="email"
+                placeholder="Endereço de e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm"
+              />
             </label>
             <label className={field}>
               <Lock size={16} className="text-[#d9ae5f]" />
-              <input type={show ? 'text' : 'password'} placeholder="Digite sua senha" className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm" />
+              <input
+                type={show ? 'text' : 'password'}
+                placeholder="Digite sua senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="flex-1 bg-transparent outline-none placeholder:text-white/50 text-sm"
+              />
               <button type="button" onClick={() => setShow(!show)} aria-label="Mostrar senha" className="text-[#d9ae5f]">
                 {show ? <Eye size={16} /> : <EyeOff size={16} />}
               </button>

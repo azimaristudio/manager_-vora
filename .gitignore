@@ -19,3 +19,7 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Local env files
+.env
+.env.local
+
