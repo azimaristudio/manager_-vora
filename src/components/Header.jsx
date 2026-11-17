@@ -11,8 +11,6 @@ import {
   Menu,
   X,
   SlidersHorizontal,
-  Settings,
-  Power,
 } from 'lucide-react';
 import ContractsDropdown from './ContractsDropdown';
 import TasksDropdown from './TasksDropdown';
@@ -98,23 +96,9 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
   };
 
   return (
-    <>
-      <header className="w-full bg-[#161617] border-b border-white/10 px-4 md:px-8 h-16 flex items-center justify-between sticky top-0 z-30">
-        <div className="flex items-center gap-3 md:gap-6 lg:gap-10">
-          {/* Botão Hamburger (visível apenas no mobile via md:hidden) */}
-          <button
-            type="button"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label="Abrir menu de navegação"
-            className="md:hidden p-2 -ml-1 text-[#E8AC51] hover:bg-[#1c1c1e] rounded-xs transition-colors cursor-pointer"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-
+    <div className="sticky top-0 z-30 w-full bg-[#161617]">
+      <header className="flex justify-between items-center w-full bg-[#161617] border-b border-neutral-800 px-4 md:px-8 h-16">
+        <div className="flex items-center gap-3 md:gap-6 lg:gap-10 min-w-0">
           {/* Logótipo Pose Manager com Link para a rota de Talentos (/talentos) */}
           <Link
             to="/talentos"
@@ -124,11 +108,11 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
             <img
               src="/pose manager.png"
               alt="Pose Manager"
-              className="h-12 sm:h-16 w-auto object-contain transition-opacity group-hover:opacity-90"
+              className="h-12 md:h-16 w-auto object-contain transition-opacity group-hover:opacity-90"
             />
           </Link>
 
-          {/* Menu Superior de Navegação (Desktop) */}
+          {/* Menu Superior de Navegação (Desktop: hidden md:flex) */}
           <nav className="hidden md:flex items-center gap-1 overflow-x-auto">
             {NAV_ITEMS.map((item) => {
               const isItemActive =
@@ -172,106 +156,109 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
           </nav>
         </div>
 
-        {/* Grupo Superior Direito: CompoMake + Contratos + Tarefas + Background Jobs + Suporte + Perfil */}
-        <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 text-[#E8AC51]">
-          {/* 1º Ícone: CompoMake */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsContractsOpen(false);
-              setIsTasksOpen(false);
-              setIsUserMenuOpen(false);
-              if (onOpenCompoMake) onOpenCompoMake();
-            }}
-            title="Abrir CompoMake (Criar Composite)"
-            className="p-1 hover:bg-[#1c1c1e] rounded-xs transition-all cursor-pointer group"
-          >
-            <div className="w-7 h-5 border-2 border-[#880E1B] bg-[#880E1B] rounded-[2px] p-0.5 flex items-center gap-0.5 group-hover:scale-105 transition-transform">
-              <div className="w-1/2 h-full bg-[#161617] flex items-end justify-center overflow-hidden">
-                <User className="w-3 h-3 text-[#E8AC51] fill-[#E8AC51] translate-y-0.5" />
-              </div>
-              <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 gap-[1.5px]">
-                <div className="bg-[#E8AC51]" />
-                <div className="bg-[#E8AC51]" />
-                <div className="bg-[#E8AC51]" />
-                <div className="bg-[#E8AC51]" />
-              </div>
-            </div>
-          </button>
-
-          {/* 2º Ícone: Pasta (Contratos - 11_contratos.png) */}
-          <div ref={contractsContainerRef} className="relative">
+        {/* Grupo Superior Direito */}
+        <div className="flex items-center gap-2 md:gap-4 text-[#E8AC51] shrink-0">
+          {/* Ícones Secundários: ocultos no mobile (hidden md:flex) para evitar sobreposição */}
+          <div className="hidden md:flex items-center gap-3 md:gap-4">
+            {/* 1º Ícone: CompoMake */}
             <button
               type="button"
-              onClick={handleToggleContracts}
-              title="Contratos"
-              className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
-                isContractsOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
-              }`}
+              onClick={() => {
+                setIsContractsOpen(false);
+                setIsTasksOpen(false);
+                setIsUserMenuOpen(false);
+                if (onOpenCompoMake) onOpenCompoMake();
+              }}
+              title="Abrir CompoMake (Criar Composite)"
+              className="p-1 hover:bg-[#1c1c1e] rounded-xs transition-all cursor-pointer group"
             >
-              <Folder className="w-4 h-4 sm:w-5 sm:h-5 fill-[#E8AC51] text-[#E8AC51]" />
-              <span className="ml-0.5 px-1 sm:px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
-                1
-              </span>
+              <div className="w-7 h-5 border-2 border-[#880E1B] bg-[#880E1B] rounded-[2px] p-0.5 flex items-center gap-0.5 group-hover:scale-105 transition-transform">
+                <div className="w-1/2 h-full bg-[#161617] flex items-end justify-center overflow-hidden">
+                  <User className="w-3 h-3 text-[#E8AC51] fill-[#E8AC51] translate-y-0.5" />
+                </div>
+                <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 gap-[1.5px]">
+                  <div className="bg-[#E8AC51]" />
+                  <div className="bg-[#E8AC51]" />
+                  <div className="bg-[#E8AC51]" />
+                  <div className="bg-[#E8AC51]" />
+                </div>
+              </div>
             </button>
 
-            {isContractsOpen && <ContractsDropdown />}
-          </div>
+            {/* 2º Ícone: Pasta (Contratos) */}
+            <div ref={contractsContainerRef} className="relative">
+              <button
+                type="button"
+                onClick={handleToggleContracts}
+                title="Contratos"
+                className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
+                  isContractsOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
+                }`}
+              >
+                <Folder className="w-5 h-5 fill-[#E8AC51] text-[#E8AC51]" />
+                <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
+                  1
+                </span>
+              </button>
 
-          {/* 3º Ícone: Bandeira (Tarefas - 12_tarefas.png) */}
-          <div ref={tasksContainerRef} className="relative">
+              {isContractsOpen && <ContractsDropdown />}
+            </div>
+
+            {/* 3º Ícone: Bandeira (Tarefas) */}
+            <div ref={tasksContainerRef} className="relative">
+              <button
+                type="button"
+                onClick={handleToggleTasks}
+                title="Tarefas"
+                className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
+                  isTasksOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
+                }`}
+              >
+                <Flag className="w-5 h-5 fill-[#E8AC51] text-[#E8AC51]" />
+                <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
+                  0
+                </span>
+              </button>
+
+              {isTasksOpen && <TasksDropdown />}
+            </div>
+
+            {/* 4º Ícone: Ampulheta (Background Trabalhos) */}
             <button
               type="button"
-              onClick={handleToggleTasks}
-              title="Tarefas"
+              onClick={handleOpenBackgroundJobs}
+              title="Background Trabalhos"
               className={`relative flex items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
-                isTasksOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
+                location.pathname === '/background-jobs'
+                  ? 'bg-[#1c1c1e]'
+                  : 'hover:bg-[#1c1c1e]'
               }`}
             >
-              <Flag className="w-4 h-4 sm:w-5 sm:h-5 fill-[#E8AC51] text-[#E8AC51]" />
-              <span className="ml-0.5 px-1 sm:px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
+              <Hourglass className="w-5 h-5 text-[#E8AC51]" />
+              <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
                 0
               </span>
             </button>
 
-            {isTasksOpen && <TasksDropdown />}
+            {/* Suporte */}
+            <button
+              type="button"
+              title="Suporte e Tutoriais"
+              className="p-1.5 hover:bg-[#1c1c1e] rounded-xs transition-colors cursor-pointer"
+            >
+              <LifeBuoy className="w-5 h-5" />
+            </button>
           </div>
 
-          {/* 4º Ícone: Ampulheta (Background Trabalhos - 13_background_trabalhos.png) */}
-          <button
-            type="button"
-            onClick={handleOpenBackgroundJobs}
-            title="Background Trabalhos"
-            className={`hidden sm:flex relative items-center p-1.5 rounded-xs transition-colors cursor-pointer ${
-              location.pathname === '/background-jobs'
-                ? 'bg-[#1c1c1e]'
-                : 'hover:bg-[#1c1c1e]'
-            }`}
-          >
-            <Hourglass className="w-5 h-5 text-[#E8AC51]" />
-            <span className="ml-0.5 px-1.5 py-0.2 bg-[#E8AC51] text-[#161617] text-[10px] font-bold rounded-xs leading-tight">
-              0
-            </span>
-          </button>
-
-          {/* Suporte */}
-          <button
-            type="button"
-            title="Suporte e Tutoriais"
-            className="hidden sm:inline-flex p-1.5 hover:bg-[#1c1c1e] rounded-xs transition-colors cursor-pointer"
-          >
-            <LifeBuoy className="w-5 h-5" />
-          </button>
-
-          {/* Menu do Usuário / Perfil (Imagem 64) + Monograma Pose Manager */}
+          {/* Menu do Usuário / Avatar */}
           <div
             ref={userMenuContainerRef}
-            className="relative pl-2 border-l border-white/10 flex items-center gap-1.5 sm:gap-2"
+            className="relative md:pl-2.5 md:border-l md:border-neutral-800 flex items-center gap-2"
           >
             <img
               src="/mini_posemanager.png"
               alt="Pose Manager"
-              className="h-7 w-7 sm:h-8 sm:w-8 object-contain rounded-md border border-white/10 shrink-0"
+              className="hidden md:block h-8 w-8 object-contain rounded-md border border-white/10 shrink-0"
             />
             <button
               type="button"
@@ -281,7 +268,7 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
                 isUserMenuOpen ? 'bg-[#1c1c1e]' : 'hover:bg-[#1c1c1e]'
               }`}
             >
-              <UserCircle2 className="w-6 h-6 sm:w-7 sm:h-7 stroke-[1.5]" />
+              <UserCircle2 className="w-7 h-7 stroke-[1.5]" />
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
 
@@ -289,151 +276,82 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
               <UserDropdown onClose={() => setIsUserMenuOpen(false)} />
             )}
           </div>
+
+          {/* Botão Hamburger (visível apenas no mobile: block md:hidden) */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            aria-label="Alternar menu mobile"
+            className="block md:hidden p-2 text-[#E8AC51] hover:bg-[#1c1c1e] rounded-xs transition-colors cursor-pointer"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
       </header>
 
-      {/* Slide-Over Mobile Menu (visível apenas em telas < md quando isMobileMenuOpen = true) */}
+      {/* Menu Mobile Dropdown / Slide-out (renderizado quando isMobileMenuOpen é true) */}
       {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-50 md:hidden bg-black/70 backdrop-blur-xs flex"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          <aside
-            className="w-72 max-w-[82vw] bg-[#161617] border-r border-white/10 h-full flex flex-col justify-between p-4 overflow-y-auto shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div>
-              {/* Topo do Drawer Mobile */}
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
-                <div className="flex items-center gap-2.5">
-                  <img
-                    src="/mini_posemanager.png"
-                    alt="Pose Manager"
-                    className="h-8 w-8 object-contain rounded-md border border-white/10"
-                  />
-                  <span className="text-xs font-bold tracking-widest uppercase text-[#E8AC51]">
-                    POSE MANAGER
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-1.5 text-neutral-400 hover:text-white rounded-xs cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+        <nav className="md:hidden bg-[#161617] border-b border-neutral-800 px-4 py-3 flex flex-col gap-1 shadow-2xl">
+          {NAV_ITEMS.map((item) => {
+            const isItemActive =
+              (item.label === 'Talentos' &&
+                (location.pathname === '/' ||
+                  location.pathname.startsWith('/talentos'))) ||
+              (item.label === 'Contatos' &&
+                location.pathname.startsWith('/contatos')) ||
+              (item.label === 'Webmail' &&
+                location.pathname.startsWith('/webmail')) ||
+              (item.label === 'Projetos' &&
+                location.pathname.startsWith('/projetos')) ||
+              (item.label === 'Calendário' &&
+                location.pathname.startsWith('/calendario')) ||
+              (item.label === 'Pacotes' &&
+                location.pathname.startsWith('/pacotes')) ||
+              (item.label === 'Estatísticas' &&
+                location.pathname.startsWith('/estatisticas')) ||
+              (item.label === 'Contabilidade' &&
+                location.pathname.startsWith('/contabilidade'));
 
-              {/* Botão Rápido para Abrir Filtros da Sidebar no Mobile (quando aplicável) */}
-              {onToggleMobileFilters && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    onToggleMobileFilters();
-                  }}
-                  className="w-full mb-3 px-3.5 py-2.5 bg-[#1c1c1e] hover:bg-[#880E1B] border border-white/10 rounded-xs text-xs font-semibold text-[#E8AC51] hover:text-white flex items-center justify-between transition-colors cursor-pointer"
-                >
-                  <span>Filtros de Talentos</span>
-                  <SlidersHorizontal className="w-4 h-4" />
-                </button>
-              )}
-
-              {/* Lista de Navegação Principal */}
-              <nav className="space-y-1">
-                {NAV_ITEMS.map((item) => {
-                  const isItemActive =
-                    (item.label === 'Talentos' &&
-                      (location.pathname === '/' ||
-                        location.pathname.startsWith('/talentos'))) ||
-                    (item.label === 'Contatos' &&
-                      location.pathname.startsWith('/contatos')) ||
-                    (item.label === 'Webmail' &&
-                      location.pathname.startsWith('/webmail')) ||
-                    (item.label === 'Projetos' &&
-                      location.pathname.startsWith('/projetos')) ||
-                    (item.label === 'Calendário' &&
-                      location.pathname.startsWith('/calendario')) ||
-                    (item.label === 'Pacotes' &&
-                      location.pathname.startsWith('/pacotes')) ||
-                    (item.label === 'Estatísticas' &&
-                      location.pathname.startsWith('/estatisticas')) ||
-                    (item.label === 'Contabilidade' &&
-                      location.pathname.startsWith('/contabilidade'));
-
-                  return (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        if (item.path && item.path !== '#') {
-                          navigate(item.path);
-                        }
-                      }}
-                      className={`w-full px-3.5 py-2.5 rounded-xs text-left text-xs transition-colors flex items-center justify-between cursor-pointer ${
-                        isItemActive
-                          ? 'bg-[#880E1B] text-white font-semibold'
-                          : 'text-[#E8AC51] hover:bg-[#1c1c1e] font-normal'
-                      }`}
-                    >
-                      <span>{item.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-
-            {/* Rodapé do Drawer Mobile: Atalhos de Conta & Sair */}
-            <div className="pt-4 mt-6 border-t border-white/10 space-y-1">
+            return (
               <button
+                key={item.label}
                 type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  navigate('/background-jobs');
+                  if (item.path && item.path !== '#') {
+                    navigate(item.path);
+                  }
                 }}
-                className="w-full px-3.5 py-2 rounded-xs text-left text-xs text-neutral-300 hover:bg-[#1c1c1e] hover:text-white flex items-center gap-2.5 cursor-pointer"
+                className={`w-full px-3.5 py-2.5 rounded-xs text-left text-sm transition-colors cursor-pointer ${
+                  isItemActive
+                    ? 'bg-[#880E1B] hover:bg-[#a31121] text-white font-semibold'
+                    : 'text-[#E8AC51] hover:bg-[#1c1c1e] font-normal'
+                }`}
               >
-                <Hourglass className="w-4 h-4 text-[#E8AC51]" />
-                <span>Background Trabalhos</span>
+                {item.label}
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate('/minha-conta');
-                }}
-                className="w-full px-3.5 py-2 rounded-xs text-left text-xs text-neutral-300 hover:bg-[#1c1c1e] hover:text-white flex items-center gap-2.5 cursor-pointer"
-              >
-                <User className="w-4 h-4 text-[#E8AC51]" />
-                <span>Minha Conta</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate('/configuracoes');
-                }}
-                className="w-full px-3.5 py-2 rounded-xs text-left text-xs text-neutral-300 hover:bg-[#1c1c1e] hover:text-white flex items-center gap-2.5 cursor-pointer"
-              >
-                <Settings className="w-4 h-4 text-[#E8AC51]" />
-                <span>Configurações</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate('/login');
-                }}
-                className="w-full px-3.5 py-2 rounded-xs text-left text-xs text-red-400 hover:bg-[#880E1B] hover:text-white flex items-center gap-2.5 cursor-pointer"
-              >
-                <Power className="w-4 h-4" />
-                <span>Sair</span>
-              </button>
-            </div>
-          </aside>
-        </div>
+            );
+          })}
+
+          {onToggleMobileFilters && (
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onToggleMobileFilters();
+              }}
+              className="mt-2 pt-2 border-t border-neutral-800 w-full px-3.5 py-2.5 rounded-xs text-left text-xs font-semibold text-neutral-300 hover:bg-[#1c1c1e] hover:text-white flex items-center justify-between cursor-pointer"
+            >
+              <span>Abrir Filtros de Talentos</span>
+              <SlidersHorizontal className="w-4 h-4 text-[#E8AC51]" />
+            </button>
+          )}
+        </nav>
       )}
-    </>
+    </div>
   );
 }
