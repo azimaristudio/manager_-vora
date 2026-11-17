@@ -1,2 +1,15 @@
 allowBuilds:
+  '@firebase/util': set this to true or false
   esbuild: set this to true or false
+  protobufjs: set this to true or false
+minimumReleaseAgeExclude:
+  - '@firebase/analytics-compat@0.2.32'
+  - '@firebase/analytics@0.10.26'
+  - '@firebase/app-check-compat@0.4.8'
+  - '@firebase/app-check@0.13.2'
+  - '@firebase/app-compat@0.5.23'
+  - '@firebase/app@0.16.7'
+  - '@firebase/auth-compat@0.6.16'
+  - '@firebase/auth@1.13.11'
+  - '@firebase/crashlytics@0.2.0'
+  - firebase@13.4.0
