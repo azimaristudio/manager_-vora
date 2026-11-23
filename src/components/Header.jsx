@@ -17,6 +17,7 @@ import TasksDropdown from './TasksDropdown';
 import UserDropdown from './UserDropdown';
 
 const NAV_ITEMS = [
+  { label: 'Dashboard', path: '/dashboard' },
   { label: 'Talentos', path: '/talentos' },
   { label: 'Contatos', path: '/contatos' },
   { label: 'Webmail', path: '/webmail/inbox' },
@@ -99,10 +100,10 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
     <div className="sticky top-0 z-30 w-full bg-[#161617]">
       <header className="flex justify-between items-center w-full bg-[#161617] border-b border-neutral-800 px-4 md:px-8 h-16">
         <div className="flex items-center gap-3 md:gap-6 lg:gap-10 min-w-0">
-          {/* Logótipo Pose Manager com Link para a rota de Talentos (/talentos) */}
+          {/* Logótipo Pose Manager com Link para o Dashboard (/dashboard) */}
           <Link
-            to="/talentos"
-            title="Ir para o Início (Talentos)"
+            to="/dashboard"
+            title="Ir para o Dashboard"
             className="flex items-center shrink-0 group"
           >
             <img
@@ -116,9 +117,11 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
           <nav className="hidden md:flex items-center gap-1 overflow-x-auto">
             {NAV_ITEMS.map((item) => {
               const isItemActive =
-                (item.label === 'Talentos' &&
+                (item.label === 'Dashboard' &&
                   (location.pathname === '/' ||
-                    location.pathname.startsWith('/talentos'))) ||
+                    location.pathname.startsWith('/dashboard'))) ||
+                (item.label === 'Talentos' &&
+                  location.pathname.startsWith('/talentos')) ||
                 (item.label === 'Contatos' &&
                   location.pathname.startsWith('/contatos')) ||
                 (item.label === 'Webmail' &&
@@ -298,9 +301,11 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
         <nav className="md:hidden bg-[#161617] border-b border-neutral-800 px-4 py-3 flex flex-col gap-1 shadow-2xl">
           {NAV_ITEMS.map((item) => {
             const isItemActive =
-              (item.label === 'Talentos' &&
+              (item.label === 'Dashboard' &&
                 (location.pathname === '/' ||
-                  location.pathname.startsWith('/talentos'))) ||
+                  location.pathname.startsWith('/dashboard'))) ||
+              (item.label === 'Talentos' &&
+                location.pathname.startsWith('/talentos')) ||
               (item.label === 'Contatos' &&
                 location.pathname.startsWith('/contatos')) ||
               (item.label === 'Webmail' &&

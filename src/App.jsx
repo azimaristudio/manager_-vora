@@ -24,6 +24,7 @@ import StatisticsLayout from './components/statistics/StatisticsLayout';
 import AccountingLayout from './components/accounting/AccountingLayout';
 import MyAccount from './components/MyAccount';
 import SettingsLayout from './components/settings/SettingsLayout';
+import Dashboard from './pages/Dashboard';
 
 const INITIAL_TALENTS = [
   {
@@ -190,18 +191,37 @@ function AppRoutes() {
   return (
     <div className="relative min-h-screen">
       <Routes>
-        {/* Rota Inicial (/): Redireciona para /login se não autenticado; caso contrário exibe Talentos */}
+        {/* Rota Inicial (/): Redireciona para /login se não autenticado; caso contrário exibe o Dashboard */}
         <Route
           path="/"
           element={
             isAuthenticated ? (
               <AppLayout
+                hideSidebar={true}
+                hideSubHeader={true}
                 customTalents={talents}
                 onOpenAddTalent={() => navigate('/talentos/novo')}
-              />
+              >
+                <Dashboard talents={talents} projectsMap={projectsMap} />
+              </AppLayout>
             ) : (
               <Navigate to="/login" replace />
             )
+          }
+        />
+
+        {/* Rota (/dashboard): Painel Operacional Principal */}
+        <Route
+          path="/dashboard"
+          element={
+            <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
+              customTalents={talents}
+              onOpenAddTalent={() => navigate('/talentos/novo')}
+            >
+              <Dashboard talents={talents} projectsMap={projectsMap} />
+            </AppLayout>
           }
         />
 
@@ -444,7 +464,7 @@ function AppRoutes() {
             <Login
               onLoginSuccess={() => {
                 setIsAuthenticated(true);
-                navigate('/talentos');
+                navigate('/dashboard');
               }}
             />
           }
@@ -470,10 +490,24 @@ function AppRoutes() {
             type="button"
             onClick={() => {
               setIsAuthenticated(true);
+              navigate('/dashboard');
+            }}
+            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
+              location.pathname === '/' || location.pathname === '/dashboard'
+                ? 'bg-[#880E1B] text-white'
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            /dashboard
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setIsAuthenticated(true);
               navigate('/talentos');
             }}
             className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-              location.pathname === '/' || location.pathname === '/talentos'
+              location.pathname === '/talentos'
                 ? 'bg-[#880E1B] text-white'
                 : 'text-neutral-400 hover:text-white'
             }`}

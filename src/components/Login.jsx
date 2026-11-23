@@ -18,7 +18,7 @@ export default function Login({ onLoginSuccess }) {
     try {
       await signInWithEmailAndPassword(auth, email, password)
       onLoginSuccess?.()
-      navigate('/talentos')
+      navigate('/dashboard')
     } catch (err) {
       setError('E-mail ou senha incorretos. Tente novamente.')
     }
