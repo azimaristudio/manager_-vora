@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCountUp } from '../hooks/useCountUp';
 import {
   Plus,
   Calendar,
@@ -157,50 +158,6 @@ const MINI_CALENDAR_WEEKDAYS = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
 // Dias de Novembro 2026 com eventos marcados (pontinhos dourados)
 const EVENT_DAYS_NOV = new Set([2, 4, 6, 9, 11, 14, 17, 18, 20, 23, 24, 26, 28, 30]);
 
-function useCountUp(target, isActive, duration = 900, delay = 0) {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    if (!isActive) {
-      setValue(0);
-      return;
-    }
-
-    let rafId = null;
-    let timeoutId = null;
-    let startTime = null;
-
-    const animate = (timestamp) => {
-      if (startTime === null) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(target * eased);
-
-      if (progress < 1) {
-        rafId = requestAnimationFrame(animate);
-      } else {
-        setValue(target);
-      }
-    };
-
-    if (delay > 0) {
-      timeoutId = setTimeout(() => {
-        rafId = requestAnimationFrame(animate);
-      }, delay);
-    } else {
-      rafId = requestAnimationFrame(animate);
-    }
-
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [target, isActive, duration, delay]);
-
-  return isActive ? value : 0;
-}
-
 function FinancialBarColumn({ item, index, maxRevenue, showFinancials }) {
   const heightPercent = Math.round((item.revenue / maxRevenue) * 100);
   const animatedRevenue = useCountUp(item.revenue, showFinancials, 850, index * 50);
@@ -259,9 +216,34 @@ function FinancialBarColumn({ item, index, maxRevenue, showFinancials }) {
 
 export default function Dashboard({ talents = [], projectsMap = {} }) {
   const navigate = useNavigate();
+  const [isMounted, setIsMounted] = useState(false);
   const [selectedCalDay, setSelectedCalDay] = useState(23);
   const [eventFilter, setEventFilter] = useState('TODOS');
   const [showFinancials, setShowFinancials] = useState(false);
+
+  useEffect(() => {
+    const rafId = requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  const activeTalentsCount = Math.max(
+    28,
+    talents.filter((t) => t.status === 'Ativo').length + 27
+  );
+  const standbyTalentsCount = Math.max(
+    4,
+    talents.filter((t) => t.status === 'Stand by').length + 4
+  );
+  const activeProjectsCount = Math.max(12, Object.keys(projectsMap).length + 11);
+
+  const animatedTodayEvents = useCountUp(6, isMounted, 800, 60);
+  const animatedActiveTalents = useCountUp(activeTalentsCount, isMounted, 900, 120);
+  const animatedStandbyTalents = useCountUp(standbyTalentsCount, isMounted, 900, 120);
+  const animatedPendingCount = useCountUp(4, isMounted, 800, 180);
+  const animatedActiveProjects = useCountUp(activeProjectsCount, isMounted, 900, 180);
+  const animatedWebmailPackages = useCountUp(9, isMounted, 850, 240);
 
   const animatedSemestralTotal = useCountUp(753500, showFinancials, 950);
   const animatedSemestralGrowth = useCountUp(18.4, showFinancials, 900);
@@ -276,16 +258,6 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
   const animatedSentPkgs = useCountUp(22, showFinancials, 950);
   const animatedCommissions = useCountUp(29700, showFinancials, 950);
 
-  const activeTalentsCount = Math.max(
-    28,
-    talents.filter((t) => t.status === 'Ativo').length + 27
-  );
-  const standbyTalentsCount = Math.max(
-    4,
-    talents.filter((t) => t.status === 'Stand by').length + 4
-  );
-  const activeProjectsCount = Math.max(12, Object.keys(projectsMap).length + 11);
-
   const filteredEvents =
     eventFilter === 'TODOS'
       ? UPCOMING_EVENTS_48H
@@ -297,10 +269,17 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
   const novOffset = 6;
   const novDays = Array.from({ length: 30 }, (_, i) => i + 1);
 
+  const entranceClass = isMounted
+    ? 'opacity-100 translate-y-0'
+    : 'opacity-0 translate-y-2';
+
   return (
     <div className="w-full pb-16 space-y-6 select-none">
       {/* 1. CABEÇALHO DE BOAS-VINDAS & AÇÕES RÁPIDAS */}
-      <div className="bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-lg">
+      <div
+        style={{ transitionDelay: '0ms' }}
+        className={`bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-lg transition-all duration-500 ease-out ${entranceClass}`}
+      >
         <div className="space-y-1">
           <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#E8AC51]">
             <Sparkles className="w-3.5 h-3.5" />
@@ -360,7 +339,8 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
         <button
           type="button"
           onClick={() => navigate('/calendario')}
-          className="group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all cursor-pointer shadow-md"
+          style={{ transitionDelay: '60ms' }}
+          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
         >
           <div className="flex items-center justify-between mb-3">
             <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
@@ -375,7 +355,9 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
             Trabalhos & Castings Hoje
           </p>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white">6</span>
+            <span className="text-2xl font-bold text-white tabular-nums">
+              {Math.round(animatedTodayEvents)}
+            </span>
             <span className="text-[11px] text-[#E8AC51] font-medium">
               +2 vs. ontem
             </span>
@@ -389,7 +371,8 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
         <button
           type="button"
           onClick={() => navigate('/talentos')}
-          className="group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all cursor-pointer shadow-md"
+          style={{ transitionDelay: '120ms' }}
+          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
         >
           <div className="flex items-center justify-between mb-3">
             <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
@@ -402,11 +385,11 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
           </div>
           <p className="text-xs font-medium text-neutral-400">Talentos Ativos</p>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white">
-              {activeTalentsCount}
+            <span className="text-2xl font-bold text-white tabular-nums">
+              {Math.round(animatedActiveTalents)}
             </span>
-            <span className="text-[11px] text-neutral-400">
-              / {standbyTalentsCount} em Stand-by
+            <span className="text-[11px] text-neutral-400 tabular-nums">
+              / {Math.round(animatedStandbyTalents)} em Stand-by
             </span>
           </div>
           <p className="mt-2 text-[11px] text-neutral-400">
@@ -418,7 +401,8 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
         <button
           type="button"
           onClick={() => navigate('/projetos')}
-          className="group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all cursor-pointer shadow-md"
+          style={{ transitionDelay: '180ms' }}
+          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
         >
           <div className="flex items-center justify-between mb-3">
             <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
@@ -432,9 +416,11 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
             Pendências & Contratos
           </p>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white">4</span>
-            <span className="text-[11px] text-[#E8AC51] font-medium">
-              {activeProjectsCount} projetos ativos
+            <span className="text-2xl font-bold text-white tabular-nums">
+              {Math.round(animatedPendingCount)}
+            </span>
+            <span className="text-[11px] text-[#E8AC51] font-medium tabular-nums">
+              {Math.round(animatedActiveProjects)} projetos ativos
             </span>
           </div>
           <p className="mt-2 text-[11px] text-neutral-400">
@@ -443,7 +429,10 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
         </button>
 
         {/* KPI 4: Webmail & Pacotes */}
-        <div className="bg-[#1c1c1e] border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all shadow-md flex flex-col justify-between">
+        <div
+          style={{ transitionDelay: '240ms' }}
+          className={`bg-[#1c1c1e] border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out shadow-md flex flex-col justify-between ${entranceClass}`}
+        >
           <div>
             <div className="flex items-center justify-between mb-3">
               <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
@@ -470,7 +459,9 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
               Webmail & Pacotes
             </p>
             <div className="mt-1 flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-white">9</span>
+              <span className="text-2xl font-bold text-white tabular-nums">
+                {Math.round(animatedWebmailPackages)}
+              </span>
               <span className="text-[11px] text-[#E8AC51] font-medium">
                 5 pacotes abertos
               </span>
@@ -483,7 +474,10 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
       </div>
 
       {/* 3. MIDDLE GRID (2 Colunas no Desktop: Agenda do Dia + Mini Calendário | Desempenho & Financeiro) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div
+        style={{ transitionDelay: '300ms' }}
+        className={`grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch transition-all duration-500 ease-out ${entranceClass}`}
+      >
         {/* COLUNA ESQUERDA (7 cols): Agenda do Dia (Próximas 48h) + Mini-Calendário */}
         <div className="lg:col-span-7 bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col justify-between shadow-md">
           <div>
@@ -901,7 +895,10 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
       </div>
 
       {/* 4. BOTTOM ROW — CENTRAL DE ALERTAS (Aniversariantes do Dia & Perfis Incompletos) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div
+        style={{ transitionDelay: '380ms' }}
+        className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-500 ease-out ${entranceClass}`}
+      >
         {/* Card Esquerdo: Aniversariantes do Dia */}
         <div className="bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 shadow-md flex flex-col justify-between">
           <div>

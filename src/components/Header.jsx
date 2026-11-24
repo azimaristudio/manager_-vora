@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Folder,
@@ -89,11 +90,27 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
     setIsTasksOpen(false);
   };
 
+  const navigateWithTransition = (path) => {
+    if (!path || path === '#' || location.pathname === path) return;
+    if (
+      typeof document !== 'undefined' &&
+      typeof document.startViewTransition === 'function'
+    ) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          navigate(path);
+        });
+      });
+    } else {
+      navigate(path);
+    }
+  };
+
   const handleOpenBackgroundJobs = () => {
     setIsContractsOpen(false);
     setIsTasksOpen(false);
     setIsUserMenuOpen(false);
-    navigate('/background-jobs');
+    navigateWithTransition('/background-jobs');
   };
 
   return (
@@ -103,6 +120,10 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
           {/* Logótipo Pose Manager com Link para o Dashboard (/dashboard) */}
           <Link
             to="/dashboard"
+            onClick={(e) => {
+              e.preventDefault();
+              navigateWithTransition('/dashboard');
+            }}
             title="Ir para o Dashboard"
             className="flex items-center shrink-0 group"
           >
@@ -141,11 +162,7 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
                 <button
                   key={item.label}
                   type="button"
-                  onClick={() => {
-                    if (item.path && item.path !== '#') {
-                      navigate(item.path);
-                    }
-                  }}
+                  onClick={() => navigateWithTransition(item.path)}
                   className={`px-2.5 lg:px-3 py-1.5 rounded-xs text-xs lg:text-[13px] whitespace-nowrap transition-colors cursor-pointer ${
                     isItemActive
                       ? 'bg-[#880E1B] hover:bg-[#a31121] text-white font-medium shadow-2xs'
@@ -327,9 +344,7 @@ export default function Header({ onOpenCompoMake, onToggleMobileFilters }) {
                 type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  if (item.path && item.path !== '#') {
-                    navigate(item.path);
-                  }
+                  navigateWithTransition(item.path);
                 }}
                 className={`w-full px-3.5 py-2.5 rounded-xs text-left text-sm transition-colors cursor-pointer ${
                   isItemActive
