@@ -18,6 +18,8 @@ import {
   Package,
   Briefcase,
   Send,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 const UPCOMING_EVENTS_48H = [
@@ -159,6 +161,7 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
   const navigate = useNavigate();
   const [selectedCalDay, setSelectedCalDay] = useState(23);
   const [eventFilter, setEventFilter] = useState('TODOS');
+  const [showFinancials, setShowFinancials] = useState(false);
 
   const activeTalentsCount = Math.max(
     28,
@@ -571,23 +574,34 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
         </div>
 
         {/* COLUNA DIREITA (5 cols): Desempenho & Financeiro */}
-        <div className="lg:col-span-5 bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col justify-between shadow-md">
-          <div>
-            <div className="flex items-center justify-between gap-3 pb-4 mb-5 border-b border-white/10">
-              <div className="flex items-center gap-2.5">
-                <span className="w-8 h-8 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
-                  <TrendingUp className="w-4 h-4" />
-                </span>
-                <div>
-                  <h2 className="text-sm font-bold text-white">
-                    Desempenho & Financeiro
-                  </h2>
-                  <p className="text-[11px] text-neutral-400">
-                    Faturamento e trabalhos fechados (últimos 6 meses)
-                  </p>
-                </div>
+        <div className="lg:col-span-5 bg-[#1c1c1e] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col shadow-md">
+          <div className="flex items-center justify-between gap-3 pb-4 mb-5 border-b border-white/10">
+            <div className="flex items-center gap-2.5">
+              <span className="w-8 h-8 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
+                <TrendingUp className="w-4 h-4" />
+              </span>
+              <div>
+                <h2 className="text-sm font-bold text-white">
+                  Desempenho & Financeiro
+                </h2>
+                <p className="text-[11px] text-neutral-400">
+                  Faturamento e trabalhos fechados (últimos 6 meses)
+                </p>
               </div>
+            </div>
 
+            <div className="flex items-center gap-2 shrink-0">
+              {showFinancials && (
+                <button
+                  type="button"
+                  onClick={() => setShowFinancials(false)}
+                  title="Ocultar valores financeiros"
+                  aria-label="Ocultar valores financeiros"
+                  className="p-1.5 rounded-lg bg-[#161617] border border-white/10 text-neutral-400 hover:text-[#E8AC51] hover:border-[#E8AC51]/40 transition-colors cursor-pointer"
+                >
+                  <EyeOff className="w-3.5 h-3.5" />
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => navigate('/contabilidade')}
@@ -596,136 +610,170 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
                 Contabilidade →
               </button>
             </div>
-
-            {/* Gráfico de Barras Responsivo (Últimos 6 Meses) */}
-            <div className="bg-[#161617] border border-white/10 rounded-xl p-4 mb-5">
-              <div className="flex items-center justify-between text-xs mb-4">
-                <div>
-                  <span className="text-neutral-400">Acumulado Semestral: </span>
-                  <strong className="text-white font-bold">R$ 753.500</strong>
-                </div>
-                <span className="px-2 py-0.5 rounded bg-[#E8AC51]/15 text-[#E8AC51] text-[10px] font-bold">
-                  +18,4% vs. semestre ant.
-                </span>
-              </div>
-
-              <div className="h-40 flex items-end justify-between gap-2.5 pt-4 px-1">
-                {SIX_MONTH_PERFORMANCE.map((item) => {
-                  const heightPercent = Math.round(
-                    (item.revenue / maxRevenue) * 100
-                  );
-                  return (
-                    <div
-                      key={item.month}
-                      className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group"
-                    >
-                      <span className="text-[10px] font-semibold text-[#E8AC51] opacity-85 group-hover:opacity-100">
-                        {item.label}
-                      </span>
-                      <div className="w-full max-w-[38px] bg-[#1c1c1e] rounded-t-md h-24 flex items-end overflow-hidden p-0.5 border border-white/5">
-                        <div
-                          style={{ height: `${heightPercent}%` }}
-                          className={`w-full rounded-t-sm transition-all duration-300 ${
-                            item.isCurrent
-                              ? 'bg-gradient-to-t from-[#880E1B] to-[#E8AC51]'
-                              : 'bg-[#880E1B] group-hover:bg-[#a31121]'
-                          }`}
-                        />
-                      </div>
-                      <div className="text-center">
-                        <span
-                          className={`block text-[11px] font-semibold ${
-                            item.isCurrent ? 'text-[#E8AC51]' : 'text-neutral-300'
-                          }`}
-                        >
-                          {item.month}
-                        </span>
-                        <span className="block text-[9px] text-neutral-400">
-                          {item.jobs} jobs
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Barras de Progresso Horizontais (Metas & Conversão) */}
-            <div className="space-y-4">
-              {/* Meta Mensal de Faturamento */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-neutral-300 font-medium">
-                    Meta de Faturamento Mensal (Nov)
-                  </span>
-                  <span className="font-bold text-white">
-                    R$ 148.500{' '}
-                    <span className="text-neutral-400 font-normal">
-                      / R$ 180.000 (82,5%)
-                    </span>
-                  </span>
-                </div>
-                <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#880E1B] to-[#E8AC51] rounded-full"
-                    style={{ width: '82.5%' }}
-                  />
-                </div>
-              </div>
-
-              {/* Taxa de Conversão: Castings -> Trabalhos */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-neutral-300 font-medium">
-                    Taxa de Conversão (Castings → Trabalhos)
-                  </span>
-                  <span className="font-bold text-[#E8AC51]">
-                    34%{' '}
-                    <span className="text-neutral-400 font-normal">
-                      (18 fechados de 53 castings)
-                    </span>
-                  </span>
-                </div>
-                <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
-                  <div
-                    className="h-full bg-[#E8AC51] rounded-full"
-                    style={{ width: '34%' }}
-                  />
-                </div>
-              </div>
-
-              {/* Taxa de Engajamento de Pacotes */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-neutral-300 font-medium">
-                    Pacotes com Seleção de Clientes
-                  </span>
-                  <span className="font-bold text-white">
-                    68%{' '}
-                    <span className="text-neutral-400 font-normal">
-                      (15 de 22 pacotes enviados)
-                    </span>
-                  </span>
-                </div>
-                <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
-                  <div
-                    className="h-full bg-[#880E1B] rounded-full"
-                    style={{ width: '68%' }}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400">
-            <span>Comissões líquidas do mês: R$ 29.700</span>
-            <button
-              type="button"
-              onClick={() => navigate('/estatisticas')}
-              className="text-[#E8AC51] hover:underline font-semibold cursor-pointer"
+          <div className="relative flex-1 flex flex-col justify-between">
+            {!showFinancials && (
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => setShowFinancials(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setShowFinancials(true);
+                  }
+                }}
+                className="absolute inset-0 flex flex-col items-center justify-center bg-[#161617]/40 backdrop-blur-sm rounded-xl cursor-pointer z-10"
+              >
+                <div className="px-4 py-2.5 rounded-xl bg-[#1c1c1e]/90 border border-white/10 shadow-lg flex items-center gap-2.5 hover:border-[#E8AC51]/50 transition-colors">
+                  <Eye className="w-4 h-4 text-[#E8AC51]" />
+                  <span className="text-xs font-semibold text-white">
+                    Clique para visualizar
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div
+              className={`flex-1 flex flex-col justify-between transition-all duration-300 ${
+                !showFinancials
+                  ? 'blur-md select-none pointer-events-none'
+                  : ''
+              }`}
             >
-              Ver Ranking & Estatísticas →
-            </button>
+              <div>
+                {/* Gráfico de Barras Responsivo (Últimos 6 Meses) */}
+                <div className="bg-[#161617] border border-white/10 rounded-xl p-4 mb-5">
+                  <div className="flex items-center justify-between text-xs mb-4">
+                    <div>
+                      <span className="text-neutral-400">Acumulado Semestral: </span>
+                      <strong className="text-white font-bold">R$ 753.500</strong>
+                    </div>
+                    <span className="px-2 py-0.5 rounded bg-[#E8AC51]/15 text-[#E8AC51] text-[10px] font-bold">
+                      +18,4% vs. semestre ant.
+                    </span>
+                  </div>
+
+                  <div className="h-40 flex items-end justify-between gap-2.5 pt-4 px-1">
+                    {SIX_MONTH_PERFORMANCE.map((item) => {
+                      const heightPercent = Math.round(
+                        (item.revenue / maxRevenue) * 100
+                      );
+                      return (
+                        <div
+                          key={item.month}
+                          className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group"
+                        >
+                          <span className="text-[10px] font-semibold text-[#E8AC51] opacity-85 group-hover:opacity-100">
+                            {item.label}
+                          </span>
+                          <div className="w-full max-w-[38px] bg-[#1c1c1e] rounded-t-md h-24 flex items-end overflow-hidden p-0.5 border border-white/5">
+                            <div
+                              style={{ height: `${heightPercent}%` }}
+                              className={`w-full rounded-t-sm transition-all duration-300 ${
+                                item.isCurrent
+                                  ? 'bg-gradient-to-t from-[#880E1B] to-[#E8AC51]'
+                                  : 'bg-[#880E1B] group-hover:bg-[#a31121]'
+                              }`}
+                            />
+                          </div>
+                          <div className="text-center">
+                            <span
+                              className={`block text-[11px] font-semibold ${
+                                item.isCurrent ? 'text-[#E8AC51]' : 'text-neutral-300'
+                              }`}
+                            >
+                              {item.month}
+                            </span>
+                            <span className="block text-[9px] text-neutral-400">
+                              {item.jobs} jobs
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Barras de Progresso Horizontais (Metas & Conversão) */}
+                <div className="space-y-4">
+                  {/* Meta Mensal de Faturamento */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-neutral-300 font-medium">
+                        Meta de Faturamento Mensal (Nov)
+                      </span>
+                      <span className="font-bold text-white">
+                        R$ 148.500{' '}
+                        <span className="text-neutral-400 font-normal">
+                          / R$ 180.000 (82,5%)
+                        </span>
+                      </span>
+                    </div>
+                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                      <div
+                        className="h-full bg-gradient-to-r from-[#880E1B] to-[#E8AC51] rounded-full"
+                        style={{ width: '82.5%' }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Taxa de Conversão: Castings -> Trabalhos */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-neutral-300 font-medium">
+                        Taxa de Conversão (Castings → Trabalhos)
+                      </span>
+                      <span className="font-bold text-[#E8AC51]">
+                        34%{' '}
+                        <span className="text-neutral-400 font-normal">
+                          (18 fechados de 53 castings)
+                        </span>
+                      </span>
+                    </div>
+                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                      <div
+                        className="h-full bg-[#E8AC51] rounded-full"
+                        style={{ width: '34%' }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Taxa de Engajamento de Pacotes */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-neutral-300 font-medium">
+                        Pacotes com Seleção de Clientes
+                      </span>
+                      <span className="font-bold text-white">
+                        68%{' '}
+                        <span className="text-neutral-400 font-normal">
+                          (15 de 22 pacotes enviados)
+                        </span>
+                      </span>
+                    </div>
+                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                      <div
+                        className="h-full bg-[#880E1B] rounded-full"
+                        style={{ width: '68%' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400">
+                <span>Comissões líquidas do mês: R$ 29.700</span>
+                <button
+                  type="button"
+                  onClick={() => navigate('/estatisticas')}
+                  className="text-[#E8AC51] hover:underline font-semibold cursor-pointer"
+                >
+                  Ver Ranking & Estatísticas →
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
