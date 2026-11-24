@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   RefreshCw,
   Settings,
@@ -11,6 +11,7 @@ import DirectEntryModal from './modals/DirectEntryModal';
 import NewEntryModal from './modals/NewEntryModal';
 import TransferModal from './modals/TransferModal';
 import ColumnsConfigModal from './modals/ColumnsConfigModal';
+import { TableRowSkeleton } from '../ui/Skeleton';
 
 const STATUS_LEGEND = [
   { label: 'Pendente', color: 'bg-black', hasExclamation: false },
@@ -38,8 +39,18 @@ const STATUS_LEGEND = [
   { label: 'Cancelado', color: 'bg-[#8e8e8e]', hasExclamation: false },
 ];
 
-export default function Expenses() {
+export default function Expenses({ isLoading: externalLoading }) {
   const [activeModal, setActiveModal] = useState(null); // 'direct' | 'new' | 'transfer' | 'columns' | null
+  const [localLoading, setLocalLoading] = useState(true);
+
+  const isLoading = externalLoading ?? localLoading;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="pt-2">
@@ -230,14 +241,18 @@ export default function Expenses() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td
-                  colSpan={18}
-                  className="bg-[#161617] border-b border-white/10 py-3.5 text-center text-[11px] text-neutral-400"
-                >
-                  Nenhum resultado encontrado
-                </td>
-              </tr>
+              {isLoading ? (
+                <TableRowSkeleton columns={18} rows={5} />
+              ) : (
+                <tr>
+                  <td
+                    colSpan={18}
+                    className="bg-[#161617] border-b border-white/10 py-3.5 text-center text-[11px] text-neutral-400 animate-content-fade"
+                  >
+                    Nenhum resultado encontrado
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

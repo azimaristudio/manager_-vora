@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCountUp } from '../hooks/useCountUp';
+import { KpiCardSkeleton, AgendaItemSkeleton } from '../components/ui/Skeleton';
 import {
   Plus,
   Calendar,
@@ -214,18 +215,32 @@ function FinancialBarColumn({ item, index, maxRevenue, showFinancials }) {
   );
 }
 
-export default function Dashboard({ talents = [], projectsMap = {} }) {
+export default function Dashboard({
+  talents = [],
+  projectsMap = {},
+  isLoading: externalLoading,
+}) {
   const navigate = useNavigate();
   const [isMounted, setIsMounted] = useState(false);
+  const [localLoading, setLocalLoading] = useState(true);
   const [selectedCalDay, setSelectedCalDay] = useState(23);
   const [eventFilter, setEventFilter] = useState('TODOS');
   const [showFinancials, setShowFinancials] = useState(false);
+
+  const isLoading = externalLoading ?? localLoading;
 
   useEffect(() => {
     const rafId = requestAnimationFrame(() => {
       setIsMounted(true);
     });
     return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
   }, []);
 
   const activeTalentsCount = Math.max(
@@ -238,12 +253,13 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
   );
   const activeProjectsCount = Math.max(12, Object.keys(projectsMap).length + 11);
 
-  const animatedTodayEvents = useCountUp(6, isMounted, 800, 60);
-  const animatedActiveTalents = useCountUp(activeTalentsCount, isMounted, 900, 120);
-  const animatedStandbyTalents = useCountUp(standbyTalentsCount, isMounted, 900, 120);
-  const animatedPendingCount = useCountUp(4, isMounted, 800, 180);
-  const animatedActiveProjects = useCountUp(activeProjectsCount, isMounted, 900, 180);
-  const animatedWebmailPackages = useCountUp(9, isMounted, 850, 240);
+  const kpiActive = isMounted && !isLoading;
+  const animatedTodayEvents = useCountUp(6, kpiActive, 800, 60);
+  const animatedActiveTalents = useCountUp(activeTalentsCount, kpiActive, 900, 120);
+  const animatedStandbyTalents = useCountUp(standbyTalentsCount, kpiActive, 900, 120);
+  const animatedPendingCount = useCountUp(4, kpiActive, 800, 180);
+  const animatedActiveProjects = useCountUp(activeProjectsCount, kpiActive, 900, 180);
+  const animatedWebmailPackages = useCountUp(9, kpiActive, 850, 240);
 
   const animatedSemestralTotal = useCountUp(753500, showFinancials, 950);
   const animatedSemestralGrowth = useCountUp(18.4, showFinancials, 900);
@@ -334,144 +350,152 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
       </div>
 
       {/* 2. TOP KPI ROW (4 Cartões Clicáveis) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1: Trabalhos & Castings Hoje */}
-        <button
-          type="button"
-          onClick={() => navigate('/calendario')}
-          style={{ transitionDelay: '60ms' }}
-          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
-              <Calendar className="w-5 h-5" />
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#E8AC51] group-hover:translate-x-0.5 transition-transform">
-              <span>Ver agenda</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </span>
-          </div>
-          <p className="text-xs font-medium text-neutral-400">
-            Trabalhos & Castings Hoje
-          </p>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white tabular-nums">
-              {Math.round(animatedTodayEvents)}
-            </span>
-            <span className="text-[11px] text-[#E8AC51] font-medium">
-              +2 vs. ontem
-            </span>
-          </div>
-          <p className="mt-2 text-[11px] text-neutral-400">
-            2 Trabalhos • 2 Castings • 1 Callback • 1 P. Roupa
-          </p>
-        </button>
-
-        {/* KPI 2: Talentos Ativos */}
-        <button
-          type="button"
-          onClick={() => navigate('/talentos')}
-          style={{ transitionDelay: '120ms' }}
-          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
-              <Users className="w-5 h-5" />
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#E8AC51] group-hover:translate-x-0.5 transition-transform">
-              <span>Casting completo</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </span>
-          </div>
-          <p className="text-xs font-medium text-neutral-400">Talentos Ativos</p>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white tabular-nums">
-              {Math.round(animatedActiveTalents)}
-            </span>
-            <span className="text-[11px] text-neutral-400 tabular-nums">
-              / {Math.round(animatedStandbyTalents)} em Stand-by
-            </span>
-          </div>
-          <p className="mt-2 text-[11px] text-neutral-400">
-            19 Feminino • 9 Masculino • 3 New Faces no mês
-          </p>
-        </button>
-
-        {/* KPI 3: Pendências & Contratos */}
-        <button
-          type="button"
-          onClick={() => navigate('/projetos')}
-          style={{ transitionDelay: '180ms' }}
-          className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
-              <FileSignature className="w-5 h-5" />
-            </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#880E1B] text-white text-[10px] font-bold">
-              1 Urgente
-            </span>
-          </div>
-          <p className="text-xs font-medium text-neutral-400">
-            Pendências & Contratos
-          </p>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white tabular-nums">
-              {Math.round(animatedPendingCount)}
-            </span>
-            <span className="text-[11px] text-[#E8AC51] font-medium tabular-nums">
-              {Math.round(animatedActiveProjects)} projetos ativos
-            </span>
-          </div>
-          <p className="mt-2 text-[11px] text-neutral-400">
-            1 contrato (Sophia Évora) vence em 30/Nov • 3 opções
-          </p>
-        </button>
-
-        {/* KPI 4: Webmail & Pacotes */}
-        <div
-          style={{ transitionDelay: '240ms' }}
-          className={`bg-[#1c1c1e] border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out shadow-md flex flex-col justify-between ${entranceClass}`}
-        >
-          <div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[0, 1, 2, 3].map((i) => (
+            <KpiCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-content-fade transition-opacity duration-300">
+          {/* KPI 1: Trabalhos & Castings Hoje */}
+          <button
+            type="button"
+            onClick={() => navigate('/calendario')}
+            style={{ transitionDelay: '60ms' }}
+            className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
+          >
             <div className="flex items-center justify-between mb-3">
               <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
-                <Mail className="w-5 h-5" />
+                <Calendar className="w-5 h-5" />
               </span>
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => navigate('/webmail/inbox')}
-                  className="px-2 py-1 rounded-md bg-[#161617] hover:bg-[#880E1B] text-[10px] font-semibold text-[#E8AC51] hover:text-white border border-white/10 transition-colors cursor-pointer"
-                >
-                  Webmail
-                </button>
-                <button
-                  type="button"
-                  onClick={() => navigate('/pacotes')}
-                  className="px-2 py-1 rounded-md bg-[#161617] hover:bg-[#880E1B] text-[10px] font-semibold text-[#E8AC51] hover:text-white border border-white/10 transition-colors cursor-pointer"
-                >
-                  Pacotes
-                </button>
-              </div>
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#E8AC51] group-hover:translate-x-0.5 transition-transform">
+                <span>Ver agenda</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </span>
             </div>
             <p className="text-xs font-medium text-neutral-400">
-              Webmail & Pacotes
+              Trabalhos & Castings Hoje
             </p>
             <div className="mt-1 flex items-baseline gap-2">
               <span className="text-2xl font-bold text-white tabular-nums">
-                {Math.round(animatedWebmailPackages)}
+                {Math.round(animatedTodayEvents)}
               </span>
               <span className="text-[11px] text-[#E8AC51] font-medium">
-                5 pacotes abertos
+                +2 vs. ontem
               </span>
             </div>
+            <p className="mt-2 text-[11px] text-neutral-400">
+              2 Trabalhos • 2 Castings • 1 Callback • 1 P. Roupa
+            </p>
+          </button>
+
+          {/* KPI 2: Talentos Ativos */}
+          <button
+            type="button"
+            onClick={() => navigate('/talentos')}
+            style={{ transitionDelay: '120ms' }}
+            className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
+                <Users className="w-5 h-5" />
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#E8AC51] group-hover:translate-x-0.5 transition-transform">
+                <span>Casting completo</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </span>
+            </div>
+            <p className="text-xs font-medium text-neutral-400">Talentos Ativos</p>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-white tabular-nums">
+                {Math.round(animatedActiveTalents)}
+              </span>
+              <span className="text-[11px] text-neutral-400 tabular-nums">
+                / {Math.round(animatedStandbyTalents)} em Stand-by
+              </span>
+            </div>
+            <p className="mt-2 text-[11px] text-neutral-400">
+              19 Feminino • 9 Masculino • 3 New Faces no mês
+            </p>
+          </button>
+
+          {/* KPI 3: Pendências & Contratos */}
+          <button
+            type="button"
+            onClick={() => navigate('/projetos')}
+            style={{ transitionDelay: '180ms' }}
+            className={`group text-left bg-[#1c1c1e] hover:bg-[#1c1c1e]/90 border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out cursor-pointer shadow-md ${entranceClass}`}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
+                <FileSignature className="w-5 h-5" />
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-[#880E1B] text-white text-[10px] font-bold">
+                1 Urgente
+              </span>
+            </div>
+            <p className="text-xs font-medium text-neutral-400">
+              Pendências & Contratos
+            </p>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-white tabular-nums">
+                {Math.round(animatedPendingCount)}
+              </span>
+              <span className="text-[11px] text-[#E8AC51] font-medium tabular-nums">
+                {Math.round(animatedActiveProjects)} projetos ativos
+              </span>
+            </div>
+            <p className="mt-2 text-[11px] text-neutral-400">
+              1 contrato (Sophia Évora) vence em 30/Nov • 3 opções
+            </p>
+          </button>
+
+          {/* KPI 4: Webmail & Pacotes */}
+          <div
+            style={{ transitionDelay: '240ms' }}
+            className={`bg-[#1c1c1e] border border-white/10 hover:border-[#E8AC51]/50 rounded-xl p-5 transition-all duration-500 ease-out shadow-md flex flex-col justify-between ${entranceClass}`}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="w-10 h-10 rounded-lg bg-[#161617] border border-white/10 flex items-center justify-center text-[#E8AC51]">
+                  <Mail className="w-5 h-5" />
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => navigate('/webmail/inbox')}
+                    className="px-2 py-1 rounded-md bg-[#161617] hover:bg-[#880E1B] text-[10px] font-semibold text-[#E8AC51] hover:text-white border border-white/10 transition-colors cursor-pointer"
+                  >
+                    Webmail
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => navigate('/pacotes')}
+                    className="px-2 py-1 rounded-md bg-[#161617] hover:bg-[#880E1B] text-[10px] font-semibold text-[#E8AC51] hover:text-white border border-white/10 transition-colors cursor-pointer"
+                  >
+                    Pacotes
+                  </button>
+                </div>
+              </div>
+              <p className="text-xs font-medium text-neutral-400">
+                Webmail & Pacotes
+              </p>
+              <div className="mt-1 flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-white tabular-nums">
+                  {Math.round(animatedWebmailPackages)}
+                </span>
+                <span className="text-[11px] text-[#E8AC51] font-medium">
+                  5 pacotes abertos
+                </span>
+              </div>
+            </div>
+            <p className="mt-2 text-[11px] text-neutral-400">
+              4 e-mails não lidos • 5 pacotes visualizados por clientes
+            </p>
           </div>
-          <p className="mt-2 text-[11px] text-neutral-400">
-            4 e-mails não lidos • 5 pacotes visualizados por clientes
-          </p>
         </div>
-      </div>
+      )}
 
       {/* 3. MIDDLE GRID (2 Colunas no Desktop: Agenda do Dia + Mini Calendário | Desempenho & Financeiro) */}
       <div
@@ -518,44 +542,54 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
             {/* Layout Interno: Lista Cronológica + Mini-Calendário Mensal ao lado/abaixo */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
               {/* Lista Cronológica de Eventos (7 cols) */}
-              <div className="md:col-span-7 space-y-2.5">
-                {filteredEvents.map((ev) => (
-                  <div
-                    key={ev.id}
-                    onClick={() => navigate('/calendario')}
-                    className="p-3 rounded-lg bg-[#161617] hover:bg-[#161617]/80 border border-white/10 hover:border-[#E8AC51]/40 transition-all cursor-pointer flex items-start justify-between gap-3"
-                  >
-                    <div className="flex items-start gap-3 min-w-0">
-                      <div className="text-center shrink-0 pt-0.5">
-                        <span className="block text-xs font-bold text-[#E8AC51]">
-                          {ev.time}
-                        </span>
-                        <span className="block text-[9px] uppercase tracking-wider text-neutral-400">
-                          {ev.dayLabel}
-                        </span>
-                      </div>
-
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <span
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${ev.badgeBg}`}
-                          >
-                            {ev.type}
-                          </span>
-                          <span className="text-xs font-bold text-white truncate">
-                            {ev.talent}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-neutral-300 mt-1 truncate">
-                          {ev.client}
-                        </p>
-                        <p className="text-[10px] text-neutral-400 truncate">
-                          {ev.location}
-                        </p>
-                      </div>
-                    </div>
+              <div className="md:col-span-7">
+                {isLoading ? (
+                  <div className="space-y-2.5">
+                    {[0, 1, 2, 3].map((i) => (
+                      <AgendaItemSkeleton key={i} />
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div className="space-y-2.5 animate-content-fade transition-opacity duration-300">
+                    {filteredEvents.map((ev) => (
+                      <div
+                        key={ev.id}
+                        onClick={() => navigate('/calendario')}
+                        className="p-3 rounded-lg bg-[#161617] hover:bg-[#161617]/80 border border-white/10 hover:border-[#E8AC51]/40 transition-all cursor-pointer flex items-start justify-between gap-3"
+                      >
+                        <div className="flex items-start gap-3 min-w-0">
+                          <div className="text-center shrink-0 pt-0.5">
+                            <span className="block text-xs font-bold text-[#E8AC51]">
+                              {ev.time}
+                            </span>
+                            <span className="block text-[9px] uppercase tracking-wider text-neutral-400">
+                              {ev.dayLabel}
+                            </span>
+                          </div>
+
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <span
+                                className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${ev.badgeBg}`}
+                              >
+                                {ev.type}
+                              </span>
+                              <span className="text-xs font-bold text-white truncate">
+                                {ev.talent}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-neutral-300 mt-1 truncate">
+                              {ev.client}
+                            </p>
+                            <p className="text-[10px] text-neutral-400 truncate">
+                              {ev.location}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Mini-Calendário Mensal Compacto com pontos dourados #E8AC51 (5 cols) */}

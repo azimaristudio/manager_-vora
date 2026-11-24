@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   RefreshCw,
   Plus,
@@ -8,10 +8,21 @@ import {
   ChevronRight,
   ChevronDown,
 } from 'lucide-react';
+import { TableRowSkeleton } from '../ui/Skeleton';
 
-export default function TalentStatements() {
+export default function TalentStatements({ isLoading: externalLoading }) {
   const [talentStatus, setTalentStatus] = useState('Ativo');
   const [currency, setCurrency] = useState('BRL');
+  const [localLoading, setLocalLoading] = useState(true);
+
+  const isLoading = externalLoading ?? localLoading;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="pt-2">
@@ -140,39 +151,43 @@ export default function TalentStatements() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-white/10 text-[11px] text-white hover:bg-[#1c1c1e]">
-                {/* Coluna Talento: avatar ÉVORA + sophia évora */}
-                <td className="py-3 px-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full border border-white/10 bg-[#1c1c1e] flex flex-col items-center justify-center shrink-0">
-                      <span className="text-[5px] font-serif tracking-widest text-white">
-                        ÉVORA
+              {isLoading ? (
+                <TableRowSkeleton columns={11} rows={5} />
+              ) : (
+                <tr className="border-b border-white/10 text-[11px] text-white hover:bg-[#1c1c1e] animate-content-fade">
+                  {/* Coluna Talento: avatar ÉVORA + sophia évora */}
+                  <td className="py-3 px-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-full border border-white/10 bg-[#1c1c1e] flex flex-col items-center justify-center shrink-0">
+                        <span className="text-[5px] font-serif tracking-widest text-white">
+                          ÉVORA
+                        </span>
+                      </div>
+                      <span className="font-bold text-white">
+                        sophia évora
                       </span>
                     </div>
-                    <span className="font-bold text-white">
-                      sophia évora
-                    </span>
-                  </div>
-                </td>
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2 text-[10px] text-neutral-400 leading-tight">
-                  30/Oct/26 - 30/
-                  <br />
-                  Oct/31
-                </td>
-                <td className="py-3 px-2 text-[10px] text-neutral-400">
-                  0.00 <span className="text-neutral-400">BRL</span>
-                </td>
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2" />
-                <td className="py-3 px-2" />
-                <td className="py-3 px-3 text-right font-bold text-white text-[11px]">
-                  0.00 <span className="font-normal text-neutral-400">BRL</span>
-                </td>
-              </tr>
+                  </td>
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2 text-[10px] text-neutral-400 leading-tight">
+                    30/Oct/26 - 30/
+                    <br />
+                    Oct/31
+                  </td>
+                  <td className="py-3 px-2 text-[10px] text-neutral-400">
+                    0.00 <span className="text-neutral-400">BRL</span>
+                  </td>
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-2" />
+                  <td className="py-3 px-3 text-right font-bold text-white text-[11px]">
+                    0.00 <span className="font-normal text-neutral-400">BRL</span>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search,
@@ -13,6 +13,7 @@ import {
   Star,
   Pencil,
 } from 'lucide-react';
+import { TableRowSkeleton } from './ui/Skeleton';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -22,12 +23,26 @@ const TABS = [
   { id: 'outros', label: 'Outros Contatos', icon: IdCard },
 ];
 
-export default function Contacts({ contactsData, onUpdateContactBooker }) {
+export default function Contacts({
+  contactsData,
+  onUpdateContactBooker,
+  isLoading: externalLoading,
+}) {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('fornecedores'); // 'clientes' | 'fornecedores' | 'outros'
   const [activeLetter, setActiveLetter] = useState('TODOS');
   const [searchQuery, setSearchQuery] = useState('');
   const [bookerDrafts, setBookerDrafts] = useState({});
+  const [localLoading, setLocalLoading] = useState(true);
+
+  const isLoading = externalLoading ?? localLoading;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   const currentList = contactsData?.[activeTab] || [];
 
@@ -271,11 +286,13 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
           </thead>
 
           <tbody>
-            {filteredList.length > 0 ? (
+            {isLoading ? (
+              <TableRowSkeleton columns={8} rows={5} />
+            ) : filteredList.length > 0 ? (
               filteredList.map((contact, idx) => (
                 <tr
                   key={contact.id}
-                  className="bg-[#161617] hover:bg-[#1c1c1e] border-b border-white/10 text-xs text-neutral-400 transition-colors"
+                  className="bg-[#161617] hover:bg-[#1c1c1e] border-b border-white/10 text-xs text-neutral-400 transition-colors animate-content-fade"
                 >
                   {/* # */}
                   <td className="py-2.5 px-3 text-neutral-400">{idx + 1}</td>
@@ -402,7 +419,7 @@ export default function Contacts({ contactsData, onUpdateContactBooker }) {
               <tr>
                 <td
                   colSpan={8}
-                  className="bg-[#161617] py-10 px-4 text-center text-xs text-neutral-400"
+                  className="bg-[#161617] py-10 px-4 text-center text-xs text-neutral-400 animate-content-fade"
                 >
                   Nenhum resultado para esta consulta
                 </td>

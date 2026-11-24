@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search,
@@ -14,6 +14,7 @@ import {
   Globe,
 } from 'lucide-react';
 import CreateProjectModal from './CreateProjectModal';
+import { TableRowSkeleton } from '../ui/Skeleton';
 
 const STATUS_LEGEND = [
   { label: 'Sem Status', color: 'bg-[#777777]' },
@@ -24,8 +25,21 @@ const STATUS_LEGEND = [
   { label: 'Fechado', color: 'bg-[#f37021]' },
 ];
 
-export default function ProjectsList({ onProjectCreated }) {
+export default function ProjectsList({
+  onProjectCreated,
+  isLoading: externalLoading,
+}) {
   const navigate = useNavigate();
+  const [localLoading, setLocalLoading] = useState(true);
+
+  const isLoading = externalLoading ?? localLoading;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Estado para abrir/fechar o modal de criação de projeto (Imagem 29)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -311,12 +325,32 @@ export default function ProjectsList({ onProjectCreated }) {
           </div>
         </div>
 
-        {/* Corpo Principal: Estado Vazio ('Nenhum registro encontrado') */}
-        <div className="py-24 flex flex-col items-center justify-center text-center">
-          <p className="text-[19px] text-neutral-400 font-normal">
-            Nenhum registro encontrado
-          </p>
-        </div>
+        {/* Corpo Principal: Skeleton de Tabela ou Estado Vazio ('Nenhum registro encontrado') */}
+        {isLoading ? (
+          <div className="mt-5 w-full border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap bg-[#1c1c1e]">
+            <table className="w-full min-w-[720px] border-collapse text-left">
+              <thead>
+                <tr className="bg-[#880E1B] text-white text-[11px] font-medium">
+                  <th className="py-2.5 px-3">#</th>
+                  <th className="py-2.5 px-3">Projeto</th>
+                  <th className="py-2.5 px-3">Cliente</th>
+                  <th className="py-2.5 px-3">Status</th>
+                  <th className="py-2.5 px-3">Datas</th>
+                  <th className="py-2.5 px-3">Booker</th>
+                </tr>
+              </thead>
+              <tbody>
+                <TableRowSkeleton columns={6} rows={5} />
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="py-24 flex flex-col items-center justify-center text-center animate-content-fade transition-opacity duration-300">
+            <p className="text-[19px] text-neutral-400 font-normal">
+              Nenhum registro encontrado
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Rodapé Padrão Évora Models */}

@@ -5,7 +5,6 @@ import {
   Route,
   Navigate,
   useNavigate,
-  useLocation,
 } from 'react-router-dom';
 import Login from './components/Login';
 import AppLayout from './components/AppLayout';
@@ -25,18 +24,334 @@ import AccountingLayout from './components/accounting/AccountingLayout';
 import MyAccount from './components/MyAccount';
 import SettingsLayout from './components/settings/SettingsLayout';
 import Dashboard from './pages/Dashboard';
+import Talentos from './pages/Talentos';
+
+const EMPTY_TALENT_OVERVIEW = {
+  info: {},
+  agenda: [],
+  atividades: [],
+  contratos: [],
+  voos: [],
+  compo: [],
+  book: [],
+  snaps: [],
+  video: [],
+  docs: [],
+};
 
 const INITIAL_TALENTS = [
   {
     id: 'talent-sophia-evora',
+    code: 'EV-001',
     stageName: 'sophia évora',
     fullName: 'sophia egito',
     initial: 'S',
+    officeId: '2848',
     officeName: 'ÉVORA',
     officeSubtitle: 'MODELS',
     category: 'Modelo',
+    categories: ['Modelo', 'Celebridade'],
     status: 'Ativo',
+    photoUrl: null,
     coverUrl: null,
+    isNewThisMonth: true,
+    createdAt: '2026-11-04T10:00:00Z',
+    updatedAt: '2026-11-23T16:30:00Z',
+    updatedAtLabel: '23/Nov/2026',
+    attributes: {
+      gender: 'woman',
+      city: 'Recife, PE',
+      state: 'PE',
+      age: 22,
+      height: 176,
+      eyes: 'brown',
+      eyesLabel: 'Castanhos',
+      hair: 'brown',
+      hairLabel: 'Castanho',
+      manequim: '36',
+      sapato: '37',
+      drt: 'Não informado',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '0',
+    },
+    overview: {
+      ...EMPTY_TALENT_OVERVIEW,
+      agenda: [
+        {
+          id: 'ag-1',
+          title: 'Casting • Vogue Brasil Editorial Resort',
+          subtitle: 'Estúdio Bob Wolfenson (SP)',
+          date: 'Hoje • 09:30',
+          status: 'Confirmado',
+        },
+      ],
+    },
+  },
+  {
+    id: 'talent-helena-valente',
+    code: 'EV-002',
+    stageName: 'helena valente',
+    fullName: 'helena valente moura',
+    initial: 'H',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Modelo',
+    categories: ['Modelo'],
+    status: 'Ativo',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: false,
+    createdAt: '2026-08-14T10:00:00Z',
+    updatedAt: '2026-11-22T14:00:00Z',
+    updatedAtLabel: '22/Nov/2026',
+    attributes: {
+      gender: 'woman',
+      city: 'São Paulo, SP',
+      state: 'SP',
+      age: 24,
+      height: 178,
+      eyes: 'green',
+      eyesLabel: 'Verdes',
+      hair: 'blonde',
+      hairLabel: 'Loiro',
+      manequim: '36',
+      sapato: '38',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '1',
+    },
+    overview: {
+      ...EMPTY_TALENT_OVERVIEW,
+      agenda: [
+        {
+          id: 'ag-2',
+          title: 'Prova de Roupa • Animale Coleção Inverno',
+          subtitle: 'Showroom Jardins',
+          date: 'Hoje • 11:00',
+          status: 'Confirmado',
+        },
+      ],
+    },
+  },
+  {
+    id: 'talent-lucas-montenegro',
+    code: 'EV-003',
+    stageName: 'lucas montenegro',
+    fullName: 'lucas montenegro silva',
+    initial: 'L',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Ator',
+    categories: ['Ator', 'Modelo'],
+    status: 'Ativo',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: false,
+    createdAt: '2026-06-20T09:00:00Z',
+    updatedAt: '2026-11-21T18:10:00Z',
+    updatedAtLabel: '21/Nov/2026',
+    attributes: {
+      gender: 'man',
+      city: 'São Paulo, SP',
+      state: 'SP',
+      age: 27,
+      height: 185,
+      eyes: 'dark_brown',
+      eyesLabel: 'Castanhos Escuros',
+      hair: 'black',
+      hairLabel: 'Preto',
+      manequim: '40',
+      sapato: '42',
+      drt: 'DRT SP-48210',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '1',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
+  },
+  {
+    id: 'talent-valentina-costa',
+    code: 'EV-004',
+    stageName: 'valentina costa',
+    fullName: 'valentina costa ferreira',
+    initial: 'V',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Modelo',
+    categories: ['Modelo'],
+    status: 'Ativo',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: true,
+    createdAt: '2026-11-10T11:30:00Z',
+    updatedAt: '2026-11-20T12:00:00Z',
+    updatedAtLabel: '20/Nov/2026',
+    attributes: {
+      gender: 'woman',
+      city: 'Rio de Janeiro, RJ',
+      state: 'RJ',
+      age: 20,
+      height: 175,
+      eyes: 'hazel',
+      eyesLabel: 'Mel',
+      hair: 'brown',
+      hairLabel: 'Castanho',
+      manequim: '34',
+      sapato: '36',
+      languages: ['PT'],
+      languagesLabel: ['Português'],
+      licensing: '0',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
+  },
+  {
+    id: 'talent-gabriel-albuquerque',
+    code: 'EV-005',
+    stageName: 'gabriel albuquerque',
+    fullName: 'gabriel albuquerque lima',
+    initial: 'G',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Modelo',
+    categories: ['Modelo', 'Ator'],
+    status: 'Ativo',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: false,
+    createdAt: '2026-09-02T15:00:00Z',
+    updatedAt: '2026-11-19T09:45:00Z',
+    updatedAtLabel: '19/Nov/2026',
+    attributes: {
+      gender: 'man',
+      city: 'Recife, PE',
+      state: 'PE',
+      age: 25,
+      height: 184,
+      eyes: 'brown',
+      eyesLabel: 'Castanhos',
+      hair: 'black',
+      hairLabel: 'Preto',
+      manequim: '40',
+      sapato: '42',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '2',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
+  },
+  {
+    id: 'talent-amber-rodrigues',
+    code: 'EV-006',
+    stageName: 'amber rodrigues',
+    fullName: 'amber rodrigues barros',
+    initial: 'A',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Modelo',
+    categories: ['Modelo'],
+    status: 'Ativo',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: true,
+    createdAt: '2026-11-15T14:20:00Z',
+    updatedAt: '2026-11-18T17:15:00Z',
+    updatedAtLabel: '18/Nov/2026',
+    attributes: {
+      gender: 'woman',
+      city: 'Recife, PE',
+      state: 'PE',
+      age: 21,
+      height: 177,
+      eyes: 'blue',
+      eyesLabel: 'Azuis',
+      hair: 'red',
+      hairLabel: 'Ruivo',
+      manequim: '36',
+      sapato: '37',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '0',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
+  },
+  {
+    id: 'talent-caio-vasconcelos',
+    code: 'EV-007',
+    stageName: 'caio vasconcelos',
+    fullName: 'caio vasconcelos duarte',
+    initial: 'C',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Celebridade',
+    categories: ['Celebridade', 'Ator'],
+    status: 'Stand by',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: false,
+    createdAt: '2026-05-12T10:00:00Z',
+    updatedAt: '2026-11-14T11:20:00Z',
+    updatedAtLabel: '14/Nov/2026',
+    attributes: {
+      gender: 'man',
+      city: 'Rio de Janeiro, RJ',
+      state: 'RJ',
+      age: 31,
+      height: 182,
+      eyes: 'brown',
+      eyesLabel: 'Castanhos',
+      hair: 'brown',
+      hairLabel: 'Castanho',
+      manequim: '42',
+      sapato: '42',
+      drt: 'DRT RJ-33190',
+      languages: ['PT', 'EN'],
+      languagesLabel: ['Português', 'Inglês'],
+      licensing: '1',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
+  },
+  {
+    id: 'talent-marina-salazar',
+    code: 'EV-008',
+    stageName: 'marina salazar',
+    fullName: 'marina salazar nobre',
+    initial: 'M',
+    officeId: '2848',
+    officeName: 'ÉVORA',
+    officeSubtitle: 'MODELS',
+    category: 'Modelo',
+    categories: ['Modelo', 'Ator'],
+    status: 'Stand by',
+    photoUrl: null,
+    coverUrl: null,
+    isNewThisMonth: false,
+    createdAt: '2026-07-08T09:30:00Z',
+    updatedAt: '2026-11-10T15:40:00Z',
+    updatedAtLabel: '10/Nov/2026',
+    attributes: {
+      gender: 'woman',
+      city: 'São Paulo, SP',
+      state: 'SP',
+      age: 23,
+      height: 174,
+      eyes: 'dark_brown',
+      eyesLabel: 'Castanhos Escuros',
+      hair: 'black',
+      hairLabel: 'Preto',
+      manequim: '36',
+      sapato: '37',
+      languages: ['PT'],
+      languagesLabel: ['Português'],
+      licensing: '1',
+    },
+    overview: { ...EMPTY_TALENT_OVERVIEW },
   },
 ];
 
@@ -94,7 +409,6 @@ const INITIAL_PROJECTS_MAP = {
 
 function AppRoutes() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [talents, setTalents] = useState(INITIAL_TALENTS);
   const [contactsData, setContactsData] = useState(INITIAL_CONTACTS);
@@ -106,22 +420,37 @@ function AppRoutes() {
       payload.personal?.fullName?.trim() ||
       'Novo Talento';
     const fullName = payload.personal?.fullName?.trim() || stageName;
+    const nowIso = new Date().toISOString();
+    const photo = payload.media?.profilePhotoUrl || null;
 
     const newCard = {
       id: payload.id,
+      code: `EV-${String(talents.length + 1).padStart(3, '0')}`,
       stageName: stageName.toLowerCase(),
       fullName: fullName.toLowerCase(),
       initial: stageName.charAt(0).toUpperCase(),
+      officeId: '2848',
       officeName: 'ÉVORA',
       officeSubtitle: 'MODELS',
       category: 'Modelo',
+      categories: ['Modelo'],
       status:
         payload.personal?.status === '0'
           ? 'Inativo'
           : payload.personal?.status === '-1'
           ? 'Stand by'
           : 'Ativo',
-      coverUrl: payload.media?.profilePhotoUrl || null,
+      photoUrl: photo,
+      coverUrl: photo,
+      isNewThisMonth: true,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+      updatedAtLabel: 'Agora',
+      attributes: {
+        email: payload.personal?.email || '',
+        phone: payload.personal?.phone || '',
+      },
+      overview: { ...EMPTY_TALENT_OVERVIEW },
     };
 
     setTalents((prev) => [newCard, ...prev]);
@@ -230,9 +559,16 @@ function AppRoutes() {
           path="/talentos"
           element={
             <AppLayout
+              hideSidebar={true}
+              hideSubHeader={true}
               customTalents={talents}
               onOpenAddTalent={() => navigate('/talentos/novo')}
-            />
+            >
+              <Talentos
+                talents={talents}
+                onOpenAddTalent={() => navigate('/talentos/novo')}
+              />
+            </AppLayout>
           }
         />
 
@@ -247,7 +583,7 @@ function AppRoutes() {
               onOpenAddTalent={() => navigate('/talentos/novo')}
             >
               <AddTalent
-                onBackToList={() => navigate('/')}
+                onBackToList={() => navigate('/talentos')}
                 onTalentCreated={handleTalentCreated}
               />
             </AppLayout>
@@ -470,184 +806,6 @@ function AppRoutes() {
           }
         />
       </Routes>
-
-      {/* Barra Flutuante de Protótipo para Inspecionar as Rotas (oculta na tela de Login) */}
-      {location.pathname !== '/login' && (
-        <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-1.5 bg-[#1c1c1e]/95 backdrop-blur-xs text-white px-3 py-1.5 rounded-full shadow-lg border border-white/15 text-xs">
-          <span className="text-neutral-400 font-medium mr-1">Rotas:</span>
-          <button
-            type="button"
-            onClick={() => navigate('/login')}
-            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-              location.pathname === '/login'
-                ? 'bg-[#880E1B] text-white'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            /login
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setIsAuthenticated(true);
-              navigate('/dashboard');
-            }}
-            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-              location.pathname === '/' || location.pathname === '/dashboard'
-                ? 'bg-[#880E1B] text-white'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            /dashboard
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setIsAuthenticated(true);
-              navigate('/talentos');
-            }}
-            className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-              location.pathname === '/talentos'
-                ? 'bg-[#880E1B] text-white'
-                : 'text-neutral-400 hover:text-white'
-            }`}
-          >
-            /talentos
-          </button>
-        <button
-          type="button"
-          onClick={() => navigate('/contatos')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/contatos')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /contatos
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/webmail/inbox')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/webmail')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /webmail
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/projetos')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/projetos'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /projetos
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/projetos/1')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/projetos/1'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /projetos/1
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/calendario')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/calendario')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /calendario
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/pacotes')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/pacotes'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /pacotes
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/pacotes/novo')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/pacotes/novo'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /pacotes/novo
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/estatisticas')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/estatisticas')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /estatisticas
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/contabilidade')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/contabilidade')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /contabilidade
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/minha-conta')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/minha-conta'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /minha-conta
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/configuracoes')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname.startsWith('/configuracoes')
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /configuracoes
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/compomake')}
-          className={`px-2.5 py-1 rounded-full font-medium transition-colors cursor-pointer ${
-            location.pathname === '/compomake'
-              ? 'bg-[#880E1B] text-white'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          /compomake
-        </button>
-      </div>
-      )}
     </div>
   );
 }

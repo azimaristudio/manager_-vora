@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search,
@@ -13,6 +13,7 @@ import {
 import Header from './Header';
 import FilterSidebar from './FilterSidebar';
 import CompoMakeModal from './CompoMakeModal';
+import { TalentCardSkeleton, TableRowSkeleton } from './ui/Skeleton';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -41,6 +42,7 @@ export default function AppLayout({
   hideSidebar = false,
   hideSubHeader = false,
   customTalents,
+  isLoading: externalLoading,
   children,
 }) {
   const navigate = useNavigate();
@@ -51,6 +53,17 @@ export default function AppLayout({
   const [isCompoMakeOpen, setIsCompoMakeOpen] = useState(false);
   const [compoToast, setCompoToast] = useState(null);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const [localLoading, setLocalLoading] = useState(!children);
+
+  const isLoading = externalLoading ?? localLoading;
+
+  useEffect(() => {
+    if (children) return;
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [children]);
 
   const talentsList = customTalents || INITIAL_MOCK_TALENTS;
 
@@ -300,12 +313,36 @@ export default function AppLayout({
 
               {/* Grid / Lista de Talentos */}
               <div className="mt-6">
-                {filteredTalents.length === 0 ? (
-                  <div className="py-16 text-center text-sm text-neutral-400">
+                {isLoading ? (
+                  viewMode === 'CARDS' ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                      {[0, 1, 2, 3].map((i) => (
+                        <TalentCardSkeleton key={i} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap">
+                      <table className="w-full min-w-[540px] text-left border-collapse text-xs">
+                        <thead>
+                          <tr className="bg-[#1c1c1e] text-neutral-400 border-b border-white/10">
+                            <th className="py-2.5 px-3">Talento</th>
+                            <th className="py-2.5 px-3">Unidade</th>
+                            <th className="py-2.5 px-3">Categoria</th>
+                            <th className="py-2.5 px-3">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <TableRowSkeleton columns={4} rows={4} />
+                        </tbody>
+                      </table>
+                    </div>
+                  )
+                ) : filteredTalents.length === 0 ? (
+                  <div className="py-16 text-center text-sm text-neutral-400 animate-content-fade transition-opacity duration-300">
                     Nenhum resultado encontrado para o filtro selecionado.
                   </div>
                 ) : viewMode === 'CARDS' ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 animate-content-fade transition-opacity duration-300">
                     {filteredTalents.map((talent) => {
                       const isSelected = selectedTalents.includes(talent.id);
                       return (
@@ -388,7 +425,7 @@ export default function AppLayout({
                     })}
                   </div>
                 ) : (
-                  <div className="border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap">
+                  <div className="border border-white/10 rounded-xs overflow-x-auto whitespace-nowrap animate-content-fade transition-opacity duration-300">
                     <table className="w-full min-w-[540px] text-left border-collapse text-xs">
                       <thead>
                         <tr className="bg-[#1c1c1e] text-neutral-400 border-b border-white/10">
