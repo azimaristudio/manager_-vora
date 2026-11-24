@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Plus,
@@ -157,11 +157,124 @@ const MINI_CALENDAR_WEEKDAYS = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
 // Dias de Novembro 2026 com eventos marcados (pontinhos dourados)
 const EVENT_DAYS_NOV = new Set([2, 4, 6, 9, 11, 14, 17, 18, 20, 23, 24, 26, 28, 30]);
 
+function useCountUp(target, isActive, duration = 900, delay = 0) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isActive) {
+      setValue(0);
+      return;
+    }
+
+    let rafId = null;
+    let timeoutId = null;
+    let startTime = null;
+
+    const animate = (timestamp) => {
+      if (startTime === null) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(target * eased);
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        setValue(target);
+      }
+    };
+
+    if (delay > 0) {
+      timeoutId = setTimeout(() => {
+        rafId = requestAnimationFrame(animate);
+      }, delay);
+    } else {
+      rafId = requestAnimationFrame(animate);
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [target, isActive, duration, delay]);
+
+  return isActive ? value : 0;
+}
+
+function FinancialBarColumn({ item, index, maxRevenue, showFinancials }) {
+  const heightPercent = Math.round((item.revenue / maxRevenue) * 100);
+  const animatedRevenue = useCountUp(item.revenue, showFinancials, 850, index * 50);
+  const animatedJobs = useCountUp(item.jobs, showFinancials, 850, index * 50);
+
+  const hasDecimal = item.revenue % 1 !== 0;
+  const formattedLabel = showFinancials
+    ? `R$ ${
+        hasDecimal
+          ? animatedRevenue.toFixed(1).replace('.', ',')
+          : Math.round(animatedRevenue)
+      }k`
+    : 'R$ 0';
+
+  return (
+    <div className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+      <span
+        className={`text-[10px] font-semibold transition-opacity duration-300 ${
+          showFinancials
+            ? 'text-[#E8AC51] opacity-85 group-hover:opacity-100'
+            : 'text-neutral-500 opacity-60'
+        }`}
+      >
+        {formattedLabel}
+      </span>
+      <div className="w-full max-w-[38px] bg-white/5 rounded-t-md h-24 flex items-end overflow-hidden p-0.5 border border-white/5">
+        <div
+          style={{
+            height: showFinancials ? `${heightPercent}%` : '0%',
+            transitionDelay: showFinancials ? `${index * 50}ms` : '0ms',
+          }}
+          className={`w-full rounded-t-sm ${
+            showFinancials ? 'transition-all duration-700 ease-out' : 'transition-none'
+          } ${
+            item.isCurrent
+              ? 'bg-gradient-to-t from-[#880E1B] to-[#E8AC51]'
+              : 'bg-[#880E1B] group-hover:bg-[#a31121]'
+          }`}
+        />
+      </div>
+      <div className="text-center">
+        <span
+          className={`block text-[11px] font-semibold ${
+            item.isCurrent ? 'text-[#E8AC51]' : 'text-neutral-300'
+          }`}
+        >
+          {item.month}
+        </span>
+        <span className="block text-[9px] text-neutral-400">
+          {Math.round(animatedJobs)} jobs
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Dashboard({ talents = [], projectsMap = {} }) {
   const navigate = useNavigate();
   const [selectedCalDay, setSelectedCalDay] = useState(23);
   const [eventFilter, setEventFilter] = useState('TODOS');
   const [showFinancials, setShowFinancials] = useState(false);
+
+  const animatedSemestralTotal = useCountUp(753500, showFinancials, 950);
+  const animatedSemestralGrowth = useCountUp(18.4, showFinancials, 900);
+  const animatedMonthlyRev = useCountUp(148500, showFinancials, 950);
+  const animatedMonthlyGoal = useCountUp(180000, showFinancials, 950);
+  const animatedMonthlyPct = useCountUp(82.5, showFinancials, 950);
+  const animatedConvPct = useCountUp(34, showFinancials, 950);
+  const animatedClosedJobs = useCountUp(18, showFinancials, 950);
+  const animatedTotalCastings = useCountUp(53, showFinancials, 950);
+  const animatedPkgPct = useCountUp(68, showFinancials, 950);
+  const animatedSelectedPkgs = useCountUp(15, showFinancials, 950);
+  const animatedSentPkgs = useCountUp(22, showFinancials, 950);
+  const animatedCommissions = useCountUp(29700, showFinancials, 950);
 
   const activeTalentsCount = Math.max(
     28,
@@ -613,33 +726,38 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
           </div>
 
           <div className="relative flex-1 flex flex-col justify-between">
-            {!showFinancials && (
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => setShowFinancials(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setShowFinancials(true);
-                  }
-                }}
-                className="absolute inset-0 flex flex-col items-center justify-center bg-[#161617]/40 backdrop-blur-sm rounded-xl cursor-pointer z-10"
-              >
-                <div className="px-4 py-2.5 rounded-xl bg-[#1c1c1e]/90 border border-white/10 shadow-lg flex items-center gap-2.5 hover:border-[#E8AC51]/50 transition-colors">
-                  <Eye className="w-4 h-4 text-[#E8AC51]" />
-                  <span className="text-xs font-semibold text-white">
-                    Clique para visualizar
-                  </span>
-                </div>
+            <div
+              role="button"
+              tabIndex={showFinancials ? -1 : 0}
+              aria-hidden={showFinancials}
+              onClick={() => {
+                if (!showFinancials) setShowFinancials(true);
+              }}
+              onKeyDown={(e) => {
+                if (!showFinancials && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  setShowFinancials(true);
+                }
+              }}
+              className={`absolute inset-0 flex flex-col items-center justify-center bg-[#161617]/55 backdrop-blur-sm rounded-xl z-10 transition-all duration-500 ease-out ${
+                showFinancials
+                  ? 'opacity-0 scale-105 pointer-events-none'
+                  : 'opacity-100 scale-100 cursor-pointer'
+              }`}
+            >
+              <div className="px-4 py-2.5 rounded-xl bg-[#1c1c1e]/95 border border-white/10 shadow-lg flex items-center gap-2.5 hover:border-[#E8AC51]/50 hover:scale-[1.02] transition-all">
+                <Eye className="w-4 h-4 text-[#E8AC51]" />
+                <span className="text-xs font-semibold text-white">
+                  Clique para visualizar
+                </span>
               </div>
-            )}
+            </div>
 
             <div
-              className={`flex-1 flex flex-col justify-between transition-all duration-300 ${
+              className={`flex-1 flex flex-col justify-between transition-all duration-500 ${
                 !showFinancials
                   ? 'blur-md select-none pointer-events-none'
-                  : ''
+                  : 'blur-0'
               }`}
             >
               <div>
@@ -648,51 +766,29 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
                   <div className="flex items-center justify-between text-xs mb-4">
                     <div>
                       <span className="text-neutral-400">Acumulado Semestral: </span>
-                      <strong className="text-white font-bold">R$ 753.500</strong>
+                      <strong className="text-white font-bold tabular-nums">
+                        {showFinancials
+                          ? `R$ ${Math.round(animatedSemestralTotal).toLocaleString('pt-BR')}`
+                          : 'R$ 0'}
+                      </strong>
                     </div>
-                    <span className="px-2 py-0.5 rounded bg-[#E8AC51]/15 text-[#E8AC51] text-[10px] font-bold">
-                      +18,4% vs. semestre ant.
+                    <span className="px-2 py-0.5 rounded bg-[#E8AC51]/15 text-[#E8AC51] text-[10px] font-bold tabular-nums">
+                      {showFinancials
+                        ? `+${animatedSemestralGrowth.toFixed(1).replace('.', ',')}% vs. semestre ant.`
+                        : '0% vs. semestre ant.'}
                     </span>
                   </div>
 
                   <div className="h-40 flex items-end justify-between gap-2.5 pt-4 px-1">
-                    {SIX_MONTH_PERFORMANCE.map((item) => {
-                      const heightPercent = Math.round(
-                        (item.revenue / maxRevenue) * 100
-                      );
-                      return (
-                        <div
-                          key={item.month}
-                          className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group"
-                        >
-                          <span className="text-[10px] font-semibold text-[#E8AC51] opacity-85 group-hover:opacity-100">
-                            {item.label}
-                          </span>
-                          <div className="w-full max-w-[38px] bg-[#1c1c1e] rounded-t-md h-24 flex items-end overflow-hidden p-0.5 border border-white/5">
-                            <div
-                              style={{ height: `${heightPercent}%` }}
-                              className={`w-full rounded-t-sm transition-all duration-300 ${
-                                item.isCurrent
-                                  ? 'bg-gradient-to-t from-[#880E1B] to-[#E8AC51]'
-                                  : 'bg-[#880E1B] group-hover:bg-[#a31121]'
-                              }`}
-                            />
-                          </div>
-                          <div className="text-center">
-                            <span
-                              className={`block text-[11px] font-semibold ${
-                                item.isCurrent ? 'text-[#E8AC51]' : 'text-neutral-300'
-                              }`}
-                            >
-                              {item.month}
-                            </span>
-                            <span className="block text-[9px] text-neutral-400">
-                              {item.jobs} jobs
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {SIX_MONTH_PERFORMANCE.map((item, idx) => (
+                      <FinancialBarColumn
+                        key={item.month}
+                        item={item}
+                        index={idx}
+                        maxRevenue={maxRevenue}
+                        showFinancials={showFinancials}
+                      />
+                    ))}
                   </div>
                 </div>
 
@@ -704,17 +800,28 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
                       <span className="text-neutral-300 font-medium">
                         Meta de Faturamento Mensal (Nov)
                       </span>
-                      <span className="font-bold text-white">
-                        R$ 148.500{' '}
+                      <span className="font-bold text-white tabular-nums">
+                        {showFinancials
+                          ? `R$ ${Math.round(animatedMonthlyRev).toLocaleString('pt-BR')}`
+                          : 'R$ 0'}{' '}
                         <span className="text-neutral-400 font-normal">
-                          / R$ 180.000 (82,5%)
+                          / {showFinancials
+                            ? `R$ ${Math.round(animatedMonthlyGoal).toLocaleString('pt-BR')}`
+                            : 'R$ 0'}{' '}
+                          ({showFinancials
+                            ? `${animatedMonthlyPct.toFixed(1).replace('.', ',')}%`
+                            : '0%'})
                         </span>
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                    <div className="w-full h-2.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
                       <div
-                        className="h-full bg-gradient-to-r from-[#880E1B] to-[#E8AC51] rounded-full"
-                        style={{ width: '82.5%' }}
+                        className={`h-full bg-gradient-to-r from-[#880E1B] to-[#E8AC51] rounded-full ${
+                          showFinancials
+                            ? 'transition-all duration-1000 ease-out'
+                            : 'transition-none'
+                        }`}
+                        style={{ width: showFinancials ? '82.5%' : '0%' }}
                       />
                     </div>
                   </div>
@@ -725,17 +832,22 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
                       <span className="text-neutral-300 font-medium">
                         Taxa de Conversão (Castings → Trabalhos)
                       </span>
-                      <span className="font-bold text-[#E8AC51]">
-                        34%{' '}
+                      <span className="font-bold text-[#E8AC51] tabular-nums">
+                        {showFinancials ? `${Math.round(animatedConvPct)}%` : '0%'}{' '}
                         <span className="text-neutral-400 font-normal">
-                          (18 fechados de 53 castings)
+                          ({Math.round(animatedClosedJobs)} fechados de{' '}
+                          {Math.round(animatedTotalCastings)} castings)
                         </span>
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                    <div className="w-full h-2.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
                       <div
-                        className="h-full bg-[#E8AC51] rounded-full"
-                        style={{ width: '34%' }}
+                        className={`h-full bg-[#E8AC51] rounded-full ${
+                          showFinancials
+                            ? 'transition-all duration-1000 ease-out'
+                            : 'transition-none'
+                        }`}
+                        style={{ width: showFinancials ? '34%' : '0%' }}
                       />
                     </div>
                   </div>
@@ -746,17 +858,22 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
                       <span className="text-neutral-300 font-medium">
                         Pacotes com Seleção de Clientes
                       </span>
-                      <span className="font-bold text-white">
-                        68%{' '}
+                      <span className="font-bold text-white tabular-nums">
+                        {showFinancials ? `${Math.round(animatedPkgPct)}%` : '0%'}{' '}
                         <span className="text-neutral-400 font-normal">
-                          (15 de 22 pacotes enviados)
+                          ({Math.round(animatedSelectedPkgs)} de{' '}
+                          {Math.round(animatedSentPkgs)} pacotes enviados)
                         </span>
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-[#161617] rounded-full overflow-hidden border border-white/10">
+                    <div className="w-full h-2.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
                       <div
-                        className="h-full bg-[#880E1B] rounded-full"
-                        style={{ width: '68%' }}
+                        className={`h-full bg-[#880E1B] rounded-full ${
+                          showFinancials
+                            ? 'transition-all duration-1000 ease-out'
+                            : 'transition-none'
+                        }`}
+                        style={{ width: showFinancials ? '68%' : '0%' }}
                       />
                     </div>
                   </div>
@@ -764,7 +881,12 @@ export default function Dashboard({ talents = [], projectsMap = {} }) {
               </div>
 
               <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400">
-                <span>Comissões líquidas do mês: R$ 29.700</span>
+                <span className="tabular-nums">
+                  Comissões líquidas do mês:{' '}
+                  {showFinancials
+                    ? `R$ ${Math.round(animatedCommissions).toLocaleString('pt-BR')}`
+                    : 'R$ 0'}
+                </span>
                 <button
                   type="button"
                   onClick={() => navigate('/estatisticas')}
