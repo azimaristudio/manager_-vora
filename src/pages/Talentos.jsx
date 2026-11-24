@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Users,
   UserCheck,
@@ -18,17 +18,14 @@ import {
   Package,
   Download,
   Trash2,
-  Calendar,
-  BookOpen,
-  Video,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react';
 import FilterSidebar, { cloneFilters } from '../components/FilterSidebar';
-import TalentCard, {
-  formatTitleCase,
-  getTalentInitials,
-} from '../components/talents/TalentCard';
+import TalentCard, { formatTitleCase } from '../components/talents/TalentCard';
+import TalentList from '../components/talents/TalentList';
 import TalentOverviewModal from '../components/talents/TalentOverviewModal';
-import { TalentCardSkeleton, TableRowSkeleton } from '../components/ui/Skeleton';
+import { TalentCardSkeleton } from '../components/ui/Skeleton';
 import { INITIAL_NORMALIZED_FILTERS } from '../data/mockFilters';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -249,8 +246,10 @@ export default function Talentos({
   talents = [],
   onOpenAddTalent,
   isLoading: externalLoading,
+  error: loadError,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [filters, setFilters] = useState(createDefaultTalentosFilters);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('CARDS');
@@ -264,15 +263,25 @@ export default function Talentos({
     tab: 'Info',
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [localLoading, setLocalLoading] = useState(true);
+  const [toastMessage, setToastMessage] = useState(
+    () => location.state?.toast || null
+  );
   const actionsRef = useRef(null);
 
-  const isLoading = externalLoading ?? localLoading;
+  const isLoading = Boolean(externalLoading);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLocalLoading(false), 320);
+    if (location.state?.toast) {
+      setToastMessage(location.state.toast);
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location.pathname, location.state, navigate]);
+
+  useEffect(() => {
+    if (!toastMessage) return;
+    const timer = setTimeout(() => setToastMessage(null), 6000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [toastMessage]);
 
   useEffect(() => {
     if (!isActionsOpen) return;
@@ -482,6 +491,27 @@ export default function Talentos({
 
   return (
     <div className="min-h-screen bg-[#161617] text-white">
+      {toastMessage && (
+        <div className="fixed top-20 right-6 z-50 max-w-md bg-[#1c1c1e] text-white px-4 py-3.5 rounded-xl shadow-2xl border border-white/10 border-l-4 border-l-[#E8AC51] flex items-start gap-3 animate-content-fade">
+          <CheckCircle2 className="w-5 h-5 text-[#E8AC51] shrink-0 mt-0.5" />
+          <div className="flex-1 text-xs">
+            <p className="font-semibold text-white">{toastMessage.title}</p>
+            {toastMessage.subtitle && (
+              <p className="text-neutral-400 mt-0.5 leading-relaxed">
+                {toastMessage.subtitle}
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => setToastMessage(null)}
+            className="text-neutral-400 hover:text-white cursor-pointer"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
       <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8 py-6 space-y-5">
         {/* 1. Header & KPI Strip */}
         <header className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
@@ -835,6 +865,16 @@ export default function Talentos({
 
           {/* Conteúdo de Talentos */}
           <div className="flex-1 min-w-0 w-full space-y-5">
+            {loadError && (
+              <div className="bg-[#1c1c1e] border border-red-500/40 rounded-xl px-4 py-3 flex items-center gap-3 text-xs text-red-300">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <span>
+                  Não foi possível carregar os talentos do Firestore.{' '}
+                  {loadError?.message || ''}
+                </span>
+              </div>
+            )}
+
             {isLoading ? (
               viewMode === 'CARDS' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
@@ -843,26 +883,35 @@ export default function Talentos({
                   ))}
                 </div>
               ) : (
-                <div className="bg-[#1c1c1e] border border-white/10 rounded-xl overflow-hidden">
-                  <div className="overflow-x-auto whitespace-nowrap">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-[#161617] border-b border-white/10 text-[11px] uppercase tracking-wider text-neutral-400">
-                          <th className="py-3 px-3 w-10" />
-                          <th className="py-3 px-3">Talento</th>
-                          <th className="py-3 px-3">Unidade</th>
-                          <th className="py-3 px-3">Categoria</th>
-                          <th className="py-3 px-3">Status</th>
-                          <th className="py-3 px-3">Ações rápidas</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <TableRowSkeleton columns={6} rows={6} />
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                <TalentList
+                  isLoading={true}
+                  allSelected={false}
+                  onToggleSelectAll={toggleSelectAll}
+                />
               )
+            ) : talents.length === 0 ? (
+              <div className="bg-[#1c1c1e] border border-white/10 rounded-xl p-12 text-center space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#E8AC51]/10 border border-[#E8AC51]/30 flex items-center justify-center mx-auto text-[#E8AC51]">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="font-serif text-lg font-semibold text-white">
+                    Nenhum talento cadastrado ainda
+                  </h3>
+                  <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
+                    Sua base no Firestore está vazia. Adicione o primeiro talento
+                    com fotos, medidas e informações para começar.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAddTalent}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E8AC51] hover:bg-[#d99b3f] text-[#161617] text-xs font-bold uppercase tracking-wider shadow-md transition-colors cursor-pointer"
+                >
+                  <Plus className="w-4 h-4 stroke-[2.5]" />
+                  <span>Adicionar talento</span>
+                </button>
+              </div>
             ) : filteredTalents.length === 0 ? (
               <div className="bg-[#1c1c1e] border border-white/10 rounded-xl p-10 text-center space-y-3">
                 <div className="w-12 h-12 rounded-xl bg-[#E8AC51]/10 border border-[#E8AC51]/25 flex items-center justify-center mx-auto text-[#E8AC51]">
@@ -901,163 +950,17 @@ export default function Talentos({
                 ))}
               </div>
             ) : (
-              <div className="bg-[#1c1c1e] border border-white/10 rounded-xl overflow-hidden animate-content-fade">
-                <div className="overflow-x-auto whitespace-nowrap">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-[#161617] border-b border-white/10 text-[11px] uppercase tracking-wider text-neutral-400">
-                        <th className="py-3 px-3 w-10">
-                          <input
-                            type="checkbox"
-                            checked={allFilteredSelected}
-                            onChange={toggleSelectAll}
-                            aria-label="Selecionar todos"
-                            className="w-3.5 h-3.5 rounded-xs accent-[#880E1B] cursor-pointer"
-                          />
-                        </th>
-                        <th className="py-3 px-3">Talento</th>
-                        <th className="py-3 px-3">Unidade</th>
-                        <th className="py-3 px-3">Categoria</th>
-                        <th className="py-3 px-3">Status</th>
-                        <th className="py-3 px-3 text-right">Ações rápidas</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/10 text-xs">
-                      {paginatedTalents.map((talent) => {
-                        const isSel = selectedIds.includes(talent.id);
-                        const photoSrc = talent.photoUrl || talent.coverUrl;
-                        const displayName = formatTitleCase(
-                          talent.stageName || talent.fullName
-                        );
-                        const categories =
-                          Array.isArray(talent.categories) &&
-                          talent.categories.length > 0
-                            ? talent.categories
-                            : [talent.category || 'Modelo'];
-
-                        return (
-                          <tr
-                            key={talent.id}
-                            onClick={() =>
-                              setOverviewState({ talent, tab: 'Info' })
-                            }
-                            className={`transition-colors cursor-pointer ${
-                              isSel
-                                ? 'bg-[#E8AC51]/5 hover:bg-[#E8AC51]/10'
-                                : 'hover:bg-white/[0.03]'
-                            }`}
-                          >
-                            <td
-                              className="py-3 px-3"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <input
-                                type="checkbox"
-                                checked={isSel}
-                                onChange={() => toggleSelectTalent(talent.id)}
-                                aria-label={`Selecionar ${displayName}`}
-                                className="w-3.5 h-3.5 rounded-xs accent-[#880E1B] cursor-pointer"
-                              />
-                            </td>
-                            <td className="py-3 px-3">
-                              <div className="flex items-center gap-3">
-                                <div className="w-9 h-10 rounded-lg bg-[#161617] border border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
-                                  {photoSrc ? (
-                                    <img
-                                      src={photoSrc}
-                                      alt={displayName}
-                                      className="w-full h-full object-cover object-top"
-                                    />
-                                  ) : (
-                                    <span className="font-serif text-xs font-semibold text-[#E8AC51]">
-                                      {getTalentInitials(talent)}
-                                    </span>
-                                  )}
-                                </div>
-                                <div>
-                                  <div className="font-semibold text-white">
-                                    {displayName}
-                                  </div>
-                                  <div className="text-[11px] text-neutral-400">
-                                    {talent.code ? `${talent.code} • ` : ''}
-                                    {formatTitleCase(talent.fullName)}
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="py-3 px-3 text-neutral-300">
-                              {talent.officeName || 'ÉVORA'}{' '}
-                              {talent.officeSubtitle || 'MODELS'}
-                            </td>
-                            <td className="py-3 px-3">
-                              <div className="flex items-center gap-1">
-                                {categories.map((cat) => (
-                                  <span
-                                    key={cat}
-                                    className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-neutral-300"
-                                  >
-                                    {cat}
-                                  </span>
-                                ))}
-                              </div>
-                            </td>
-                            <td className="py-3 px-3">
-                              <span
-                                className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${
-                                  talent.status === 'Stand by'
-                                    ? 'bg-[#E8AC51]/15 text-[#E8AC51] border-[#E8AC51]/35'
-                                    : talent.status === 'Inativo'
-                                    ? 'bg-red-500/15 text-red-400 border-red-500/30'
-                                    : 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                                }`}
-                              >
-                                {talent.status || 'Ativo'}
-                              </span>
-                            </td>
-                            <td
-                              className="py-3 px-3 text-right"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <div className="inline-flex items-center gap-3 text-neutral-400">
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setOverviewState({ talent, tab: 'Agenda' })
-                                  }
-                                  className="hover:text-[#E8AC51] inline-flex items-center gap-1 cursor-pointer"
-                                >
-                                  <Calendar className="w-3.5 h-3.5" />
-                                  <span>Agenda</span>
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setOverviewState({ talent, tab: 'Book' })
-                                  }
-                                  className="hover:text-[#E8AC51] inline-flex items-center gap-1 cursor-pointer"
-                                >
-                                  <BookOpen className="w-3.5 h-3.5" />
-                                  <span>Book</span>
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setOverviewState({ talent, tab: 'Video' })
-                                  }
-                                  className="hover:text-[#E8AC51] inline-flex items-center gap-1 cursor-pointer"
-                                >
-                                  <Video className="w-3.5 h-3.5" />
-                                  <span>Video</span>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <TalentList
+                talents={paginatedTalents}
+                selectedIds={selectedIds}
+                allSelected={allFilteredSelected}
+                onToggleSelectAll={toggleSelectAll}
+                onToggleSelect={toggleSelectTalent}
+                onOpenOverview={(t, tab = 'Info') =>
+                  setOverviewState({ talent: t, tab })
+                }
+                onOpenCompoMake={() => navigate('/compomake')}
+              />
             )}
 
             {/* 6. Rodapé de Paginação */}

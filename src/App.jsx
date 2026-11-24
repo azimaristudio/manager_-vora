@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -25,335 +25,7 @@ import MyAccount from './components/MyAccount';
 import SettingsLayout from './components/settings/SettingsLayout';
 import Dashboard from './pages/Dashboard';
 import Talentos from './pages/Talentos';
-
-const EMPTY_TALENT_OVERVIEW = {
-  info: {},
-  agenda: [],
-  atividades: [],
-  contratos: [],
-  voos: [],
-  compo: [],
-  book: [],
-  snaps: [],
-  video: [],
-  docs: [],
-};
-
-const INITIAL_TALENTS = [
-  {
-    id: 'talent-sophia-evora',
-    code: 'EV-001',
-    stageName: 'sophia évora',
-    fullName: 'sophia egito',
-    initial: 'S',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo', 'Celebridade'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: true,
-    createdAt: '2026-11-04T10:00:00Z',
-    updatedAt: '2026-11-23T16:30:00Z',
-    updatedAtLabel: '23/Nov/2026',
-    attributes: {
-      gender: 'woman',
-      city: 'Recife, PE',
-      state: 'PE',
-      age: 22,
-      height: 176,
-      eyes: 'brown',
-      eyesLabel: 'Castanhos',
-      hair: 'brown',
-      hairLabel: 'Castanho',
-      manequim: '36',
-      sapato: '37',
-      drt: 'Não informado',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '0',
-    },
-    overview: {
-      ...EMPTY_TALENT_OVERVIEW,
-      agenda: [
-        {
-          id: 'ag-1',
-          title: 'Casting • Vogue Brasil Editorial Resort',
-          subtitle: 'Estúdio Bob Wolfenson (SP)',
-          date: 'Hoje • 09:30',
-          status: 'Confirmado',
-        },
-      ],
-    },
-  },
-  {
-    id: 'talent-helena-valente',
-    code: 'EV-002',
-    stageName: 'helena valente',
-    fullName: 'helena valente moura',
-    initial: 'H',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: false,
-    createdAt: '2026-08-14T10:00:00Z',
-    updatedAt: '2026-11-22T14:00:00Z',
-    updatedAtLabel: '22/Nov/2026',
-    attributes: {
-      gender: 'woman',
-      city: 'São Paulo, SP',
-      state: 'SP',
-      age: 24,
-      height: 178,
-      eyes: 'green',
-      eyesLabel: 'Verdes',
-      hair: 'blonde',
-      hairLabel: 'Loiro',
-      manequim: '36',
-      sapato: '38',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '1',
-    },
-    overview: {
-      ...EMPTY_TALENT_OVERVIEW,
-      agenda: [
-        {
-          id: 'ag-2',
-          title: 'Prova de Roupa • Animale Coleção Inverno',
-          subtitle: 'Showroom Jardins',
-          date: 'Hoje • 11:00',
-          status: 'Confirmado',
-        },
-      ],
-    },
-  },
-  {
-    id: 'talent-lucas-montenegro',
-    code: 'EV-003',
-    stageName: 'lucas montenegro',
-    fullName: 'lucas montenegro silva',
-    initial: 'L',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Ator',
-    categories: ['Ator', 'Modelo'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: false,
-    createdAt: '2026-06-20T09:00:00Z',
-    updatedAt: '2026-11-21T18:10:00Z',
-    updatedAtLabel: '21/Nov/2026',
-    attributes: {
-      gender: 'man',
-      city: 'São Paulo, SP',
-      state: 'SP',
-      age: 27,
-      height: 185,
-      eyes: 'dark_brown',
-      eyesLabel: 'Castanhos Escuros',
-      hair: 'black',
-      hairLabel: 'Preto',
-      manequim: '40',
-      sapato: '42',
-      drt: 'DRT SP-48210',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '1',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-  {
-    id: 'talent-valentina-costa',
-    code: 'EV-004',
-    stageName: 'valentina costa',
-    fullName: 'valentina costa ferreira',
-    initial: 'V',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: true,
-    createdAt: '2026-11-10T11:30:00Z',
-    updatedAt: '2026-11-20T12:00:00Z',
-    updatedAtLabel: '20/Nov/2026',
-    attributes: {
-      gender: 'woman',
-      city: 'Rio de Janeiro, RJ',
-      state: 'RJ',
-      age: 20,
-      height: 175,
-      eyes: 'hazel',
-      eyesLabel: 'Mel',
-      hair: 'brown',
-      hairLabel: 'Castanho',
-      manequim: '34',
-      sapato: '36',
-      languages: ['PT'],
-      languagesLabel: ['Português'],
-      licensing: '0',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-  {
-    id: 'talent-gabriel-albuquerque',
-    code: 'EV-005',
-    stageName: 'gabriel albuquerque',
-    fullName: 'gabriel albuquerque lima',
-    initial: 'G',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo', 'Ator'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: false,
-    createdAt: '2026-09-02T15:00:00Z',
-    updatedAt: '2026-11-19T09:45:00Z',
-    updatedAtLabel: '19/Nov/2026',
-    attributes: {
-      gender: 'man',
-      city: 'Recife, PE',
-      state: 'PE',
-      age: 25,
-      height: 184,
-      eyes: 'brown',
-      eyesLabel: 'Castanhos',
-      hair: 'black',
-      hairLabel: 'Preto',
-      manequim: '40',
-      sapato: '42',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '2',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-  {
-    id: 'talent-amber-rodrigues',
-    code: 'EV-006',
-    stageName: 'amber rodrigues',
-    fullName: 'amber rodrigues barros',
-    initial: 'A',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo'],
-    status: 'Ativo',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: true,
-    createdAt: '2026-11-15T14:20:00Z',
-    updatedAt: '2026-11-18T17:15:00Z',
-    updatedAtLabel: '18/Nov/2026',
-    attributes: {
-      gender: 'woman',
-      city: 'Recife, PE',
-      state: 'PE',
-      age: 21,
-      height: 177,
-      eyes: 'blue',
-      eyesLabel: 'Azuis',
-      hair: 'red',
-      hairLabel: 'Ruivo',
-      manequim: '36',
-      sapato: '37',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '0',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-  {
-    id: 'talent-caio-vasconcelos',
-    code: 'EV-007',
-    stageName: 'caio vasconcelos',
-    fullName: 'caio vasconcelos duarte',
-    initial: 'C',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Celebridade',
-    categories: ['Celebridade', 'Ator'],
-    status: 'Stand by',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: false,
-    createdAt: '2026-05-12T10:00:00Z',
-    updatedAt: '2026-11-14T11:20:00Z',
-    updatedAtLabel: '14/Nov/2026',
-    attributes: {
-      gender: 'man',
-      city: 'Rio de Janeiro, RJ',
-      state: 'RJ',
-      age: 31,
-      height: 182,
-      eyes: 'brown',
-      eyesLabel: 'Castanhos',
-      hair: 'brown',
-      hairLabel: 'Castanho',
-      manequim: '42',
-      sapato: '42',
-      drt: 'DRT RJ-33190',
-      languages: ['PT', 'EN'],
-      languagesLabel: ['Português', 'Inglês'],
-      licensing: '1',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-  {
-    id: 'talent-marina-salazar',
-    code: 'EV-008',
-    stageName: 'marina salazar',
-    fullName: 'marina salazar nobre',
-    initial: 'M',
-    officeId: '2848',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    categories: ['Modelo', 'Ator'],
-    status: 'Stand by',
-    photoUrl: null,
-    coverUrl: null,
-    isNewThisMonth: false,
-    createdAt: '2026-07-08T09:30:00Z',
-    updatedAt: '2026-11-10T15:40:00Z',
-    updatedAtLabel: '10/Nov/2026',
-    attributes: {
-      gender: 'woman',
-      city: 'São Paulo, SP',
-      state: 'SP',
-      age: 23,
-      height: 174,
-      eyes: 'dark_brown',
-      eyesLabel: 'Castanhos Escuros',
-      hair: 'black',
-      hairLabel: 'Preto',
-      manequim: '36',
-      sapato: '37',
-      languages: ['PT'],
-      languagesLabel: ['Português'],
-      licensing: '1',
-    },
-    overview: { ...EMPTY_TALENT_OVERVIEW },
-  },
-];
+import { subscribeToTalents } from './services/talentsService';
 
 const INITIAL_CONTACTS = {
   clientes: [],
@@ -410,50 +82,35 @@ const INITIAL_PROJECTS_MAP = {
 function AppRoutes() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [talents, setTalents] = useState(INITIAL_TALENTS);
+  const [talents, setTalents] = useState([]);
+  const [talentsLoading, setTalentsLoading] = useState(true);
+  const [talentsError, setTalentsError] = useState(null);
   const [contactsData, setContactsData] = useState(INITIAL_CONTACTS);
   const [projectsMap, setProjectsMap] = useState(INITIAL_PROJECTS_MAP);
 
-  const handleTalentCreated = (payload) => {
-    const stageName =
-      payload.personal?.stageName?.trim() ||
-      payload.personal?.fullName?.trim() ||
-      'Novo Talento';
-    const fullName = payload.personal?.fullName?.trim() || stageName;
-    const nowIso = new Date().toISOString();
-    const photo = payload.media?.profilePhotoUrl || null;
-
-    const newCard = {
-      id: payload.id,
-      code: `EV-${String(talents.length + 1).padStart(3, '0')}`,
-      stageName: stageName.toLowerCase(),
-      fullName: fullName.toLowerCase(),
-      initial: stageName.charAt(0).toUpperCase(),
-      officeId: '2848',
-      officeName: 'ÉVORA',
-      officeSubtitle: 'MODELS',
-      category: 'Modelo',
-      categories: ['Modelo'],
-      status:
-        payload.personal?.status === '0'
-          ? 'Inativo'
-          : payload.personal?.status === '-1'
-          ? 'Stand by'
-          : 'Ativo',
-      photoUrl: photo,
-      coverUrl: photo,
-      isNewThisMonth: true,
-      createdAt: nowIso,
-      updatedAt: nowIso,
-      updatedAtLabel: 'Agora',
-      attributes: {
-        email: payload.personal?.email || '',
-        phone: payload.personal?.phone || '',
+  useEffect(() => {
+    const unsubscribe = subscribeToTalents(
+      (items) => {
+        setTalents(items);
+        setTalentsLoading(false);
+        setTalentsError(null);
       },
-      overview: { ...EMPTY_TALENT_OVERVIEW },
-    };
+      (err) => {
+        console.error('Erro ao carregar talentos do Firestore:', err);
+        setTalentsError(err);
+        setTalentsLoading(false);
+      }
+    );
+    return () => unsubscribe();
+  }, []);
 
-    setTalents((prev) => [newCard, ...prev]);
+  const handleTalentCreated = (savedTalent) => {
+    if (!savedTalent?.id) return;
+    setTalents((prev) =>
+      prev.some((t) => t.id === savedTalent.id)
+        ? prev
+        : [savedTalent, ...prev]
+    );
   };
 
   const handleSaveContact = (groupKey, contactObj) => {
@@ -531,7 +188,11 @@ function AppRoutes() {
                 customTalents={talents}
                 onOpenAddTalent={() => navigate('/talentos/novo')}
               >
-                <Dashboard talents={talents} projectsMap={projectsMap} />
+                <Dashboard
+                  talents={talents}
+                  projectsMap={projectsMap}
+                  isLoading={talentsLoading}
+                />
               </AppLayout>
             ) : (
               <Navigate to="/login" replace />
@@ -549,7 +210,11 @@ function AppRoutes() {
               customTalents={talents}
               onOpenAddTalent={() => navigate('/talentos/novo')}
             >
-              <Dashboard talents={talents} projectsMap={projectsMap} />
+              <Dashboard
+                talents={talents}
+                projectsMap={projectsMap}
+                isLoading={talentsLoading}
+              />
             </AppLayout>
           }
         />
@@ -566,6 +231,8 @@ function AppRoutes() {
             >
               <Talentos
                 talents={talents}
+                isLoading={talentsLoading}
+                error={talentsError}
                 onOpenAddTalent={() => navigate('/talentos/novo')}
               />
             </AppLayout>

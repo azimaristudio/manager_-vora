@@ -120,9 +120,25 @@ export default function TalentOverviewModal({
     ...(overview.info || {}),
   };
 
-  const sectionItems = Array.isArray(overview[currentSection.key])
-    ? overview[currentSection.key]
-    : [];
+  const sectionItems =
+    currentSection.key === 'book' &&
+    (!Array.isArray(overview.book) || overview.book.length === 0) &&
+    Array.isArray(talent.galleryMedia) &&
+    talent.galleryMedia.length > 0
+      ? talent.galleryMedia.map((m) => ({
+          id: m.id,
+          title: m.name,
+          subtitle: m.category || 'Book',
+          url: m.url,
+          status: m.sizeKB ? `${m.sizeKB} KB` : undefined,
+        }))
+      : Array.isArray(overview[currentSection.key])
+      ? overview[currentSection.key]
+      : [];
+
+  const isMediaSection = ['compo', 'book', 'snaps'].includes(
+    currentSection.key
+  );
 
   return (
     <div
@@ -243,33 +259,67 @@ export default function TalentOverviewModal({
               ))}
             </div>
           ) : sectionItems.length > 0 ? (
-            <div className="space-y-3">
-              {sectionItems.map((item, idx) => (
-                <div
-                  key={item.id || idx}
-                  className="bg-[#1c1c1e] border border-white/10 rounded-xl p-4 flex items-start justify-between gap-3"
-                >
-                  <div className="min-w-0 space-y-1">
-                    <h4 className="text-sm font-semibold text-white">
-                      {item.title || item.name || `${currentSection.label} #${idx + 1}`}
-                    </h4>
-                    {item.subtitle && (
-                      <p className="text-xs text-neutral-400">{item.subtitle}</p>
-                    )}
-                    {item.date && (
-                      <span className="inline-block text-[11px] text-[#E8AC51]">
-                        {item.date}
+            isMediaSection && sectionItems.some((item) => item.url) ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {sectionItems.map((item, idx) => (
+                  <a
+                    key={item.id || idx}
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group bg-[#1c1c1e] border border-white/10 hover:border-[#E8AC51]/50 rounded-xl overflow-hidden transition-colors block"
+                  >
+                    <div className="aspect-[3/4] w-full bg-[#161617] overflow-hidden">
+                      {item.url ? (
+                        <img
+                          src={item.url}
+                          alt={item.title || currentSection.label}
+                          className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="p-2.5 flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-medium text-neutral-200 truncate">
+                        {item.title || item.subtitle || `${currentSection.label} #${idx + 1}`}
+                      </span>
+                      {item.status && (
+                        <span className="text-[10px] text-neutral-400 shrink-0">
+                          {item.status}
+                        </span>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {sectionItems.map((item, idx) => (
+                  <div
+                    key={item.id || idx}
+                    className="bg-[#1c1c1e] border border-white/10 rounded-xl p-4 flex items-start justify-between gap-3"
+                  >
+                    <div className="min-w-0 space-y-1">
+                      <h4 className="text-sm font-semibold text-white">
+                        {item.title || item.name || `${currentSection.label} #${idx + 1}`}
+                      </h4>
+                      {item.subtitle && (
+                        <p className="text-xs text-neutral-400">{item.subtitle}</p>
+                      )}
+                      {item.date && (
+                        <span className="inline-block text-[11px] text-[#E8AC51]">
+                          {item.date}
+                        </span>
+                      )}
+                    </div>
+                    {item.status && (
+                      <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-300 shrink-0">
+                        {item.status}
                       </span>
                     )}
                   </div>
-                  {item.status && (
-                    <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-300 shrink-0">
-                      {item.status}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )
           ) : (
             <div className="bg-[#1c1c1e] border border-white/10 rounded-xl p-8 text-center space-y-3">
               <div className="w-12 h-12 rounded-xl bg-[#E8AC51]/10 border border-[#E8AC51]/25 flex items-center justify-center mx-auto text-[#E8AC51]">

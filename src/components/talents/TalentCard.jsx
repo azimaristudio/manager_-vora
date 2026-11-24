@@ -10,7 +10,7 @@ import {
   CheckSquare,
 } from 'lucide-react';
 
-const STATUS_BADGE_MAP = {
+export const STATUS_BADGE_MAP = {
   Ativo: {
     wrapper: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
     dot: 'bg-emerald-400',

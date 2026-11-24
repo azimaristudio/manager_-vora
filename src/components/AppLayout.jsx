@@ -23,19 +23,7 @@ const TALENT_QUICK_LINKS = [
   { group: 3, items: ['Docs'] },
 ];
 
-const INITIAL_MOCK_TALENTS = [
-  {
-    id: 'talent-sophia-evora',
-    stageName: 'sophia évora',
-    fullName: 'sophia egito',
-    initial: 'S',
-    officeName: 'ÉVORA',
-    officeSubtitle: 'MODELS',
-    category: 'Modelo',
-    status: 'Ativo',
-    coverUrl: null,
-  },
-];
+const INITIAL_MOCK_TALENTS = [];
 
 export default function AppLayout({
   onOpenAddTalent,

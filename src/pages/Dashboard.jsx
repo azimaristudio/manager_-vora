@@ -243,14 +243,8 @@ export default function Dashboard({
     return () => clearTimeout(timer);
   }, []);
 
-  const activeTalentsCount = Math.max(
-    28,
-    talents.filter((t) => t.status === 'Ativo').length + 27
-  );
-  const standbyTalentsCount = Math.max(
-    4,
-    talents.filter((t) => t.status === 'Stand by').length + 4
-  );
+  const activeTalentsCount = talents.filter((t) => t.status === 'Ativo').length;
+  const standbyTalentsCount = talents.filter((t) => t.status === 'Stand by').length;
   const activeProjectsCount = Math.max(12, Object.keys(projectsMap).length + 11);
 
   const kpiActive = isMounted && !isLoading;

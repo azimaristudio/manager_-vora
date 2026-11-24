@@ -69,7 +69,51 @@ export function TalentCardSkeleton() {
 
 const CELL_WIDTHS = ['w-8', 'w-28', 'w-20', 'w-24', 'w-16'];
 
-export function TableRowSkeleton({ columns = 4, rows = 5 }) {
+export function TableRowSkeleton({ columns = 4, rows = 5, variant = 'default' }) {
+  if (variant === 'talents') {
+    return (
+      <>
+        {Array.from({ length: rows }).map((_, rowIdx) => (
+          <tr
+            key={rowIdx}
+            aria-hidden="true"
+            className="border-b border-white/5 bg-[#1c1c1e]"
+          >
+            <td className="py-3.5 px-4 w-12">
+              <Skeleton className="w-4 h-4 rounded-xs" />
+            </td>
+            <td className="py-3.5 px-4">
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-10 w-10 rounded-full shrink-0" />
+                <div className="space-y-1.5">
+                  <Skeleton className="h-3.5 w-32" />
+                  <Skeleton className="h-2.5 w-20" />
+                </div>
+              </div>
+            </td>
+            <td className="py-3.5 px-4">
+              <Skeleton className="h-5 w-16 rounded-full" />
+            </td>
+            <td className="py-3.5 px-4">
+              <div className="flex items-center gap-1.5">
+                <Skeleton className="h-5 w-14 rounded-md" />
+                <Skeleton className="h-5 w-12 rounded-md" />
+              </div>
+            </td>
+            <td className="py-3.5 px-4 text-right">
+              <div className="inline-flex items-center justify-end gap-3">
+                <Skeleton className="h-3.5 w-12" />
+                <Skeleton className="h-3.5 w-10" />
+                <Skeleton className="h-3.5 w-11" />
+                <Skeleton className="h-6 w-6 rounded-md" />
+              </div>
+            </td>
+          </tr>
+        ))}
+      </>
+    );
+  }
+
   return (
     <>
       {Array.from({ length: rows }).map((_, rowIdx) => (
