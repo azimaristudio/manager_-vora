@@ -428,19 +428,19 @@ export default function AddTalent({ onBackToList, onTalentCreated }) {
             title: 'Talento cadastrado com sucesso!',
             subtitle: `${
               stageName || fullName
-            } foi salvo no Firebase com suas fotos e informações completas.`,
+            } foi salvo com fotos e informações completas.`,
           },
         },
       });
     } catch (error) {
-      console.error('Erro ao salvar talento no Firebase:', error);
+      console.error('Erro ao salvar talento:', error);
       showToast(
         {
           type: 'error',
           title: 'Não foi possível salvar o talento',
           subtitle:
             error?.message ||
-            'Verifique sua conexão e as permissões do Firestore / Storage.',
+            'Verifique sua conexão, as configurações do Cloudinary e as permissões do Firestore.',
         },
         7000
       );

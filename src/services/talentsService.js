@@ -7,8 +7,8 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { db, storage } from '../firebase';
+import { db } from '../firebase';
+import { uploadImageToCloudinary } from './cloudinaryService';
 import {
   CATEGORY_OPTIONS,
   EYES_OPTIONS,
@@ -60,13 +60,6 @@ function calculateAge(day, month, year) {
     }
   }
   return age >= 0 ? age : null;
-}
-
-function sanitizeFileName(name = 'image.jpg') {
-  return String(name)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-zA-Z0-9._-]/g, '_');
 }
 
 function timestampToIso(value, fallbackIso = null) {
@@ -183,17 +176,18 @@ export async function createTalentWithMedia({
   const talentId = talentRef.id;
   const nowIso = new Date().toISOString();
 
-  // 1. Upload de imagens da galeria/composites para Firebase Storage
-  const uploadedGalleryMedia = [];
-  for (let i = 0; i < mediaItems.length; i += 1) {
-    const item = mediaItems[i];
+  // 1. Upload paralelo para o Cloudinary (foto de perfil + imagens da galeria)
+  const galleryItemsToProcess = Array.isArray(mediaItems) ? mediaItems : [];
+
+  const profileUploadPromise =
+    profilePhotoFile instanceof File
+      ? uploadImageToCloudinary(profilePhotoFile)
+      : Promise.resolve(null);
+
+  const galleryUploadPromises = galleryItemsToProcess.map(async (item) => {
     if (item?.file instanceof File) {
-      const cleanName = sanitizeFileName(item.file.name || `media_${i}.jpg`);
-      const storagePath = `talents/${talentId}/gallery/${Date.now()}_${i}_${cleanName}`;
-      const storageRef = ref(storage, storagePath);
-      const snapshot = await uploadBytes(storageRef, item.file);
-      const url = await getDownloadURL(snapshot.ref);
-      uploadedGalleryMedia.push({
+      const url = await uploadImageToCloudinary(item.file);
+      return {
         id: item.id,
         name: item.name || item.file.name,
         category: item.category || 'Polaroid / Snap',
@@ -201,22 +195,24 @@ export async function createTalentWithMedia({
         mimeType: item.mimeType || item.file.type || 'image/jpeg',
         previewUrl: item.previewUrl,
         url,
-      });
-    } else if (item?.url) {
-      uploadedGalleryMedia.push(item);
+      };
     }
-  }
+    if (item?.url) {
+      return item;
+    }
+    return null;
+  });
 
-  // 2. Upload da Foto de Perfil dedicada ou correspondência com imagem marcada na galeria
-  let photoUrl = null;
-  if (profilePhotoFile instanceof File) {
-    const profileRef = ref(
-      storage,
-      `talents/${talentId}/profile_${Date.now()}`
-    );
-    const profileSnap = await uploadBytes(profileRef, profilePhotoFile);
-    photoUrl = await getDownloadURL(profileSnap.ref);
-  } else if (profilePhotoPreviewUrl) {
+  const [dedicatedProfileUrl, rawGalleryResults] = await Promise.all([
+    profileUploadPromise,
+    Promise.all(galleryUploadPromises),
+  ]);
+
+  const uploadedGalleryMedia = rawGalleryResults.filter(Boolean);
+
+  // 2. Define photoUrl prioritária (foto de perfil dedicada -> item estrelado da galeria -> primeira foto)
+  let photoUrl = dedicatedProfileUrl;
+  if (!photoUrl && profilePhotoPreviewUrl) {
     const matchedItem = uploadedGalleryMedia.find(
       (m) => m.previewUrl === profilePhotoPreviewUrl
     );

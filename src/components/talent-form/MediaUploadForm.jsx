@@ -146,7 +146,7 @@ export default function MediaUploadForm({
               </h3>
             </div>
             <p className="text-[11px] text-neutral-400 mt-1 leading-relaxed">
-              Selecione múltiplas imagens para enviar ao Storage ao salvar.
+              Selecione múltiplas imagens para enviar à galeria do talento ao salvar.
             </p>
           </div>
 
